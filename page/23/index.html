@@ -174,109 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2015/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">数据库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2015-06-06T20:08:08+08:00">2015-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2015/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2015/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="cy_cmt_count" data-xid="2015/06/06/数据库/数据库/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>数据库</p>
-<p>SQL Server、MySQL、Oracle、H2</p>
-<p>Greemplum、PostgreSql</p>
-<h1 id="MySQL开窗函数"><a href="#MySQL开窗函数" class="headerlink" title="MySQL开窗函数"></a>MySQL开窗函数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/*测试数据*/</span><br><span class="line">CREATE TABLE `school_score` (</span><br><span class="line">  `id` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `name` char(1) DEFAULT NULL,</span><br><span class="line">    `course` char(10) DEFAULT NULL,</span><br><span class="line">  `score`  int (2) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ;</span><br><span class="line"></span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (1, &#x27;A&#x27;,&#x27;Chinese&#x27;,80);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (2, &#x27;B&#x27;,&#x27;Chinese&#x27;,90);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (3, &#x27;C&#x27;,&#x27;Chinese&#x27;,70);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (4, &#x27;A&#x27;,&#x27;Math&#x27;,70);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (5, &#x27;B&#x27;,&#x27;Math&#x27;,100);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (6, &#x27;C&#x27;,&#x27;Math&#x27;,80);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (7, &#x27;A&#x27;,&#x27;English&#x27;,90);</span><br><span class="line">INSERT INTO `test`.`school_score`(`id`, `name`,`course`,`score`) VALUES (8, &#x27;B&#x27;,&#x27;English&#x27;,85);</span><br><span class="line">INSERT INTO `test`.`school_score` (`id`, `name`,`course`,`score`) VALUES (9, &#x27;C&#x27;,&#x27;English&#x27;,99);</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*开窗函数和排名类函数结合，看每个课程的排名*/</span><br><span class="line"></span><br><span class="line">SELECT</span><br><span class="line">    `name`,</span><br><span class="line">    `course`,</span><br><span class="line">    `score`,</span><br><span class="line">    row_number ( ) over ( PARTITION BY `course` ORDER BY score DESC ) AS score_rank </span><br><span class="line">FROM</span><br><span class="line">    `test`.`school_score`;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/thxj/p/12727589.html">https://www.cnblogs.com/thxj/p/12727589.html</a></p>
-<p>mysql帐号管理基本操作</p>
-<p><a target="_blank" rel="noopener" href="https://www.weixiaolive.com/post/693.html">https://www.weixiaolive.com/post/693.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2015/05/17/linux_space/Linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -401,7 +298,7 @@
 <li>生成秘钥对并指定秘钥对名称（切换值需生成的目录）：</li>
 </ol>
 <p>例如切换到.ssh_test目录生成了test_rsa（公钥）、test_rsa.pub（私钥）</p>
-<p>ssh-keygen -t rsa -f test_rsa -C “for test”<br>例如：<br>ssh-keygen -t rsa -C “<a href="mailto:&#x31;&#50;&#51;&#64;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;">&#x31;&#50;&#51;&#64;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;</a>“</p>
+<p>ssh-keygen -t rsa -f test_rsa -C “for test”<br>例如：<br>ssh-keygen -t rsa -C “<a href="mailto:&#x31;&#50;&#x33;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#109;">&#x31;&#50;&#x33;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#109;</a>“</p>
 <ul>
 <li>输入密码（可直接回车）</li>
 <li>确认密码（可直接回车）</li>
@@ -1152,7 +1049,7 @@ Callable接口可以返回线程信息。
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">226</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

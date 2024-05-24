@@ -174,109 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/16/java_space/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">多线程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2018-03-16T19:21:26+08:00">2018-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/16/java_space/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/16/java_space/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="cy_cmt_count" data-xid="2018/03/16/java_space/Java多线程/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><h1 id="线程互斥"><a href="#线程互斥" class="headerlink" title="线程互斥"></a>线程互斥</h1><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>1.自定义线程池<br>2.配置spring默认的线程池<br>IntelliJ IDEA - Debug 调试多线程程序</p>
-<h2 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h2><p> 随着cpu核数越来越多，不可避免的利用多线程技术以充分利用其计算能力。所以，多线程技术是服务端开发人员必须掌握的技术。</p>
-<p>线程的创建和销毁，都涉及到系统调用，比较消耗系统资源，所以就引入了线程池技术，避免频繁的线程创建和销毁。</p>
-<p>在Java用有一个Executors工具类，可以为我们创建一个线程池，其本质就是new了一个ThreadPoolExecutor对象。线程池几乎也是面试必考问题。本节结合源代码，说说ThreadExecutor的工作原理</p>
-<h1 id="线程数最优设置"><a href="#线程数最优设置" class="headerlink" title="线程数最优设置"></a>线程数最优设置</h1><p>线程数设置和CPU数的关系<br>在Windows中，在cmd命令中输入“wmic”，然后在出现的新窗口中输入“cpu get *”即可查看物理CPU数、CPU核心数、线程数。其中，<br>　　Name:表示物理CPU数<br>　　NumberOfCores：表示CPU核心数<br>　　NumberOfLogicalProcessors：表示CPU线程数<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liubei/p/coreNumAndProcess.html">https://www.cnblogs.com/liubei/p/coreNumAndProcess.html</a></p>
-<ul>
-<li>如何合理地估算线程池大小？</li>
-</ul>
-<p>比如平均每个线程CPU运行时间为0.5s，而线程等待时间（非CPU运行时间，比如IO）为1.5s，CPU核心数为8，那么根据上面这个公式估算得到：((0.5+1.5)/0.5)<em>8=32。这个公式进一步转化为：<br>最佳线程数目 = （线程等待时间与线程CPU时间之比 + 1）</em> CPU数目</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38128980/answer/75041041">https://www.zhihu.com/question/38128980/answer/75041041</a></p>
-<h2 id="连接池场景"><a href="#连接池场景" class="headerlink" title="连接池场景"></a>连接池场景</h2><p>数据库连接池<br>同步数据<br>日志采集保存</p>
-<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><h2 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h2><p>参考(感谢大佬，仅用于个人学习记录)：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunshine052697/p/7269795.html">https://www.cnblogs.com/sunshine052697/p/7269795.html</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> study.interview;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Map.Entry;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestEmailFromList</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String[] list = &#123;<span class="string">&quot;qq.com&quot;</span>,<span class="string">&quot;126.com&quot;</span>,<span class="string">&quot;168.com&quot;</span>,<span class="string">&quot;sina.com&quot;</span>,<span class="string">&quot;baidu.com&quot;</span>,<span class="string">&quot;soho.com&quot;</span>,<span class="string">&quot;yeah.net&quot;</span>,<span class="string">&quot;139.com&quot;</span>,<span class="string">&quot;hotmail.com&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="comment">//email存放容器</span></span><br><span class="line">        LinkedList&lt;Email&gt; emailList = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Email&gt;();</span><br><span class="line">        <span class="comment">//统计各类邮箱使用人数容器</span></span><br><span class="line">        Map&lt;String, Integer&gt; mapEmail = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">        <span class="comment">//统计各类邮箱使用人数容器</span></span><br><span class="line">        Map&lt;String, Integer&gt; mapEmailPool = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">        Random random=<span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">        <span class="comment">//email原始邮箱初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">9999</span>; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> random.nextInt(<span class="number">9</span>);</span><br><span class="line">            emailList.add(<span class="keyword">new</span> <span class="title class_">Email</span>(String.valueOf(i+<span class="string">&quot;@&quot;</span>+list[num])));</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">// 单线程统计各类邮箱使用人数</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        TestEmailFromList.countingBySingleThread(emailList, mapEmail); </span><br><span class="line">        <span class="type">long</span> <span class="variable">endTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;单线程统计用时：&quot;</span>+(endTime-startTime));</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//多线程统计各类邮箱使用人数</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime2</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">//用多少个线程</span></span><br><span class="line">        TestEmailFromList.countingByMultiThread(emailList, mapEmailPool);</span><br><span class="line">        <span class="type">long</span> <span class="variable">endTime2</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;多线程统计用时：&quot;</span>+(endTime2-startTime2));</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 单线程统计邮箱使用人数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">countingBySingleThread</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmail)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;emailList.size(); i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> emailList.get(i).getUserName().split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(mapEmail.containsKey(key))&#123;</span><br><span class="line">                <span class="type">int</span>  <span class="variable">value</span> <span class="operator">=</span> mapEmail.get(key);</span><br><span class="line">                mapEmail.put(key, ++value);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                mapEmail.put(key, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printMap(mapEmail);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 多线程统计邮箱使用人数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title function_">countingByMultiThread</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmailPool)</span>&#123;</span><br><span class="line">        <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line">        List&lt;Future&lt;Map&lt;String, Integer&gt;&gt;&gt; resultList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Future&lt;Map&lt;String, Integer&gt;&gt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            LinkedList&lt;Email&gt; eList = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">3</span>)&#123;</span><br><span class="line">                eList = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Email&gt;(emailList.subList(i*<span class="number">2500</span>,(i+<span class="number">1</span>)*<span class="number">2500</span>-<span class="number">1</span>));</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                eList = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Email&gt;(emailList.subList(i*<span class="number">2500</span>,(i+<span class="number">1</span>)*<span class="number">2500</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(eList.getFirst().getUserName()+<span class="string">&quot;----&quot;</span>+eList.getLast().getUserName());</span><br><span class="line">            <span class="comment">//使用ExecutorService执行Callable类型的任务，并将结果保存在future变量中</span></span><br><span class="line">            Future&lt;Map&lt;String, Integer&gt;&gt; future = executorService.submit(<span class="keyword">new</span> <span class="title class_">TaskWithResultMap</span>( eList,mapEmailPool));</span><br><span class="line">            <span class="comment">//将任务执行结果存储到List中</span></span><br><span class="line">            resultList.add(future);</span><br><span class="line">             </span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//遍历任务的结果</span></span><br><span class="line">        <span class="keyword">for</span> (Future&lt;Map&lt;String, Integer&gt;&gt; fs : resultList) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(fs.get());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">                executorService.shutdown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        printMap(mapEmailPool);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 输出map</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printMap</span><span class="params">(Map&lt;String, Integer&gt; mapEmail)</span>&#123;</span><br><span class="line">        Set&lt;Entry&lt;String, Integer&gt;&gt; set = mapEmail.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;String, Integer&gt; entry : set) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;使用&quot;</span>+entry.getKey()+<span class="string">&quot;的人共&quot;</span>+entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskWithResultMap</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;Map&lt;String, Integer&gt;&gt;&#123;</span><br><span class="line">    LinkedList&lt;Email&gt; emailList;</span><br><span class="line">    Map&lt;String, Integer&gt; mapEmailPool;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TaskWithResultMap</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmailPool)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.emailList = emailList;</span><br><span class="line">        <span class="built_in">this</span>.mapEmailPool = mapEmailPool;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, Integer&gt; <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (mapEmailPool) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;emailList.size(); i++) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> emailList.get(i).getUserName().split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span>(mapEmailPool.containsKey(key))&#123;</span><br><span class="line">                    <span class="type">int</span>  <span class="variable">value</span> <span class="operator">=</span> mapEmailPool.get(key);</span><br><span class="line">                    mapEmailPool.put(key, ++value);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    mapEmailPool.put(key, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mapEmailPool;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    LinkedList&lt;Email&gt; emailList;</span><br><span class="line">    Map&lt;String, Integer&gt; mapEmailPool;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyThread</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmailPool)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.emailList = emailList;</span><br><span class="line">        <span class="built_in">this</span>.mapEmailPool = mapEmailPool;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (mapEmailPool) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;emailList.size(); i++) &#123;</span><br><span class="line">                        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> emailList.get(i).getUserName().split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">if</span>(mapEmailPool.containsKey(key))&#123;</span><br><span class="line">                            <span class="type">int</span>  <span class="variable">value</span> <span class="operator">=</span> mapEmailPool.get(key);</span><br><span class="line">                            mapEmailPool.put(key, ++value);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            mapEmailPool.put(key, <span class="number">1</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                         </span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+<span class="string">&quot;异常&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                 </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Email</span> &#123;</span><br><span class="line">    String username;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Email</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Email</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUserName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1484,6 +1381,106 @@ On Yarn——计算机资源同意由Hadoop Yarn管理，生产模式使用
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/CDH%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/CDH%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">CDH的介绍和部署</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/CDH%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/CDH%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%83%A8%E7%BD%B2/" class="cy_cmt_count" data-xid="2018/01/19/CDH的介绍和部署/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cloudera.com/">https://www.cloudera.com/</a></p>
+<p>官网、版本</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>1、CM是什么？</p>
+<p>2、CDH是什么？</p>
+<p>3、CM+CDH是什么？</p>
+<p>CDH：全称Cloudera’s Distribution Including Apache Hadoop.</p>
+<p>CDH版本衍化</p>
+<pre><code>hadoop是一个开源项目，所以很多公司在这个基础进行商业化，Cloudera对hadoop做了相应的改变。
+
+Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution Hadoop)。
+</code></pre>
+<h1 id="CDH版本选择"><a href="#CDH版本选择" class="headerlink" title="CDH版本选择"></a>CDH版本选择</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1555,7 +1552,7 @@ On Yarn——计算机资源同意由Hadoop Yarn管理，生产模式使用
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">226</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

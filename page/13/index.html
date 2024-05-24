@@ -174,108 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/21/java_space/JPA%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%96%B9%E6%B3%95%E5%90%8D%E6%9F%A5%E8%AF%A2%E8%A7%84%E5%88%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/21/java_space/JPA%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%96%B9%E6%B3%95%E5%90%8D%E6%9F%A5%E8%AF%A2%E8%A7%84%E5%88%99/" class="post-title-link" itemprop="url">JPA查询方式及方法名查询规则</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-21 22:18:36" itemprop="dateCreated datePublished" datetime="2018-08-21T22:18:36+08:00">2018-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jpa/" itemprop="url" rel="index"><span itemprop="name">jpa</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/21/java_space/JPA%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%96%B9%E6%B3%95%E5%90%8D%E6%9F%A5%E8%AF%A2%E8%A7%84%E5%88%99/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/21/java_space/JPA%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%96%B9%E6%B3%95%E5%90%8D%E6%9F%A5%E8%AF%A2%E8%A7%84%E5%88%99/" class="cy_cmt_count" data-xid="2018/08/21/java_space/JPA查询方式及方法名查询规则/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-Data-JPA"><a href="#Spring-Data-JPA" class="headerlink" title="Spring Data JPA"></a>Spring Data JPA</h1><p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories">jpa文档</a></p>
-<p>JPA(Java Persistence API)意即Java持久化API，是Sun官方在JDK5.0后提出的Java持久化规范(一套基于ORM的规范),（JSR 338，这些接口所在包为javax.persistence，详细内容可参考<a target="_blank" rel="noopener" href="https://github.com/javaee/jpa-spec%EF%BC%89">https://github.com/javaee/jpa-spec）</a><br>ORM:对象关系映射（英语：Object Relational Mapping，简称ORM，或O/RM，或O/R mapping），是一种程序设计技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换。</p>
-<p>dao层<br>一个表对应一个dao层接口，该接口要继承 org.springframework.data.jpa.repository.JpaRepository&lt;T, ID&gt; 接口：<br>    第一个泛型：实体类<br>    第二个泛型：实体类中Id（数据库主键）的类型</p>
-<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p>Spring Data 存储库抽象中的中心接口是Repository. 它需要域类来管理以及域类的 ID 类型作为类型参数。此接口主要用作标记接口，以捕获要使用的类型并帮助您发现扩展此接口的接口。该CrudRepository接口为正在管理的实体类提供复杂的 CRUD 功能。</p>
-<h2 id="Spring-Data-JPA的查询方式及方法名查询规则"><a href="#Spring-Data-JPA的查询方式及方法名查询规则" class="headerlink" title="Spring Data JPA的查询方式及方法名查询规则"></a>Spring Data JPA的查询方式及方法名查询规则</h2><h3 id="使用JPQL的方式查询"><a href="#使用JPQL的方式查询" class="headerlink" title="使用JPQL的方式查询"></a>使用JPQL的方式查询</h3><ol>
-<li><p>JPQL查询<br>@Query 注解的使用非常简单，只需在方法上面标注该注解，同时提供一个JPQL查询语句即可</p>
-</li>
-<li><p>原始sql（nativeQuery=true）<br>@Query(value=”select * from table_name”,nativeQuery=true)</p>
-</li>
-<li><p>修改<br>用 @Modifying 来将该操作标识为修改查询，这样框架最终会生成一个更新的操作，而非查询<br>做修改的时候:用自己实现的修改和删除,必须要加上事务,且JPA会自动回滚,需要收到加上@Rollback(value= false),设置为不自动回滚</p>
-</li>
-</ol>
-<h3 id="方法名查询"><a href="#方法名查询" class="headerlink" title="方法名查询"></a>方法名查询</h3><p><img src="/2018/08/21/java_space/JPA%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F%E5%8F%8A%E6%96%B9%E6%B3%95%E5%90%8D%E6%9F%A5%E8%AF%A2%E8%A7%84%E5%88%99/2.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/16/Dubbo%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -353,6 +251,137 @@
 <h1 id="使用rest协议发布http服务"><a href="#使用rest协议发布http服务" class="headerlink" title="使用rest协议发布http服务 "></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/loveyou/p/9551468.html">使用rest协议发布http服务 </a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## dubbo协议配置 ##</span><br><span class="line">dubbo.protocol.name=rest</span><br><span class="line">dubbo.protocol.port=8675</span><br><span class="line">dubbo.protocol.server=tomcat</span><br></pre></td></tr></table></figure>
 
 <p>如上dubbo配置了rest协议，那么可以通过http进行请求</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">推荐系统算法基础和大项目实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-08-08 20:20:20" itemprop="dateCreated datePublished" datetime="2018-08-08T20:20:20+08:00">2018-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="cy_cmt_count" data-xid="2018/08/08/算法与数据结构/推荐系统算法基础和大项目实战/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>物以类聚、人以群分</p>
+<p>头条、抖音、快手、淘宝</p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>信息过载&amp;用户需求不明确（满足这两个条件才好推行）</p>
+<ul>
+<li>分类目录（1990）：hao123、yahoo</li>
+<li>搜索引擎-主动（2000）：google、baidu</li>
+<li>推荐系统-被动（2010）：个推</li>
+</ul>
+<h1 id="技术框架"><a href="#技术框架" class="headerlink" title="技术框架"></a>技术框架</h1><h2 id="实现技术"><a href="#实现技术" class="headerlink" title="实现技术"></a>实现技术</h2><p>基于python实现推荐算法</p>
+<h2 id="lambda架构"><a href="#lambda架构" class="headerlink" title="lambda架构"></a>lambda架构</h2><p>离线计算</p>
+<p>实时计算</p>
+<p>消息中间件</p>
+<h2 id="推荐算法"><a href="#推荐算法" class="headerlink" title="推荐算法"></a>推荐算法</h2><p>流程：</p>
+<p>1、推荐算法</p>
+<p>2、排序</p>
+<p>3、策略调整（例如部分内容屏蔽）</p>
+<p>海量-召回-候选-排序-规则-topN-展示-结果页面</p>
+<h1 id="推荐系统和web项目"><a href="#推荐系统和web项目" class="headerlink" title="推荐系统和web项目"></a>推荐系统和web项目</h1><p>web：系统稳定、结果固定</p>
+<p>推荐：信息过滤、指标增长（增强业务）、结果可预估（涉及概率）</p>
+<h1 id="推荐系统设计"><a href="#推荐系统设计" class="headerlink" title="推荐系统设计"></a>推荐系统设计</h1><p>UI和UE（前端界面）</p>
+<p>数据（lambda）</p>
+<p>业务知识</p>
+<p>算法</p>
+<h1 id="推荐系统冷启动"><a href="#推荐系统冷启动" class="headerlink" title="推荐系统冷启动"></a>推荐系统冷启动</h1><ul>
+<li>用户冷启动（用户画像构建、打标签）</li>
+<li>物品冷启动（物品画像构建、打标签）</li>
+<li>系统冷启动（暂无用户行为数据、基于内容推荐，随着用户行为进行协调过滤）</li>
+</ul>
+<h1 id="数据来源？"><a href="#数据来源？" class="headerlink" title="数据来源？"></a>数据来源？</h1><ul>
+<li><p>显示数据</p>
+<p>采集、点击数据</p>
+</li>
+<li><p>隐形数据</p>
+<p>历史数据</p>
+<p>购物车</p>
+</li>
+</ul>
+<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>社会化推荐</p>
+<p>基于内容推荐（协同过滤、文本挖掘）</p>
+<p>流行度推荐（热门）</p>
+<p>基于用户推荐（协同过滤）</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fZ4y1F7K1?p=2&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1fZ4y1F7K1?p=2&amp;spm_id_from=pageDriver</a></p>
 
       
     </div>
@@ -504,137 +533,6 @@
 <p>产品的指标，一扯就多了。。。</p>
 <p>千人千面基于用户，非千人千面应该基于系统（可涉及类目本身权重、人工干预）</p>
 <p>基于商品给你推荐</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">推荐系统算法基础和大项目实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-08 20:20:20" itemprop="dateCreated datePublished" datetime="2018-08-08T20:20:20+08:00">2018-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="cy_cmt_count" data-xid="2018/08/08/算法与数据结构/推荐系统算法基础和大项目实战/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>物以类聚、人以群分</p>
-<p>头条、抖音、快手、淘宝</p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>信息过载&amp;用户需求不明确（满足这两个条件才好推行）</p>
-<ul>
-<li>分类目录（1990）：hao123、yahoo</li>
-<li>搜索引擎-主动（2000）：google、baidu</li>
-<li>推荐系统-被动（2010）：个推</li>
-</ul>
-<h1 id="技术框架"><a href="#技术框架" class="headerlink" title="技术框架"></a>技术框架</h1><h2 id="实现技术"><a href="#实现技术" class="headerlink" title="实现技术"></a>实现技术</h2><p>基于python实现推荐算法</p>
-<h2 id="lambda架构"><a href="#lambda架构" class="headerlink" title="lambda架构"></a>lambda架构</h2><p>离线计算</p>
-<p>实时计算</p>
-<p>消息中间件</p>
-<h2 id="推荐算法"><a href="#推荐算法" class="headerlink" title="推荐算法"></a>推荐算法</h2><p>流程：</p>
-<p>1、推荐算法</p>
-<p>2、排序</p>
-<p>3、策略调整（例如部分内容屏蔽）</p>
-<p>海量-召回-候选-排序-规则-topN-展示-结果页面</p>
-<h1 id="推荐系统和web项目"><a href="#推荐系统和web项目" class="headerlink" title="推荐系统和web项目"></a>推荐系统和web项目</h1><p>web：系统稳定、结果固定</p>
-<p>推荐：信息过滤、指标增长（增强业务）、结果可预估（涉及概率）</p>
-<h1 id="推荐系统设计"><a href="#推荐系统设计" class="headerlink" title="推荐系统设计"></a>推荐系统设计</h1><p>UI和UE（前端界面）</p>
-<p>数据（lambda）</p>
-<p>业务知识</p>
-<p>算法</p>
-<h1 id="推荐系统冷启动"><a href="#推荐系统冷启动" class="headerlink" title="推荐系统冷启动"></a>推荐系统冷启动</h1><ul>
-<li>用户冷启动（用户画像构建、打标签）</li>
-<li>物品冷启动（物品画像构建、打标签）</li>
-<li>系统冷启动（暂无用户行为数据、基于内容推荐，随着用户行为进行协调过滤）</li>
-</ul>
-<h1 id="数据来源？"><a href="#数据来源？" class="headerlink" title="数据来源？"></a>数据来源？</h1><ul>
-<li><p>显示数据</p>
-<p>采集、点击数据</p>
-</li>
-<li><p>隐形数据</p>
-<p>历史数据</p>
-<p>购物车</p>
-</li>
-</ul>
-<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>社会化推荐</p>
-<p>基于内容推荐（协同过滤、文本挖掘）</p>
-<p>流行度推荐（热门）</p>
-<p>基于用户推荐（协同过滤）</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fZ4y1F7K1?p=2&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1fZ4y1F7K1?p=2&amp;spm_id_from=pageDriver</a></p>
 
       
     </div>
@@ -1255,6 +1153,175 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">大数据-HIVE搭建及使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-12 20:18:18" itemprop="dateCreated datePublished" datetime="2018-06-12T20:18:18+08:00">2018-06-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/06/12/大数据/大数据-HIVE搭建及使用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hive：Hive是Hadoop<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:185664626%7D">数据仓库</a>，严格来说，不是数据库，主要是让开发人员能够通过SQL来计算和处理HDFS上的结构化数据，适用于离线的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:185664626%7D">批量数据计算</a>。</p>
+<p>官网</p>
+<p><a target="_blank" rel="noopener" href="https://hive.apache.org/">https://hive.apache.org/</a></p>
+<p>注意和hadoop版本要求</p>
+<p>下载镜像：<a target="_blank" rel="noopener" href="http://www.apache.org/dyn/closer.cgi/hive/">http://www.apache.org/dyn/closer.cgi/hive/</a></p>
+<p>HBase的安装也有三种模式：单机模式、伪分布模式和完全分布式模式；完全分布模式。前提是Hadoop集群已经安装完毕，并能正确运行。 </p>
+<h1 id="快速单机安装"><a href="#快速单机安装" class="headerlink" title="快速单机安装"></a>快速单机安装</h1><ol>
+<li><p>下载安装包.tar.gz<br><a target="_blank" rel="noopener" href="http://www.apache.org/dyn/closer.cgi/hive/">http://www.apache.org/dyn/closer.cgi/hive/</a></p>
+</li>
+<li><p>上传到hadoop集群上的一台机器，并解压</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-hive-2.3.9-bin.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>配置环境变量（/etc/profile）</p>
+</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_HOME=~/soft/hive/hive-2.3.9</span><br><span class="line">export PATH=$&#123;HIVE_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>配置文件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mv conf/hive-env.sh.template conf/hive-env.sh # 重命名环境文件</span><br><span class="line">mv conf/hive-log4j2.properties.template conf/hive-log4j2.properties # 重命名日志文件</span><br><span class="line">cp conf/hive-default.xml.template conf/hive-site.xml # 拷贝生成 xml 文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​     注意: Xml文件中不能使用&amp;，要使用他的转义&amp;来代替。</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">cd ./hive/hive-2.3.9/conf</span><br><span class="line">vim hive-site.xml</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">写入mysql配置（将hive创建的库，表等元数据信息存在mysql里）</span></span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span><br><span class="line">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;jdbc:mysql://my-host:3306/onhive?allowPublicKeyRetrieval=true&amp;amp;serverTimezone=UTC&amp;amp;useSSL=false&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;JDBC connect string for a JDBC metastore&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;com.mysql.cj.jdbc.Driver&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;Driver class name for a JDBC metastore&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;Username to use against metastore database&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;password to use against metastore database&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>安装mysql并创建hive数据库（保存元数据）<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装</span></span><br><span class="line">yum install mysql-server</span><br><span class="line">yum install mysql</span><br><span class="line">service mysqld start</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">第一次登录不用输root密码</span></span><br><span class="line">mysql -u root -p</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">改root密码</span></span><br><span class="line">UPDATE user SET password=password(&quot;你的密码&quot;) WHERE user=&#x27;root&#x27;;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">更新</span></span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建数据库</span></span><br><span class="line">create database hive;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">root角色可以在所有远程电脑登录并拥有所有库中的所有表的权限</span></span><br><span class="line">grant all privileges on *.* to root@&quot;%&quot; identified by &quot;root&quot; with grant option;</span><br></pre></td></tr></table></figure></li>
+<li>初始化 <code>Hive</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ./bin</span><br><span class="line">schematool -dbType mysql -initSchema</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li><p>开启元数据服务</p>
+<p>已经配置过环境变量了(bin/hive)，直接输入:hive</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd ./bin</span><br><span class="line">nohup hive --service metastore &amp; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">或者</span></span><br><span class="line">hive --service hiveserver2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">后台运行</span></span><br><span class="line">hiveserver2  &amp;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">退出hive</span></span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash"><span class="built_in">exit</span>;</span></span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">quit;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>  启动Hiveserver2</li>
+</ol>
+<p>Hive从2.0版本开始，为HiveServer2提供了一个简单的WEB UI界面，界面中可以直观的看到当前链接的会话、历史日志、配置参数以及度量信息。</p>
+<p><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-WebUIforHiveServer2">https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-WebUIforHiveServer2</a></p>
+<p>配置非常简单，两个参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 这是hiveserver2 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.support.concurrency&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;Enable Hive&#x27;s TableLock Manager Service&lt;/description&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;</span><br><span class="line">       Zookeeper quorum used by Hive&#x27;s Table Lock Manager</span><br><span class="line">    &lt;/description&gt;</span><br><span class="line">    &lt;value&gt;</span><br><span class="line">       hadoop1:2181,hadoop2:2181,hadoop3:2181</span><br><span class="line">    &lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hive.server2.thrift.bind.host&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hadoop1&lt;/value&gt;</span><br><span class="line">    &lt;description&gt;</span><br><span class="line">       Bind host on which to run the HiveServer2 Thrift interface.Can</span><br><span class="line">       be overridden by setting $HIVE_SERVER2_THRIFT_BIND_HOST</span><br><span class="line">    &lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--配置 hadoop 中的 core-site.xml 文件,并同步带其他主机--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.bennie.hosts&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.bennie.groups&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>验证（web 访问）</li>
+</ol>
+<p>注意：web默认端口10002，数据库连接默认端口为10000</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hiveserver2</span><br><span class="line">#或者</span><br><span class="line">hive --service hiveserver2</span><br><span class="line"># 后台运行</span><br><span class="line">hiveserver2  &amp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/06/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/.%5Cimages%5Chive1.png"></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.hvnobug.com/post/hive-install.html#%E5%AE%89%E8%A3%85">https://blog.hvnobug.com/post/hive-install.html#%E5%AE%89%E8%A3%85</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/canyueduyi/article/details/100868703">https://blog.csdn.net/canyueduyi/article/details/100868703</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/52mm/p/p16.html">https://www.cnblogs.com/52mm/p/p16.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32690999/article/details/77434381">https://blog.csdn.net/qq_32690999/article/details/77434381</a></p>
+<ol start="10">
+<li> dbeaver连接</li>
+</ol>
+<p><img src="/2018/06/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/.%5Cimages%5Chive2.png"></p>
+<p>连接过程涉及下载驱动（驱动jar包可在hive安装包jdbc文件夹获取），配置hadoop访问，重启hadoop、hiveserver2</p>
+<p>参考:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dkl12/article/details/81381122">https://blog.csdn.net/dkl12/article/details/81381122</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.icode9.com/content-4-614418.html">https://www.icode9.com/content-4-614418.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/github_38358734/article/details/77522798">https://blog.csdn.net/github_38358734/article/details/77522798</a></p>
+<p>org.apache.hadoop.security.AccessControlException Permission denied: user=anonymous, access=WRITE, inode=”/user/hive/warehouse/my_hive.db”:hadoop:supergroup:drwxr-xr-x</p>
+<p> 路径权限问题：</p>
+<p>执行授权：hdfs dfs -chmod 777 /tmp/hive/hadoop</p>
+<h1 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h1><h2 id="Hive命令行常用操作（数据库操作，表操作）"><a href="#Hive命令行常用操作（数据库操作，表操作）" class="headerlink" title="Hive命令行常用操作（数据库操作，表操作）"></a>Hive命令行常用操作（数据库操作，表操作）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的数据库</span></span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">show databases ;</span></span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">use default;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看数据库信息</span></span><br><span class="line">hive &gt; describe database default; </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示地展示当前使用的数据库</span></span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash"><span class="built_in">set</span> hive.cli.print.current.db=<span class="literal">true</span>;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Hive显示列头</span></span><br><span class="line">hive (default)&gt; set hive.cli.print.header=true; </span><br><span class="line">hive (default)&gt; desc addressall_2015_07_09; </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建数据库命令</span></span><br><span class="line">hive (default)&gt; create database liguodong; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>删除数据库的时候，不允许删除有数据的数据库，如果数据库里面有数据则会报错。如果要忽略这些内容，则在后面增加CASCADE关键字，则忽略报错，删除数据库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">DROP DATABASE DbName CASCADE(可选);</span> </span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">DROP DATABASE IF EXISTS DbName CASCADE;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">SHOW TABLES IN DbName;</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">也可以使用正则表达式</span> </span><br><span class="line"><span class="meta prompt_">hive&gt; </span><span class="language-bash">SHOW TABLES LIKE <span class="string">&#x27;h*&#x27;</span>;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">获得表的建表语句</span></span><br><span class="line">hive (default)&gt; show create table address1_2015_07_09;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lusijie1/article/details/78733879">https://blog.csdn.net/lusijie1/article/details/78733879</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br></pre></td><td class="code"><pre><span class="line">-- DROP TABLE IF EXISTS obj.tdm_customer_label_df;</span><br><span class="line">CREATE TABLE obj.tdm_customer_label_df(</span><br><span class="line">    <span class="string">&quot;guid&quot;</span> varchar(200) NOT NULL,</span><br><span class="line">    <span class="string">&quot;name&quot;</span> varchar(200) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;gender&quot;</span> varchar(200) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;age&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;age_group&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;birthday&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;constellation&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;native_country&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;native_province&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;native_city&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;native_county&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;chinese_citizens_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;card_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;idcard&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;education&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;marital_status&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;residence_country&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;residence_province&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;residence_city&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;residence_area&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;residence_street&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;residence_address&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;phone&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;vocation&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;industry&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;work_unit_name&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;work_area&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;month_income_level&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;familly_year_income&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;familly_structure&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;children_number&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;involve_system&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;first_contact_date&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;contact_duration&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;is_oct_member&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;own_enterprise&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;customer_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;register_channel&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;customer_grade&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;customer_point&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;customer_status&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;is_oct_property_owner&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;is_oct_employee&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;is_internal_partner&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;is_one_level_partner&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;total_property_value&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;residential_units_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;residential_value&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;residential_area&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;shops_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;shops_value&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;parking_space_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;parking_spaces_value&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;total_cumulative_consumption&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;last_consumption_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_contact_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;lastYaer_consumption_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;lastYaer_consumption_amounts&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;touristFavarite_holiday&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;weekend_tourist&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_days&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;performance_favarite&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_city&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_people&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_organization&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_scenicLevel&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_brand&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;touristFavarite_scope&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;intention_level&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;intention_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;intention_budget&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;lastyear_call_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_call_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_call_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;visit_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;lastyear_visit_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_visit_date&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_visit_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_visit_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;booking_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;booking_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;last_booking_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_booking_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;refund_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_refund_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;refund_reason&quot;</span> varchar(6000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_refund_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;refund_noun&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;order_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;order_subscription_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;order_payform_name&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_ordertime&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_orderamout&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;last_order_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_order_bld&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_order_floor&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_order_roomcode&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;cumulative_change&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;change_Reason&quot;</span> varchar(6000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;cumulative_contract_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;cumulative_contract_times&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_signed_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;last_signed_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_signed_projname&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;contract_payform_name&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_signed_bld&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_signed_floor&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_signed_roomcode&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_signed_bldarea&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;OTA_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;tb_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;travelAgency_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;order_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;lastyear_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;lastyear_order_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;lastyear_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;turnover_object&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_hypothetical&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_ticket&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_package&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_voucher&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_yearcard&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;turnover_scenic_name&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;lastyear_turnover_scenic_name&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;turnover_scenic_level&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_turnover_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_channel_sale_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;first_channel_sale_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;turnover_channel_sale_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;max_channel_sale_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;last_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;tourist_consume_cycle&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;tourist_cycle&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;6_12months_tourist_cycle&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;3_6months_tourist_cycle&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;1_3months_tourist_cycle&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;lastMonth_tourist_cycle&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;fc_last_login_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;fc_last_login_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;fc_lastYear_online_times&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;beconme_partner_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;partner_status&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;partner_BUName&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;is_superior_reseller&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;inferior_reseller_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;is_share&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;share_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;share_link_click_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;share_link_succeed_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;share_succeed_rate&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;invite_new_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;invite_new_deal_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;last_share_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;is_distribute&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;order_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_order_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;distribute_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;distribute_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;distribute_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;order_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;commision_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;commision_order_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;commision_distribute_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;withdraw_commision_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_CjTotal&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;fc_CjTotal_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_last_year_CjTotal_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_turnover_object&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_turnover_ticket&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_last_CJTime&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;fc_last_CJAmount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;fc_last_CJProduct_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_last_login_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_last_login_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hc_online_times&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_coupons_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hc_coupons_useNum&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hc_coupons_useRate&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_enshrine_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hc_most_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_shoppingcart_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_shopping_cart_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hc_most_shoppingcart_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_order_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hc_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_lastyear_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_deal_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_deal_scenic_spot&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_turnover_object&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_turnover_hypothetical&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_turnover_ticket&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_turnover_voucher&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_turnover_yearcard&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_turnover_package&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_last_deal_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hc_last_deal_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;hc_last_deal_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;avg_satisfaction&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;judge_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;negative_comment_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;negative_comment_reason_top3&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hxc_last_login_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hxc_last_login_fromToday&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hxc_online_times&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;hxc_luckydraw_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hxc_probability&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hxc_use_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hxc_coupons_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hxc_coupons_useNum&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;hxc_coupons_useRate&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;attendance_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;attendance_scenicList&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;comment_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;comment_scenic&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;enshrine_product_type_list&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;enshrine_product_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;most_enshrine_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;publish_strategy_brand&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;publish_strategy_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;publish_strategy_like&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;publish_strategy_refining&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;douyin_order_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;douyin_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_lastyear_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_deal_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;douyin_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_deal_scenic_spot&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;douyin_turnover_object&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_turnover_hypothetical&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_turnover_ticket&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_turnover_voucher&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_turnover_yearcard&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_turnover_package&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_last_deal_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;douyin_last_deal_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;douyin_last_deal_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;youban_order_num&quot;</span> bigint,</span><br><span class="line">    <span class="string">&quot;youban_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_lastyear_turnover&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_deal_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;youban_unit_price&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_deal_scenic_spot&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;youban_turnover_object&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_turnover_hypothetical&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_turnover_ticket&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_turnover_voucher&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_turnover_yearcard&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_turnover_package&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_last_deal_time&quot;</span> varchar(3000) DEFAULT NULL :: character varying,</span><br><span class="line">    <span class="string">&quot;youban_last_deal_amount&quot;</span> double precision,</span><br><span class="line">    <span class="string">&quot;youban_last_deal_product_type&quot;</span> varchar(3000) DEFAULT NULL :: character varying</span><br><span class="line">) WITH (</span><br><span class="line">    appendonly = <span class="literal">true</span>,</span><br><span class="line">	orientation = row,</span><br><span class="line">    compresstype = zlib,</span><br><span class="line">    compresslevel = 5</span><br><span class="line">) DISTRIBUTED BY (guid);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CREATE TABLE obj.map_customer_label_name_guid(</span><br><span class="line">    <span class="string">&quot;guid&quot;</span> varchar(200) NOT NULL,</span><br><span class="line">    <span class="string">&quot;name&quot;</span> varchar(200) DEFAULT NULL :: character varying</span><br><span class="line">) WITH (</span><br><span class="line">    appendonly = <span class="literal">true</span>,</span><br><span class="line">	orientation = row,</span><br><span class="line">    compresstype = zlib,</span><br><span class="line">    compresslevel = 5</span><br><span class="line">) DISTRIBUTED BY (guid);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 添加 guid 索引</span><br><span class="line">CREATE INDEX tdm_customer_label_df_guid_idx ON obj.tdm_customer_label_df (guid);</span><br><span class="line"></span><br><span class="line">-- 添加 身份证 索引</span><br><span class="line">CREATE INDEX tdm_customer_label_df_idcard_idx ON obj.tdm_customer_label_df (idcard);</span><br><span class="line"></span><br><span class="line">-- 添加 手机号 索引</span><br><span class="line">CREATE INDEX tdm_customer_label_df_phone_idx ON obj.tdm_customer_label_df (phone);</span><br><span class="line"></span><br><span class="line">-- 添加 名称 索引</span><br><span class="line">CREATE INDEX tdm_customer_label_df_name_idx ON obj.tdm_customer_label_df (name);</span><br><span class="line"></span><br><span class="line">-- 测试 guid 索引</span><br><span class="line"><span class="keyword">select</span> * from obj.tdm_customer_label_df <span class="built_in">where</span> guid = <span class="string">&#x27;ad1f7860-6b43-4c93-96c3-88ffcf340aaa&#x27;</span>;</span><br><span class="line"></span><br><span class="line">-- 测试 身份证 索引</span><br><span class="line"><span class="keyword">select</span> * from obj.tdm_customer_label_df <span class="built_in">where</span> idcard like <span class="string">&#x27;430404197906291510%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">-- 测试 手机号 索引</span><br><span class="line"><span class="keyword">select</span> * from obj.tdm_customer_label_df <span class="built_in">where</span> phone like <span class="string">&#x27;%13660177696%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">-- 测试 名称 索引</span><br><span class="line"><span class="keyword">select</span> * from obj.tdm_customer_label_df <span class="built_in">where</span> name like <span class="string">&#x27;全孟操%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * from obj.map_customer_phone_guid_df <span class="built_in">where</span> phone = <span class="string">&#x27;15808024802&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * from obj.tdm_customer_label_df <span class="built_in">where</span> guid = <span class="string">&#x27;892d8621-8e59-4547-89d5-d3c92ebcfb69&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="HDFS文件和HIVE表的一些操作"><a href="#HDFS文件和HIVE表的一些操作" class="headerlink" title="HDFS文件和HIVE表的一些操作"></a>HDFS文件和HIVE表的一些操作</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1326,7 +1393,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">226</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

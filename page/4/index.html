@@ -174,152 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/29/flink_space/flink%20on%20yarn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/29/flink_space/flink%20on%20yarn/" class="post-title-link" itemprop="url">Flink On Yarn</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-29 20:18:18" itemprop="dateCreated datePublished" datetime="2021-06-29T20:18:18+08:00">2021-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/06/29/flink_space/flink%20on%20yarn/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/06/29/flink_space/flink%20on%20yarn/" class="cy_cmt_count" data-xid="2021/06/29/flink_space/flink on yarn/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>flink on yarn<br><img src="/2021/06/29/flink_space/flink%20on%20yarn/flinkOnYarn.jpg"><br>![](flink on yarn_files/1.jpg)<br>前提条件：需先安装zookeeper与hadoop</p>
-<p>zookeeper安装</p>
-<p>hadoop安装</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>机器配置<br>3台 linux centos7（虚拟机即可）<br>修改主机名、固定ip<br>免密<br>安装jdk</p>
-<ul>
-<li>hadoop1: 4g内存 2核 80g硬盘 作为master节点</li>
-<li>hadoop2 1g内存 1核 8g硬盘 作为slave节点</li>
-<li>hadoop3: 1g内存 1核 8g硬盘 作为slave节点</li>
-</ul>
-<h2 id="免密（3步）"><a href="#免密（3步）" class="headerlink" title="免密（3步）"></a>免密（3步）</h2><p>生成密钥<br>ssh-keygen</p>
-<p>验证密钥<br>cd ~/.ssh/</p>
-<p>将公钥传到目标服务器即可<br>ssh-copy-id -i ~/.ssh/id_rsa.pub root@ip</p>
-<ol>
-<li>下载解压<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O http://apache.mirrors.hoobly.com/flink/flink-1.10.0/flink-1.10.0-bin-scala_2.12.tgz</span><br></pre></td></tr></table></figure></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp flink-1.10.0-bin-scala_2.12.tgz root@hadoop2:`pwd`</span><br><span class="line">scp flink-1.10.0-bin-scala_2.12.tgz root@hadoop3:`pwd`</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf flink-1.10.0-bin-scala_2.12.tgz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>JobManager高可用配置</li>
-</ol>
-<p>(1)yarn-site.xml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.am.max-attempts&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;4&lt;/value&gt;</span><br><span class="line">  &lt;description&gt;</span><br><span class="line">    The maximum number of application master execution attempts.</span><br><span class="line">  &lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<p>(2)flink配置文件flink-conf.yaml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">high-availability: zookeeper</span><br><span class="line">high-availability.zookeeper.quorum: hadoop1:2181,hadoop2:2181,hadoop3:2181</span><br><span class="line">high-availability.storageDir: hdfs:///flink/recovery</span><br><span class="line">high-availability.zookeeper.path.root: /flink</span><br><span class="line">yarn.application-attempts: 10</span><br></pre></td></tr></table></figure>
-<p>(3)添加flink环境变量/etc/profile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#flink环境变量配置</span><br><span class="line">export FLINK_HOME=/soft/flink/flink-1.10.0</span><br><span class="line">export PATH=$PATH:$FLINK_HOME/bin</span><br><span class="line"></span><br><span class="line">#flink on yarn配置</span><br><span class="line">HADOOP_CONF_DIR=$HADOOP_HOME</span><br><span class="line">export HADOOP_CLASSPATH=&#x27;hadoop classpath&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>参考：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxuhongming/p/12873010.html">https://www.cnblogs.com/hxuhongming/p/12873010.html</a></p>
-<h1 id="Flink1-11-2-On-Yarn安装部署参考"><a href="#Flink1-11-2-On-Yarn安装部署参考" class="headerlink" title="Flink1.11.2 On Yarn安装部署参考"></a>Flink1.11.2 On Yarn安装部署参考</h1><p>flink-conf.yaml<br>masters<br>slaves<br>zoo.cfg</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Joe_circle/article/details/110188604">https://blog.csdn.net/Joe_circle/article/details/110188604</a></p>
-<p>#测试<br>启动监听客户端端口<br>nc -lk 8888<br>（yum install -y nc）<br>启动flink的自带demo<br>bin/flink run examples/streaming/SocketWindowWordCount.jar –port 8888<br>启动日志监控<br>集群</p>
-<p>##提交Flink任务到yarn的两种方式</p>
-<ul>
-<li>第一种yarn seesion(Start a long-running Flink cluster on YARN)这种方式需要先启动集群，然后在提交作业，接着会向yarn申请一块空间后，资源永远保持不变。如果资源满了，下一个作业就无法提交，只能等到yarn中的其中一个作业执行完成后，释放了资源，那下一个作业才会正常提交.这种方式资源被限制在session中，不能超过，比较适合特定的运行环境或者测试环境。</li>
-</ul>
-<p>启动后查看hadoop<br>启动集群<br>启动一个session</p>
-<ul>
-<li>第二种Flink run直接在YARN上提交运行Flink作业(Run a Flink job on YARN)，这种方式的好处是一个任务会对应一个job,即没提交一个作业会根据自身的情况，向yarn申请资源，直到作业执行完成，并不会影响下一个作业的正常运行，除非是yarn上面没有任何资源的情况下。一般生产环境是采用此种方式运行。这种方式就需要确保集群资源足够。</li>
-</ul>
-<p>启动后查看hadoop，yarn的web监控页面<br><img src="/2021/06/29/flink_space/flink%20on%20yarn/ha.jpg"><br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/asker009/p/11327533.html">https://www.cnblogs.com/asker009/p/11327533.html</a></p>
-<p>#yarn<br>yarn是一个资源管理与调度平台，不仅hadoop跑在上面，flink也可以直接向yarn申请资源并运行上去</p>
-<p>观察任务</p>
-<p>命令行可以确认一下yarn任务创建成功：</p>
-<pre><code>yarn application -list
-</code></pre>
-<p>杀死任务</p>
-<p>如果想停止任务，直接向yarn杀死整个任务即可。</p>
-<pre><code>yarn application -kill 进程ID
-</code></pre>
-<p><img src="/2021/06/29/flink_space/flink%20on%20yarn/1.jpg"><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankdeng/p/9400627.html">https://www.cnblogs.com/frankdeng/p/9400627.html</a></p>
-<p>#疑问点？<br>flink启动后，提交job异常，发现是jdk版本问题，flink版本和jdk版本关系？</p>
-<p> Sum of configured JVM Metaspace (96.000mb (100663296 bytes)) and JVM Overhead (192.000mb (201326592 bytes)) exceed configured Total Process Memory (64.000mb (67108864 bytes)).</p>
-<h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>java.lang.NoClassDefFoundError: org/apache/hadoop/yarn/exceptions/YarnException问题可能缺少jar包<br>解决方法<br>cp $HADOOP_HOME/share/hadoop/yarn/hadoop-yarn-api* $FLINK_HOME/lib</p>
-<p><a target="_blank" rel="noopener" href="https://yuchi.blog.csdn.net/article/details/106586942">https://yuchi.blog.csdn.net/article/details/106586942</a></p>
-<p>java.lang.NoClassDefFoundError: org/apache/hadoop/fs/Path</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/19/flink_space/flink%20on%20k8s/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1290,6 +1144,106 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/" class="post-title-link" itemprop="url">大数据开发-全量表、增量表、快照表、拉链表、流水表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-03 22:08:08" itemprop="dateCreated datePublished" datetime="2021-01-03T22:08:08+08:00">2021-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/" class="cy_cmt_count" data-xid="2021/01/03/大数据/大数据开发-数据表的种类/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="全量表、增量表、快照表、拉链表、流水表"><a href="#全量表、增量表、快照表、拉链表、流水表" class="headerlink" title="全量表、增量表、快照表、拉链表、流水表"></a>全量表、增量表、快照表、拉链表、流水表</h1><p><strong>全量表</strong></p>
+<p>顾名思义是存储了全部数据的表，全量表没有分区的，所有数据都储存在一个分区中。全量表存储的是截至到目前最新状态的全部记录。</p>
+<p><strong>增量表</strong></p>
+<p>增量表是相对于全量表而言的，增量表是每次把新增的数据追加到原表中，增量表中每次新增的数据单独存储在一个分区中。</p>
+<p><strong>快照表</strong></p>
+<p>快照表就是截至过去某个时间点的所有数据，关注更多的是过去某个时间点的状态，即快照表主要存储的是历史状态的表。每次快照的数据单独储存在一个分区中。</p>
+<p><strong>拉链表</strong></p>
+<p>拉链表储存了某个主体的一整套连续动作的信息。与快照表类似，但拉链表储存的是在快照表的基础上去除了重复状态的数据。</p>
+<p><strong>流水表</strong></p>
+<p>流水表是存储了所有修改记录的表。流水表与拉链表也有些类似，不同的是拉链表可以根据拉链粒度存储数据，也就是只存储特定维度的数据变化记录；而流水表存储的是每一个修改记录。</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/218243038">https://zhuanlan.zhihu.com/p/218243038</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1361,7 +1315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">226</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
