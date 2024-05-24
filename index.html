@@ -458,6 +458,172 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">数据库-ClickHouse搭建及使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2023-06-06T20:08:08+08:00">2023-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 11:29:05" itemprop="dateModified" datetime="2024-05-24T11:29:05+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2023/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2023/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2023/06/06/数据库/数据库-ClickHouse搭建及使用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>数据库-ClickHouse</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><a target="_blank" rel="noopener" href="https://clickhouse.com/#quick-start">https://clickhouse.com/#quick-start</a></p>
+<p>ClickHouse 是俄罗斯的 Yandex 于 2016 年开源的用于在线分析处理查询（OLAP :Online Analytical Processing）的列式存储数据库（DBMS：Database Management System），能够使用 SQL 查询实时生成分析数据报告。ClickHouse的全称是Click Stream，Data WareHouse。</p>
+<p>ClickHouse开源的出现让许多想做大数据并且想做大数据分析的很多公司和企业耳目一新。ClickHouse 正是以不依赖Hadoop 生态、安装和维护简单、查询速度快、可以支持SQL等特点在大数据分析领域越走越远。</p>
+<p>MySQL单条SQL是单线程的，只能跑满一个core，ClickHouse相反，有多少CPU，吃多少资源，所以飞快；<br>ClickHouse不支持事务，不存在隔离级别。</p>
+<p>ClickHouse的定位是分析性数据库，而不是严格的关系型数据库。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="docker-m1"><a href="#docker-m1" class="headerlink" title="docker-m1"></a>docker-m1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull clickhouse/s3-proxy:latest</span><br></pre></td></tr></table></figure>
+
+<h2 id="docker-windows"><a href="#docker-windows" class="headerlink" title="docker-windows"></a>docker-windows</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;2&#x27;</span><br><span class="line"> </span><br><span class="line">services:</span><br><span class="line">  clickhouse:</span><br><span class="line">    image: yandex/clickhouse-server</span><br><span class="line">    hostname: clickhouse</span><br><span class="line">    container_name: clickhouse</span><br><span class="line">    expose:</span><br><span class="line">      - &quot;9000&quot;</span><br><span class="line">    user: root</span><br><span class="line">    privileged: true</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8133:8123&quot;</span><br><span class="line">      - &quot;9011:9000&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - ./ch01/data:/var/lib/clickhouse</span><br><span class="line">      - ./ch01/log/:/var/log/clickhouse-server/</span><br><span class="line">    ulimits:</span><br><span class="line">      nofile:</span><br><span class="line">        soft: 262144</span><br><span class="line">        hard: 262144</span><br></pre></td></tr></table></figure>
+
+
+<p>启动server端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name clickhouse-server --ulimit nofile=262144:262144 clickhouse/s3-proxy</span><br></pre></td></tr></table></figure>
+
+<p>启动并连接clickhouse-server</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm --link clickhouse-test-server:clickhouse-server -p 8123:8123 -p 9000:9000 -p 9009:9009 yandex/clickhouse-client --host clickhouse-server</span><br><span class="line"></span><br><span class="line">尝试</span><br><span class="line">docker run -d --name clickhouse-server -p 8123:8123 -p 9000:9000 -p 9009:9009 --ulimit nofile=262144:262144 clickhouse/s3-proxy --volume=~/docker_deploy/clickhouse/conf/config.xml:/etc/clickhouse-server/config.xml --volume=~/docker_deploy/clickhouse/conf/users.xml:/etc/clickhouse-server/users.xml</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ck默认的配置不支持远程访问"><a href="#ck默认的配置不支持远程访问" class="headerlink" title="ck默认的配置不支持远程访问"></a>ck默认的配置不支持远程访问</h2><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>clickhouse可以做用户行为分析，流批一体。<br>分析清晰明确的数据流，结构稳定的事件或者日志。</p>
+<h2 id="基于ClickHouse的用户行为分析"><a href="#基于ClickHouse的用户行为分析" class="headerlink" title="基于ClickHouse的用户行为分析"></a>基于ClickHouse的用户行为分析</h2><h2 id="基于Flink-ClickHouse打造轻量级点击流实时数仓"><a href="#基于Flink-ClickHouse打造轻量级点击流实时数仓" class="headerlink" title="基于Flink+ClickHouse打造轻量级点击流实时数仓"></a>基于Flink+ClickHouse打造轻量级点击流实时数仓</h2><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"><span class="keyword">show</span> tables;</span><br><span class="line"><span class="keyword">desc</span> test;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建数据库</span></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> if <span class="keyword">not</span> <span class="keyword">exists</span> test.tb_test</span><br><span class="line">(</span><br><span class="line">    id Int64,</span><br><span class="line">    datetime DateTime,</span><br><span class="line">    content Nullable(String),</span><br><span class="line">    <span class="keyword">value</span> Nullable(Float64),</span><br><span class="line">    <span class="type">date</span> <span class="type">Date</span></span><br><span class="line">)</span><br><span class="line">engine <span class="operator">=</span> MergeTree                  <span class="comment">--使用mergeTree引擎，ch主要引擎</span></span><br><span class="line"><span class="keyword">partition</span> <span class="keyword">by</span> toYYYYMM(datetime)     <span class="comment">--按照datetime这个字段的月进行分区</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> id                         <span class="comment">--按照id进行排序</span></span><br><span class="line">TTL datetime <span class="operator">+</span> <span class="type">INTERVAL</span> <span class="number">3</span> <span class="keyword">DAY</span> ;     <span class="comment">--三天过期</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--修改表中数据过期时间，到期后数据会在merge时被删除</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test.tb_test</span><br><span class="line">MODIFY TTL datetime <span class="operator">+</span> <span class="type">INTERVAL</span> <span class="number">1</span> <span class="keyword">DAY</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--查询</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_test <span class="keyword">order</span> <span class="keyword">by</span> id;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删除分区，可用于定时任务删除旧数据</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tb_test <span class="keyword">drop</span> <span class="keyword">partition</span> <span class="string">&#x27;202005&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--插入数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb_test <span class="keyword">values</span> (<span class="number">5</span>, <span class="string">&#x27;2020-02-29 12:38:37&#x27;</span>, <span class="string">&#x27;abcde&#x27;</span>, <span class="number">12.553</span>, <span class="string">&#x27;2020-04-25&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--修改数据，不推荐使用</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tb_test <span class="keyword">update</span> content <span class="operator">=</span> <span class="string">&#x27;hello click&#x27;</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">52</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删除数据，不推荐使用</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tb_test <span class="keyword">delete</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">56</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 或（ATTACH 也可以建库，但是metadata目录下不会生成.sql文件，一般用于metadata元数据sql文件被删除后，恢复库表结构使用）</span></span><br><span class="line"><span class="keyword">CREATE</span><span class="operator">/</span>ATTACH DATABASE test ENGINE <span class="operator">=</span> Ordinary;</span><br><span class="line"><span class="comment">-- 创建分布式表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> distributed_table <span class="keyword">AS</span> <span class="keyword">table</span> ENGINE <span class="operator">=</span> Distributed(cluster, db, <span class="keyword">table</span>, rand());</span><br><span class="line"></span><br><span class="line"><span class="comment">-- cluster：配置文件中的群集名称。</span></span><br><span class="line"><span class="comment">-- db：库名。</span></span><br><span class="line"><span class="comment">-- table：本地表名。</span></span><br><span class="line"><span class="comment">-- rand()：分片方式：随机。</span></span><br><span class="line"><span class="comment">-- intHash64():分片方式：指定字段做hash。</span></span><br><span class="line"><span class="comment">-- Distribute引擎会选择每个分发到的Shard中的”健康的”副本执行SQL</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="核心特性"><a href="#核心特性" class="headerlink" title="核心特性"></a>核心特性</h1><h1 id="客户端（工具）"><a href="#客户端（工具）" class="headerlink" title="客户端（工具）"></a>客户端（工具）</h1><p>clickhouse-client</p>
+<p>Dbeaver</p>
+<ul>
+<li>自动求和聚合表</li>
+</ul>
+<h1 id="运维查看数据库及表容量"><a href="#运维查看数据库及表容量" class="headerlink" title="运维查看数据库及表容量"></a>运维查看数据库及表容量</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查看数据库容量，以测试数据为参考</span></span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    <span class="built_in">sum</span>(<span class="keyword">rows</span>) <span class="keyword">as</span> &quot;总行数&quot;,</span><br><span class="line">    formatReadableSize(<span class="built_in">sum</span>(data_uncompressed_bytes)) <span class="keyword">as</span> &quot;原始大小&quot;,</span><br><span class="line">    formatReadableSize(<span class="built_in">sum</span>(data_compressed_bytes)) <span class="keyword">as</span> &quot;压缩大小&quot;,</span><br><span class="line">    round(<span class="built_in">sum</span>(data_compressed_bytes) <span class="operator">/</span> <span class="built_in">sum</span>(data_uncompressed_bytes) <span class="operator">*</span> <span class="number">100</span>, <span class="number">0</span>) &quot;压缩率&quot;</span><br><span class="line"><span class="keyword">from</span> system.parts;</span><br><span class="line"></span><br><span class="line">┌──────总行数─┬─原始大小──┬─压缩大小─┬─压缩率─┐</span><br><span class="line">│ <span class="number">169851144587</span> │ <span class="number">30.76</span> TiB │ <span class="number">4.51</span> TiB │     <span class="number">15</span> │</span><br><span class="line">└─────────────┴───────────┴──────────┴────────┘</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="keyword">rows</span> <span class="keyword">in</span> set. Elapsed: <span class="number">1.462</span> sec. Processed <span class="number">90.35</span> thousand <span class="keyword">rows</span>, <span class="number">42.81</span> MB (<span class="number">63.76</span> thousand <span class="keyword">rows</span><span class="operator">/</span>s., <span class="number">30.60</span> MB<span class="operator">/</span>s.) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询test表，2019年10月份的数据容量</span></span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    <span class="keyword">table</span> <span class="keyword">as</span> &quot;表名&quot;,</span><br><span class="line">    <span class="built_in">sum</span>(<span class="keyword">rows</span>) <span class="keyword">as</span> &quot;总行数&quot;,</span><br><span class="line">    formatReadableSize(<span class="built_in">sum</span>(data_uncompressed_bytes)) <span class="keyword">as</span> &quot;原始大小&quot;,</span><br><span class="line">    formatReadableSize(<span class="built_in">sum</span>(data_compressed_bytes)) <span class="keyword">as</span> &quot;压缩大小&quot;,</span><br><span class="line">    round(<span class="built_in">sum</span>(data_compressed_bytes) <span class="operator">/</span> <span class="built_in">sum</span>(data_uncompressed_bytes) <span class="operator">*</span> <span class="number">100</span>, <span class="number">0</span>) &quot;压缩率&quot;</span><br><span class="line"><span class="keyword">from</span> system.parts</span><br><span class="line">	<span class="comment">-- 根据实际情况加查询条件</span></span><br><span class="line">    <span class="keyword">where</span> <span class="keyword">table</span> <span class="keyword">in</span>(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">        <span class="keyword">and</span> <span class="keyword">partition</span> <span class="keyword">like</span> <span class="string">&#x27;2019-10-%&#x27;</span></span><br><span class="line">    <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">table</span>;		</span><br><span class="line"></span><br><span class="line">┌─────总行数─┬─原始大小───┬─压缩大小──┬─压缩率─┐</span><br><span class="line">│ <span class="number">3015199559</span> │ <span class="number">727.83</span> GiB │ <span class="number">60.34</span> GiB │      <span class="number">8</span> │</span><br><span class="line">└────────────┴────────────┴───────────┴────────┘</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="keyword">rows</span> <span class="keyword">in</span> set. Elapsed: <span class="number">0.227</span> sec. Processed <span class="number">3.52</span> thousand <span class="keyword">rows</span>, <span class="number">1.70</span> MB (<span class="number">15.48</span> thousand <span class="keyword">rows</span><span class="operator">/</span>s., <span class="number">7.50</span> MB<span class="operator">/</span>s.) </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> 感谢&amp;参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yyoc97/article/details/103111464">https://blog.csdn.net/yyoc97/article/details/103111464</a></p>
+<h1 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h1><h2 id="kafkaToClickhouse"><a href="#kafkaToClickhouse" class="headerlink" title="kafkaToClickhouse"></a>kafkaToClickhouse</h2><p>1亿数据:</p>
+<p>比Vertica快5倍,比Hive快279倍,比Mysql快801倍;</p>
+<p>10亿数据:</p>
+<p>比Vertica快5倍,mysql无法完成。</p>
+<h2 id="趣头条基于-Flink-ClickHouse-构建实时数据分析平台"><a href="#趣头条基于-Flink-ClickHouse-构建实时数据分析平台" class="headerlink" title="趣头条基于 Flink+ClickHouse 构建实时数据分析平台"></a>趣头条基于 Flink+ClickHouse 构建实时数据分析平台</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44904816/article/details/105260005">https://blog.csdn.net/weixin_44904816/article/details/105260005</a></p>
+<p><strong>Flink-to-ClickHouse 秒级场景</strong></p>
+<p>相对较为复杂的 SQL，count+group by+order by，ClickHouse 在 3.6s内完成 26 亿数据计算。</p>
+<p><strong>ClickHouse在业界的一些应用场景？</strong></p>
+<p>（1）<strong>今日头条</strong>：内部用ClickHouse来做用户行为分析，内部一共几千个ClickHouse节点，单集群最大1200节点，总数据量几十PB，日增原始数据300TB左右。</p>
+<p>（2）<strong>腾讯</strong>：内部用ClickHouse做游戏数据分析，并且为之建立了一整套监控运维体系。</p>
+<p>（3）<strong>携程</strong>：内部从18年7月份开始接入试用，目前80%的业务都跑在ClickHouse上。每天数据增量十多亿，近百万次查询请求。</p>
+<p>（4）<strong>快手</strong>：内部也在使用ClickHouse，存储总量大约10PB， 每天新增200TB， 90%查询小于3S。</p>
+<h1 id="架构规划"><a href="#架构规划" class="headerlink" title="架构规划"></a>架构规划</h1><p>为什么要使用ClickHouse？场景是什么？</p>
+<p>1、场景是实时指标，指标基本都以 SQL 进行描述。主要是要Flink SQL实现。</p>
+<p>2、数据可回溯，方便异常排查：当日活下降，需要回溯排查是哪些指标口径的逻辑问题，比如是报的数据差异或是数据流 Kafka 掉了，或者是因为用户没有上报某个指标导致日活下降，而 Flink 则无法进行回溯。所以需要存到数据库</p>
+<p>3、计算快，一个周期内完成所有指标计算：平均每五分钟或三分钟计算一次</p>
+<p>4、支持实时流，分布式部署，运维简单：支持 Kafka 数据实时流。</p>
+<p>因为数据量大，Hive、MySQL无法满足性能要求，例如统计上一条数据，需秒级完成</p>
+<p><img src="/2023/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/ck1.png" alt="img"></p>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>部分表引擎，创建后，不可修改表结构。</p>
+<p><code>ALTER</code> 仅支持 <code>*MergeTree</code> ，<code>Merge</code>以及<code>Distributed</code>等引擎表。</p>
+<p>数据库引擎允许您处理数据表。</p>
+<p>默认情况下，ClickHouse使用<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/engines/database-engines/atomic">Atomic</a>数据库引擎。它提供了可配置的<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/engines/table-engines/">table engines</a>和<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/sql-reference/syntax">SQL dialect</a>。</p>
+<ul>
+<li>clickhouse默认无法实时删除表中的数据</li>
+</ul>
+<p>具体删除&amp;更新实现 语法 如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>table_name<span class="operator">&gt;</span> <span class="keyword">DELETE</span> <span class="keyword">WHERE</span> <span class="operator">&lt;</span><span class="keyword">filter</span><span class="operator">&gt;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="operator">&lt;</span>table_name<span class="operator">&gt;</span> <span class="keyword">UPDATE</span> col1 <span class="operator">=</span> expr1, ... <span class="keyword">WHERE</span> <span class="operator">&lt;</span><span class="keyword">filter</span><span class="operator">&gt;</span>;</span><br><span class="line"></span><br><span class="line"># 实际操作</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> test_update <span class="keyword">UPDATE</span> event_status_key<span class="operator">=</span><span class="number">0</span> <span class="keyword">where</span> event_status_key<span class="operator">=</span><span class="number">22</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> test_update <span class="keyword">update</span> dmp_audience_ids <span class="operator">=</span> arrayPushBack(dmp_audience_ids, <span class="number">1234567</span>) <span class="keyword">where</span> has(dmp_audience_ids, <span class="number">31694239</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="表引擎"><a href="#表引擎" class="headerlink" title="表引擎"></a>表引擎</h1><p>Log系列引擎、MergeTree系列引擎、外部存储引擎、虚拟列</p>
+<h1 id="常见报错"><a href="#常见报错" class="headerlink" title="常见报错"></a>常见报错</h1><p> Code: 43, e.displayText() = DB::Exception: Illegal types Decimal(20, 4) and Float64 of arguments of function multiply</p>
+<p>我们都应该知道本身两表进行相乘计算，字段类型都一样，那出错的肯定是在这个 ‘0.2’ 咯！  0.35是float类型，具体就不普及了。</p>
+<p>CAST函数用于将某种数据类型的表达式显式转换为另一种数据类型。CAST()函数的参数是一个表达式，它包括用AS关键字分隔的源值和目标数据类型。</p>
+<p>语法：CAST (expression AS data_type)</p>
+<p>可以转换的类型是有限制的。这个类型可以是以下值其中的一个：</p>
+<p>二进制，同带binary前缀的效果 : BINARY<br>字符型，可带参数 : CHAR()<br>日期 : DATE<br>时间: TIME<br>日期时间型 : DATETIME<br>浮点数 : DECIMAL<br>整数 : SIGNED<br>无符号整数 : UNSIGNED<br>————————————————<br>版权声明：本文为CSDN博主「Isay_me」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Sy1114/article/details/110733382">https://blog.csdn.net/Sy1114/article/details/110733382</a></p>
+<p>1.SELECT CAST(‘0.5’ AS decimal) 结果：0.5</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> filed1,filed2,filed2 <span class="operator">*</span> <span class="number">0</span>,multiply(filed2, <span class="built_in">CAST</span>(<span class="string">&#x27;0.5&#x27;</span> <span class="keyword">AS</span> <span class="type">decimal</span>(<span class="number">10</span>,<span class="number">2</span>)))</span><br><span class="line"><span class="keyword">from</span> db.table1  </span><br><span class="line"><span class="keyword">where</span> assess_year<span class="operator">=</span><span class="string">&#x27;2021&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line"><span class="keyword">case</span> <span class="keyword">when</span> x.FNL_PRICE <span class="keyword">is</span> <span class="keyword">null</span> <span class="keyword">then</span> a.RTL_MKT_VAL <span class="operator">*</span> <span class="built_in">CAST</span>(<span class="string">&#x27;0.35&#x27;</span> <span class="keyword">as</span> <span class="type">Decimal</span>(<span class="number">20</span>,<span class="number">4</span>))</span><br><span class="line">	        <span class="keyword">else</span> a.RTL_MKT_VAL <span class="operator">*</span> x.FNL_PRICE <span class="keyword">end</span> <span class="keyword">as</span> AGENT_COST</span><br><span class="line"><span class="keyword">from</span> ck a </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> bala x <span class="keyword">on</span> a.id <span class="operator">=</span>b.id</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/17/test/Test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1042,106 +1208,6 @@
           <p>绝大数据开发、IT应用，应该是要涉及算法及数据挖掘。</p>
 <p>向往的方向：利用算法、数据，解决天灾人祸，服务人类衣食行住，讨索未知事物、新能源、新材料。</p>
 <h1 id="待整合"><a href="#待整合" class="headerlink" title="待整合"></a>待整合</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/16/java_space/Java-Flowable%20--%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BC%95%E6%93%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/16/java_space/Java-Flowable%20--%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BC%95%E6%93%8E/" class="post-title-link" itemprop="url">Java-Flowable -- 工作流引擎</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-16 22:21:26" itemprop="dateCreated datePublished" datetime="2022-01-16T22:21:26+08:00">2022-01-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2022/01/16/java_space/Java-Flowable%20--%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BC%95%E6%93%8E/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2022/01/16/java_space/Java-Flowable%20--%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%BC%95%E6%93%8E/" class="cy_cmt_count" data-xid="2022/01/16/java_space/Java-Flowable -- 工作流引擎/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h4 id="Flowable-知识"><a href="#Flowable-知识" class="headerlink" title="Flowable 知识"></a>Flowable 知识</h4><p>官网：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://www.flowable.org">https://www.flowable.org</a></p>
-<p>五个官方应用（包含于Flowable下载包里的wars目录）<br> flowable-modeler.war：流程定义管理<br> flowable-task.war：用户任务管理<br> flowable-idm.war：用户组权限管理<br> flowable-rest.war：流程引擎对外提供的API接口<br> flowable-admin.war：后台管理</p>
-<p>流程设计器：将 flowable-modeler.war 和 flowable-idm.war部署到tomcat，即可得到网页版流程设计器（访问路径为 /flowable-modeler，默认账号为 admin/test ）</p>
-<p>Flowable五大引擎（包含于Flowable下载包里的libs目录）<br> ProcessEngine（流程引擎）、DmnEngine（决策引擎）、IdmEngine（身份识别引擎）、ContentEngine（内容引擎）、FormEngine（表单引擎）</p>
-<p>应用首次启动时，Flowable会往数据库里添加一些表<br> ACT_RE_ *：RE代表repository。具有此前缀的表包含静态信息，例如流程定义和流程资源（图像，规则等）。<br> ACT_RU_ *：RU代表runtime。这些是包含运行时的流程实例，用户任务，变量，作业等的运行时数据的运行时表。Flowable仅在流程实例执行期间存储运行时数据，并在流程实例结束时删除记录。这使运行时表保持小而快。<br> ACT_HI_ *：HI代表history。这些是包含历史数据的表，例如过去的流程实例，变量，任务等<br> ACT_GE_ *：general数据，用于各种用例<br> ACT_ID_ *：Idm的用户、组</p>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="实际开发"><a href="#实际开发" class="headerlink" title="实际开发"></a>实际开发</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">流程定义</span><br><span class="line">工作流流程实例管理</span><br><span class="line">工作流流程任务管理</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>实例化一个流程</li>
-</ol>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7e58197dbe9d">https://www.jianshu.com/p/7e58197dbe9d</a></p>
-
       
     </div>
 
