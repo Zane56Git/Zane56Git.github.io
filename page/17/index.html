@@ -174,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-Hue/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -188,7 +188,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/19/hadoop_space/hadoop-Hue/" class="post-title-link" itemprop="url">hadoop-Hue</a>
+            <a href="/2018/01/19/hadoop_space/hadoop/" class="post-title-link" itemprop="url">hadoop</a>
         </h2>
 
         <div class="post-meta">
@@ -205,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,8 +227,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-Hue/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-Hue/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-Hue/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -244,224 +244,141 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Hue是一个开源的Apache Hadoop UI系统，由Cloudera Desktop演化而来，最后Cloudera公司将其贡献给Apache基金会的Hadoop社区，它是基于Python Web框架Django实现的。</p>
+          <p>hadoop</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Hadoop 是一个开源的分布式计算和存储（计算+存储）框架，允许使用简单的编程模型在跨计算机集群的分布式环境中存储和处理大数据。它的设计是从单个服务器扩展到数千个机器，每个都提供本地计算和存储。</p>
+<p>Hadoop三大组件：<br>分布式文件系统：HDFS —— 实现将文件分布式存储在很多的服务器上<br>分布式运算编程框架：MapReduce——实现多台机器的分布式并行运算。<br>分布式资源调度平台：YARN —— 帮用户调度大量的mapreduce程序，并合理分配运算资源</p>
+<p>Hadoop中NameNode和DataNode</p>
+<p>HDFS主要分为两大角色，NameNode与DataNode，NameNode主要负责管理元数据，DataNode主要负责存储文件块。NameNode来管理datanode与文件块的映射关系。</p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="单机安装"><a href="#单机安装" class="headerlink" title="单机安装"></a>单机安装</h1><h2 id="mac安装"><a href="#mac安装" class="headerlink" title="mac安装"></a>mac安装</h2><ol>
+<li>如同jdk，下载解压，配置即可</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置hadoop环境变量</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/Users/zane/software/hadoop-2.10.0</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出编辑模式，使用 :wq 保存修改，然后运行 source 命令使文件中的修改立即生效：</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile	</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<ol start="2">
+<li>修改 Hadoop 的配置文件</li>
+</ol>
+<p>需要修改的 Hadoop 配置文件都在目录 etc/hadoop 下，包括：</p>
+<ul>
+<li>hadoop-env.sh</li>
+<li>core-site.xml</li>
+<li>hdfs-site.xml</li>
+<li>mapred-site.xml</li>
+<li>yarn-site.xml</li>
+</ul>
+<ol>
+<li><p>修改hadoop-env.sh文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home</span><br><span class="line">export HADOOP_CONF_DIR=/Users/Cyan/coding/hadoop/hadoop-2.8.2/etc/hadoop</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 core-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--用来指定hadoop运行时产生文件的存放目录  自己创建--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/Users/Cyan/coding/hadoop/hadoop-2.8.2/tmp&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 hdfs-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;1&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--不是root用户也可以写文件到hdfs--&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.permissions&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;false&lt;/value&gt;    &lt;!--关闭防火墙--&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">        &lt;!--把路径换成本地的name坐在位置--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/home/hadoop/cdh4/hadoop/dfs/name&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;!--在本地新建一个存放hadoop数据的文件夹，然后将路径在这里配置一下--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/data1/hadoop&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 mapred-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;!--指定mapreduce运行在yarn上--&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 yarn-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="启动-Hadoop（三步启动）"><a href="#启动-Hadoop（三步启动）" class="headerlink" title="启动 Hadoop（三步启动）"></a><strong>启动 Hadoop（三步启动）</strong></h2><p><strong>1. 启动 NameNode</strong></p>
+<p>在终端运行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<p><strong>2. 启动 HDFS</strong></p>
+<p>在终端首先进入 /sbin 目录，执行启动脚本（注意mac需要开启远程登录权限）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/software/hadoop-2.10.0/sbin</span><br><span class="line">./start-dfs.sh</span><br></pre></td></tr></table></figure>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-YARN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/19/hadoop_space/hadoop-YARN/" class="post-title-link" itemprop="url">hadoop-YARN</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-YARN/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-YARN/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-YARN/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Hadoop YARN：Hadoop集群资源管理框架（Yet Another Resource Negotiator）,用于作业调度和集群资源管理。</p>
-<p>YARN使用了轻量级资源隔离机制Cgroup进行资源隔离</p>
-<p>主要管理什么呢？</p>
-<p>内存、CPU、磁盘、网络等</p>
-<p><strong>一、YARN简介</strong></p>
-<p>YARN（Yet Another Resource Negotiator）是一个通用的资源管理平台，可为各类计算框架提供资源的管理和调度。YARN可以将多种计算框架（如离线处理MapReduce、在线处理的Storm、内存计算框架Spark等）部署到一个公共集群中，共享集群的资源，并提供如下功能。</p>
-<p><strong>二、YARN体系架构</strong></p>
-<p>YARN是Master/Slave结构，主要由<strong>ResourceManager、NodeManager、ApplicationMaster和Container</strong>等几个组件构成。YARN架构如下所示。</p>
-<h1 id="Yarn-UI"><a href="#Yarn-UI" class="headerlink" title="Yarn UI"></a>Yarn UI</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903893080473614">https://juejin.cn/post/6844903893080473614</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/19/hadoop_space/hadoop-HDFS/" class="post-title-link" itemprop="url">hadoop-HDFS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-HDFS/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-HDFS/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>HDFS(hadoop分布式文件系统)</p>
-<h1 id="HDFS常用shell操作"><a href="#HDFS常用shell操作" class="headerlink" title="HDFS常用shell操作"></a>HDFS常用shell操作</h1><p>1、-ls：查询指定路径信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls</span><br><span class="line"># 远程查询</span><br><span class="line">hdfs dfs -ls hdfs://bigdata01:9000/</span><br><span class="line"># 根目录</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
-
-<p>2、-put：从本地上传文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put hello.txt /</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+<p><strong>3.启动 yarn</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/software/hadoop-2.10.0/sbin</span><br><span class="line">./ start-yarn.sh</span><br></pre></td></tr></table></figure>
 
 
-<p>3、-cat：查看HDFS文件内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br><span class="line">hdfs dfs -cat /hello.txt</span><br></pre></td></tr></table></figure>
 
-<p>4、-get：下载文件到本地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -get /hello.txt ./</span><br></pre></td></tr></table></figure>
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p><a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070/</a></p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1:50075/datanode.html">http://127.0.0.1:50075/datanode.html</a>    </p>
+<p>注意点：</p>
+<p>刚装好<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/hadoop">Hadoop</a>的时候，每次输入命令运行都会出现</p>
+<blockquote>
+<p>WARN util.NativeCodeLoader: Unable to load native-<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/hadoop">hadoop</a> library for your platform… using builtin-<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/java">Java </a>classes where applicable</p>
+</blockquote>
+<p>解决方法：<br> 在hadoop-2.6.5/etc/hadoop/log4j.properties的文件最后添加log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR，去除警告信息</p>
+<p>参考&amp;感谢：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33117305">https://zhuanlan.zhihu.com/p/33117305</a></p>
+<h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/windows-docker-install.html">Windows 上 Docker 安装</a></p>
+<p><strong>注：</strong>Windows 用户建议使用虚拟机方案安装 Docker，使用Docker安装，再使用docker进行安装hadoop。</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/hadoop-setup.html">https://www.runoob.com/w3cnote/hadoop-setup.html</a></p>
+<h1 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h1><ul>
+<li>机器配置</li>
+</ul>
+<p>一台master,2台slave,</p>
+<p>免密，关闭防火墙<br>systemctl stop friewalld<br>systemctl disable firewalld.service</p>
+<ul>
+<li>创建Hadoop用户</li>
+</ul>
+<p>sudo useradd -m hadoop -s /bin/bash</p>
+<p>实际操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m deploy -s /bin/bash</span><br><span class="line"></span><br><span class="line">passwd deploy</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看权限</span></span><br><span class="line">vi /etc/passwd</span><br><span class="line">（可修改为管理员权限）</span><br><span class="line">visudo</span><br><span class="line">（通过root可加入当前用户操作sudo权限	）</span><br></pre></td></tr></table></figure>
 
-<p>5、-mkdir [-p]：创建文件夹</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /test</span><br><span class="line">hdfs dfs -mkdir -p /a/b</span><br></pre></td></tr></table></figure>
-
-<p>R参数(遍历)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls -R /</span><br></pre></td></tr></table></figure>
-
-<p>6、-rm [-r]：删除文件/文件夹</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm /hello.txt</span><br><span class="line"># 递归删除</span><br><span class="line">hdfs dfs -rm -r /a</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="HDFS一些实际操作"><a href="#HDFS一些实际操作" class="headerlink" title="HDFS一些实际操作"></a>HDFS一些实际操作</h2><p>1、统计根目录下文件的个数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test | grep /test| wc -l</span><br></pre></td></tr></table></figure>
-<p>2、统计根目录下每个文件的大小，最终把文件名称和大小打印出来</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test |grep /test |  awk &#x27;&#123;print $8,$5&#125;&#x27;</span><br></pre></td></tr></table></figure>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40612128/article/details/123009365">https://blog.csdn.net/weixin_40612128/article/details/123009365</a></p>
-<p>创建一个文件夹    hdfs dfs -mkdir /myTask<br>创建多个文件夹    hdfs dfs -mkdir -p /myTask1/input1<br>上传文件 hdfs dfs -put /opt/wordcount.txt /myTask/input<br>查看总目录下的文件和文件夹 hdfs dfs -ls /<br>查看myTask下的文件和文件夹 hdfs dfs -ls /myTask<br>查看myTask下的wordcount.txt的内容 hdfs dfs -cat /myTask/wordcount.txt<br>删除总目录下的myTask2文件夹以及里面的文件和文件夹 hdfs dfs -rmr /myTask2<br>删除myTask下的wordcount.txt hdfs dfs -rmr /myTask/wordcount.txt<br>下载hdfs中myTask/input/wordcount.txt到本地opt文件夹中 hdfs dfs -get /myTask/input/wordcount.txt /opt<br>————————————————<br>版权声明：本文为CSDN博主「码仙♥」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tswc_byy/article/details/90577551">https://blog.csdn.net/tswc_byy/article/details/90577551</a></p>
+<p> 为hadoop用户添加管理员权限</p>
+<p>linux添加管理员用户（简单粗暴）<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/20b68a889a0147796cec621d.html">https://jingyan.baidu.com/article/20b68a889a0147796cec621d.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">设置完密码以后，设置一下权限，usermod -g root ceshi  执行这个命令，赋予权限</span><br><span class="line">赋予权限以后，切换一下用户看一下是否是管理员，执行su ceshi 切换到用户为ceshi  ，以$开头是普通用户。</span><br><span class="line">赋予了管理员权限，但是登录用户和管理员不是一个权限，我查看一下执行</span><br><span class="line"></span><br><span class="line">vi /etc/passwd  测试这个用户和root不是一个用户组  </span><br><span class="line"></span><br><span class="line">例如：root:x:0:0:root:/root:/bin/bash</span><br><span class="line">hadoop:x:0:0::/home/hadoop:/bin/bash</span><br><span class="line">用户名:密码:Uid:Gid:描述:家目录:登录使用shell</span><br><span class="line"></span><br><span class="line">把测试用户的用户组修改成0，保存以后再次切换用户，就是管理员用户了。</span><br></pre></td></tr></table></figure>
+
+<p>centos7添加管理员用户<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/MySundays/article/details/88549963">https://blog.csdn.net/MySundays/article/details/88549963</a></p>
+<ul>
+<li>(六大步)<br>1、下载</li>
+</ul>
+<p>curl -O <a target="_blank" rel="noopener" href="https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz">https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz</a></p>
+<p>2、远程传输到hadoop2、hadoop3节点同目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp hadoop-3.1.3.tar.gz  root@hadoop2:`pwd`</span><br><span class="line">scp hadoop-3.1.3.tar.gz  root@hadoop3:`pwd`</span><br></pre></td></tr></table></figure>
+<p>3、解压安装包(3台节点同时操作)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-3.1.3.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4、添加hadoop环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/usr/local/software/install/hadoop-3.1.3</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile   #使修改生效</span><br></pre></td></tr></table></figure>
+
+<p>5、修改配置文件</p>
+<p>注：除了个别提示，其余文件只用修改hadoop1中的即可</p>
+<p>(1)core-site.xml 添加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"> &lt;!--定义namenode地址 默认9000--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://hadoop1:9003&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"> &lt;!--修改用于hadoop存储数据的默认位置--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/hadoop&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>(2)workers（slaves）文件 （hadoop3.0以后slaves更名为workers）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /soft/hadoop/hadoop-2.10.0/etc/hadoop/</span><br><span class="line">vi slaves</span><br><span class="line"></span><br><span class="line">#每一台都存入子节点保存即可</span><br><span class="line">hadoop2</span><br><span class="line">hadoop3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(3)hadoop-env.sh文件<br>export JAVA_HOME=/usr/java/jdk1.8.0_25</p>
+<p>(4)yarn-site.xml文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;!-- hadoop1 修改为你的机器名或者ip --&gt;</span><br><span class="line">        &lt;value&gt;hadoop1:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hdfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;!-- 备份次数 --&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hdfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>(5)注：该步骤需要四台都配置<br>修改hdfs-site.xml(部分教程不修改该文件，待完善)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;!-- hserver1 修改为你的机器名或者ip --&gt;</span><br><span class="line">        &lt;value&gt;hdp-01:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/hadoop/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;!-- 备份次数 --&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/hadoop/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>(6)修改/usr/local/softwareinstall/hadoop-3.1.3/sbin/目录下的<br>start-dfs.sh、start-yarn.sh文件，<br>在文件头添加如下用户设置(对应的stop-dfs.sh、stop-yarn.sh也要修改，此处为hadoop3的特殊配置处，不修改，启动失败)。 </p>
+<p>start-dfs.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HDFS_DATANODE_SECURE_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
+
+<p>start-yarn.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
+
+<p>6、启动集群(hdfs集群和yarn集群) 只需在master节点(hadoop1)上操作即可，</p>
+<p>6.1 启动hdfs集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format   #格式化hdfs文件系统</span><br><span class="line">start-dfs.sh   #启动hdfs集群</span><br><span class="line">stop-dfs.sh   #停止hdfs集群</span><br></pre></td></tr></table></figure>
+<p>6.2 启动yarn集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-yarn.sh    #启动yarn集群</span><br><span class="line">stop-yarn.sh     #停止yarnjiqun</span><br></pre></td></tr></table></figure>
+<p>补充：可用start-all.sh一次性启动hdfs、yarn集群</p>
+<p>6.3 进程验证 </p>
+<h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>1、主从机器相互免密</p>
+<p>2、hadoop3.0以后slaves更名为workers</p>
+<p>3、hdfs namenode -format   #格式化hdfs文件系统（记住启动前先格式化hdfs，不然NameNode启动失败）</p>
+<p>4、访问页面问题：It looks like you are making an HTTP request to a Hadoop IPC port. This is not the correct port for the web interface on this daemon.</p>
+<p>可通过查看端口使用情况来排查 netstat -nltp</p>
+<p>具体见下面说明：</p>
+<p>hadoop管理界面：<a target="_blank" rel="noopener" href="http://localhost:8088/">http://localhost:8088</a><br><a target="_blank" rel="noopener" href="http://192.168.60.131:8088/cluster">http://192.168.60.131:8088/cluster</a></p>
+<p>NameNode界面：<a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070</a><br><a target="_blank" rel="noopener" href="http://192.168.60.131:50070/">http://192.168.60.131:50070/</a></p>
+<p>HDFS NameNode界面：<a target="_blank" rel="noopener" href="http://localhost:8042/">http://localhost:8042</a></p>
+<h1 id="hadoop-version"><a href="#hadoop-version" class="headerlink" title="hadoop version"></a>hadoop version</h1><p> hadoop version</p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxuhongming/p/12872007.html">https://www.cnblogs.com/hxuhongming/p/12872007.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mengzj233/p/9756099.html">https://www.cnblogs.com/mengzj233/p/9756099.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xym4869/p/8821312.html">https://www.cnblogs.com/xym4869/p/8821312.html</a></p>
+<p>主要配置文件<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pingzizhuanshu/p/8964025.html">https://www.cnblogs.com/pingzizhuanshu/p/8964025.html</a></p>
 
       
     </div>
@@ -729,7 +646,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-Hue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -743,7 +660,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/19/hadoop_space/hadoop/" class="post-title-link" itemprop="url">hadoop</a>
+            <a href="/2018/01/19/hadoop_space/hadoop-Hue/" class="post-title-link" itemprop="url">hadoop-Hue</a>
         </h2>
 
         <div class="post-meta">
@@ -760,7 +677,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -782,8 +699,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-Hue/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-Hue/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-Hue/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -799,141 +716,126 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>hadoop</p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Hadoop 是一个开源的分布式计算和存储（计算+存储）框架，允许使用简单的编程模型在跨计算机集群的分布式环境中存储和处理大数据。它的设计是从单个服务器扩展到数千个机器，每个都提供本地计算和存储。</p>
-<p>Hadoop三大组件：<br>分布式文件系统：HDFS —— 实现将文件分布式存储在很多的服务器上<br>分布式运算编程框架：MapReduce——实现多台机器的分布式并行运算。<br>分布式资源调度平台：YARN —— 帮用户调度大量的mapreduce程序，并合理分配运算资源</p>
-<p>Hadoop中NameNode和DataNode</p>
-<p>HDFS主要分为两大角色，NameNode与DataNode，NameNode主要负责管理元数据，DataNode主要负责存储文件块。NameNode来管理datanode与文件块的映射关系。</p>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="单机安装"><a href="#单机安装" class="headerlink" title="单机安装"></a>单机安装</h1><h2 id="mac安装"><a href="#mac安装" class="headerlink" title="mac安装"></a>mac安装</h2><ol>
-<li>如同jdk，下载解压，配置即可</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置hadoop环境变量</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/Users/zane/software/hadoop-2.10.0</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出编辑模式，使用 :wq 保存修改，然后运行 source 命令使文件中的修改立即生效：</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile	</span><br></pre></td></tr></table></figure>
+          <p>Hue是一个开源的Apache Hadoop UI系统，由Cloudera Desktop演化而来，最后Cloudera公司将其贡献给Apache基金会的Hadoop社区，它是基于Python Web框架Django实现的。</p>
 
-<ol start="2">
-<li>修改 Hadoop 的配置文件</li>
-</ol>
-<p>需要修改的 Hadoop 配置文件都在目录 etc/hadoop 下，包括：</p>
-<ul>
-<li>hadoop-env.sh</li>
-<li>core-site.xml</li>
-<li>hdfs-site.xml</li>
-<li>mapred-site.xml</li>
-<li>yarn-site.xml</li>
-</ul>
-<ol>
-<li><p>修改hadoop-env.sh文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home</span><br><span class="line">export HADOOP_CONF_DIR=/Users/Cyan/coding/hadoop/hadoop-2.8.2/etc/hadoop</span><br></pre></td></tr></table></figure></li>
-<li><p>修改 core-site.xml 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--用来指定hadoop运行时产生文件的存放目录  自己创建--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/Users/Cyan/coding/hadoop/hadoop-2.8.2/tmp&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>修改 hdfs-site.xml 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;1&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--不是root用户也可以写文件到hdfs--&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.permissions&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;false&lt;/value&gt;    &lt;!--关闭防火墙--&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">        &lt;!--把路径换成本地的name坐在位置--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/home/hadoop/cdh4/hadoop/dfs/name&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;!--在本地新建一个存放hadoop数据的文件夹，然后将路径在这里配置一下--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/data1/hadoop&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>修改 mapred-site.xml 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;!--指定mapreduce运行在yarn上--&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>修改 yarn-site.xml 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="启动-Hadoop（三步启动）"><a href="#启动-Hadoop（三步启动）" class="headerlink" title="启动 Hadoop（三步启动）"></a><strong>启动 Hadoop（三步启动）</strong></h2><p><strong>1. 启动 NameNode</strong></p>
-<p>在终端运行命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p><strong>2. 启动 HDFS</strong></p>
-<p>在终端首先进入 /sbin 目录，执行启动脚本（注意mac需要开启远程登录权限）：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/software/hadoop-2.10.0/sbin</span><br><span class="line">./start-dfs.sh</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<p><strong>3.启动 yarn</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/software/hadoop-2.10.0/sbin</span><br><span class="line">./ start-yarn.sh</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop-HDFS/" class="post-title-link" itemprop="url">hadoop-HDFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-HDFS/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-HDFS/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>HDFS(hadoop分布式文件系统)</p>
+<h1 id="HDFS常用shell操作"><a href="#HDFS常用shell操作" class="headerlink" title="HDFS常用shell操作"></a>HDFS常用shell操作</h1><p>1、-ls：查询指定路径信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls</span><br><span class="line"># 远程查询</span><br><span class="line">hdfs dfs -ls hdfs://bigdata01:9000/</span><br><span class="line"># 根目录</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+
+<p>2、-put：从本地上传文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put hello.txt /</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
 
 
+<p>3、-cat：查看HDFS文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br><span class="line">hdfs dfs -cat /hello.txt</span><br></pre></td></tr></table></figure>
 
-<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p><a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070/</a></p>
-<p><a target="_blank" rel="noopener" href="http://127.0.0.1:50075/datanode.html">http://127.0.0.1:50075/datanode.html</a>    </p>
-<p>注意点：</p>
-<p>刚装好<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/hadoop">Hadoop</a>的时候，每次输入命令运行都会出现</p>
-<blockquote>
-<p>WARN util.NativeCodeLoader: Unable to load native-<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/hadoop">hadoop</a> library for your platform… using builtin-<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/java">Java </a>classes where applicable</p>
-</blockquote>
-<p>解决方法：<br> 在hadoop-2.6.5/etc/hadoop/log4j.properties的文件最后添加log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR，去除警告信息</p>
-<p>参考&amp;感谢：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33117305">https://zhuanlan.zhihu.com/p/33117305</a></p>
-<h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/windows-docker-install.html">Windows 上 Docker 安装</a></p>
-<p><strong>注：</strong>Windows 用户建议使用虚拟机方案安装 Docker，使用Docker安装，再使用docker进行安装hadoop。</p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/hadoop-setup.html">https://www.runoob.com/w3cnote/hadoop-setup.html</a></p>
-<h1 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h1><ul>
-<li>机器配置</li>
-</ul>
-<p>一台master,2台slave,</p>
-<p>免密，关闭防火墙<br>systemctl stop friewalld<br>systemctl disable firewalld.service</p>
-<ul>
-<li>创建Hadoop用户</li>
-</ul>
-<p>sudo useradd -m hadoop -s /bin/bash</p>
-<p>实际操作</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m deploy -s /bin/bash</span><br><span class="line"></span><br><span class="line">passwd deploy</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看权限</span></span><br><span class="line">vi /etc/passwd</span><br><span class="line">（可修改为管理员权限）</span><br><span class="line">visudo</span><br><span class="line">（通过root可加入当前用户操作sudo权限	）</span><br></pre></td></tr></table></figure>
+<p>4、-get：下载文件到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -get /hello.txt ./</span><br></pre></td></tr></table></figure>
+
+<p>5、-mkdir [-p]：创建文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /test</span><br><span class="line">hdfs dfs -mkdir -p /a/b</span><br></pre></td></tr></table></figure>
+
+<p>R参数(遍历)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls -R /</span><br></pre></td></tr></table></figure>
+
+<p>6、-rm [-r]：删除文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm /hello.txt</span><br><span class="line"># 递归删除</span><br><span class="line">hdfs dfs -rm -r /a</span><br></pre></td></tr></table></figure>
 
 
-
-<p> 为hadoop用户添加管理员权限</p>
-<p>linux添加管理员用户（简单粗暴）<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/20b68a889a0147796cec621d.html">https://jingyan.baidu.com/article/20b68a889a0147796cec621d.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">设置完密码以后，设置一下权限，usermod -g root ceshi  执行这个命令，赋予权限</span><br><span class="line">赋予权限以后，切换一下用户看一下是否是管理员，执行su ceshi 切换到用户为ceshi  ，以$开头是普通用户。</span><br><span class="line">赋予了管理员权限，但是登录用户和管理员不是一个权限，我查看一下执行</span><br><span class="line"></span><br><span class="line">vi /etc/passwd  测试这个用户和root不是一个用户组  </span><br><span class="line"></span><br><span class="line">例如：root:x:0:0:root:/root:/bin/bash</span><br><span class="line">hadoop:x:0:0::/home/hadoop:/bin/bash</span><br><span class="line">用户名:密码:Uid:Gid:描述:家目录:登录使用shell</span><br><span class="line"></span><br><span class="line">把测试用户的用户组修改成0，保存以后再次切换用户，就是管理员用户了。</span><br></pre></td></tr></table></figure>
-
-<p>centos7添加管理员用户<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/MySundays/article/details/88549963">https://blog.csdn.net/MySundays/article/details/88549963</a></p>
-<ul>
-<li>(六大步)<br>1、下载</li>
-</ul>
-<p>curl -O <a target="_blank" rel="noopener" href="https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz">https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz</a></p>
-<p>2、远程传输到hadoop2、hadoop3节点同目录下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp hadoop-3.1.3.tar.gz  root@hadoop2:`pwd`</span><br><span class="line">scp hadoop-3.1.3.tar.gz  root@hadoop3:`pwd`</span><br></pre></td></tr></table></figure>
-<p>3、解压安装包(3台节点同时操作)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-3.1.3.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>4、添加hadoop环境变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/usr/local/software/install/hadoop-3.1.3</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile   #使修改生效</span><br></pre></td></tr></table></figure>
-
-<p>5、修改配置文件</p>
-<p>注：除了个别提示，其余文件只用修改hadoop1中的即可</p>
-<p>(1)core-site.xml 添加如下配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"> &lt;!--定义namenode地址 默认9000--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://hadoop1:9003&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"> &lt;!--修改用于hadoop存储数据的默认位置--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/hadoop&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
-<p>(2)workers（slaves）文件 （hadoop3.0以后slaves更名为workers）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /soft/hadoop/hadoop-2.10.0/etc/hadoop/</span><br><span class="line">vi slaves</span><br><span class="line"></span><br><span class="line">#每一台都存入子节点保存即可</span><br><span class="line">hadoop2</span><br><span class="line">hadoop3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>(3)hadoop-env.sh文件<br>export JAVA_HOME=/usr/java/jdk1.8.0_25</p>
-<p>(4)yarn-site.xml文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;!-- hadoop1 修改为你的机器名或者ip --&gt;</span><br><span class="line">        &lt;value&gt;hadoop1:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hdfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;!-- 备份次数 --&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hdfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<p>(5)注：该步骤需要四台都配置<br>修改hdfs-site.xml(部分教程不修改该文件，待完善)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;!-- hserver1 修改为你的机器名或者ip --&gt;</span><br><span class="line">        &lt;value&gt;hdp-01:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/hadoop/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;!-- 备份次数 --&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/hadoop/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
-<p>(6)修改/usr/local/softwareinstall/hadoop-3.1.3/sbin/目录下的<br>start-dfs.sh、start-yarn.sh文件，<br>在文件头添加如下用户设置(对应的stop-dfs.sh、stop-yarn.sh也要修改，此处为hadoop3的特殊配置处，不修改，启动失败)。 </p>
-<p>start-dfs.sh</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HDFS_DATANODE_SECURE_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
-
-<p>start-yarn.sh</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
-
-<p>6、启动集群(hdfs集群和yarn集群) 只需在master节点(hadoop1)上操作即可，</p>
-<p>6.1 启动hdfs集群</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format   #格式化hdfs文件系统</span><br><span class="line">start-dfs.sh   #启动hdfs集群</span><br><span class="line">stop-dfs.sh   #停止hdfs集群</span><br></pre></td></tr></table></figure>
-<p>6.2 启动yarn集群</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-yarn.sh    #启动yarn集群</span><br><span class="line">stop-yarn.sh     #停止yarnjiqun</span><br></pre></td></tr></table></figure>
-<p>补充：可用start-all.sh一次性启动hdfs、yarn集群</p>
-<p>6.3 进程验证 </p>
-<h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>1、主从机器相互免密</p>
-<p>2、hadoop3.0以后slaves更名为workers</p>
-<p>3、hdfs namenode -format   #格式化hdfs文件系统（记住启动前先格式化hdfs，不然NameNode启动失败）</p>
-<p>4、访问页面问题：It looks like you are making an HTTP request to a Hadoop IPC port. This is not the correct port for the web interface on this daemon.</p>
-<p>可通过查看端口使用情况来排查 netstat -nltp</p>
-<p>具体见下面说明：</p>
-<p>hadoop管理界面：<a target="_blank" rel="noopener" href="http://localhost:8088/">http://localhost:8088</a><br><a target="_blank" rel="noopener" href="http://192.168.60.131:8088/cluster">http://192.168.60.131:8088/cluster</a></p>
-<p>NameNode界面：<a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070</a><br><a target="_blank" rel="noopener" href="http://192.168.60.131:50070/">http://192.168.60.131:50070/</a></p>
-<p>HDFS NameNode界面：<a target="_blank" rel="noopener" href="http://localhost:8042/">http://localhost:8042</a></p>
-<h1 id="hadoop-version"><a href="#hadoop-version" class="headerlink" title="hadoop version"></a>hadoop version</h1><p> hadoop version</p>
-<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxuhongming/p/12872007.html">https://www.cnblogs.com/hxuhongming/p/12872007.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mengzj233/p/9756099.html">https://www.cnblogs.com/mengzj233/p/9756099.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xym4869/p/8821312.html">https://www.cnblogs.com/xym4869/p/8821312.html</a></p>
-<p>主要配置文件<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pingzizhuanshu/p/8964025.html">https://www.cnblogs.com/pingzizhuanshu/p/8964025.html</a></p>
+<h2 id="HDFS一些实际操作"><a href="#HDFS一些实际操作" class="headerlink" title="HDFS一些实际操作"></a>HDFS一些实际操作</h2><p>1、统计根目录下文件的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test | grep /test| wc -l</span><br></pre></td></tr></table></figure>
+<p>2、统计根目录下每个文件的大小，最终把文件名称和大小打印出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test |grep /test |  awk &#x27;&#123;print $8,$5&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40612128/article/details/123009365">https://blog.csdn.net/weixin_40612128/article/details/123009365</a></p>
+<p>创建一个文件夹    hdfs dfs -mkdir /myTask<br>创建多个文件夹    hdfs dfs -mkdir -p /myTask1/input1<br>上传文件 hdfs dfs -put /opt/wordcount.txt /myTask/input<br>查看总目录下的文件和文件夹 hdfs dfs -ls /<br>查看myTask下的文件和文件夹 hdfs dfs -ls /myTask<br>查看myTask下的wordcount.txt的内容 hdfs dfs -cat /myTask/wordcount.txt<br>删除总目录下的myTask2文件夹以及里面的文件和文件夹 hdfs dfs -rmr /myTask2<br>删除myTask下的wordcount.txt hdfs dfs -rmr /myTask/wordcount.txt<br>下载hdfs中myTask/input/wordcount.txt到本地opt文件夹中 hdfs dfs -get /myTask/input/wordcount.txt /opt<br>————————————————<br>版权声明：本文为CSDN博主「码仙♥」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tswc_byy/article/details/90577551">https://blog.csdn.net/tswc_byy/article/details/90577551</a></p>
 
       
     </div>
@@ -1026,6 +928,135 @@
           <p>这里讲的是EFK（Elasticsearch、Filebeat、kibana）<br>其实很早及接触到ELK了，但一直没有真正在公司能用到用起来，因为如果是一个项目的日期其实通过简单的日志系统可以采集，或者通过日志文件也可以管理；<br>EFK主要作用是统一收集多个业务域下不同项目的多个节点的应用日志，这就涉及的日志范围及数量就不简单了，需要庞大的日志储存，<br>这里还涉及专业的运维团队实时监控(一般可设置保留10天，必要时可以申请延长)。这才是真正的微服务日志统一管理。</p>
 <h1 id="EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集"><a href="#EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集" class="headerlink" title="EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集"></a>EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集</h1><h1 id="日志的采集及处理"><a href="#日志的采集及处理" class="headerlink" title="日志的采集及处理"></a>日志的采集及处理</h1><p>如何将各个服务的日志进行采集到EFK呢？<br>-&gt;日志模块基于logback的同步实现，日志打印到容器控制台，通过EFK统一收集和查阅。</p>
 <p>如何将通一个服务多个节点的数据进行有序合并呢？不合并有影响吗？<br>如何根据不同服务进行分类及索引管理呢？<br>日志接入时的级别统一规范化</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">es实际应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/19/中间件/es实际应用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>es<br>面向文档，文档是所有可搜索的数据最小单位<br>可以理解为一个文件、日志、mp3歌曲信息等等</p>
+<p>文档会被序列号成json格式保存在es中</p>
+<p>es和solr都是基于hahhop之父1999年开发的lucene开源项目<br>es：<br>支持分布式、水平扩展<br>降低全文检索学习曲线</p>
+<h2 id="本地安装及水平扩展"><a href="#本地安装及水平扩展" class="headerlink" title="本地安装及水平扩展"></a>本地安装及水平扩展</h2><p>7.0已内置jdk</p>
+<p>阿里云es30免费试用版</p>
+<p>es实际应用</p>
+<p>目前只是记录一下es的简单使用<br>使用es查看日志，首先得有关联的索引</p>
+<p>通过筛选查看数据<br>例如</p>
+<p>(模糊并查询)</p>
+<p>条件 and flag_name and 13800138000</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>文档</p>
+<p>节点（Data Node、Coordinating Node），还有其他节点类型</p>
+<p>分片（主分片、副本）<br>分片的设定（创建索引时会设置主分片，需提前容量规划）<br>多或少都有影响</p>
+<p>查看健康情况</p>
+<h2 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h2><p>##项目实战</p>
+<p>快速定位日志</p>
+<p>索引-&gt;（日志字段筛选，例如：message:”查询关键字1” and message:”查询关键字2”）</p>
+<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><p> java.util.LinkedHashMap cannot be cast to XXXX</p>
+<p> 先转成MAP 在转成JSON  在转成JavaBean </p>
+<p> 后面修改方法：先转成LinkedHashMap 再转成json最后转成json</p>
+<p>LinkedHashMap linkedHashMap = (LinkedHashMap) map.get(“data”);</p>
+<p>String json = new JSONObject().toJSONString(linkedHashMap);</p>
+<p>userEntity = new JSONObject().parseObject(json, UserEntity.class);<br>————————————————<br>版权声明：本文为CSDN博主「BellCalderon」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014373554/article/details/92743743">https://blog.csdn.net/u014373554/article/details/92743743</a></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Get 查看所有索引</span><br><span class="line"></span><br><span class="line">localhost:9200/_all</span><br><span class="line"></span><br><span class="line">PUT 创建索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEL 删除索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 创建索引-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 25,</span><br><span class="line">  &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-2</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/2</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;Eric&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 23,</span><br><span class="line">  &quot;about&quot; : &quot;I love basketball&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;reading&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-id</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-name</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/_search?q=first_name:john</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;took&quot;: 56,</span><br><span class="line">  &quot;timed_out&quot;: false,</span><br><span class="line">  &quot;_shards&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: 1,</span><br><span class="line">    &quot;successful&quot;: 1,</span><br><span class="line">    &quot;skipped&quot;: 0,</span><br><span class="line">    &quot;failed&quot;: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hits&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: &#123;</span><br><span class="line">      &quot;value&quot;: 1,</span><br><span class="line">      &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;max_score&quot;: 0.6931472,</span><br><span class="line">    &quot;hits&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;_index&quot;: &quot;person&quot;,</span><br><span class="line">        &quot;_type&quot;: &quot;_doc&quot;,</span><br><span class="line">        &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">        &quot;_score&quot;: 0.6931472,</span><br><span class="line">        &quot;_source&quot;: &#123;</span><br><span class="line">          &quot;first_name&quot;: &quot;John&quot;,</span><br><span class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</span><br><span class="line">          &quot;age&quot;: 25,</span><br><span class="line">          &quot;about&quot;: &quot;I love to go rock climbing&quot;,</span><br><span class="line">          &quot;interests&quot;: [</span><br><span class="line">            &quot;sports&quot;,</span><br><span class="line">            &quot;music&quot;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h1><p>有相关可视化工具</p>
+<p>es本身也是一个数据库，可以通过DBeaver进行连接，默认安装是没有密码的</p>
+<p>通过 dbeaver 配置 jdbc 连接 es时报错 current license is non-compliant for [jdbc]</p>
+<p>在官网 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/subscriptions">https://www.elastic.co/cn/subscriptions</a> 搜索后发现需要白金级别</p>
+<p>查看服务器es的license信息，发现 “type” : “basic”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># curl -XGET http://localhost:9200/_license</span><br></pre></td></tr></table></figure>
+
+<p>修改成30天试用版，<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># curl -X POST &quot;localhost:9200/_license/start_trial?acknowledge=true&amp;pretty&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot; : true,</span><br><span class="line">  &quot;trial_was_started&quot; : true,</span><br><span class="line">  &quot;type&quot; : &quot;trial&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/9255676433/">https://www.freesion.com/article/9255676433/</a></p>
 
       
     </div>
@@ -1175,135 +1206,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">es实际应用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/19/中间件/es实际应用/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>es<br>面向文档，文档是所有可搜索的数据最小单位<br>可以理解为一个文件、日志、mp3歌曲信息等等</p>
-<p>文档会被序列号成json格式保存在es中</p>
-<p>es和solr都是基于hahhop之父1999年开发的lucene开源项目<br>es：<br>支持分布式、水平扩展<br>降低全文检索学习曲线</p>
-<h2 id="本地安装及水平扩展"><a href="#本地安装及水平扩展" class="headerlink" title="本地安装及水平扩展"></a>本地安装及水平扩展</h2><p>7.0已内置jdk</p>
-<p>阿里云es30免费试用版</p>
-<p>es实际应用</p>
-<p>目前只是记录一下es的简单使用<br>使用es查看日志，首先得有关联的索引</p>
-<p>通过筛选查看数据<br>例如</p>
-<p>(模糊并查询)</p>
-<p>条件 and flag_name and 13800138000</p>
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>文档</p>
-<p>节点（Data Node、Coordinating Node），还有其他节点类型</p>
-<p>分片（主分片、副本）<br>分片的设定（创建索引时会设置主分片，需提前容量规划）<br>多或少都有影响</p>
-<p>查看健康情况</p>
-<h2 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h2><p>##项目实战</p>
-<p>快速定位日志</p>
-<p>索引-&gt;（日志字段筛选，例如：message:”查询关键字1” and message:”查询关键字2”）</p>
-<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><p> java.util.LinkedHashMap cannot be cast to XXXX</p>
-<p> 先转成MAP 在转成JSON  在转成JavaBean </p>
-<p> 后面修改方法：先转成LinkedHashMap 再转成json最后转成json</p>
-<p>LinkedHashMap linkedHashMap = (LinkedHashMap) map.get(“data”);</p>
-<p>String json = new JSONObject().toJSONString(linkedHashMap);</p>
-<p>userEntity = new JSONObject().parseObject(json, UserEntity.class);<br>————————————————<br>版权声明：本文为CSDN博主「BellCalderon」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014373554/article/details/92743743">https://blog.csdn.net/u014373554/article/details/92743743</a></p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Get 查看所有索引</span><br><span class="line"></span><br><span class="line">localhost:9200/_all</span><br><span class="line"></span><br><span class="line">PUT 创建索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEL 删除索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 创建索引-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 25,</span><br><span class="line">  &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-2</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/2</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;Eric&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 23,</span><br><span class="line">  &quot;about&quot; : &quot;I love basketball&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;reading&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-id</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-name</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/_search?q=first_name:john</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;took&quot;: 56,</span><br><span class="line">  &quot;timed_out&quot;: false,</span><br><span class="line">  &quot;_shards&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: 1,</span><br><span class="line">    &quot;successful&quot;: 1,</span><br><span class="line">    &quot;skipped&quot;: 0,</span><br><span class="line">    &quot;failed&quot;: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hits&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: &#123;</span><br><span class="line">      &quot;value&quot;: 1,</span><br><span class="line">      &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;max_score&quot;: 0.6931472,</span><br><span class="line">    &quot;hits&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;_index&quot;: &quot;person&quot;,</span><br><span class="line">        &quot;_type&quot;: &quot;_doc&quot;,</span><br><span class="line">        &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">        &quot;_score&quot;: 0.6931472,</span><br><span class="line">        &quot;_source&quot;: &#123;</span><br><span class="line">          &quot;first_name&quot;: &quot;John&quot;,</span><br><span class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</span><br><span class="line">          &quot;age&quot;: 25,</span><br><span class="line">          &quot;about&quot;: &quot;I love to go rock climbing&quot;,</span><br><span class="line">          &quot;interests&quot;: [</span><br><span class="line">            &quot;sports&quot;,</span><br><span class="line">            &quot;music&quot;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h1><p>有相关可视化工具</p>
-<p>es本身也是一个数据库，可以通过DBeaver进行连接，默认安装是没有密码的</p>
-<p>通过 dbeaver 配置 jdbc 连接 es时报错 current license is non-compliant for [jdbc]</p>
-<p>在官网 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/subscriptions">https://www.elastic.co/cn/subscriptions</a> 搜索后发现需要白金级别</p>
-<p>查看服务器es的license信息，发现 “type” : “basic”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># curl -XGET http://localhost:9200/_license</span><br></pre></td></tr></table></figure>
-
-<p>修改成30天试用版，<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># curl -X POST &quot;localhost:9200/_license/start_trial?acknowledge=true&amp;pretty&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot; : true,</span><br><span class="line">  &quot;trial_was_started&quot; : true,</span><br><span class="line">  &quot;type&quot; : &quot;trial&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/9255676433/">https://www.freesion.com/article/9255676433/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1429,6 +1331,144 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-hbase%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-hbase%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">hbase集群搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-hbase%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-hbase%E5%85%A5%E9%97%A8/" class="cy_cmt_count" data-xid="2018/01/19/大数据/大数据-hbase入门/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hbase（Hadoop database）</p>
+<p>Hbase： Hadoop database 的简称，也就是基于Hadoop数据库，是一种NoSQL数据库，主要适用于海量明细数据（十亿、百亿）的随机实时查询，如日志明细、交易清单、轨迹行为等。</p>
+<p>官网</p>
+<p><a target="_blank" rel="noopener" href="http://hbase.apache.org/">http://hbase.apache.org/</a></p>
+<p><a target="_blank" rel="noopener" href="http://hbase.apache.org/book.html">http://hbase.apache.org/book.html</a></p>
+<p>注意和hadoop版本要求</p>
+<p>下载镜像：<a target="_blank" rel="noopener" href="http://www.apache.org/dyn/closer.cgi/hbase/">http://www.apache.org/dyn/closer.cgi/hbase/</a></p>
+<p>HBase的安装也有三种模式：单机模式、伪分布模式和完全分布式模式；完全分布模式。前提是Hadoop集群和Zookeeper已经安装完毕，并能正确运行。 </p>
+<h1 id="快速单机安装"><a href="#快速单机安装" class="headerlink" title="快速单机安装"></a>快速单机安装</h1><ul>
+<li>下载、解压<br>wget  <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/1.4.9/hbase-1.4.9-bin.tar.gz">http://mirrors.tuna.tsinghua.edu.cn/apache/hbase/1.4.9/hbase-1.4.9-bin.tar.gz</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://archive.apache.org/dist/hbase/2.4.5/">http://archive.apache.org/dist/hbase/2.4.5/</a></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hbase-1.7.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>配置环境变量</p>
+</li>
+<li><p>修改hbase文件</p>
+</li>
+</ul>
+<p>1、配置hbase-env.sh</p>
+<p>修改jdk地址<br>修改自身zk</p>
+<p>2、配置hbase-site.xml</p>
+<p>（可使用默认的）</p>
+<ul>
+<li>启动（依赖hadoop）</li>
+</ul>
+<p>启动：./start-hbase.sh</p>
+<p>停止：./stop-hbase.sh</p>
+<ul>
+<li>web验证</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://ip:16010/master-status">http://ip:16010/master-status</a></p>
+<p><img src="/./images/hbase1.png"></p>
+<h1 id="Hbase集群安装"><a href="#Hbase集群安装" class="headerlink" title="Hbase集群安装"></a>Hbase集群安装</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huhongy/p/10953647.html">https://www.cnblogs.com/huhongy/p/10953647.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/clsn/p/10300487.html">https://www.cnblogs.com/clsn/p/10300487.html</a></p>
+<p>完全分布模式。前提是Hadoop集群和Zookeeper已经安装完毕，并能正确运行。 </p>
+<p>hbase本身自带zk，无需可停用</p>
+<h3 id="启动和停止HBase"><a href="#启动和停止HBase" class="headerlink" title="启动和停止HBase"></a>启动和停止HBase</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-hbase.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>停止</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop-hbase.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="HBase的基础概念"><a href="#HBase的基础概念" class="headerlink" title="HBase的基础概念"></a>HBase的基础概念</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/145551967?utm_source=wechat_session">https://zhuanlan.zhihu.com/p/145551967?utm_source=wechat_session</a></p>
+<p><img src="/./images/hbase-c.png"></p>
+<h1 id="HBase的基本操作"><a href="#HBase的基本操作" class="headerlink" title="HBase的基本操作"></a>HBase的基本操作</h1><p><a target="_blank" rel="noopener" href="https://www.zifangsky.cn/1285.html">https://www.zifangsky.cn/1285.html</a></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ./bin </span><br><span class="line"> ./hbase shell</span><br></pre></td></tr></table></figure>
+
+<h1 id="HBase运用场景"><a href="#HBase运用场景" class="headerlink" title="HBase运用场景"></a>HBase运用场景</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1500,7 +1540,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">226</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

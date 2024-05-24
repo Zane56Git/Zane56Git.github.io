@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。 flink开发实战（运用flink的原因：几十万人同时在线，快速计算） 一切皆规则，一切皆动态规则  实时规则风控（动态规则）  实时广告智能投放  实时推荐">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Flink开发实战">
-<meta property="og:url" content="http://example.com/2022/01/29/flink_space/flink%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/index.html">
+  <meta name="description" content="Flink SQL快速构建实时计算平台 流程：KAFKA模拟数据——FLINK SQL处理数据——FLINK计算处理——ES——KIBANA 模拟数据-已完成ES、KIBANA安装  待完成##利用FLINK SQL 构建Flink实时计算平台 进入FLINK SQL 交互式界面script1$FLINK_HOME&#x2F;bin&#x2F;sql-client.sh embedded  script1$FLINK">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Flink SQL快速构建实时计算平台">
+<meta property="og:url" content="http://example.com/bak/Flink%20SQL%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0.html">
 <meta property="og:site_name" content="Zane’s Space">
-<meta property="og:description" content="任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。 flink开发实战（运用flink的原因：几十万人同时在线，快速计算） 一切皆规则，一切皆动态规则  实时规则风控（动态规则）  实时广告智能投放  实时推荐">
+<meta property="og:description" content="Flink SQL快速构建实时计算平台 流程：KAFKA模拟数据——FLINK SQL处理数据——FLINK计算处理——ES——KIBANA 模拟数据-已完成ES、KIBANA安装  待完成##利用FLINK SQL 构建Flink实时计算平台 进入FLINK SQL 交互式界面script1$FLINK_HOME&#x2F;bin&#x2F;sql-client.sh embedded  script1$FLINK">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-29T12:28:26.000Z">
-<meta property="article:modified_time" content="2023-06-15T06:53:48.281Z">
+<meta property="article:published_time" content="2021-05-10T15:13:30.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.212Z">
 <meta property="article:author" content="Zane">
 <meta property="article:tag" content="Flink">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2022/01/29/flink_space/flink%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/">
+<link rel="canonical" href="http://example.com/bak/Flink%20SQL%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0">
 
 
 <script id="page-configurations">
@@ -41,12 +41,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Flink开发实战 | Zane’s Space</title>
+  <title>Flink SQL快速构建实时计算平台 | Zane’s Space
+</title>
   
 
 
@@ -169,127 +170,77 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+  
+  
 
-          <div class="content post posts-expand">
+          <div class="content page posts-expand">
             
 
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/29/flink_space/flink%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
+    
+    
+    <div class="post-block" lang="zh-CN">
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Flink开发实战
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+<h1 class="post-title" itemprop="name headline">Flink SQL快速构建实时计算平台
+</h1>
 
-              <time title="创建时间：2022-01-29 20:28:26" itemprop="dateCreated datePublished" datetime="2022-01-29T20:28:26+08:00">2022-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2022/01/29/flink_space/flink%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/01/29/flink_space/flink实战项目/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
+<div class="post-meta">
   
 
-        </div>
-      </header>
+</div>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
-        <p>任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。</p>
-<p>flink开发实战（运用flink的原因：几十万人同时在线，快速计算）</p>
-<p>一切皆规则，一切皆动态规则</p>
+      
+      
+      <div class="post-body">
+          <p>Flink SQL快速构建实时计算平台</p>
+<h1 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h1><p>KAFKA模拟数据——FLINK SQL处理数据——FLINK计算处理——ES——KIBANA</p>
+<p>模拟数据-已完成<br>ES、KIBANA安装</p>
 <ul>
-<li><p>实时规则风控（动态规则）</p>
-</li>
-<li><p>实时广告智能投放</p>
-</li>
-<li><p>实时推荐</p>
-</li>
+<li>待完成<br>##利用FLINK SQL 构建Flink实时计算平台</li>
+<li>进入FLINK SQL 交互式界面<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">FLINK_HOME/bin/sql-client.sh embedded</span></span><br></pre></td></tr></table></figure></li>
 </ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">FLINK_HOME/bin/sql-client.sh embedded --jar <span class="variable">$FLINK_HOME</span>/lib/flink-sql-connector-kafka_2.11-1.10.0.jar</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>创建一个user_behavior 表接收kafka中Topic为user_behavior的数据(配置kafka数据接入)</li>
+</ul>
+<p>注意：需要先启动flink</p>
+<p>验证成功</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">create table user_behavior(</span><br><span class="line">user_id BIGINT,</span><br><span class="line">item_id BIGINT,</span><br><span class="line">category_id BIGINT,</span><br><span class="line">behavior STRING,</span><br><span class="line">ts TIMESTAMP(3),</span><br><span class="line">proctime as PROCTIME(),</span><br><span class="line">WATERMARK FOR ts as ts - INTERVAL &#x27;5&#x27; SECOND</span><br><span class="line">) with(</span><br><span class="line">  &#x27;connector.type&#x27; = &#x27;kafka&#x27;,   </span><br><span class="line">  &#x27;connector.version&#x27; = &#x27;universal&#x27;,</span><br><span class="line">  &#x27;connector.topic&#x27; = &#x27;user_behavior&#x27;,</span><br><span class="line">  &#x27;connector.properties.zookeeper.connect&#x27; = &#x27;hadoop1:2181,hadoop2:2181,hadoop3:2181&#x27;,</span><br><span class="line">  &#x27;connector.properties.bootstrap.servers&#x27; = &#x27;hadoop1:9092&#x27;,</span><br><span class="line">  &#x27;format.type&#x27; = &#x27;json&#x27;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>select * from user_behavior;</p>
+<p>注意：select * from default_catalog.default_database.user_behavior ;<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huangqingshi/p/12496743.html">https://www.cnblogs.com/huangqingshi/p/12496743.html</a></p>
+<p>bin/kafka-server-start.sh config/server.properties</p>
+<p>后台运行<br>bin/kafka-server-start.sh -daemon config/server.properties</p>
+<p>bin/kafka-console-consumer.sh –bootstrap-server hadoop1:9092 –topic user_behavior</p>
+<ul>
+<li>创建一个user_details表(配置elasticsearch数据接入)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create table <span class="title function_">user_details</span><span class="params">(</span></span><br><span class="line"><span class="params">user_id BIGINT,</span></span><br><span class="line"><span class="params">item_id BIGINT,</span></span><br><span class="line"><span class="params">category_id BIGINT,</span></span><br><span class="line"><span class="params">behavior STRING,</span></span><br><span class="line"><span class="params">ts TIMESTAMP(<span class="number">3</span>)</span></span><br><span class="line">)</span><br><span class="line">with(</span><br><span class="line"><span class="string">&#x27;connector.type&#x27;</span> = <span class="string">&#x27;elasticsearch&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.version&#x27;</span> = <span class="string">&#x27;6&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.hosts&#x27;</span> = <span class="string">&#x27;http://192.168.112.100:9200&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.index&#x27;</span> = <span class="string">&#x27;user_details&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.document-type&#x27;</span> = <span class="string">&#x27;user_behavior&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;format.type&#x27;</span> = <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;update-mode&#x27;</span> = <span class="string">&#x27;upsert&#x27;</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>每十分钟统计一次最大的用户独立数</li>
+</ul>
+<p>待完善</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013343882/article/details/104496132">https://blog.csdn.net/u013343882/article/details/104496132</a></p>
+<p>java demo</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zz-ksw/p/12938611.html">https://www.cnblogs.com/zz-ksw/p/12938611.html</a></p>
+<h1 id="FlinkSql客户端执行SQL文件"><a href="#FlinkSql客户端执行SQL文件" class="headerlink" title="FlinkSql客户端执行SQL文件"></a>FlinkSql客户端执行SQL文件</h1><p><a target="_blank" rel="noopener" href="https://github.com/Chengyanan1008/flink-sql-submit-client">https://github.com/Chengyanan1008/flink-sql-submit-client</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26502245/article/details/107520111">https://blog.csdn.net/qq_26502245/article/details/107520111</a></p>
+
+      </div>
+      
+      
+      
     </div>
+    
 
     
     
     
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Flink/" rel="tag"># Flink</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/01/18/java_space/Java-%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BAkka/" rel="prev" title="JAVA-高并发之AKKA">
-      <i class="fa fa-chevron-left"></i> JAVA-高并发之AKKA
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/05/17/linux_space/Linux%E6%9C%AC%E5%9C%B0yum%E6%BA%90%E6%90%AD%E5%BB%BA/" rel="next" title="Linux本地yum源搭建（release）">
-      Linux本地yum源搭建（release） <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
 
 
           </div>
@@ -345,6 +296,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">流程：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FlinkSql%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%89%A7%E8%A1%8CSQL%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">FlinkSql客户端执行SQL文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,7 +312,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">226</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

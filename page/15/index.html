@@ -174,104 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/06/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/06/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">多数据源实践</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-06 23:08:08" itemprop="dateCreated datePublished" datetime="2018-05-06T23:08:08+08:00">2018-05-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/05/06/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AE%9E%E8%B7%B5/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/05/06/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AE%9E%E8%B7%B5/" class="cy_cmt_count" data-xid="2018/05/06/多数据源实践/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>多数据源是开发中很常见的场景</p>
-<p>其实开发中集成多数据源也很简单,以springboot为例子，3步完成多数据集成</p>
-<p>1、pom加入以下配置，引入多数据源相关的依赖</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 多数据源 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;dynamic-datasource-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>2、yml文件加入以下配置</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    dynamic:</span><br><span class="line">      primary: mysqldb</span><br><span class="line">      datasource:</span><br><span class="line">        mysqldb:</span><br><span class="line">          url: jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</span><br><span class="line">          username: user</span><br><span class="line">          password: pw</span><br><span class="line">          driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">          type: com.zaxxer.hikari.HikariDataSource</span><br><span class="line">          hikari:</span><br><span class="line">            leak-detection-threshold: 180000</span><br><span class="line">            max-pool-size: 32</span><br><span class="line">            idle-timeout: 300000</span><br><span class="line">            max-lifetime: 600000</span><br><span class="line">            connection-timeout: 60000</span><br><span class="line">            validation-timeout: 10000</span><br><span class="line">        oracledb:</span><br><span class="line">          url: jdbc:oracle:thin:@127.0.0.1:1521:ibpp</span><br><span class="line">          username: user</span><br><span class="line">          password: pw</span><br><span class="line">          driver-class-name: oracle.jdbc.OracleDriver</span><br><span class="line">          type: com.zaxxer.hikari.HikariDataSource</span><br><span class="line">          hikari:</span><br><span class="line">            leak-detection-threshold: 180000</span><br><span class="line">            max-pool-size: 3</span><br><span class="line">            idle-timeout: 300000</span><br><span class="line">            max-lifetime: 600000</span><br><span class="line">            connection-timeout: 60000</span><br><span class="line">            validation-timeout: 10000</span><br></pre></td></tr></table></figure>
-<p>3、类或方法上面加入以下注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DS(&quot;mysqldb&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServiceMySQLDbIn</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@DS(&quot;oracledb&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServiceOracleDb</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>至此为止，服务已经成功引入多数据源实现，ServiceWhoUseMySQLDb类的方法会查询MySQL库，ServiceWhoUseOracleDb类的方法会查询Oracle库</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -898,6 +800,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="post-title-link" itemprop="url">大数据-SparkSQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-SparkSQL/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>大数据-SparkSQL 操作和普通sql相似</p>
+<p>SparkSQL可以取代HiveSQL（同样是查询hive表数据）</p>
+<p>hive是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%B8%83%E5%BC%8F&spm=1001.2101.3001.7020">分布式</a>又是数据仓库，同时又是查询引擎，Spark SQL只是取代的HIVE的查询引擎这一部分，企业一般使用Hive+<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> SQL进行开发</p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> sql可以使用hive里面的表，并做操作，并且会很快</p>
+<p>需要做如下配置 </p>
+<p>1.hive-site.xml hive的元数据配置文件要拷贝到spark的conf路径下 </p>
+<p>2.spark的启动要加上–jars mysql连接jar包的路径</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1033,102 +1031,6 @@
 
 
 <h1 id="web-UI"><a href="#web-UI" class="headerlink" title="web UI"></a>web UI</h1><h4 id="http-localhost-8080"><a href="#http-localhost-8080" class="headerlink" title="http://localhost:8080/"></a><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></h4><h2 id="spark-shell"><a href="#spark-shell" class="headerlink" title="spark-shell"></a>spark-shell</h2><h4 id="到spark的bin目录下-spark-shell命令查看"><a href="#到spark的bin目录下-spark-shell命令查看" class="headerlink" title="到spark的bin目录下./spark-shell命令查看"></a>到spark的bin目录下./spark-shell命令查看</h4><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="使用spark-shell完成单词统计功能"><a href="#使用spark-shell完成单词统计功能" class="headerlink" title="使用spark-shell完成单词统计功能"></a>使用spark-shell完成单词统计功能</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="post-title-link" itemprop="url">大数据-SparkSQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-SparkSQL/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大数据-SparkSQL 操作和普通sql相似</p>
-<p>SparkSQL可以取代HiveSQL（同样是查询hive表数据）</p>
-<p>hive是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%B8%83%E5%BC%8F&spm=1001.2101.3001.7020">分布式</a>又是数据仓库，同时又是查询引擎，Spark SQL只是取代的HIVE的查询引擎这一部分，企业一般使用Hive+<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> SQL进行开发</p>
-<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> sql可以使用hive里面的表，并做操作，并且会很快</p>
-<p>需要做如下配置 </p>
-<p>1.hive-site.xml hive的元数据配置文件要拷贝到spark的conf路径下 </p>
-<p>2.spark的启动要加上–jars mysql连接jar包的路径</p>
-
       
     </div>
 
@@ -1439,6 +1341,144 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/16/java_space/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">Java线程池实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2018-03-16T19:21:26+08:00">2018-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/16/java_space/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/16/java_space/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E6%88%98/" class="cy_cmt_count" data-xid="2018/03/16/java_space/Java线程池实战/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="多线程影响点"><a href="#多线程影响点" class="headerlink" title="多线程影响点"></a>多线程影响点</h1><p>多线程同时运行是否存在幂等问题、先后问题</p>
+<h1 id="Executor是不建议的"><a href="#Executor是不建议的" class="headerlink" title="Executor是不建议的"></a>Executor是不建议的</h1><p>public static ExecutorService newSingleThreadExecutor()<br>public static ExecutorService newFixedThreadPool(int nThreads)<br>public static ExecutorService newCachedThreadPool()<br>public static ScheduledExecutorService newSingleThreadScheduledExecutor()<br>public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadDemo</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">ExecutorService</span> <span class="variable">es</span> <span class="operator">=</span> Executors.newSingleThreadExecutor();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>阿里巴巴是不允许这么创建线程池的，上面的警告写的很明确“线程池不允许使用Executors去创建，而是通过ThreadPoolExecutor的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。</p>
+<h1 id="强制使用ThreadPoolExecutor"><a href="#强制使用ThreadPoolExecutor" class="headerlink" title="强制使用ThreadPoolExecutor"></a>强制使用ThreadPoolExecutor</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadDemo</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">ExecutorService</span> <span class="variable">es</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">				<span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;Runnable&gt;(<span class="number">10</span>), Executors.defaultThreadFactory(),</span><br><span class="line">				<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.DiscardPolicy());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过查看源码我们知道上述三种静态方法的内部实现均使用了ThreadPoolExecutor类。难怪阿里巴巴会建议通过ThreadPoolExecutor的方式实现，原来Executors类的静态方法也是用的它，只不过帮我们配了一些参数而已。</p>
+<h2 id="ThreadPoolExecutor参数说明"><a href="#ThreadPoolExecutor参数说明" class="headerlink" title="ThreadPoolExecutor参数说明"></a>ThreadPoolExecutor参数说明</h2><p>corePoolSize：线程池中的线程数量；<br>maximumPoolSize：线程池中的最大线程数量；<br>keepAliveTime：当线程池线程数量超过corePoolSize时，多余的空闲线程会在多长时间内被销毁；<br>unit：keepAliveTime的时间单位；<br>workQueue：任务队列，被提交但是尚未被执行的任务；<br>threadFactory：线程工厂，用于创建线程，一般情况下使用默认的，即Executors类的静态方法defaultThreadFactory()；<br>handler：拒绝策略。当任务太多来不及处理时，如何拒绝任务。</p>
+<p>参考&amp;感谢。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/dabusiGin/article/details/105327873">https://blog.csdn.net/dabusiGin/article/details/105327873</a></p>
+<h1 id="线程池工具"><a href="#线程池工具" class="headerlink" title="线程池工具"></a>线程池工具</h1><p>ThreadPoolUtil</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35974759/article/details/97763677">https://blog.csdn.net/qq_35974759/article/details/97763677</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shuige.business.train.util;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.formula.functions.T;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.LinkedBlockingQueue;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ThreadPoolExecutor;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Description:符合阿里巴巴规范的线程池</span></span><br><span class="line"><span class="comment"> * User: zhouzhou</span></span><br><span class="line"><span class="comment"> * Date: 2019-01-15</span></span><br><span class="line"><span class="comment"> * Time: 14:19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadPoolUtil</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ThreadPoolExecutor threadPool;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 无返回值直接执行, 管他娘的</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> runnable</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">(Runnable runnable)</span>&#123;</span><br><span class="line">        getThreadPool().execute(runnable);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回值直接执行, 管他娘的</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> callable</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> &lt;T&gt; Future&lt;T&gt; <span class="title function_">submit</span><span class="params">(Callable&lt;T&gt; callable)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span>   getThreadPool().submit(callable);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * dcs获取线程池</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 线程池对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ThreadPoolExecutor <span class="title function_">getThreadPool</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (threadPool != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> threadPool;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (ThreadPoolUtil.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (threadPool == <span class="literal">null</span>) &#123;</span><br><span class="line">                    threadPool = <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">8</span>, <span class="number">16</span>, <span class="number">60</span>, TimeUnit.SECONDS,</span><br><span class="line">                            <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;(<span class="number">32</span>), <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.CallerRunsPolicy());</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> threadPool;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>例子2</p>
+<p>线程池运用</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xhq1024/p/12125290.html">https://www.cnblogs.com/xhq1024/p/12125290.html</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.util.concurrent.ThreadFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 线程池</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> xhq</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadPoolService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义线程名称,方便的出错的时候溯源</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ThreadFactory</span> <span class="variable">namedThreadFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadFactoryBuilder</span>().setNameFormat(<span class="string">&quot;test-pool-%d&quot;</span>).build();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * corePoolSize    线程池核心池的大小</span></span><br><span class="line"><span class="comment">     * maximumPoolSize 线程池中允许的最大线程数量</span></span><br><span class="line"><span class="comment">     * keepAliveTime   当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间</span></span><br><span class="line"><span class="comment">     * unit            keepAliveTime 的时间单位</span></span><br><span class="line"><span class="comment">     * workQueue       用来储存等待执行任务的队列</span></span><br><span class="line"><span class="comment">     * threadFactory   创建线程的工厂类</span></span><br><span class="line"><span class="comment">     * handler         拒绝策略类,当线程池数量达到上线并且workQueue队列长度达到上限时就需要对到来的任务做拒绝处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ExecutorService</span> <span class="variable">service</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(</span><br><span class="line">            <span class="number">4</span>,</span><br><span class="line">            <span class="number">40</span>,</span><br><span class="line">            <span class="number">0L</span>,</span><br><span class="line">            TimeUnit.MILLISECONDS,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;(<span class="number">1024</span>),</span><br><span class="line">            namedThreadFactory,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.AbortPolicy()</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取线程池</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 线程池</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title function_">getEs</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> service;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用线程池创建线程并异步执行任务</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> r 任务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">newTask</span><span class="params">(Runnable r)</span> &#123;</span><br><span class="line">        service.execute(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="线程池压测"><a href="#线程池压测" class="headerlink" title="线程池压测"></a>线程池压测</h1><p>用到线程池的地方都应该进行压测，观测最佳线程数</p>
+<h1 id="实战-3步"><a href="#实战-3步" class="headerlink" title="实战(3步)"></a>实战(3步)</h1><p>1.初始化队列及线程池<br>2.编译任务类<br>3.任务处理器</p>
+<h2 id="实战1"><a href="#实战1" class="headerlink" title="实战1"></a>实战1</h2><p>Semaphore</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">        &lt;properties&gt;</span><br><span class="line">            &lt;pagehelper.boot.version&gt;1.3.0&lt;/pagehelper.boot.version&gt;</span><br><span class="line">        &lt;/properties&gt; </span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.11&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;--&gt;</span><br><span class="line">        &lt;!-- pagehelper 分页插件 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;pagehelper.boot.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">@GetMapping(&quot;queryAll&quot;)</span><br><span class="line">public PageInfo&lt;User&gt; selectAll()&#123;</span><br><span class="line">    Page&lt;User&gt; page = PageHelper.startPage(2, 2);</span><br><span class="line">    List&lt;User&gt; users = userService.queryAllUser();</span><br><span class="line">    PageInfo&lt;User&gt; pageInfo = new PageInfo&lt;User&gt;(users);</span><br><span class="line">    pageInfo.getList().stream().forEach(System.out::println);</span><br><span class="line">    int pages = pageInfo.getPages();</span><br><span class="line">    System.out.println(pages);</span><br><span class="line">    users.stream().forEach(System.out::println);</span><br><span class="line">    return pageInfo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="线程池使用场景"><a href="#线程池使用场景" class="headerlink" title="线程池使用场景"></a>线程池使用场景</h1><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhipengfang/article/details/124833998?spm=1001.2014.3001.5502">https://blog.csdn.net/zhipengfang/article/details/124833998?spm=1001.2014.3001.5502</a></p>
+<h3 id="循环调用"><a href="#循环调用" class="headerlink" title="循环调用"></a><strong>循环调用</strong></h3><p>这种显然每个月的数据计算相互都是独立的，我们完全可以采用多线程方式进行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 建立一个线程池，注意要放在外面，不要每次执行代码就建立一个，具体线程池的使用就不展开了</span><br><span class="line">public static ExecutorService commonThreadPool = new ThreadPoolExecutor(5, 5, 300L,</span><br><span class="line">        TimeUnit.SECONDS, new LinkedBlockingQueue&lt;&gt;(10), commonThreadFactory, new ThreadPoolExecutor.DiscardPolicy());</span><br><span class="line"> </span><br><span class="line">// 开始多线程调用</span><br><span class="line">List&lt;Future&lt;Model&gt;&gt; futures = new ArrayList&lt;&gt;();</span><br><span class="line">for(int i = 0 ; i &lt; 12 ; i ++) &#123;</span><br><span class="line">    Future&lt;Model&gt; future = commonThreadPool.submit(() -&gt; calOneMonthData(i););</span><br><span class="line">    futures.add(future);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 获取结果</span><br><span class="line">List&lt;Model&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">try &#123;</span><br><span class="line">   for (int i = 0 ; i &lt; futures.size() ; i ++) &#123;</span><br><span class="line">      list.add(futures.get(i).get());</span><br><span class="line">   &#125;</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">   LOGGER.error(&quot;出现错误：&quot;, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="顺序调用"><a href="#顺序调用" class="headerlink" title="顺序调用"></a><strong>顺序调用</strong></h3><p>如果不是类似上面循环调用，而是一次次的顺序调用，而且调用之间没有结果上的依赖，那么也可以用多线程的方式进行，例如：</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/b67c0673c50beb0d6b919f76007aa975.png" alt="b67c0673c50beb0d6b919f76007aa975.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> doA();</span><br><span class="line"><span class="type">B</span> <span class="variable">b</span> <span class="operator">=</span> doB();</span><br><span class="line"> </span><br><span class="line"><span class="type">C</span> <span class="variable">c</span> <span class="operator">=</span> doC(a, b);</span><br><span class="line"> </span><br><span class="line"><span class="type">D</span> <span class="variable">d</span> <span class="operator">=</span> doD(c);</span><br><span class="line"><span class="type">E</span> <span class="variable">e</span> <span class="operator">=</span> doE(c);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">return</span> doResult(d, e);</span><br></pre></td></tr></table></figure>
+
+<p>那么可用 CompletableFuture 解决：    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CompletableFuture&lt;A&gt; futureA = CompletableFuture.supplyAsync(() -&gt; doA());</span><br><span class="line">CompletableFuture&lt;B&gt; futureB = CompletableFuture.supplyAsync(() -&gt; doB());</span><br><span class="line">CompletableFuture.allOf(futureA,futureB) // 等a b 两个任务都执行完成</span><br><span class="line"> </span><br><span class="line">C c = doC(futureA.join(), futureB.join());</span><br><span class="line"> </span><br><span class="line">CompletableFuture&lt;D&gt; futureD = CompletableFuture.supplyAsync(() -&gt; doD(c));</span><br><span class="line">CompletableFuture&lt;E&gt; futureE = CompletableFuture.supplyAsync(() -&gt; doE(c));</span><br><span class="line">CompletableFuture.allOf(futureD,futureE) // 等d e两个任务都执行完成</span><br><span class="line"> </span><br><span class="line">return doResult(futureD.join(),futureE.join());</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程池设计不合理"><a href="#线程池设计不合理" class="headerlink" title="线程池设计不合理"></a><strong>线程池设计不合理</strong></h4><p>有的时候，即使我们使用了线程池让任务并行处理，接口的执行效率仍然不够快，这种情况可能是怎么回事呢？</p>
+<p>这种情况首先应该怀疑是不是线程池设计的不合理。我觉得这里有必要回顾一下线程池的三个重要参数：核心线程数、最大线程数、等待队列。</p>
+<p>这三个参数是怎么打配合的呢？当线程池创建的时候，如果不预热线程池，则线程池中线程为 0。当有任务提交到线程池，则开始创建核心线程。</p>
+<p><strong>ThreadPoolExecutor中参数详解</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">corePoolSize：核心线程数，也是线程池中常驻的线程数，线程池初始化时默认是没有线程的，当任务来临时才开始创建线程去执行任务</span><br><span class="line"></span><br><span class="line">maximumPoolSize：最大线程数，在核心线程数的基础上可能会额外增加一些非核心线程，需要注意的是只有当workQueue队列填满时才会创建多于corePoolSize的线程(线程池总线程数不超过maxPoolSize)</span><br><span class="line"></span><br><span class="line">keepAliveTime：非核心线程的空闲时间超过keepAliveTime就会被自动终止回收掉，注意当corePoolSize=maxPoolSize时，keepAliveTime参数也就不起作用了(因为不存在非核心线程)；</span><br><span class="line"></span><br><span class="line">unit：keepAliveTime的时间单位</span><br><span class="line"></span><br><span class="line">workQueue：用于保存任务的队列，可以为无界、有界、同步移交三种队列类型之一，当池子里的工作线程数大于corePoolSize时，这时新进来的任务会被放到队列中</span><br><span class="line"></span><br><span class="line">threadFactory：创建线程的工厂类，默认使用Executors.defaultThreadFactory()，也可以使用guava库的ThreadFactoryBuilder来创建</span><br><span class="line"></span><br><span class="line">handler：线程池无法继续接收任务(队列已满且线程数达到maximunPoolSize)时的饱和策略，取值有AbortPolicy、CallerRunsPolicy、DiscardOldestPolicy、DiscardPolicy</span><br><span class="line">————————————————</span><br><span class="line">版权声明：本文为CSDN博主「人生就像一场戏!」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https://blog.csdn.net/qq_40428665/article/details/121651421</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1510,7 +1550,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">226</span>
+          <span class="site-state-item-count">225</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
