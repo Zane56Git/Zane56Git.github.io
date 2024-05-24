@@ -17,26 +17,26 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"space.zane56stars.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。 为了学习Flink，首先也了解一下Storm  Storm是什么？Storm是一个流式计算框架，数据源源不断的产生，源源不断的收集，源源不断的计算。（数据实时产生、实时传输、实时计算、实时展示）Storm只负责数据的计算，不负责数据的存储。 实时计算在计算什么？所谓”实时计算”，应该叫”实时流计算”，如果不知道">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Storm环境搭建">
-<meta property="og:url" content="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:url" content="https://space.zane56stars.xyz/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Zane’s Space">
 <meta property="og:description" content="任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。 为了学习Flink，首先也了解一下Storm  Storm是什么？Storm是一个流式计算框架，数据源源不断的产生，源源不断的收集，源源不断的计算。（数据实时产生、实时传输、实时计算、实时展示）Storm只负责数据的计算，不负责数据的存储。 实时计算在计算什么？所谓”实时计算”，应该叫”实时流计算”，如果不知道">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png">
+<meta property="og:image" content="https://space.zane56stars.xyz/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png">
 <meta property="article:published_time" content="2018-01-29T12:18:18.000Z">
 <meta property="article:modified_time" content="2023-06-15T06:53:48.611Z">
 <meta property="article:author" content="Zane">
 <meta property="article:tag" content="storm">
 <meta property="article:tag" content="流计算">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png">
+<meta name="twitter:image" content="https://space.zane56stars.xyz/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png">
 
-<link rel="canonical" href="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+<link rel="canonical" href="https://space.zane56stars.xyz/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
 
 <script id="page-configurations">
@@ -180,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -378,7 +378,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

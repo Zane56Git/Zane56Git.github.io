@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"space.zane56stars.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="全量表、增量表、快照表、拉链表、流水表全量表 顾名思义是存储了全部数据的表，全量表没有分区的，所有数据都储存在一个分区中。全量表存储的是截至到目前最新状态的全部记录。 增量表 增量表是相对于全量表而言的，增量表是每次把新增的数据追加到原表中，增量表中每次新增的数据单独存储在一个分区中。 快照表 快照表就是截至过去某个时间点的所有数据，关注更多的是过去某个时间点的状态，即快照表主要存储的是历史状态的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大数据开发-全量表、增量表、快照表、拉链表、流水表">
-<meta property="og:url" content="http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/index.html">
+<meta property="og:url" content="https://space.zane56stars.xyz/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Zane’s Space">
 <meta property="og:description" content="全量表、增量表、快照表、拉链表、流水表全量表 顾名思义是存储了全部数据的表，全量表没有分区的，所有数据都储存在一个分区中。全量表存储的是截至到目前最新状态的全部记录。 增量表 增量表是相对于全量表而言的，增量表是每次把新增的数据追加到原表中，增量表中每次新增的数据单独存储在一个分区中。 快照表 快照表就是截至过去某个时间点的所有数据，关注更多的是过去某个时间点的状态，即快照表主要存储的是历史状态的">
 <meta property="og:locale" content="zh_CN">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
+<link rel="canonical" href="https://space.zane56stars.xyz/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
 
 
 <script id="page-configurations">
@@ -178,7 +178,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -363,7 +363,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

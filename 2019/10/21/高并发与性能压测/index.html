@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"space.zane56stars.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="直接操库的危险涉及对外的访问接口，记住，请求不要轻易直接读库写库，多少次请求就有多少次操库，很容易产生OOM血案！ 一定要多方位压测（模拟真实场景压测）。  数据库 OOM  缓存的危险区千万不要觉得数据放在数据库就可以减轻数据库压力而保护系统了，缓存的使用同样需要考虑到内存大小，主从备份，连接池大小。 JVM运用其实JVM主要的运用是为了保护操作系统，例如给应用限定jvm参数，避免内存超过机器资">
 <meta property="og:type" content="article">
 <meta property="og:title" content="性能压测与运维">
-<meta property="og:url" content="http://example.com/2019/10/21/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/index.html">
+<meta property="og:url" content="https://space.zane56stars.xyz/2019/10/21/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/index.html">
 <meta property="og:site_name" content="Zane’s Space">
 <meta property="og:description" content="直接操库的危险涉及对外的访问接口，记住，请求不要轻易直接读库写库，多少次请求就有多少次操库，很容易产生OOM血案！ 一定要多方位压测（模拟真实场景压测）。  数据库 OOM  缓存的危险区千万不要觉得数据放在数据库就可以减轻数据库压力而保护系统了，缓存的使用同样需要考虑到内存大小，主从备份，连接池大小。 JVM运用其实JVM主要的运用是为了保护操作系统，例如给应用限定jvm参数，避免内存超过机器资">
 <meta property="og:locale" content="zh_CN">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="难点">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2019/10/21/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/">
+<link rel="canonical" href="https://space.zane56stars.xyz/2019/10/21/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/">
 
 
 <script id="page-configurations">
@@ -178,7 +178,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/21/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/">
+    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2019/10/21/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -364,7 +364,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
