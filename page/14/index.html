@@ -1258,6 +1258,118 @@ zookeeper
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Linux-机器基础搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-17 20:01:30" itemprop="dateCreated datePublished" datetime="2018-05-17T20:01:30+08:00">2018-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-机器基础搭建/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>以下主要基于虚拟机快速完成基础搭建</li>
+</ul>
+<p>建议使用桥接网络-实现局域网互通</p>
+<p>固定IP，设置主机名，这是服务器的基本设置</p>
+<p>root-&gt;@2020</p>
+<p>创建deploy用户（后面的基本操作都必须基于非root用户完成，这是规范、标准）</p>
+<p>1、快速虚拟化三台centos7（半个小时内），固定好IP，网络互通即可（离开虚拟机，通过ssh操作）(相当拥有了3台服务器，省去购买阿里云的钱)</p>
+<p>2、设置ssh密钥（便于部署）</p>
+<p>3、设置软链</p>
+<p>sudo ln -s /opt/data/ /data<br>deploy用户下创建/opt/data/目录</p>
+<h1 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h1><p>主机名：host_app1（例如：vm_host1、vm_cdh1、host_service1、server1.bigdata.local、master.cdh、node1.cdh）<br>host映射：server1.bigdata.local（例如：server1.bigdata.local、local.service1.com）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.135 master.cdh</span><br><span class="line">192.168.100.136 node1.cdh</span><br><span class="line">192.168.100.137 node2.cdh</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 处理ifconfig not command问题</span><br><span class="line">yum install net-tools</span><br><span class="line"></span><br><span class="line"># 安装rsync</span><br><span class="line">yum -y install rsync</span><br><span class="line"># rsync同步，执行同步</span><br><span class="line">rsync -av install/rsync_files vm_cdh3:/home/deploy/</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangyy3/p/12454728.html">https://www.cnblogs.com/zhangyy3/p/12454728.html</a></p>
+<p>注意:第3点后,创建分区后需要重启再对/dev/sda3进行格式化,不重启导致格式化失败</p>
+<p>mkfs.xfs /dev/sda3</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1467,118 +1579,6 @@ zookeeper
 <p>日志文件分离</p>
 <p>日志大小限制、日志保留时长限制</p>
 <p>日志按环境等级分离管理</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Linux-机器基础搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-17 20:01:30" itemprop="dateCreated datePublished" datetime="2018-05-17T20:01:30+08:00">2018-05-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-机器基础搭建/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>以下主要基于虚拟机快速完成基础搭建</li>
-</ul>
-<p>建议使用桥接网络-实现局域网互通</p>
-<p>固定IP，设置主机名，这是服务器的基本设置</p>
-<p>root-&gt;@2020</p>
-<p>创建deploy用户（后面的基本操作都必须基于非root用户完成，这是规范、标准）</p>
-<p>1、快速虚拟化三台centos7（半个小时内），固定好IP，网络互通即可（离开虚拟机，通过ssh操作）(相当拥有了3台服务器，省去购买阿里云的钱)</p>
-<p>2、设置ssh密钥（便于部署）</p>
-<p>3、设置软链</p>
-<p>sudo ln -s /opt/data/ /data<br>deploy用户下创建/opt/data/目录</p>
-<h1 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h1><p>主机名：host_app1（例如：vm_host1、vm_cdh1、host_service1、server1.bigdata.local、master.cdh、node1.cdh）<br>host映射：server1.bigdata.local（例如：server1.bigdata.local、local.service1.com）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.135 master.cdh</span><br><span class="line">192.168.100.136 node1.cdh</span><br><span class="line">192.168.100.137 node2.cdh</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 处理ifconfig not command问题</span><br><span class="line">yum install net-tools</span><br><span class="line"></span><br><span class="line"># 安装rsync</span><br><span class="line">yum -y install rsync</span><br><span class="line"># rsync同步，执行同步</span><br><span class="line">rsync -av install/rsync_files vm_cdh3:/home/deploy/</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangyy3/p/12454728.html">https://www.cnblogs.com/zhangyy3/p/12454728.html</a></p>
-<p>注意:第3点后,创建分区后需要重启再对/dev/sda3进行格式化,不重启导致格式化失败</p>
-<p>mkfs.xfs /dev/sda3</p>
 
       
     </div>

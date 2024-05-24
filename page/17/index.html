@@ -274,125 +274,6 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/19/hadoop_space/hadoop-HDFS/" class="post-title-link" itemprop="url">hadoop-HDFS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-HDFS/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-HDFS/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>HDFS(hadoop分布式文件系统)</p>
-<h1 id="HDFS常用shell操作"><a href="#HDFS常用shell操作" class="headerlink" title="HDFS常用shell操作"></a>HDFS常用shell操作</h1><p>1、-ls：查询指定路径信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls</span><br><span class="line"># 远程查询</span><br><span class="line">hdfs dfs -ls hdfs://bigdata01:9000/</span><br><span class="line"># 根目录</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
-
-<p>2、-put：从本地上传文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put hello.txt /</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
-
-
-<p>3、-cat：查看HDFS文件内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br><span class="line">hdfs dfs -cat /hello.txt</span><br></pre></td></tr></table></figure>
-
-<p>4、-get：下载文件到本地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -get /hello.txt ./</span><br></pre></td></tr></table></figure>
-
-<p>5、-mkdir [-p]：创建文件夹</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /test</span><br><span class="line">hdfs dfs -mkdir -p /a/b</span><br></pre></td></tr></table></figure>
-
-<p>R参数(遍历)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls -R /</span><br></pre></td></tr></table></figure>
-
-<p>6、-rm [-r]：删除文件/文件夹</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm /hello.txt</span><br><span class="line"># 递归删除</span><br><span class="line">hdfs dfs -rm -r /a</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="HDFS一些实际操作"><a href="#HDFS一些实际操作" class="headerlink" title="HDFS一些实际操作"></a>HDFS一些实际操作</h2><p>1、统计根目录下文件的个数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test | grep /test| wc -l</span><br></pre></td></tr></table></figure>
-<p>2、统计根目录下每个文件的大小，最终把文件名称和大小打印出来</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test |grep /test |  awk &#x27;&#123;print $8,$5&#125;&#x27;</span><br></pre></td></tr></table></figure>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40612128/article/details/123009365">https://blog.csdn.net/weixin_40612128/article/details/123009365</a></p>
-<p>创建一个文件夹    hdfs dfs -mkdir /myTask<br>创建多个文件夹    hdfs dfs -mkdir -p /myTask1/input1<br>上传文件 hdfs dfs -put /opt/wordcount.txt /myTask/input<br>查看总目录下的文件和文件夹 hdfs dfs -ls /<br>查看myTask下的文件和文件夹 hdfs dfs -ls /myTask<br>查看myTask下的wordcount.txt的内容 hdfs dfs -cat /myTask/wordcount.txt<br>删除总目录下的myTask2文件夹以及里面的文件和文件夹 hdfs dfs -rmr /myTask2<br>删除myTask下的wordcount.txt hdfs dfs -rmr /myTask/wordcount.txt<br>下载hdfs中myTask/input/wordcount.txt到本地opt文件夹中 hdfs dfs -get /myTask/input/wordcount.txt /opt<br>————————————————<br>版权声明：本文为CSDN博主「码仙♥」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tswc_byy/article/details/90577551">https://blog.csdn.net/tswc_byy/article/details/90577551</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-Hue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -562,6 +443,125 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
 <p><strong>二、YARN体系架构</strong></p>
 <p>YARN是Master/Slave结构，主要由<strong>ResourceManager、NodeManager、ApplicationMaster和Container</strong>等几个组件构成。YARN架构如下所示。</p>
 <h1 id="Yarn-UI"><a href="#Yarn-UI" class="headerlink" title="Yarn UI"></a>Yarn UI</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903893080473614">https://juejin.cn/post/6844903893080473614</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop-HDFS/" class="post-title-link" itemprop="url">hadoop-HDFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-HDFS/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-HDFS/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>HDFS(hadoop分布式文件系统)</p>
+<h1 id="HDFS常用shell操作"><a href="#HDFS常用shell操作" class="headerlink" title="HDFS常用shell操作"></a>HDFS常用shell操作</h1><p>1、-ls：查询指定路径信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls</span><br><span class="line"># 远程查询</span><br><span class="line">hdfs dfs -ls hdfs://bigdata01:9000/</span><br><span class="line"># 根目录</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+
+<p>2、-put：从本地上传文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put hello.txt /</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+
+
+<p>3、-cat：查看HDFS文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br><span class="line">hdfs dfs -cat /hello.txt</span><br></pre></td></tr></table></figure>
+
+<p>4、-get：下载文件到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -get /hello.txt ./</span><br></pre></td></tr></table></figure>
+
+<p>5、-mkdir [-p]：创建文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /test</span><br><span class="line">hdfs dfs -mkdir -p /a/b</span><br></pre></td></tr></table></figure>
+
+<p>R参数(遍历)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls -R /</span><br></pre></td></tr></table></figure>
+
+<p>6、-rm [-r]：删除文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm /hello.txt</span><br><span class="line"># 递归删除</span><br><span class="line">hdfs dfs -rm -r /a</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="HDFS一些实际操作"><a href="#HDFS一些实际操作" class="headerlink" title="HDFS一些实际操作"></a>HDFS一些实际操作</h2><p>1、统计根目录下文件的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test | grep /test| wc -l</span><br></pre></td></tr></table></figure>
+<p>2、统计根目录下每个文件的大小，最终把文件名称和大小打印出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test |grep /test |  awk &#x27;&#123;print $8,$5&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40612128/article/details/123009365">https://blog.csdn.net/weixin_40612128/article/details/123009365</a></p>
+<p>创建一个文件夹    hdfs dfs -mkdir /myTask<br>创建多个文件夹    hdfs dfs -mkdir -p /myTask1/input1<br>上传文件 hdfs dfs -put /opt/wordcount.txt /myTask/input<br>查看总目录下的文件和文件夹 hdfs dfs -ls /<br>查看myTask下的文件和文件夹 hdfs dfs -ls /myTask<br>查看myTask下的wordcount.txt的内容 hdfs dfs -cat /myTask/wordcount.txt<br>删除总目录下的myTask2文件夹以及里面的文件和文件夹 hdfs dfs -rmr /myTask2<br>删除myTask下的wordcount.txt hdfs dfs -rmr /myTask/wordcount.txt<br>下载hdfs中myTask/input/wordcount.txt到本地opt文件夹中 hdfs dfs -get /myTask/input/wordcount.txt /opt<br>————————————————<br>版权声明：本文为CSDN博主「码仙♥」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tswc_byy/article/details/90577551">https://blog.csdn.net/tswc_byy/article/details/90577551</a></p>
 
       
     </div>
@@ -1053,6 +1053,98 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">EFK实际应用案例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/" class="cy_cmt_count" data-xid="2018/01/19/中间件/EFK实际应用案例/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这里讲的是EFK（Elasticsearch、Filebeat、kibana）<br>其实很早及接触到ELK了，但一直没有真正在公司能用到用起来，因为如果是一个项目的日期其实通过简单的日志系统可以采集，或者通过日志文件也可以管理；<br>EFK主要作用是统一收集多个业务域下不同项目的多个节点的应用日志，这就涉及的日志范围及数量就不简单了，需要庞大的日志储存，<br>这里还涉及专业的运维团队实时监控(一般可设置保留10天，必要时可以申请延长)。这才是真正的微服务日志统一管理。</p>
+<h1 id="EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集"><a href="#EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集" class="headerlink" title="EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集"></a>EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集</h1><h1 id="日志的采集及处理"><a href="#日志的采集及处理" class="headerlink" title="日志的采集及处理"></a>日志的采集及处理</h1><p>如何将各个服务的日志进行采集到EFK呢？<br>-&gt;日志模块基于logback的同步实现，日志打印到容器控制台，通过EFK统一收集和查阅。</p>
+<p>如何将通一个服务多个节点的数据进行有序合并呢？不合并有影响吗？<br>如何根据不同服务进行分类及索引管理呢？<br>日志接入时的级别统一规范化</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kibana%E8%AF%A6%E7%BB%86%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1293,98 +1385,6 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
 
 
 <p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/9255676433/">https://www.freesion.com/article/9255676433/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">EFK实际应用案例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/" class="cy_cmt_count" data-xid="2018/01/19/中间件/EFK实际应用案例/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这里讲的是EFK（Elasticsearch、Filebeat、kibana）<br>其实很早及接触到ELK了，但一直没有真正在公司能用到用起来，因为如果是一个项目的日期其实通过简单的日志系统可以采集，或者通过日志文件也可以管理；<br>EFK主要作用是统一收集多个业务域下不同项目的多个节点的应用日志，这就涉及的日志范围及数量就不简单了，需要庞大的日志储存，<br>这里还涉及专业的运维团队实时监控(一般可设置保留10天，必要时可以申请延长)。这才是真正的微服务日志统一管理。</p>
-<h1 id="EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集"><a href="#EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集" class="headerlink" title="EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集"></a>EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集</h1><h1 id="日志的采集及处理"><a href="#日志的采集及处理" class="headerlink" title="日志的采集及处理"></a>日志的采集及处理</h1><p>如何将各个服务的日志进行采集到EFK呢？<br>-&gt;日志模块基于logback的同步实现，日志打印到容器控制台，通过EFK统一收集和查阅。</p>
-<p>如何将通一个服务多个节点的数据进行有序合并呢？不合并有影响吗？<br>如何根据不同服务进行分类及索引管理呢？<br>日志接入时的级别统一规范化</p>
 
       
     </div>
