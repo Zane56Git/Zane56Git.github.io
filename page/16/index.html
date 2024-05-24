@@ -1347,7 +1347,7 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-YARN/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1361,7 +1361,7 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/19/hadoop_space/hadoop-YARN/" class="post-title-link" itemprop="url">hadoop-YARN</a>
+            <a href="/2018/01/19/hadoop_space/hadoop-HDFS/" class="post-title-link" itemprop="url">hadoop-HDFS</a>
         </h2>
 
         <div class="post-meta">
@@ -1400,8 +1400,8 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-YARN/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-YARN/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-YARN/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-HDFS/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-HDFS/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-HDFS/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -1417,15 +1417,36 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Hadoop YARN：Hadoop集群资源管理框架（Yet Another Resource Negotiator）,用于作业调度和集群资源管理。</p>
-<p>YARN使用了轻量级资源隔离机制Cgroup进行资源隔离</p>
-<p>主要管理什么呢？</p>
-<p>内存、CPU、磁盘、网络等</p>
-<p><strong>一、YARN简介</strong></p>
-<p>YARN（Yet Another Resource Negotiator）是一个通用的资源管理平台，可为各类计算框架提供资源的管理和调度。YARN可以将多种计算框架（如离线处理MapReduce、在线处理的Storm、内存计算框架Spark等）部署到一个公共集群中，共享集群的资源，并提供如下功能。</p>
-<p><strong>二、YARN体系架构</strong></p>
-<p>YARN是Master/Slave结构，主要由<strong>ResourceManager、NodeManager、ApplicationMaster和Container</strong>等几个组件构成。YARN架构如下所示。</p>
-<h1 id="Yarn-UI"><a href="#Yarn-UI" class="headerlink" title="Yarn UI"></a>Yarn UI</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903893080473614">https://juejin.cn/post/6844903893080473614</a></p>
+          <p>HDFS(hadoop分布式文件系统)</p>
+<h1 id="HDFS常用shell操作"><a href="#HDFS常用shell操作" class="headerlink" title="HDFS常用shell操作"></a>HDFS常用shell操作</h1><p>1、-ls：查询指定路径信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls</span><br><span class="line"># 远程查询</span><br><span class="line">hdfs dfs -ls hdfs://bigdata01:9000/</span><br><span class="line"># 根目录</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+
+<p>2、-put：从本地上传文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put hello.txt /</span><br><span class="line">hdfs dfs -ls /</span><br></pre></td></tr></table></figure>
+
+
+<p>3、-cat：查看HDFS文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /</span><br><span class="line">hdfs dfs -cat /hello.txt</span><br></pre></td></tr></table></figure>
+
+<p>4、-get：下载文件到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -get /hello.txt ./</span><br></pre></td></tr></table></figure>
+
+<p>5、-mkdir [-p]：创建文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /test</span><br><span class="line">hdfs dfs -mkdir -p /a/b</span><br></pre></td></tr></table></figure>
+
+<p>R参数(遍历)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls -R /</span><br></pre></td></tr></table></figure>
+
+<p>6、-rm [-r]：删除文件/文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm /hello.txt</span><br><span class="line"># 递归删除</span><br><span class="line">hdfs dfs -rm -r /a</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="HDFS一些实际操作"><a href="#HDFS一些实际操作" class="headerlink" title="HDFS一些实际操作"></a>HDFS一些实际操作</h2><p>1、统计根目录下文件的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test | grep /test| wc -l</span><br></pre></td></tr></table></figure>
+<p>2、统计根目录下每个文件的大小，最终把文件名称和大小打印出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /test |grep /test |  awk &#x27;&#123;print $8,$5&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40612128/article/details/123009365">https://blog.csdn.net/weixin_40612128/article/details/123009365</a></p>
+<p>创建一个文件夹    hdfs dfs -mkdir /myTask<br>创建多个文件夹    hdfs dfs -mkdir -p /myTask1/input1<br>上传文件 hdfs dfs -put /opt/wordcount.txt /myTask/input<br>查看总目录下的文件和文件夹 hdfs dfs -ls /<br>查看myTask下的文件和文件夹 hdfs dfs -ls /myTask<br>查看myTask下的wordcount.txt的内容 hdfs dfs -cat /myTask/wordcount.txt<br>删除总目录下的myTask2文件夹以及里面的文件和文件夹 hdfs dfs -rmr /myTask2<br>删除myTask下的wordcount.txt hdfs dfs -rmr /myTask/wordcount.txt<br>下载hdfs中myTask/input/wordcount.txt到本地opt文件夹中 hdfs dfs -get /myTask/input/wordcount.txt /opt<br>————————————————<br>版权声明：本文为CSDN博主「码仙♥」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tswc_byy/article/details/90577551">https://blog.csdn.net/tswc_byy/article/details/90577551</a></p>
 
       
     </div>

@@ -994,7 +994,7 @@ zookeeper
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1008,7 +1008,7 @@ zookeeper
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Linux-软链正确使用</a>
+            <a href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Linux-机器基础搭建</a>
         </h2>
 
         <div class="post-meta">
@@ -1025,7 +1025,7 @@ zookeeper
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1047,8 +1047,8 @@ zookeeper
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-软链正确使用/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-机器基础搭建/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -1064,33 +1064,29 @@ zookeeper
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Linux-软链正确使用</p>
-<p>软链在windows系统可以理解为“快捷方式”</p>
-<p>在实际应用中软链有着很用的作用：</p>
-<p>例如</p>
-<p>通过软链知道相关包，软链是通用路径名称，不包含文件版本，这样能让文件路径固定，如果实际报名有调整，只需调整软链指向即可。</p>
-<p>注意点</p>
-<p>需要特别注意软链删除，多了一个/就会把时间文件目录删除，而不是删除软链</p>
-<h1 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h1><p>必备操作：软连接的创建，删除，修改</p>
-<p>一，创建<br>ln 命令的基本格式如下：</p>
-<p>ln -s /flie/plan /ruanlian</p>
-<p>[root@localhost ~]# ln [选项] 【源文件】 【目标文件（软链路径）】</p>
-<p>源文件是指软连接指向的目录，就比如C盘下的某个文件的路径。</p>
-<p>目标文件是指“快捷键”文件名称 该文件是指令创建的。</p>
-<p>以上两个文件都必须使用绝对地址</p>
-<p>选项：</p>
-<p>-s：建立软链接文件。如果不加 “-s” 选项，则建立硬链接文件；</p>
-<p>-f：强制。如果目标文件已经存在，则删除目标文件后再建立链接文件；</p>
-<p>二、删除<br>rm -rf 【软链接地址】<br>上述指令中，软链接地址最后不能含有“/”，当含有“/”时，删除的是软链接目标目录下的资源，而不是软链接本身。</p>
-<p>三、修改</p>
-<p>ln -snf 【新目标目录】 【软链接地址】<br>这里修改是指修改软链接的目标目录 </p>
-<p>ln -snf /flie/plan/new /ruanlian</p>
-<p>切割文件</p>
-<p>使用split -b 500M filename将文件分割为500M大小的文件。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/carefree2005/article/details/122703056">https://blog.csdn.net/carefree2005/article/details/122703056</a></p>
-<p>合并文件</p>
-<p>cat x* &gt;new_file</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50247813/article/details/127246452">https://blog.csdn.net/qq_50247813/article/details/127246452</a></p>
+          <ul>
+<li>以下主要基于虚拟机快速完成基础搭建</li>
+</ul>
+<p>建议使用桥接网络-实现局域网互通</p>
+<p>固定IP，设置主机名，这是服务器的基本设置</p>
+<p>root-&gt;@2020</p>
+<p>创建deploy用户（后面的基本操作都必须基于非root用户完成，这是规范、标准）</p>
+<p>1、快速虚拟化三台centos7（半个小时内），固定好IP，网络互通即可（离开虚拟机，通过ssh操作）(相当拥有了3台服务器，省去购买阿里云的钱)</p>
+<p>2、设置ssh密钥（便于部署）</p>
+<p>3、设置软链</p>
+<p>sudo ln -s /opt/data/ /data<br>deploy用户下创建/opt/data/目录</p>
+<h1 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h1><p>主机名：host_app1（例如：vm_host1、vm_cdh1、host_service1、server1.bigdata.local、master.cdh、node1.cdh）<br>host映射：server1.bigdata.local（例如：server1.bigdata.local、local.service1.com）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.135 master.cdh</span><br><span class="line">192.168.100.136 node1.cdh</span><br><span class="line">192.168.100.137 node2.cdh</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 处理ifconfig not command问题</span><br><span class="line">yum install net-tools</span><br><span class="line"></span><br><span class="line"># 安装rsync</span><br><span class="line">yum -y install rsync</span><br><span class="line"># rsync同步，执行同步</span><br><span class="line">rsync -av install/rsync_files vm_cdh3:/home/deploy/</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangyy3/p/12454728.html">https://www.cnblogs.com/zhangyy3/p/12454728.html</a></p>
+<p>注意:第3点后,创建分区后需要重启再对/dev/sda3进行格式化,不重启导致格式化失败</p>
+<p>mkfs.xfs /dev/sda3</p>
 
       
     </div>
@@ -1222,7 +1218,7 @@ zookeeper
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1236,7 +1232,7 @@ zookeeper
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Linux-机器基础搭建</a>
+            <a href="/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Linux-软链正确使用</a>
         </h2>
 
         <div class="post-meta">
@@ -1253,7 +1249,7 @@ zookeeper
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1275,8 +1271,8 @@ zookeeper
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-机器基础搭建/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E8%BD%AF%E9%93%BE%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-软链正确使用/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -1292,29 +1288,33 @@ zookeeper
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li>以下主要基于虚拟机快速完成基础搭建</li>
-</ul>
-<p>建议使用桥接网络-实现局域网互通</p>
-<p>固定IP，设置主机名，这是服务器的基本设置</p>
-<p>root-&gt;@2020</p>
-<p>创建deploy用户（后面的基本操作都必须基于非root用户完成，这是规范、标准）</p>
-<p>1、快速虚拟化三台centos7（半个小时内），固定好IP，网络互通即可（离开虚拟机，通过ssh操作）(相当拥有了3台服务器，省去购买阿里云的钱)</p>
-<p>2、设置ssh密钥（便于部署）</p>
-<p>3、设置软链</p>
-<p>sudo ln -s /opt/data/ /data<br>deploy用户下创建/opt/data/目录</p>
-<h1 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h1><p>主机名：host_app1（例如：vm_host1、vm_cdh1、host_service1、server1.bigdata.local、master.cdh、node1.cdh）<br>host映射：server1.bigdata.local（例如：server1.bigdata.local、local.service1.com）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.100.135 master.cdh</span><br><span class="line">192.168.100.136 node1.cdh</span><br><span class="line">192.168.100.137 node2.cdh</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 处理ifconfig not command问题</span><br><span class="line">yum install net-tools</span><br><span class="line"></span><br><span class="line"># 安装rsync</span><br><span class="line">yum -y install rsync</span><br><span class="line"># rsync同步，执行同步</span><br><span class="line">rsync -av install/rsync_files vm_cdh3:/home/deploy/</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangyy3/p/12454728.html">https://www.cnblogs.com/zhangyy3/p/12454728.html</a></p>
-<p>注意:第3点后,创建分区后需要重启再对/dev/sda3进行格式化,不重启导致格式化失败</p>
-<p>mkfs.xfs /dev/sda3</p>
+          <p>Linux-软链正确使用</p>
+<p>软链在windows系统可以理解为“快捷方式”</p>
+<p>在实际应用中软链有着很用的作用：</p>
+<p>例如</p>
+<p>通过软链知道相关包，软链是通用路径名称，不包含文件版本，这样能让文件路径固定，如果实际报名有调整，只需调整软链指向即可。</p>
+<p>注意点</p>
+<p>需要特别注意软链删除，多了一个/就会把时间文件目录删除，而不是删除软链</p>
+<h1 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h1><p>必备操作：软连接的创建，删除，修改</p>
+<p>一，创建<br>ln 命令的基本格式如下：</p>
+<p>ln -s /flie/plan /ruanlian</p>
+<p>[root@localhost ~]# ln [选项] 【源文件】 【目标文件（软链路径）】</p>
+<p>源文件是指软连接指向的目录，就比如C盘下的某个文件的路径。</p>
+<p>目标文件是指“快捷键”文件名称 该文件是指令创建的。</p>
+<p>以上两个文件都必须使用绝对地址</p>
+<p>选项：</p>
+<p>-s：建立软链接文件。如果不加 “-s” 选项，则建立硬链接文件；</p>
+<p>-f：强制。如果目标文件已经存在，则删除目标文件后再建立链接文件；</p>
+<p>二、删除<br>rm -rf 【软链接地址】<br>上述指令中，软链接地址最后不能含有“/”，当含有“/”时，删除的是软链接目标目录下的资源，而不是软链接本身。</p>
+<p>三、修改</p>
+<p>ln -snf 【新目标目录】 【软链接地址】<br>这里修改是指修改软链接的目标目录 </p>
+<p>ln -snf /flie/plan/new /ruanlian</p>
+<p>切割文件</p>
+<p>使用split -b 500M filename将文件分割为500M大小的文件。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/carefree2005/article/details/122703056">https://blog.csdn.net/carefree2005/article/details/122703056</a></p>
+<p>合并文件</p>
+<p>cat x* &gt;new_file</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50247813/article/details/127246452">https://blog.csdn.net/qq_50247813/article/details/127246452</a></p>
 
       
     </div>
