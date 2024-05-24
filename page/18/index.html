@@ -174,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -188,7 +188,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">es实际应用</a>
+            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">EFK实际应用案例</a>
         </h2>
 
         <div class="post-meta">
@@ -227,8 +227,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/19/中间件/es实际应用/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/EFK%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/" class="cy_cmt_count" data-xid="2018/01/19/中间件/EFK实际应用案例/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -244,46 +244,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>es<br>面向文档，文档是所有可搜索的数据最小单位<br>可以理解为一个文件、日志、mp3歌曲信息等等</p>
-<p>文档会被序列号成json格式保存在es中</p>
-<p>es和solr都是基于hahhop之父1999年开发的lucene开源项目<br>es：<br>支持分布式、水平扩展<br>降低全文检索学习曲线</p>
-<h2 id="本地安装及水平扩展"><a href="#本地安装及水平扩展" class="headerlink" title="本地安装及水平扩展"></a>本地安装及水平扩展</h2><p>7.0已内置jdk</p>
-<p>阿里云es30免费试用版</p>
-<p>es实际应用</p>
-<p>目前只是记录一下es的简单使用<br>使用es查看日志，首先得有关联的索引</p>
-<p>通过筛选查看数据<br>例如</p>
-<p>(模糊并查询)</p>
-<p>条件 and flag_name and 13800138000</p>
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>文档</p>
-<p>节点（Data Node、Coordinating Node），还有其他节点类型</p>
-<p>分片（主分片、副本）<br>分片的设定（创建索引时会设置主分片，需提前容量规划）<br>多或少都有影响</p>
-<p>查看健康情况</p>
-<h2 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h2><p>##项目实战</p>
-<p>快速定位日志</p>
-<p>索引-&gt;（日志字段筛选，例如：message:”查询关键字1” and message:”查询关键字2”）</p>
-<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><p> java.util.LinkedHashMap cannot be cast to XXXX</p>
-<p> 先转成MAP 在转成JSON  在转成JavaBean </p>
-<p> 后面修改方法：先转成LinkedHashMap 再转成json最后转成json</p>
-<p>LinkedHashMap linkedHashMap = (LinkedHashMap) map.get(“data”);</p>
-<p>String json = new JSONObject().toJSONString(linkedHashMap);</p>
-<p>userEntity = new JSONObject().parseObject(json, UserEntity.class);<br>————————————————<br>版权声明：本文为CSDN博主「BellCalderon」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014373554/article/details/92743743">https://blog.csdn.net/u014373554/article/details/92743743</a></p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Get 查看所有索引</span><br><span class="line"></span><br><span class="line">localhost:9200/_all</span><br><span class="line"></span><br><span class="line">PUT 创建索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEL 删除索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 创建索引-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 25,</span><br><span class="line">  &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-2</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/2</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;Eric&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 23,</span><br><span class="line">  &quot;about&quot; : &quot;I love basketball&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;reading&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-id</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-name</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/_search?q=first_name:john</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;took&quot;: 56,</span><br><span class="line">  &quot;timed_out&quot;: false,</span><br><span class="line">  &quot;_shards&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: 1,</span><br><span class="line">    &quot;successful&quot;: 1,</span><br><span class="line">    &quot;skipped&quot;: 0,</span><br><span class="line">    &quot;failed&quot;: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hits&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: &#123;</span><br><span class="line">      &quot;value&quot;: 1,</span><br><span class="line">      &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;max_score&quot;: 0.6931472,</span><br><span class="line">    &quot;hits&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;_index&quot;: &quot;person&quot;,</span><br><span class="line">        &quot;_type&quot;: &quot;_doc&quot;,</span><br><span class="line">        &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">        &quot;_score&quot;: 0.6931472,</span><br><span class="line">        &quot;_source&quot;: &#123;</span><br><span class="line">          &quot;first_name&quot;: &quot;John&quot;,</span><br><span class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</span><br><span class="line">          &quot;age&quot;: 25,</span><br><span class="line">          &quot;about&quot;: &quot;I love to go rock climbing&quot;,</span><br><span class="line">          &quot;interests&quot;: [</span><br><span class="line">            &quot;sports&quot;,</span><br><span class="line">            &quot;music&quot;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h1><p>有相关可视化工具</p>
-<p>es本身也是一个数据库，可以通过DBeaver进行连接，默认安装是没有密码的</p>
-<p>通过 dbeaver 配置 jdbc 连接 es时报错 current license is non-compliant for [jdbc]</p>
-<p>在官网 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/subscriptions">https://www.elastic.co/cn/subscriptions</a> 搜索后发现需要白金级别</p>
-<p>查看服务器es的license信息，发现 “type” : “basic”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># curl -XGET http://localhost:9200/_license</span><br></pre></td></tr></table></figure>
-
-<p>修改成30天试用版，<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># curl -X POST &quot;localhost:9200/_license/start_trial?acknowledge=true&amp;pretty&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot; : true,</span><br><span class="line">  &quot;trial_was_started&quot; : true,</span><br><span class="line">  &quot;type&quot; : &quot;trial&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/9255676433/">https://www.freesion.com/article/9255676433/</a></p>
+          <p>这里讲的是EFK（Elasticsearch、Filebeat、kibana）<br>其实很早及接触到ELK了，但一直没有真正在公司能用到用起来，因为如果是一个项目的日期其实通过简单的日志系统可以采集，或者通过日志文件也可以管理；<br>EFK主要作用是统一收集多个业务域下不同项目的多个节点的应用日志，这就涉及的日志范围及数量就不简单了，需要庞大的日志储存，<br>这里还涉及专业的运维团队实时监控(一般可设置保留10天，必要时可以申请延长)。这才是真正的微服务日志统一管理。</p>
+<h1 id="EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集"><a href="#EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集" class="headerlink" title="EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集"></a>EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集</h1><h1 id="日志的采集及处理"><a href="#日志的采集及处理" class="headerlink" title="日志的采集及处理"></a>日志的采集及处理</h1><p>如何将各个服务的日志进行采集到EFK呢？<br>-&gt;日志模块基于logback的同步实现，日志打印到容器控制台，通过EFK统一收集和查阅。</p>
+<p>如何将通一个服务多个节点的数据进行有序合并呢？不合并有影响吗？<br>如何根据不同服务进行分类及索引管理呢？<br>日志接入时的级别统一规范化</p>
 
       
     </div>

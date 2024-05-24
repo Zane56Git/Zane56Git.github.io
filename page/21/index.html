@@ -174,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BD%A0%E6%8E%A5%E8%A7%A6%E5%88%B0%E7%9A%84JSON/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -188,7 +188,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BD%A0%E6%8E%A5%E8%A7%A6%E5%88%B0%E7%9A%84JSON/" class="post-title-link" itemprop="url">你接触到的JSON</a>
+            <a href="/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
         </h2>
 
         <div class="post-meta">
@@ -227,8 +227,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BD%A0%E6%8E%A5%E8%A7%A6%E5%88%B0%E7%9A%84JSON/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BD%A0%E6%8E%A5%E8%A7%A6%E5%88%B0%E7%9A%84JSON/" class="cy_cmt_count" data-xid="2016/10/18/算法与数据结构/数据结构-你接触到的JSON/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2016/10/18/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="cy_cmt_count" data-xid="2016/10/18/算法与数据结构/数据结构/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -244,14 +244,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>待删除</p>
-<p>JSON在IT的发展中及其重要！</p>
-<p>在一个大数据项目中，用户跟我提了json、debezium-json、canel-json；<br>一开始只是接触的到json的我，以为debezium-json、canel-json是什么神奇格式，然而只是debezium、canel数据同步工具处理数据的一种json格式，<br>其实主要是特定的json格式，包含特定的json字段而已</p>
-<p>cdc 数据写入kafka 场景:</p>
-<p>upsert-kakfa 正常json 数据格式:<br>– insert 操作:<br>{“name”:”魏夜游”,”remark”:”12”,”pid”:”12”,”eno”:”12”}<br>– update 操作:<br>{“name”:”魏夜游update”,”remark”:”12”,”pid”:”12”,”eno”:”12”}<br>– delete 操作: kafka 中没有数据</p>
-<p>debezium-json 数据格式:（<a target="_blank" rel="noopener" href="https://debezium.io/%EF%BC%89">https://debezium.io/）</a></p>
-<p>– insert 操作<br>{“before”:null,”after”:{“id”:194,”code_value”:”value”,”name”:”value”,”remark”:”remark”,”pid”:”xxx”},”op”:”c”}<br>– update 操作<br>{“before”:{“id”:5,”code_value”:null,”name”:”宋六”,”remark”:”法国”,”pid”:null},”after”:null,”op”:”d”}<br>{“before”:null,”after”:{“id”:5,”code_value”:null,”name”:”陈平安”,”remark”:”法国”,”pid”:null},”op”:”c”}<br>– delete 操作<br>{“before”:{“id”:4,”code_value”:null,”name”:”赵四”,”remark”:”意大利”,”pid”:null},”after”:null,”op”:”d”}</p>
-<p>changelog-json 数据格式:<br>– insert 操作<br>{“data”:{“id”:548,”code_value”:”value”,”name”:”value”,”remark”:”value”,”pid”:”xx”},”op”:”+I”}<br>– 更新操作<br>{“data”:{“id”:6,”code_value”:null,”name”:”钱七”,”remark”:”西班牙”,”pid”:null},”op”:”-U”}<br>{“data”:{“id”:6,”code_value”:null,”name”:”陈平安”,”remark”:”西班牙”,”pid”:null},”op”:”+U”}<br>– 删除操作<br>{“data”:{“id”:7,”code_value”:null,”name”:”FLINK”,”remark”:”flink”,”pid”:null},”op”:”-D”}</p>
+          <p>程序=算法+数据结构</p>
 
       
     </div>
