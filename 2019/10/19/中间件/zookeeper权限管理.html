@@ -1,0 +1,78 @@
+<hr>
+<p>title: zookeeper集群搭建<br>tags:</p>
+<ul>
+<li>zookeeper</li>
+<li>kafka<br>categories:</li>
+<li>大数据<br>toc: true<br>date: 2019/10/19 20:18:18</li>
+</ul>
+<hr>
+<p>肯定要学习zookeeper，这IT的动物那么多，怎么能少了zookeeper呢！</p>
+<p>确实应该多去了解zookeeper，zookeeper在微服务、大数据中起着重要的角色！</p>
+<h1 id="zookeeper权限管理"><a href="#zookeeper权限管理" class="headerlink" title="zookeeper权限管理"></a>zookeeper权限管理</h1><p>大部分场景我们使用zookeeper做注册中心，其核心原理是管理一个树节点，那么如果每一个用户都可以进行连接创建，如果是生产环境显然这样安全性很低；</p>
+<p>zookeeper类似于文件系统，client可以创建、更新、删除节点。但是如何做到节点的权限控制呢，zookeeper提供了access control list访问控制列表。ACL 权限可以针对节点设置相关读写等权限，保障数据安全性。permissions 可以指定不同的权限范围及角色。</p>
+<p>那么接下来将介绍一下zk的SASL认证</p>
+<p>详细可参考：<a href="https://www.cnblogs.com/jkin/p/14778342.html">https://www.cnblogs.com/jkin/p/14778342.html</a></p>
+<h2 id="权限控制-ACL"><a href="#权限控制-ACL" class="headerlink" title="权限控制 ACL"></a>权限控制 ACL</h2><p>ACL特性</p>
+<p>zookeeper的权限控制是基于每个znode节点的，需要对每个节点设置权限<br>每个znode支持多种权限控制方案和多个权限<br>子节点不会继承父节点的权限，客户端无权访问某节点，但可能可以访问它的子节点</p>
+<p>ACL权限控制，通过[scheme: id : permissions]来构成权限列表。</p>
+<p>权限模式（schema）：授权的策略，采用的某种权限机制，包括 world、auth、digest、ip、super 几种。<br>授权对象（id）：授权的对象，代表允许访问的用户<br>权限（permission）：授予的权限，由 cdrwa 组成，其中每个字母代表支持不同权限， 创建权限 create(c)、删除权限 delete(d)、读权限 read(r)、写权限 write(w)、管理权限admin(a)。</p>
+<ul>
+<li><p>cdrwa</p>
+<p>create: 你可以创建子节点。</p>
+<p>read: 你可以获取节点数据以及当前节点的子节点列表。</p>
+<p>write: 你可以为节点设置数据。</p>
+<p>delete: 你可以删除子节点。</p>
+<p>admin: 可以为节点设置权限</p>
+</li>
+</ul>
+<h1 id="漏洞描述（问题）"><a href="#漏洞描述（问题）" class="headerlink" title="漏洞描述（问题）"></a>漏洞描述（问题）</h1><p>ZooKeeper 未授权访问【原理扫描】 在通常情况下，zookeeper允许未经授权的访问 为ZooKeeper配置相应的访问权限。</p>
+<p>今天遇到zk操作异常问题（kafka创建topic失败）<br>一开始以为是kerberos认证失败问题，后面排查确实也是认证问题，原因是是zk开启了SASL认证</p>
+<p>执行Kafka Topic创建操作，发现无法创建提示NoAuthException</p>
+<p>可能原因<br>用户不属于kafkaadmin组，Kafka提供安全访问接口，kafkaamdin组用户才可以进行topic删除操作。</p>
+<p>原因分析<br>1、使用客户端命令，打印NoAuthException异常。</p>
+<p>2、通过客户端命令klist查询当前认证用户：</p>
+<p>3、通过命令id查询用户组信息。</p>
+<p><a href="https://support.huaweicloud.com/trouble-mrs/mrs_03_0121.html">https://support.huaweicloud.com/trouble-mrs/mrs_03_0121.html</a></p>
+<h2 id="排查步骤"><a href="#排查步骤" class="headerlink" title="排查步骤"></a>排查步骤</h2><p>通过kafka客户端连接kafka创建topic，果然客户端创建失败，</p>
+<p>提示Error while executing topic command org.apache.zookeeper.KeeperException$NoAuthException: KeeperErrorCode = NoAuth for /config/topics</p>
+<p>通过zk客户端连接zk</p>
+<p>尝试创建查看和创建节点，发现zk节点没有创建权限，</p>
+<p>后面通过getacl /nodeName 查看权限，果然普通用户只有查看权限，通过认证的用户有全部操作权限</p>
+<p>最后需要应用集成对zk的kerberos认证</p>
+<h1 id="ZK实现SASL认证-Kafka连接ZK"><a href="#ZK实现SASL认证-Kafka连接ZK" class="headerlink" title="ZK实现SASL认证+Kafka连接ZK"></a>ZK实现SASL认证+Kafka连接ZK</h1><p>（略）可参考一下链接</p>
+<p><a href="https://blog.csdn.net/mosaicwang/article/details/111748283">https://blog.csdn.net/mosaicwang/article/details/111748283</a></p>
+<p><a href="https://blog.csdn.net/sdksdk0/article/details/95336382">https://blog.csdn.net/sdksdk0/article/details/95336382</a></p>
+<h1 id="命令操作"><a href="#命令操作" class="headerlink" title="命令操作"></a>命令操作</h1><pre><code class="shell"># kafka客户端单机版创建topic
+kafka-topics.sh --create --zookeeper hadoop-001:2181 --replication-factor 3 --partitions 1 --topic first
+
+
+# kafka客户端连接集群创建topic
+kafka-topics --create --zookeeper master01-host:2181,master02-host:2181,master03-host:2181/kafka --replication-factor 3 --partitions 1 --topic first01 
+
+# 查看topic
+kafka-topics.sh --list --zookeeper hadoop-001:2181
+
+#连接zk
+./zkCli.sh -server master01-host:2181,master02-host:2181,master03-host:2181/kafka
+
+#查看该节点下的子节点
+ls /
+ls /zk_test
+#创建znode
+create [-s] [-e] path data acl
+-s：创建的是带序列号的节点，序列号用0填充节点路径。
+-e：创建的是临时节点。
+path：znode的路径，ZooKeeper中没有相对路径，所有路径都必须以&#39;/&#39;开头。
+data：znode携带的数据。
+acl：这个节点的ACL（权限）。
+
+create /zk_test mydata1
+
+#查看节点ACL权限
+getacl /nodename
+#查看目标节点的Acl
+getAcl /
+
+#设置ACL（digest方式）
+setAcl / digest:zk_admin:ohtM2mRqgIWcdWOUvA6Cc9lUQrY=:cdrwa
+</code></pre>

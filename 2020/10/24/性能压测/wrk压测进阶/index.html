@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="以下主要记录wrk由浅到深进行性能压测 1、首先，明确接口三要素 123地址：http:&#x2F;&#x2F;url请求方式：get&#x2F;post&#x2F;put&#x2F;delete参数：&amp;#123;&amp;#125;  2、切换进入wrk根目录#实战##wrk简单压测（一条命令，Get请求）最简单的压力测试示例，get请求，固定url固定参数 总共是12个线程,100个连接(不是一个线程对应一个连接) 1wrk -t12 -c100 -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wrk压测进阶">
+<meta property="og:url" content="http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="以下主要记录wrk由浅到深进行性能压测 1、首先，明确接口三要素 123地址：http:&#x2F;&#x2F;url请求方式：get&#x2F;post&#x2F;put&#x2F;delete参数：&amp;#123;&amp;#125;  2、切换进入wrk根目录#实战##wrk简单压测（一条命令，Get请求）最简单的压力测试示例，get请求，固定url固定参数 总共是12个线程,100个连接(不是一个线程对应一个连接) 1wrk -t12 -c100 -">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-24T13:22:22.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.829Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="性能压测">
+<meta property="article:tag" content="wrk">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>wrk压测进阶 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wrk压测进阶
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-24 21:22:22" itemprop="dateCreated datePublished" datetime="2020-10-24T21:22:22+08:00">2020-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">性能压测</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2020/10/24/性能压测/wrk压测进阶/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>以下主要记录wrk由浅到深进行性能压测</p>
+<p>1、首先，明确接口三要素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">地址：http://url</span><br><span class="line">请求方式：get/post/put/delete</span><br><span class="line">参数：&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、切换进入wrk根目录<br>#实战<br>##wrk简单压测（一条命令，Get请求）<br>最简单的压力测试示例，get请求，固定url固定参数</p>
+<p>总共是12个线程,100个连接(不是一个线程对应一个连接)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c100 -d30s http://www.baidu.com  </span><br></pre></td></tr></table></figure>
+<p>如果想看看响应时间的分布,可以增加–latency:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c100 -d30s --latency http://www.baidu.com </span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ac185e01cc30">https://www.jianshu.com/p/ac185e01cc30</a></p>
+<p>##wrk中Post接口测试（读取lua文件）</p>
+<p>##wrk外部参数压测（读取外部lua）<br>如下差不多</p>
+<p>##wrk发送随机参数-（get）</p>
+<p>执行命令为  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t5 -c10 -d 1s -T5s --latency -s test1.lua  http://www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>test1.lua </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request = function()</span><br><span class="line">num = math.random(1000,9999)</span><br><span class="line">   path = &quot;/test.html?t=&quot; .. num</span><br><span class="line">   return wrk.format(&quot;GET&quot;, path)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>##wrk动态参数压测</p>
+<ol>
+<li>可以通过lua脚本生成动态参数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">loginmap = &#123;&#125;</span><br><span class="line">counter = 0</span><br><span class="line">--初始化方法</span><br><span class="line">function init(args)</span><br><span class="line">--循环遍历生成测试数据</span><br><span class="line">        counter = 0</span><br><span class="line">		local test = &#x27;&#123;&quot;activityPage&quot;: &quot;cdsy&quot;,&quot;distributorRegion&quot;:  &quot;北京市&quot;,&quot;driveRegion&quot;: &quot;code1,code2,code3&quot;,&quot;models&quot;: &quot;CMYHV,ALPHV,WLDHV&quot;,&quot;phone&quot;: &quot;13800138000&quot;,&quot;userId&quot;: 123456&#125;&#x27;</span><br><span class="line">		for i=1000000,1,-1 do</span><br><span class="line">			local data = &#x27;&#123;&quot;activityPage&quot;: &quot;cdsy&quot;,&quot;distributorRegion&quot;:  &quot;北京市&quot;,&quot;driveRegion&quot;: &quot;code1,code2,code3&quot;,&quot;models&quot;: &quot;CMYHV,ALPHV,WLDHV&quot;,&quot;phone&quot;: &quot;13800138000&quot;,&quot;userId&quot;: &#x27;</span><br><span class="line">			data=data .. i .. &#x27;&#125;&#x27;;</span><br><span class="line">			--print(data)</span><br><span class="line">			loginmap[counter] = data</span><br><span class="line">		    print(i)</span><br><span class="line">			counter = counter + 1</span><br><span class="line">		end</span><br><span class="line">		counter = 0</span><br><span class="line">end</span><br><span class="line">--执行的主方法</span><br><span class="line">request = function()</span><br><span class="line">        local body1 = &#x27;[&#123;&quot;layerDefinitionVersion&quot;:&quot;V1.0.0&quot;,&quot;layerName&quot;:&quot;poi&quot;,&quot;partitionNames&quot;:[&#123;&#x27;</span><br><span class="line">        local body2 = &#x27;&#125;]&#125;]&#x27;</span><br><span class="line">        print(counter)</span><br><span class="line">        print(&quot;长度：&quot;,table.getn(loginmap))</span><br><span class="line">        counter = counter+1</span><br><span class="line">        print(&quot;++:&quot;,counter)</span><br><span class="line">        if( counter &lt; 10 )</span><br><span class="line">        then</span><br><span class="line">                parms = loginmap[counter-1]</span><br><span class="line">				print(&quot;++++++++++++++++++++++++++++++++++++++++++&quot;)</span><br><span class="line">				print(parms)</span><br><span class="line">				print(&quot;++++++++++++++++++++++++++++++++++++++++++&quot;)</span><br><span class="line">      --        print(parms)</span><br><span class="line">      --接口地址后面可以配置多个参数</span><br><span class="line">                path = &quot;/api/app/activity/query?productVersion=latest&quot;</span><br><span class="line">                method = &quot;POST&quot;</span><br><span class="line">                wrk.headers[&quot;Content-Type&quot;] = &quot;application/json&quot;</span><br><span class="line">                wrk.headers[&quot;clientId&quot;] = &quot;103&quot;</span><br><span class="line">                wrk.headers[&quot;orgId&quot;] = &quot;1&quot;</span><br><span class="line">                return  wrk.format(method,path,wrk.headers,parms)</span><br><span class="line">        end</span><br><span class="line">        print(&quot;countera 的值为:并结束请求&quot;, counter); --日志打印</span><br><span class="line">end</span><br><span class="line"> </span><br><span class="line">--接口返回值设置并打印</span><br><span class="line">a=1</span><br><span class="line">function response(status, headers, body)</span><br><span class="line">   if(true)  -- 执行的每一次方法都打印返回值</span><br><span class="line">   then</span><br><span class="line">--           a=2</span><br><span class="line">          print(body)</span><br><span class="line">      end</span><br><span class="line">        print(status) --打印状态</span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>可以通过lua读取外部文件进行作为动态参数 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">待完善</span><br></pre></td></tr></table></figure></li>
+<li>执行测试<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wrk -t1 -c1 -d1s -s ./startpost.lua --latency http://localhost:8998</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>#wrk参数设定<br>wrk参数主要根据机器系统参数相关，主要通过调整线程数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-t 线程数量</span><br><span class="line">-c 保持的连接数</span><br><span class="line">-d 持续时间</span><br><span class="line">-s 执行自定义脚本</span><br><span class="line">–latency 打印统计数据</span><br><span class="line">–timeout 超时时间</span><br></pre></td></tr></table></figure>
+
+<p>#结果查看（参考网上说明）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@jerrik /]# wrk -t12 -c100 -d30s http://www.baidu.com  </span><br><span class="line">Running 30s test @ http://www.baidu.com</span><br><span class="line">  12 threads and 100 connections</span><br><span class="line">  Thread Stats   Avg      Stdev     Max   +/- Stdev</span><br><span class="line">    Latency   211.76ms  304.92ms   1.97s    88.17%</span><br><span class="line">    Req/Sec    72.93     68.72   797.00     90.97%</span><br><span class="line">  23725 requests in 30.05s, 347.47MB read</span><br><span class="line">  Socket errors: connect 0, read 48, write 0, timeout 50</span><br><span class="line">Requests/sec:    789.57</span><br><span class="line">Transfer/sec:     11.56MB</span><br><span class="line">[root@jerrik /]# </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">12 threads and 100 connections:</span><br><span class="line">总共是12个线程,100个连接(不是一个线程对应一个连接)</span><br><span class="line">latency和Req/Sec:</span><br><span class="line">代表单个线程的统计数据,latency代表延迟时间,Req/Sec代表单个线程每秒完成的请求数，他们都具有平均值, 标准偏差, 最大值, 正负一个标准差占比。一般我们来说我们主要关注平均值和最大值. 标准差如果太大说明样本本身离散程度比较高. 有可能系统性能波动很大.</span><br><span class="line">23725 requests in 30.05s, 347.47MB read</span><br><span class="line">在30秒之内总共有23725个请求,总共读取347.47MB的数据</span><br><span class="line">Socket errors: connect 0, read 48, write 0, timeout 50</span><br><span class="line">总共有48个读错误,50个超时.</span><br><span class="line">Requests/sec和Transfer/sec</span><br><span class="line"></span><br><span class="line">作者：jerrik</span><br><span class="line">链接：https://www.jianshu.com/p/ac185e01cc30</span><br><span class="line">来源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+
+<p>#总结<br>总体wrk压测还是比较简单的，主要是先清楚简单的测试命令，然后在通过lua脚本实现post请求压测，后续加强性能压测。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/" rel="tag"># 性能压测</a>
+              <a href="/tags/wrk/" rel="tag"># wrk</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" rel="prev" title="Arthas开源Java诊断工具">
+      <i class="fa fa-chevron-left"></i> Arthas开源Java诊断工具
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/29/flink_space/flink%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="next" title="Flink开发实战">
+      Flink开发实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<hr>
+<p>title: EFK实际应用案例<br>tags:</p>
+<ul>
+<li>大数据</li>
+<li>elasticsearch<br>categories:</li>
+<li>大数据<br>toc: true<br>date: 2018/1/19 0:18:18</li>
+</ul>
+<hr>
+<p>这里讲的是EFK（Elasticsearch、Filebeat、kibana）<br>其实很早及接触到ELK了，但一直没有真正在公司能用到用起来，因为如果是一个项目的日期其实通过简单的日志系统可以采集，或者通过日志文件也可以管理；<br>EFK主要作用是统一收集多个业务域下不同项目的多个节点的应用日志，这就涉及的日志范围及数量就不简单了，需要庞大的日志储存，<br>这里还涉及专业的运维团队实时监控(一般可设置保留10天，必要时可以申请延长)。这才是真正的微服务日志统一管理。</p>
+<h1 id="EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集"><a href="#EFK（Elasticsearch、Filebeat、kibana）-SpringBoot日志收集" class="headerlink" title="EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集"></a>EFK（Elasticsearch、Filebeat、kibana）+SpringBoot日志收集</h1><h1 id="日志的采集及处理"><a href="#日志的采集及处理" class="headerlink" title="日志的采集及处理"></a>日志的采集及处理</h1><p>如何将各个服务的日志进行采集到EFK呢？<br>-&gt;日志模块基于logback的同步实现，日志打印到容器控制台，通过EFK统一收集和查阅。</p>
+<p>如何将通一个服务多个节点的数据进行有序合并呢？不合并有影响吗？<br>如何根据不同服务进行分类及索引管理呢？<br>日志接入时的级别统一规范化</p>

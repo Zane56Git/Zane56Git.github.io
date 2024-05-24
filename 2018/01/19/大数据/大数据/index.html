@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="大数据 所谓大数据，即是大的数据处理，我们得清楚大数据来源，数据永远来源于实际业务场景，引发的大数据缘由如下： 历史数据累积，进一步对其分析处理；并发数据，抢红包、抢车票、网络攻击等大数据分析；高业务量场景，滴滴、地图分析、千人千面；。。。。 综上所述，处理传统业务系统的同学总会觉得接触不到数据，其实大数据同样来源于业务数据。 例如，千人千面系统，也是基于用户实际的业务场景，对用户操作行为进行埋点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据">
+<meta property="og:url" content="http://example.com/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="大数据 所谓大数据，即是大的数据处理，我们得清楚大数据来源，数据永远来源于实际业务场景，引发的大数据缘由如下： 历史数据累积，进一步对其分析处理；并发数据，抢红包、抢车票、网络攻击等大数据分析；高业务量场景，滴滴、地图分析、千人千面；。。。。 综上所述，处理传统业务系统的同学总会觉得接触不到数据，其实大数据同样来源于业务数据。 例如，千人千面系统，也是基于用户实际的业务场景，对用户操作行为进行埋点">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-01-18T16:18:18.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.686Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>大数据 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/01/19/大数据/大数据/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>大数据</p>
+<p>所谓大数据，即是大的数据处理，我们得清楚大数据来源，数据永远来源于实际业务场景，引发的大数据缘由如下：</p>
+<p>历史数据累积，进一步对其分析处理；<br>并发数据，抢红包、抢车票、网络攻击等大数据分析；<br>高业务量场景，滴滴、地图分析、千人千面；<br>。。。。</p>
+<p>综上所述，处理传统业务系统的同学总会觉得接触不到数据，其实大数据同样来源于业务数据。</p>
+<p>例如，千人千面系统，也是基于用户实际的业务场景，对用户操作行为进行埋点数据存储，当用户多或日积月累用户行为数据较多了便能对其进行分析处理。</p>
+<p>从而形成了大数据的说法。大数据最终也是回归到实际业务场景，例如千人千面推荐系统，根据用户行为以T+1生成用户推荐数据，这些推荐数据交由给业务系统反显给用户。</p>
+<p>刚才说到T+1作为离线数据处理，如果是实时计算一般都是针对海量数据进行的，一般要求为秒级。实时计算主要分为两块:数据的实时入库、数据的实时计算。</p>
+<p>日志采集</p>
+<p>数据同步（多数据源同步、入仓出仓、临界点数据补偿）</p>
+<p>离线数据开发</p>
+<p>实时计算</p>
+<p>数据服务（openApi）</p>
+<p>数据挖掘（算法推荐）</p>
+<ul>
+<li>数据产品（四大环节）：<br>数据消洗 存储官理 展示分析 挖掘应用</li>
+<li>产品经理类型：<br>应用型、策略型、平台型</li>
+</ul>
+<h1 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h1><p>大数据真的有想象的那么大那么可怕吗；<br>其实接触大数据是从尊重、了解单条数据开始，当你开始注意一条数据的大小，所占内存空间，说明你已经接触大数据了，最起码你开始计算数据了。</p>
+<p>大数据是结构化、非结构化以及众多不同格式的原始数据，相对传统数据管理其实是一种模式的转变<br>Spa</p>
+<h1 id="数据仓库：为企业决策提供数据支撑"><a href="#数据仓库：为企业决策提供数据支撑" class="headerlink" title="数据仓库：为企业决策提供数据支撑"></a>数据仓库：为企业决策提供数据支撑</h1><p>【【尚硅谷】2021新版电商数仓V4.0丨大数据数据仓库项目实战-哔哩哔哩】<a target="_blank" rel="noopener" href="https://b23.tv/4FLzcKK">https://b23.tv/4FLzcKK</a></p>
+<p>（存储、分析、计算）</p>
+<p>sqoop相当于多个hadoop组成</p>
+<p>数据分层：ODS（原始数据层）、DWD（明细数据层）、DWM（数据主题层）、DWS（服务数据层）、ADS（数据应用层）<br>[]<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1dd894e5bb62">https://www.jianshu.com/p/1dd894e5bb62</a><br>ODS-DWD-DWS-DWT-ADS</p>
+<p>以上交由全流程调度器进行推进</p>
+<h1 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h1><ol>
+<li>用户行为数据采集平台搭建</li>
+<li>业务数据采集平台搭建</li>
+<li>数据仓库纬度建模</li>
+<li>指标梳理（分析、设备、会员、商品、地区、活动等电商核心主题）</li>
+<li>采用即席查询工具，指标分析</li>
+<li>集群性能进行监控，异常告警</li>
+<li>元数据管理</li>
+<li>质量监控</li>
+<li>权限管理</li>
+</ol>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>考虑因素：数据量大小、业务需求、兴业内经验、技术成熟度、开发维护成本、总成本预算</p>
+<p>数据采集传输：Flume、Kafka、Sqoop、Logstash、DataX<br>数据存储：Mysql、HDFS、HBase、Redis、MongoDB<br>数据计算：Hive、Tez、Spark、Flink、Strom<br>数据查询：Presto、Kylin(银河麒麟)、Impala、Druid、ClickHouse、Doris<br>数据可视化：Echarts、Superset、QuickBI、DataV<br>任务调度：Azkaban、Oozie、DolphinScheduler、Airflow<br>集群监控：Zabbix、Prometheus<br>元数据管理：Atlas<br>权限管理：Ranger、Sentry（被APCHE除名了）</p>
+<p>数据库：mysql、kylin、doris、clickhouse</p>
+<p>分析引擎：Hologres</p>
+<p>OLTP、OLAP</p>
+<h1 id="数仓理论"><a href="#数仓理论" class="headerlink" title="数仓理论"></a>数仓理论</h1><h2 id="范式理论"><a href="#范式理论" class="headerlink" title="范式理论"></a>范式理论</h2><h2 id="关系建模与维度建模"><a href="#关系建模与维度建模" class="headerlink" title="关系建模与维度建模"></a>关系建模与维度建模</h2><p>维度建模<br>事实表（主表）和维度表</p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040367293">https://segmentfault.com/a/1190000040367293</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/" rel="prev" title="数据仓库-从入门到进阶">
+      <i class="fa fa-chevron-left"></i> 数据仓库-从入门到进阶
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-hbase%E5%85%A5%E9%97%A8/" rel="next" title="hbase集群搭建">
+      hbase集群搭建 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">大数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%EF%BC%9A%E4%B8%BA%E4%BC%81%E4%B8%9A%E5%86%B3%E7%AD%96%E6%8F%90%E4%BE%9B%E6%95%B0%E6%8D%AE%E6%94%AF%E6%92%91"><span class="nav-number">2.</span> <span class="nav-text">数据仓库：为企业决策提供数据支撑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">项目需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E4%BB%93%E7%90%86%E8%AE%BA"><span class="nav-number">5.</span> <span class="nav-text">数仓理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%BC%8F%E7%90%86%E8%AE%BA"><span class="nav-number">5.1.</span> <span class="nav-text">范式理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%BB%BA%E6%A8%A1%E4%B8%8E%E7%BB%B4%E5%BA%A6%E5%BB%BA%E6%A8%A1"><span class="nav-number">5.2.</span> <span class="nav-text">关系建模与维度建模</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

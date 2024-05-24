@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="JVM实战对于后端程序员，特别是 Java 程序员来讲，排查线上问题是不可避免的。各种 CPU 飚高，内存溢出，频繁 GC 等等 （文档待规整） 查看GC日志jar启动命令（输出GC日志）java -jar .\app.jar -verbose:gc -XX:+PrintGCDetails -XX:+PrintHeapAtGC -Xloggc:gc-app.log 例如，查询虚拟机的运行状态信息，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM实战">
+<meta property="og:url" content="http://example.com/2016/03/16/java_space/jvm%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="JVM实战对于后端程序员，特别是 Java 程序员来讲，排查线上问题是不可避免的。各种 CPU 飚高，内存溢出，频繁 GC 等等 （文档待规整） 查看GC日志jar启动命令（输出GC日志）java -jar .\app.jar -verbose:gc -XX:+PrintGCDetails -XX:+PrintHeapAtGC -Xloggc:gc-app.log 例如，查询虚拟机的运行状态信息，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-03-16T11:21:26.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.541Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2016/03/16/java_space/jvm%E5%AE%9E%E6%88%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JVM实战 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/03/16/java_space/jvm%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM实战
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2016-03-16T19:21:26+08:00">2016-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2016/03/16/java_space/jvm%E5%AE%9E%E6%88%98/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/03/16/java_space/jvm实战/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JVM实战"><a href="#JVM实战" class="headerlink" title="JVM实战"></a>JVM实战</h1><p>对于后端程序员，特别是 Java 程序员来讲，排查线上问题是不可避免的。各种 CPU 飚高，内存溢出，频繁 GC 等等</p>
+<p>（文档待规整）</p>
+<h2 id="查看GC日志"><a href="#查看GC日志" class="headerlink" title="查看GC日志"></a>查看GC日志</h2><p>jar启动命令（输出GC日志）<br>java -jar .\app.jar -verbose:gc -XX:+PrintGCDetails -XX:+PrintHeapAtGC -Xloggc:gc-app.log</p>
+<p>例如，查询虚拟机的运行状态信息，每隔1000ms，总共5次。<br>jstat -gc 5524 1000 5</p>
+<p>windows可通过jvisualvm.exe查看java执行情况</p>
+<p>GC运行日志：<br>Java HotSpot(TM) 64-Bit Server VM (25.40-b25) for windows-amd64 JRE (1.8.0_40-b26), built on Mar  7 2015 13:51:59 by “java_re” with MS VC++ 10.0 (VS2010)<br>Memory: 4k page, physical 16618764k(5477364k free), swap 34444556k(15077248k free)<br>CommandLine flags: -XX:InitialHeapSize=265900224 -XX:MaxHeapSize=4254403584 -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintHeapAtGC -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:+UseParallelGC<br>Heap<br> PSYoungGen      total 75776K, used 6503K [0x000000076b780000, 0x0000000770c00000, 0x00000007c0000000)<br>  eden space 65024K, 10% used [0x000000076b780000,0x000000076bdd9c18,0x000000076f700000)<br>  from space 10752K, 0% used [0x0000000770180000,0x0000000770180000,0x0000000770c00000)<br>  to   space 10752K, 0% used [0x000000076f700000,0x000000076f700000,0x0000000770180000)<br> ParOldGen       total 173568K, used 0K [0x00000006c2600000, 0x00000006ccf80000, 0x000000076b780000)<br>  object space 173568K, 0% used [0x00000006c2600000,0x00000006c2600000,0x00000006ccf80000)<br> Metaspace       used 3358K, capacity 4554K, committed 4864K, reserved 1056768K<br>  class space    used 376K, capacity 386K, committed 512K, reserved 1048576K</p>
+<h2 id="导出Dump文件"><a href="#导出Dump文件" class="headerlink" title="导出Dump文件#"></a>导出Dump文件#</h2><h2 id="使用jstack精确找到异常代码"><a href="#使用jstack精确找到异常代码" class="headerlink" title="使用jstack精确找到异常代码"></a>使用jstack精确找到异常代码</h2><p>1、找到CPU利用率持续比较高的进程，获取进程号，此处PID为3036<br>命令：<br>top</p>
+<p>2、找到上述进程中，CPU利用率比较高的线程号TID（十进制数）,此处为3046<br>命令：<br>ps p 5262 -L -o pcpu,pid,tid,time,tname,cmd</p>
+<p>3、将获取的线程号（十进制数）转换成十六进制,此处为0xb46</p>
+<p>命令：<br>printf “%x\n”  5433</p>
+<p>查看进程PID为5433中</p>
+<p>4、nid为0xb46的线程信息。<br>命令：<br>jstack -l 3036</p>
+<p>参考<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/4f34706e3ec075e387b56df2.html?tdsourcetag=s_pctim_aiomsg&amp;qq-pf-to=pcqq.c2c">https://jingyan.baidu.com/article/4f34706e3ec075e387b56df2.html?tdsourcetag=s_pctim_aiomsg&amp;qq-pf-to=pcqq.c2c</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bolg_hero/article/details/53126744">https://blog.csdn.net/bolg_hero/article/details/53126744</a></p>
+<p>================jvm cpu过高排查实战============9205、top -Hp  9798</p>
+<p>1、top找出cpu高的java进程号9592</p>
+<p>2、top -Hp  9592查看cpu占用time最高的线程编号28178</p>
+<p>3、执行 printf “%x\n” 28178 获取线程十六进制地址6e12 （十六进制一定要小写）</p>
+<p>4、执行 jstack 9592（pid）|grep  -10 6e12（线程十六进制号）</p>
+<p> jstack 9205（pid）|grep  -10 28fa<br>注意:需要切换到运行时的用户环境<br>jstack 2576 | grep -A 10 a10</p>
+<p>-Xms4096m -Xmx4096m -XX:PermSize=1024m -XX:MaxPermSize=1024m</p>
+<p>-Dfile.encoding=UTF-8 -Xms2048m -Xmx2048m -XX:PermSize=256m -XX:MaxPermSize=512m</p>
+<h2 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h2><p>jconsole远程监控linux上的springBoot服务<br>注意：关闭防火墙或者放行12312端口<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/myfmyfmyfmyf/article/details/88288388">https://blog.csdn.net/myfmyfmyfmyf/article/details/88288388</a></p>
+<p>nohup java -Xms128m -Xmx256m  -Djava.rmi.server.hostname=49.233.182.8 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=12312 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -jar demo-0.0.1-SNAPSHOT.jar &gt; nohup_demo-0.0.1-SNAPSHOT.out 2&gt;&amp;1 &amp;</p>
+<h2 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h2><p>阿里重磅开源性能测试神器，性能监控分析工具 Arthas<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/407220">https://cloud.tencent.com/developer/news/407220</a><br><a target="_blank" rel="noopener" href="https://alibaba.github.io/arthas/quick-start.html">https://alibaba.github.io/arthas/quick-start.html</a></p>
+<h2 id="sysstat"><a href="#sysstat" class="headerlink" title="sysstat"></a>sysstat</h2><p>sar性能监测工具<br> yum install sysstat   </p>
+<p>sar -u 1 3<br>sar -r 1 3</p>
+<p>pidstat<br>重点：<br>jps</p>
+<p>jps -m -l<br>jps -m -l -v<br>首先通过jps找到java程序pid</p>
+<p>pid查看端口<br>netstat -nap | grep 4500</p>
+<p>导出java应用线程堆栈4500为pid<br>jstack -l 4500 &gt;/tmp/t.txt<br>可查看是否存在死锁</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jilodream/p/5107785.html">https://www.cnblogs.com/jilodream/p/5107785.html</a></p>
+<p>Jstack -l PID &gt;&gt; 123.txt</p>
+<p>（需要配置环境jstack变量，也可切换到jstcak路径再执行）<br>Jstack -l 14016&gt;&gt; 123.txt</p>
+<h2 id="dump分析"><a href="#dump分析" class="headerlink" title="dump分析"></a>dump分析</h2><ul>
+<li>jps</li>
+</ul>
+<p>JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。</p>
+<ul>
+<li>jstat</li>
+</ul>
+<p>jstat(JVM statistics Monitoring)是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译(Just In Time Compiler, 即时编译器)等运行数据。</p>
+<ul>
+<li>jhat</li>
+</ul>
+<p>jhat(JVM Heap Analysis Tool)命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看。在此要注意，一般不会直接在服务器上进行分析，因为jhat是一个耗时并且耗费硬件资源的过程，一般把服务器生成的dump文件复制到本地或其他机器上进行分析。<br>PS C:\Program Files\Java\jdk1.8.0_40\bin&gt; .\jhat.exe  -J-Xmx512m C:\Users\Admin\Desktop\4098xxx.dump<br><a target="_blank" rel="noopener" href="http://localhost:7000/">http://localhost:7000/</a></p>
+<p>dump工具：Eclipse Memory</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JAVA/" rel="tag"># JAVA</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/08/28/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99%E5%88%86%E7%B1%BB/" rel="prev" title="常用网站分类">
+      <i class="fa fa-chevron-left"></i> 常用网站分类
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/16/spring_space/Spring/" rel="next" title="Spring">
+      Spring <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E5%AE%9E%E6%88%98"><span class="nav-number">1.</span> <span class="nav-text">JVM实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BGC%E6%97%A5%E5%BF%97"><span class="nav-number">1.1.</span> <span class="nav-text">查看GC日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%87%BADump%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">导出Dump文件#</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8jstack%E7%B2%BE%E7%A1%AE%E6%89%BE%E5%88%B0%E5%BC%82%E5%B8%B8%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">使用jstack精确找到异常代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jconsole"><span class="nav-number">1.4.</span> <span class="nav-text">jconsole</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arthas"><span class="nav-number">1.5.</span> <span class="nav-text">Arthas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sysstat"><span class="nav-number">1.6.</span> <span class="nav-text">sysstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dump%E5%88%86%E6%9E%90"><span class="nav-number">1.7.</span> <span class="nav-text">dump分析</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

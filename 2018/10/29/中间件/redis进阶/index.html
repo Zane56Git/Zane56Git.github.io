@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="进阶 查看全部key数量 dbsize info memory redis 集群清除全部数据flushall 集群监控https:&#x2F;&#x2F;blog.51cto.com&#x2F;xiangcun168&#x2F;1923302 redis数据倾斜解决方案https:&#x2F;&#x2F;www.cnblogs.com&#x2F;foreverlearnxzw&#x2F;p&#x2F;14001896.html 一次redis调优——连接池优化https:&#x2F;&#x2F;www.p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis进阶">
+<meta property="og:url" content="http://example.com/2018/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="进阶 查看全部key数量 dbsize info memory redis 集群清除全部数据flushall 集群监控https:&#x2F;&#x2F;blog.51cto.com&#x2F;xiangcun168&#x2F;1923302 redis数据倾斜解决方案https:&#x2F;&#x2F;www.cnblogs.com&#x2F;foreverlearnxzw&#x2F;p&#x2F;14001896.html 一次redis调优——连接池优化https:&#x2F;&#x2F;www.p">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-29T12:11:22.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.593Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2018/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis%E8%BF%9B%E9%98%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>redis进阶 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis%E8%BF%9B%E9%98%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          redis进阶
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-29 20:11:22" itemprop="dateCreated datePublished" datetime="2018-10-29T20:11:22+08:00">2018-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis%E8%BF%9B%E9%98%B6/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/10/29/中间件/redis进阶/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>进阶</p>
+<p>查看全部key数量</p>
+<p>dbsize</p>
+<p>info memory</p>
+<p>redis 集群清除全部数据<br>flushall</p>
+<h1 id="集群监控"><a href="#集群监控" class="headerlink" title="集群监控"></a>集群监控</h1><p><a target="_blank" rel="noopener" href="https://blog.51cto.com/xiangcun168/1923302">https://blog.51cto.com/xiangcun168/1923302</a></p>
+<h1 id="redis数据倾斜解决方案"><a href="#redis数据倾斜解决方案" class="headerlink" title="redis数据倾斜解决方案"></a>redis数据倾斜解决方案</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/foreverlearnxzw/p/14001896.html">https://www.cnblogs.com/foreverlearnxzw/p/14001896.html</a></p>
+<p>一次redis调优——连接池优化<br><a target="_blank" rel="noopener" href="https://www.pianshen.com/article/3715107869/">https://www.pianshen.com/article/3715107869/</a></p>
+<h1 id="SpringBoot整合redis使用Lettuce客户端超时问题"><a href="#SpringBoot整合redis使用Lettuce客户端超时问题" class="headerlink" title="SpringBoot整合redis使用Lettuce客户端超时问题"></a>SpringBoot整合redis使用Lettuce客户端超时问题</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shouyaya/p/14607270.html">https://www.cnblogs.com/shouyaya/p/14607270.html</a></p>
+<h1 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h1><p>连接池在很多场景都有使用，例如数据库连接池</p>
+<p>数据库一次性访问人数有限，每次访问都会创建一个连接对象，影响效率</p>
+<p>原理</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn_shilin/article/details/109147790">https://blog.csdn.net/csdn_shilin/article/details/109147790</a></p>
+<h1 id="redis连接池调优"><a href="#redis连接池调优" class="headerlink" title="redis连接池调优"></a>redis连接池调优</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">config get maxclients</span><br><span class="line">info clients</span><br><span class="line">CLIENT LIST获取客户端列表</span><br><span class="line"></span><br><span class="line">CLIENT SETNAME    设置当前连接点redis的名称</span><br><span class="line"></span><br><span class="line">CLIENT GETNAME    查看当前连接的名称</span><br><span class="line"></span><br><span class="line">CLIENT KILL ip:port    杀死指定连接</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redis-c(devhost01:6371)&gt;info clients</span><br><span class="line">&quot;# Clients</span><br><span class="line">connected_clients:6							当前连接数</span><br><span class="line">client_recent_max_input_buffer:8		连接数峰值</span><br><span class="line">client_recent_max_output_buffer:0</span><br><span class="line">blocked_clients:0</span><br><span class="line">tracking_clients:0</span><br><span class="line">clients_in_timeout_table:0</span><br><span class="line">&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>实际连接数分析</p>
+<p>单机redis启动后，连接数为0，如果通过可视化工具打开连接到redis，则连接数为0；</p>
+<p>如果再打开命令行，则连接数+1，为2；（每打开一次命令行连接，就多一个连接）</p>
+<p>空闲连接数是指应用端占用空闲连接数</p>
+<p>最大连接数是指应用端所限制的最大连接数，并非redis服务端的连接数</p>
+<p>当应用最小连接数为2，操作时连接数最大为2</p>
+<p>集群redis启动后，一个节点 的连接数为集群主节点数-1，例如三主三从，1个主节点连接数为2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">疑惑点</span><br><span class="line">min-idle、max-idle、max-active之间没有大小约束，很容易产生误解，按道理min-idle、max-idle需小于max-active</span><br><span class="line">应用端连接数受max-active限制，max-active为2，min-idle、max-idle再大，该应用连接数也为2</span><br><span class="line"># 初始连接数=最小空闲连接数&gt;0:(最小)空闲连接数?1</span><br><span class="line"># 应用连接数&lt;=最大连接数</span><br><span class="line">单个节点，没有并发时，不会占满空闲连接数，连接1个，空闲占1个，共两个，2个节点，则为4个连接数，如果可视化工具已经连接了1个，则一共5个连接数；</span><br></pre></td></tr></table></figure>
+
+<p>实战待验证：</p>
+<p>只启动一个服务，看占用数</p>
+<h2 id="lettuce偶现Connection-reset-by-peer异常排查"><a href="#lettuce偶现Connection-reset-by-peer异常排查" class="headerlink" title="lettuce偶现Connection reset by peer异常排查"></a>lettuce偶现Connection reset by peer异常排查</h2><p>场景：多个服务，每个服务多个节点，连接同一个redis集群。</p>
+<p>查看当前连接数：info clients    </p>
+<p>查看redis最大连接数:CONFIG GET maxclients</p>
+<p>Connection reset by peer: socket write error</p>
+<p><em>①：服务器的并发连接数超过了其承载量，服务器会将其中一些连接<strong>Down</strong>掉；</em> </p>
+<p><em>②：客户关掉了浏览器，而服务器还在给客户端发送数据；</em> </p>
+<p><em>③：浏览器端按了**Stop</em></p>
+<p><a target="_blank" rel="noopener" href="https://singgel.blog.csdn.net/article/details/111608179">https://singgel.blog.csdn.net/article/details/111608179</a></p>
+<p>redis集群搭建</p>
+<p>三步</p>
+<p>1、创建挂在目录及配置文件</p>
+<p>2、docker-compose.yml</p>
+<p>3、进入容器创建集群（这一步不可少，因为docker-compose up -d只是创建了6个redis实例并没有构建成cluster集群）</p>
+<p>1、创建挂在目录及配置文件</p>
+<p>创建目录和文件、结构如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">├── docker-compose.yml</span><br><span class="line">├── redis-6371</span><br><span class="line">│   ├── conf</span><br><span class="line">│   │   └── redis.conf</span><br><span class="line">│   └── data</span><br><span class="line">├── redis-6372</span><br><span class="line">│   ├── conf</span><br><span class="line">│   │   └── redis.conf</span><br><span class="line">│   └── data</span><br><span class="line">├── redis-6373</span><br><span class="line">│   ├── conf</span><br><span class="line">│   │   └── redis.conf</span><br><span class="line">│   └── data</span><br><span class="line">├── redis-6374</span><br><span class="line">│   ├── conf</span><br><span class="line">│   │   └── redis.conf</span><br><span class="line">│   └── data</span><br><span class="line">├── redis-6375</span><br><span class="line">│   ├── conf</span><br><span class="line">│   │   └── redis.conf</span><br><span class="line">│   └── data</span><br><span class="line">└── redis-6376</span><br><span class="line">    ├── conf</span><br><span class="line">    │   └── redis.conf</span><br><span class="line">    └── data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="redis-conf-配置文件"><a href="#redis-conf-配置文件" class="headerlink" title="redis.conf 配置文件"></a>redis.conf 配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">port 6371</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes-6371.conf</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line">appendonly yes</span><br><span class="line">protected-mode no</span><br><span class="line">requirepass 1234</span><br><span class="line">masterauth 1234</span><br><span class="line">cluster-announce-ip 10.35.30.39 # 这里是宿主机IP</span><br><span class="line">cluster-announce-port 6371</span><br><span class="line">cluster-announce-bus-port 16371</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、docker-compose-配置文件"><a href="#2、docker-compose-配置文件" class="headerlink" title="2、docker-compose 配置文件"></a>2、docker-compose 配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line"></span><br><span class="line"># 定义服务，可以多个</span><br><span class="line">services:</span><br><span class="line">  redis-6371: # 服务名称</span><br><span class="line">    image: redis # 创建容器时所需的镜像</span><br><span class="line">    container_name: redis-6371 # 容器名称</span><br><span class="line">    restart: always # 容器总是重新启动</span><br><span class="line">    volumes: # 数据卷，目录挂载</span><br><span class="line">      - ./redis-6371/conf/redis.conf:/usr/local/etc/redis/redis.conf</span><br><span class="line">      - ./redis-6371/data:/data</span><br><span class="line">    ports:</span><br><span class="line">      - 6371:6371</span><br><span class="line">      - 16371:16371</span><br><span class="line">    command:</span><br><span class="line">      redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">  redis-6372:</span><br><span class="line">    image: redis</span><br><span class="line">    container_name: redis-6372</span><br><span class="line">    volumes:</span><br><span class="line">      - ./redis-6372/conf/redis.conf:/usr/local/etc/redis/redis.conf</span><br><span class="line">      - ./redis-6372/data:/data</span><br><span class="line">    ports:</span><br><span class="line">      - 6372:6372</span><br><span class="line">      - 16372:16372</span><br><span class="line">    command:</span><br><span class="line">      redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">  redis-6373:</span><br><span class="line">    image: redis</span><br><span class="line">    container_name: redis-6373</span><br><span class="line">    volumes:</span><br><span class="line">      - ./redis-6373/conf/redis.conf:/usr/local/etc/redis/redis.conf</span><br><span class="line">      - ./redis-6373/data:/data</span><br><span class="line">    ports:</span><br><span class="line">      - 6373:6373</span><br><span class="line">      - 16373:16373</span><br><span class="line">    command:</span><br><span class="line">      redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line">      </span><br><span class="line">  redis-6374:</span><br><span class="line">    image: redis</span><br><span class="line">    container_name: redis-6374</span><br><span class="line">    restart: always</span><br><span class="line">    volumes:</span><br><span class="line">      - ./redis-6374/conf/redis.conf:/usr/local/etc/redis/redis.conf</span><br><span class="line">      - ./redis-6374/data:/data</span><br><span class="line">    ports:</span><br><span class="line">      - 6374:6374</span><br><span class="line">      - 16374:16374</span><br><span class="line">    command:</span><br><span class="line">      redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">  redis-6375:</span><br><span class="line">    image: redis</span><br><span class="line">    container_name: redis-6375</span><br><span class="line">    volumes:</span><br><span class="line">      - ./redis-6375/conf/redis.conf:/usr/local/etc/redis/redis.conf</span><br><span class="line">      - ./redis-6375/data:/data</span><br><span class="line">    ports:</span><br><span class="line">      - 6375:6375</span><br><span class="line">      - 16375:16375</span><br><span class="line">    command:</span><br><span class="line">      redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">  redis-6376:</span><br><span class="line">    image: redis</span><br><span class="line">    container_name: redis-6376</span><br><span class="line">    volumes:</span><br><span class="line">      - ./redis-6376/conf/redis.conf:/usr/local/etc/redis/redis.conf</span><br><span class="line">      - ./redis-6376/data:/data</span><br><span class="line">    ports:</span><br><span class="line">      - 6376:6376</span><br><span class="line">      - 16376:16376</span><br><span class="line">    command:</span><br><span class="line">      redis-server /usr/local/etc/redis/redis.conf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编写完成后使用<code>docker-compose up -d</code>启动容器。</p>
+<p>3、进入容器，创建集群(ip为宿主机ip)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -a 1234 --cluster create ip:6371 ip:6372 ip:6373 ip:6374 ip:6375 ip:6376 --cluster-replicas 1</span><br></pre></td></tr></table></figure>
+
+<p>版权声明：本文为CSDN博主「January丶」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39340792/article/details/113766933">https://blog.csdn.net/qq_39340792/article/details/113766933</a></p>
+<p>redis弹窗控制</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903815053852679">https://juejin.cn/post/6844903815053852679</a></p>
+<h1 id="Springboot整合redis：bitmaps用法"><a href="#Springboot整合redis：bitmaps用法" class="headerlink" title="Springboot整合redis：bitmaps用法"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiehanshi/p/14140729.html">Springboot整合redis：bitmaps用法</a></h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiehanshi/p/14140729.html">https://www.cnblogs.com/jiehanshi/p/14140729.html</a></p>
+<p>一百万个用户数据</p>
+<h1 id="redis-bitmap-存放手机号"><a href="#redis-bitmap-存放手机号" class="headerlink" title="redis bitmap 存放手机号"></a>redis bitmap 存放手机号</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/932fac6b4cd6">https://www.jianshu.com/p/932fac6b4cd6</a></p>
+<p>redis bitmap 布隆过滤器</p>
+<p>核心要点：bitmap 使用了整数类型作为位移量，这样恰恰影响redis非整数数据类型的存储；</p>
+<p>那么基于bitmap布隆过滤器是如何实现非整数数据的位移量数据的呢？</p>
+<p>主要是通过计算一个元素值哈希后映射到Bitmap的多个bit上（Guava算法同理），如果对应的bit上都是true，则说明该元素存在，否则为不存在，相对于bigmap的存储，布隆过滤器无非是将一个元素哈希成多个位移值，</p>
+<p>之前的bigmap值判断只是1个元素对应一个偏移量的值</p>
+<p>现在是1个元素对应多个偏移量的值求并，</p>
+<p>java方式</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/5384697?fr=aladdin">https://baike.baidu.com/item/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/5384697?fr=aladdin</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"># redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/24/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86-%E6%95%B0%E6%8D%AE%E6%9D%83%E9%99%90/" rel="prev" title="权限管理-数据权限">
+      <i class="fa fa-chevron-left"></i> 权限管理-数据权限
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/02/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%EF%BC%88%E6%80%BB%EF%BC%89/" rel="next" title="源码分析-（总）">
+      源码分析-（总） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7"><span class="nav-number">1.</span> <span class="nav-text">集群监控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">redis数据倾斜解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot%E6%95%B4%E5%90%88redis%E4%BD%BF%E7%94%A8Lettuce%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">SpringBoot整合redis使用Lettuce客户端超时问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">4.</span> <span class="nav-text">连接池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E8%B0%83%E4%BC%98"><span class="nav-number">5.</span> <span class="nav-text">redis连接池调优</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lettuce%E5%81%B6%E7%8E%B0Connection-reset-by-peer%E5%BC%82%E5%B8%B8%E6%8E%92%E6%9F%A5"><span class="nav-number">5.1.</span> <span class="nav-text">lettuce偶现Connection reset by peer异常排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-conf-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">redis.conf 配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81docker-compose-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.3.</span> <span class="nav-text">2、docker-compose 配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Springboot%E6%95%B4%E5%90%88redis%EF%BC%9Abitmaps%E7%94%A8%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">Springboot整合redis：bitmaps用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis-bitmap-%E5%AD%98%E6%94%BE%E6%89%8B%E6%9C%BA%E5%8F%B7"><span class="nav-number">7.</span> <span class="nav-text">redis bitmap 存放手机号</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="我认为每一个程序猿都应该有一个产品的心，（这里会涉及需求分析、原型设计、前端UI）尽管不够专业，起码要知道自己做什么，了解产品基本价值，才能更好地设计及开发系统。 产品之道Balsamiq vs Sketch vs Mockplus：三大原型设计工具对比 https:&#x2F;&#x2F;www.mockplus.cn&#x2F;blog&#x2F;post&#x2F;1034 电商平台用户行为数据分析（MySQL）https:&#x2F;&#x2F;zhuanl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zane之产品之道">
+<meta property="og:url" content="http://example.com/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="我认为每一个程序猿都应该有一个产品的心，（这里会涉及需求分析、原型设计、前端UI）尽管不够专业，起码要知道自己做什么，了解产品基本价值，才能更好地设计及开发系统。 产品之道Balsamiq vs Sketch vs Mockplus：三大原型设计工具对比 https:&#x2F;&#x2F;www.mockplus.cn&#x2F;blog&#x2F;post&#x2F;1034 电商平台用户行为数据分析（MySQL）https:&#x2F;&#x2F;zhuanl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-08T12:18:18.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.571Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Zane之产品之道 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Zane之产品之道
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-08 20:18:18" itemprop="dateCreated datePublished" datetime="2021-09-08T20:18:18+08:00">2021-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/09/08/zane_space/Zane之产品之道/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我认为每一个程序猿都应该有一个产品的心，（这里会涉及需求分析、原型设计、前端UI）尽管不够专业，起码要知道自己做什么，了解产品基本价值，才能更好地设计及开发系统。</p>
+<h1 id="产品之道"><a href="#产品之道" class="headerlink" title="产品之道"></a>产品之道</h1><p>Balsamiq vs Sketch vs Mockplus：三大原型设计工具对比</p>
+<p><a target="_blank" rel="noopener" href="https://www.mockplus.cn/blog/post/1034">https://www.mockplus.cn/blog/post/1034</a></p>
+<h1 id="电商平台用户行为数据分析（MySQL）"><a href="#电商平台用户行为数据分析（MySQL）" class="headerlink" title="电商平台用户行为数据分析（MySQL）"></a>电商平台用户行为数据分析（MySQL）</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356326256">https://zhuanlan.zhihu.com/p/356326256</a></p>
+<p>CREATE TABLE userbehavior_dwd(<br>    user_id VARCHAR(255)    COMMENT ‘用户id’ ,<br>    item_id VARCHAR(255)    COMMENT ‘商品id’ ,<br>    category_id VARCHAR(255)    COMMENT ‘商品类型id’ ,<br>    behavior_type VARCHAR(255)    COMMENT ‘访问类型：pv,cart,fav,buy（浏览，添加购物车，收藏，购买）’ ,<br>    timestamps DATETIME    COMMENT ‘行为发生时间戳’ ,<br>    behavior_date VARCHAR(255)    COMMENT ‘日期’ ,<br>    behavior_time VARCHAR(255)    COMMENT ‘时间’ ,<br>    weekdays VARCHAR(255)    COMMENT ‘周-天数’<br>)  COMMENT = ‘用户行为表(维度表)’;</p>
+<p>select * from userbehavior_dwd</p>
+<p>select min(behavior_date),max(behavior_date) from userbehavior_dwd</p>
+<p>delete from userbehavior_dwd where behavior_date&gt;’2017-11-25’</p>
+<p>– ▶▶用户行为指标<br>– 一、按实际维度<br>– 1、用户活跃度（这里就涉及每天、每时，不会是全量数据，所以会用到天字段或小时字段分组统计）</p>
+<p>– 首先将用户活跃度划分为每日活跃度与每时活跃度，并对比UV与PV的情况。</p>
+<p>– 日活跃情况<br>–  我的sql(初步sql，没有参考价值)<br>select user_id,count(behavior_type) from userbehavior_dwd  where behavior_type=’pv’ GROUP BY user_id<br>– 日活跃情况-实际sql<br>select behavior_date,count(DISTINCT user_id) as ‘UV’,count(behavior_type) as ‘PV’ from userbehavior_dwd<br>where behavior_type=’pv’ GROUP BY behavior_date </p>
+<p>– 小时活跃情况<br>select HOUR(behavior_time) as ‘hour’,count(DISTINCT user_id) as ‘UV’,count(behavior_type) as ‘PV’ from userbehavior_dwd<br>where behavior_type=’pv’ GROUP BY hour </p>
+<p>– 人均PV（日）<br>select behavior_date,count(DISTINCT user_id) as ‘UV’,count(behavior_type) as ‘PV’,<br>count(behavior_date)/count(DISTINCT user_id) as ‘MeanPVofUV’<br>from userbehavior_dwd<br>where behavior_type=’pv’ GROUP BY behavior_date<br>– 人均PV（小时）同上<br>– 分析价值：晚上20-22点的PV大幅上涨，是由于人均PV的上升产生的，说明晚上休息时间用户的活跃度相较白天有较大提升。</p>
+<p>– 二、用户复购率<br>– （复购率对于平台来讲是非常重要的行为指标，复购率越高，平台的拉新成本，运营成本越低。）<br>– 逻辑分析：统计用户购买【相同商品/非相同商品】次数，用户复购率计算逻辑：复购人数/总购买人数<br>– 2.1、统计复购人数<br>– 2.2 统计总购买人数<br>– 2.3 计算复购率</p>
+<p>select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id<br>– 分析复购人员<br>select t.user_id,if(t.buy_num&gt;1,1,0) as ‘复购人员’<br>from (select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id ) t</p>
+<p>– 统计复购人员数=复购人员总和<br>select sum(if(t.buy_num&gt;1,1,0)) as ‘复购人数’<br>from (select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id ) t</p>
+<p>– 统计总购买人数<br>select count(DISTINCT user_id) as ‘总购买人数’ from userbehavior_dwd  where behavior_type=’buy’</p>
+<p>– 计算复购率=复购人员总和/总购买人数<br>select count(DISTINCT t.user_id) as ‘总购买人数’,sum(if(t.buy_num&gt;1,1,0)) as ‘复购人数’,<br>CONCAT(ROUND(0/20*100,2),’%’) as ‘复购率’<br>from (select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id ) t</p>
+<p>– ▶▶购物环节转化率（AARRR分析模型）,主要分为浏览数据转化率、用户数据转化率<br>– 加购率=浏览数/加购数；购买率=购买数/加购数<br>– 浏览数据转化率<br>select pv_sum,cf_sum,buy_sum<br>,CONCAT(ROUND(cf_sum/pv_sum<em>100,2),’%’) as cp<br>,CONCAT(ROUND(buy_sum/cf_sum</em>100,2),’%’)as bc<br>from(<br>select<br>sum(IF(behavior_type=’pv’,1,0)) as pv_sum,<br>sum(IF(behavior_type=’cart’ or behavior_type=’fav’,1,0)) as cf_sum,<br>sum(IF(behavior_type=’buy’,1,0)) as buy_sum<br>from userbehavior_dwd<br>)t</p>
+<p>– 用户数据转化率<br>select pv_sum,cf_sum,buy_sum<br>,CONCAT(ROUND(cf_sum/pv_sum<em>100,2),’%’) as cp<br>,CONCAT(ROUND(buy_sum/cf_sum</em>100,2),’%’)as bc<br>from(<br>select<br>COUNT(DISTINCT IF(behavior_type=’pv’,user_id,0)) as pv_sum,<br>COUNT(DISTINCT IF(behavior_type=’cart’ or behavior_type=’fav’,user_id,0)) as cf_sum,<br>COUNT(DISTINCT IF(behavior_type=’buy’,user_id,0)) as buy_sum<br>from userbehavior_dwd<br>)t</p>
+<p>– 方式2（待验证）<br>select<br>COUNT(behavior_type=’pv’) as pv_sum,<br>COUNT(behavior_type=’cart’ or behavior_type=’fav’) as cf_sum,<br>COUNT(behavior_type=’buy’) as buy_sum<br>from userbehavior_dwd</p>
+<p>– 用户价值指标（RFM分析模型），区分出：价值客户、发展客户、保持客户、挽留客户，一般挽留客户占比最高，进而是价值客户，发展客户，保持客户。<br>– 1、Recency-上次消费时间（间隔天数），求平均值<br>– 2、Frequency-消费频率，求平均值<br>– 3、R、F按价值打分规则&amp;用户分组规则</p>
+<p>– r_table、f_table         –（TDM）<br>– r_table<br>CREATE VIEW R_table(user_id,recentbuy)<br>as<br>select u.user_id,<br>case<br>    when recentbuy is not null then recentbuy<br>    else 10<br>end as recentbuy<br>from userbehavior_dwd u left join<br>    (<br>        select user_id<br>        ,count(behavior_type) as recentbuy<br>        from userbehavior_dwd<br>        where behavior_type=’buy’<br>        GROUP BY user_id<br>    ) t<br>    on u.user_id=t.user_id<br>    – GROUP BY u.user_id<br>    ORDER BY u.user_id</p>
+<p>– f_table<br>CREATE VIEW F_table(user_id,frequency)<br>as<br>select u.user_id,<br>case<br>    when frequency is not null then frequency<br>    else 10<br>end as frequency<br>from userbehavior_dwd u left join<br>    (<br>        select user_id<br>        ,MIN(DATEDIFF(‘2017-12-08’,behavior_date)) as frequency<br>        from userbehavior_dwd<br>        where behavior_type=’buy’<br>        GROUP BY user_id<br>    ) t<br>    on u.user_id=t.user_id<br>    – GROUP BY u.user_id<br>    ORDER BY u.user_id</p>
+<p>– （ADM）<br>SELECT a.userID,r_score,f_score,<br>CASE<br>    when r_score&gt;2.35 and f_score&gt;2.04 then ‘价值客户’<br>    when r_score&gt;2.35 and f_score&lt;2.04 then ‘发展客户’<br>    when r_score&lt;2.35 and f_score&gt;2.04 then ‘保持客户’<br>    when r_score&lt;2.35 and f_score&lt;2.04 then ‘挽留客户’<br>END as userclass<br>FROM(<br>    SELECT t.userID,r_score,f_score<br>    FROM<br>    (<br>           SELECT userID,<br>           CASE<br>            when recentbuy=10 then 1<br>            when recentbuy&lt;10 and recentbuy&gt;=5 then 2<br>            when recentbuy&lt;5 and recentbuy&gt;=2 then 3<br>            when recentbuy=1 then 4<br>                    END as r_score<br>                    FROM r_table<br>                ) t<br>    LEFT JOIN<br>    (<br>        SELECT userID,<br>        CASE<br>            when frequency=0 then 1<br>            when frequency&lt;3 and frequency&gt;=1 then 2<br>            when frequency&lt;7 and frequency&gt;=3 then 3<br>            when frequency&gt;=7 then 4<br>            END as f_score<br>            FROM f_table<br>            ) f<br>    ON t.userID=f.userID<br>) a</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/29/flink_space/flink%E5%BC%80%E5%8F%91-%20FlinkCDC/" rel="prev" title="flink开发- FlinkCDC">
+      <i class="fa fa-chevron-left"></i> flink开发- FlinkCDC
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/curl%E7%9A%84%E5%AE%9E%E9%99%85%E8%BF%90%E7%94%A8/" rel="next" title="curl的实际运用">
+      curl的实际运用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93"><span class="nav-number">1.</span> <span class="nav-text">产品之道</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%EF%BC%88MySQL%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">电商平台用户行为数据分析（MySQL）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

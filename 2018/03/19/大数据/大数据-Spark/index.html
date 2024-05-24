@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="概述https:&#x2F;&#x2F;spark.apache.org&#x2F; 2009年，Spark诞生于伯克利大学AMPLab，最初属于伯克利大学的研究性项目。 2010年，正式开源。 2013年，成为了Apache基金项目，同年，基于spark的开源商业公司Databricks成立。 2014年，成为Apache基金的顶级项目。 Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据-Spark">
+<meta property="og:url" content="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="概述https:&#x2F;&#x2F;spark.apache.org&#x2F; 2009年，Spark诞生于伯克利大学AMPLab，最初属于伯克利大学的研究性项目。 2010年，正式开源。 2013年，成为了Apache基金项目，同年，基于spark的开源商业公司Databricks成立。 2014年，成为Apache基金的顶级项目。 Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。Spark">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-03-18T16:18:18.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.617Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="Spark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>大数据-Spark | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据-Spark
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/19/大数据/大数据-Spark/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><a target="_blank" rel="noopener" href="https://spark.apache.org/">https://spark.apache.org/</a></p>
+<p>2009年，Spark诞生于伯克利大学AMPLab，最初属于伯克利大学的研究性项目。</p>
+<p>2010年，正式开源。</p>
+<p>2013年，成为了Apache基金项目，同年，基于spark的开源商业公司Databricks成立。</p>
+<p>2014年，成为Apache基金的顶级项目。</p>
+<p>Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。<br>Spark 是使用 scala 实现的基于内存计算的大数据开源集群计算环境.提供了 java,scala, python,R 等语言的调用接口.</p>
+<p>Spark 运算比 Hadoop 的 MapReduce 框架快原因是：<br>Hadoop 在一次 MapReduce 运算之后,会将数据的运算结果从内存写入到磁盘中,第二次 Mapredue 运算时在从磁盘中读取数据,所以其瓶颈在2次运算间的多余 IO 消耗；<br>Spark 则是将数据一直缓存在内存中,直到计算得到最后的结果,再将结果写入到磁盘；</p>
+<p>大神解读：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34436165">https://zhuanlan.zhihu.com/p/34436165</a></p>
+<ul>
+<li>SparkSQL的进化之路</li>
+</ul>
+<p>1.0以前：  Shark</p>
+<p>1.1.x开始：SparkSQL(只是测试性的) SQL</p>
+<p>1.3.x:     SparkSQL(正式版本)+Dataframe</p>
+<p>1.5.x:     SparkSQL 钨丝计划</p>
+<p>1.6.x：    SparkSQL+DataFrame+DataSet(测试版本)</p>
+<p> 2.x:</p>
+<ul>
+<li>   SparkSQL+DataFrame+DataSet(正式版本)</li>
+<li>   SparkSQL:还有其他的优化</li>
+<li>   StructuredStreaming(DataSet)</li>
+</ul>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>分析统计，实时数据处理，图计算及机器学习</p>
+<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><ul>
+<li>Spark Core</li>
+<li>Spark SQL</li>
+<li>Spark Streaming</li>
+<li>MLlib</li>
+<li>GraphX</li>
+</ul>
+<h1 id="Spark之RDD"><a href="#Spark之RDD" class="headerlink" title="Spark之RDD"></a>Spark之RDD</h1><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。<br>RDD具有数据流模型的特点：自动容错、位置感知性调度和可伸缩性。RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度。</p>
+<ul>
+<li>Partition<br>一组分片（Partition），即数据集的基本组成单位。</li>
+</ul>
+<h2 id="RDD编程API"><a href="#RDD编程API" class="headerlink" title="RDD编程API"></a>RDD编程API</h2><p>Spark支持两个类型（算子）操作：Transformation和Action</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qingyunzong/p/8899715.html">https://www.cnblogs.com/qingyunzong/p/8899715.html</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Spark会用到HDFS与YARN，因此请先安装Hadoop</p>
+<p>**第一步:**安装Java JDK 1.7及以上版本，并配置好环境变量。本电脑安装的jdk是1.7.0_79版本的。</p>
+<p>**第二步:**安装Hadoop。本电脑安装的Hadoop是2.7.3版本的。</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yhl-yh/p/7651470.html">https://www.cnblogs.com/yhl-yh/p/7651470.html</a></p>
+<h1 id="Spark开发"><a href="#Spark开发" class="headerlink" title="Spark开发"></a>Spark开发</h1><ul>
+<li>scala</li>
+<li>java</li>
+</ul>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="Spark的运行模式"><a href="#Spark的运行模式" class="headerlink" title="Spark的运行模式"></a>Spark的运行模式</h2><ul>
+<li>1.<code>local</code>: 本地单进程模式，用于本地开发测试Spark代码。</li>
+<li>2.<code>standalone</code>:分布式集群模式，Master-Worker架构，Master负责调度，Worker负责具体Task的执行。</li>
+<li>3.<code>on yarn/mesos</code>:运行在yarn/mesos等资源管理框架之上，yarn/mesos提供资源管理，spark提供计算调度，并可与其他计算框架(如MapReduce/MPI/Storm)共同运行在同一个集群之上。</li>
+<li>4.<code>on cloud(EC2)</code>: 运行在AWS的EC2之上</li>
+</ul>
+<h1 id="伪分布式"><a href="#伪分布式" class="headerlink" title="伪分布式"></a><strong>伪分布式</strong></h1><h3 id="从微软镜像站下载"><a href="#从微软镜像站下载" class="headerlink" title="从微软镜像站下载"></a>从微软镜像站下载</h3><p> <a target="_blank" rel="noopener" href="http://mirrors.hust.edu.cn/apache/">http://mirrors.hust.edu.cn/apache/</a></p>
+<h3 id="从清华镜像站下载"><a href="#从清华镜像站下载" class="headerlink" title="从清华镜像站下载"></a>从清华镜像站下载</h3><p> <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache/">https://mirrors.tuna.tsinghua.edu.cn/apache/</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#解压包到对应规划目录</span></span><br><span class="line">tar -xvf spark-2.2.1-bin-hadoop2.7.tgz -C /opt/hadoop/apps</span><br><span class="line"><span class="comment">#创建软连接</span></span><br><span class="line"><span class="built_in">ln</span> -s spark-2.2.1-bin-hadoop2.7/ spark</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">export SPARK_HOME=/opt/hadoop/apps/spark-2.2.1-bin-hadoop2.7/</span><br><span class="line">export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置spark-site-xml"><a href="#配置spark-site-xml" class="headerlink" title="配置spark-site.xml"></a>配置spark-site.xml</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/opt/hadoop/apps/jdk1.8.0_161</span><br><span class="line">export HADOOP_HOME=/opt/hadoop/apps/hadoop-2.7.1/</span><br><span class="line">export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br><span class="line">export SPARK_MASTER_IP=master</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=1G</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动及验证"><a href="#启动及验证" class="headerlink" title="启动及验证"></a>启动及验证</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在spark/sbin目录下执行</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="web-UI"><a href="#web-UI" class="headerlink" title="web UI"></a>web UI</h1><h4 id="http-localhost-8080"><a href="#http-localhost-8080" class="headerlink" title="http://localhost:8080/"></a><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></h4><h2 id="spark-shell"><a href="#spark-shell" class="headerlink" title="spark-shell"></a>spark-shell</h2><h4 id="到spark的bin目录下-spark-shell命令查看"><a href="#到spark的bin目录下-spark-shell命令查看" class="headerlink" title="到spark的bin目录下./spark-shell命令查看"></a>到spark的bin目录下./spark-shell命令查看</h4><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="使用spark-shell完成单词统计功能"><a href="#使用spark-shell完成单词统计功能" class="headerlink" title="使用spark-shell完成单词统计功能"></a>使用spark-shell完成单词统计功能</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spark/" rel="tag"># Spark</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" rel="prev" title="大数据-SparkSQL">
+      <i class="fa fa-chevron-left"></i> 大数据-SparkSQL
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/" rel="next" title="大数据-PySpark">
+      大数据-PySpark <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark%E4%B9%8BRDD"><span class="nav-number">4.</span> <span class="nav-text">Spark之RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD%E7%BC%96%E7%A8%8BAPI"><span class="nav-number">4.1.</span> <span class="nav-text">RDD编程API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">4.2.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark%E5%BC%80%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text">Spark开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">6.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark%E7%9A%84%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.1.</span> <span class="nav-text">Spark的运行模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">伪分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%BE%AE%E8%BD%AF%E9%95%9C%E5%83%8F%E7%AB%99%E4%B8%8B%E8%BD%BD"><span class="nav-number">7.0.1.</span> <span class="nav-text">从微软镜像站下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F%E7%AB%99%E4%B8%8B%E8%BD%BD"><span class="nav-number">7.0.2.</span> <span class="nav-text">从清华镜像站下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">7.1.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEspark-site-xml"><span class="nav-number">7.2.</span> <span class="nav-text">配置spark-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%8F%8A%E9%AA%8C%E8%AF%81"><span class="nav-number">7.3.</span> <span class="nav-text">启动及验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web-UI"><span class="nav-number">8.</span> <span class="nav-text">web UI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http-localhost-8080"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">http:&#x2F;&#x2F;localhost:8080&#x2F;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spark-shell"><span class="nav-number">8.1.</span> <span class="nav-text">spark-shell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B0spark%E7%9A%84bin%E7%9B%AE%E5%BD%95%E4%B8%8B-spark-shell%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B"><span class="nav-number">8.1.0.1.</span> <span class="nav-text">到spark的bin目录下.&#x2F;spark-shell命令查看</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">8.2.</span> <span class="nav-text">快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8spark-shell%E5%AE%8C%E6%88%90%E5%8D%95%E8%AF%8D%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD"><span class="nav-number">8.2.1.</span> <span class="nav-text">使用spark-shell完成单词统计功能</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

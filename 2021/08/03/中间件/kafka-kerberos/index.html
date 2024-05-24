@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在工作中接触kafka很多，但是kafka集成kerberos也是必不可少的，在实际项目中进行kerberos认证还是会有出现很多问题，所以仅以此篇记录kerberos认证相关步骤及问题点，方便以后使用。 kerberos基础概念Kerberos是一种计算机网络授权协议，用来在非安全网络中，对个人通信以安全的手段进行身份认证。这个词又指麻省理工学院为这个协议开发的一套计算机软件。 Kerberos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka之kerberos认证（release）">
+<meta property="og:url" content="http://example.com/2021/08/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka-kerberos/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="在工作中接触kafka很多，但是kafka集成kerberos也是必不可少的，在实际项目中进行kerberos认证还是会有出现很多问题，所以仅以此篇记录kerberos认证相关步骤及问题点，方便以后使用。 kerberos基础概念Kerberos是一种计算机网络授权协议，用来在非安全网络中，对个人通信以安全的手段进行身份认证。这个词又指麻省理工学院为这个协议开发的一套计算机软件。 Kerberos">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-03T05:52:25.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.590Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="kafka">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka-kerberos/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>kafka之kerberos认证（release） | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka-kerberos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kafka之kerberos认证（release）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-03 13:52:25" itemprop="dateCreated datePublished" datetime="2021-08-03T13:52:25+08:00">2021-08-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/08/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka-kerberos/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/08/03/中间件/kafka-kerberos/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在工作中接触kafka很多，但是kafka集成kerberos也是必不可少的，在实际项目中进行kerberos认证还是会有出现很多问题，所以仅以此篇记录kerberos认证相关步骤及问题点，方便以后使用。</p>
+<h1 id="kerberos"><a href="#kerberos" class="headerlink" title="kerberos"></a>kerberos</h1><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p><strong>Kerberos</strong>是一种计算机网络授权协议，用来在非安全<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C">网络</a>中，对个人通信以安全的手段进行身份认证。这个词又指<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%BA%BB%E7%9C%81%E7%90%86%E5%B7%A5%E5%AD%A6%E9%99%A2">麻省理工学院</a>为这个协议开发的一套计算机软件。</p>
+<p>Kerberos是一种客户端/服务端架构。</p>
+<p>KDC：密钥分发中心（Key distribution Center），由三部分构成：Kerberos数据库、认证服务（Authentication service，AS）和票据授予服务（ticket-granting service，TGS）</p>
+<p>principal：主体，Kerberos中的身份标识称为主体。</p>
+<p>realm：域，确定了管理边界，所有主体均属于特定的Kerberos域。</p>
+<p>主体和域的信息存储在Kerberos数据库中。</p>
+<p>TGT：票据授予票据，AS认证成功后授予用户的一种特殊票据。</p>
+<ul>
+<li><em>关于keytab文件</em></li>
+</ul>
+<p>所有Kerberos服务器都需要一个keytab文件授权链接到KDC，默认文件名为：krb5.keytab。该文件是主机key的本地拷贝。</p>
+<p>要为主机生成keytab文件，主机必须在Kerberos数据库中拥有一个principal。</p>
+<h1 id="Kerberos安装（偏运维）"><a href="#Kerberos安装（偏运维）" class="headerlink" title="Kerberos安装（偏运维）"></a>Kerberos安装（偏运维）</h1><p>安装Kerberos KDC服务端</p>
+<p>Kerberos属于主从结构，我们这里使用一台KDC服务器，3个客户端，另外集群中需要有一台服务器作为时间同步服务器安装NTP服务，Kerberos对NTP服务有依赖，必须进行安装。</p>
+<p>操作步骤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1. 编辑/etc/hosts文件保证主机名和IP地址正确对应</span><br><span class="line"></span><br><span class="line">2. 安装KDC</span><br><span class="line"></span><br><span class="line">3. 配置kdc.conf文件</span><br><span class="line"></span><br><span class="line">4. 配置kadm5.acl文件</span><br><span class="line"></span><br><span class="line">5. 配置krb5.conf文件</span><br><span class="line"></span><br><span class="line">6. 创建Kerberos数据库</span><br><span class="line"></span><br><span class="line">7. 测试Kerberos数据库</span><br><span class="line"></span><br><span class="line">8. 启动KDC服务</span><br><span class="line"></span><br><span class="line">9. 建立keytab文件</span><br><span class="line"></span><br><span class="line">10. 启动kadmind服务</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考&amp;感谢：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46474921/article/details/123515813">https://blog.csdn.net/weixin_46474921/article/details/123515813</a></p>
+<h1 id="Kerberos基本使用"><a href="#Kerberos基本使用" class="headerlink" title="Kerberos基本使用"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wind-man/p/14143882.html">Kerberos基本使用</a></h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">创建用户</span><br><span class="line"></span><br><span class="line">kadmin.local</span><br><span class="line"></span><br><span class="line">addprinc confluent@BIGDATA.COM</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">kadmin.local -q &quot;addprinc confluent@BIGDATA.COM&quot;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">导出keytab文件</span><br><span class="line"></span><br><span class="line">kadmin.local</span><br><span class="line"></span><br><span class="line">xst -k /etc/security/keytabs/confluent.keytab confluent@BIGDATA.COM</span><br><span class="line"></span><br><span class="line">xst -k /etc/security/keytabs/confluent.keytab -norandkey confluent@BIGDATA.COM</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">kadmin.local -q &quot;xst -k /etc/security/keytabs/confluent.keytab confluent@BIGDATA.COM&quot;</span><br><span class="line"></span><br><span class="line">kadmin.local -q &quot; xst -k /etc/security/keytabs/confluent.keytab -norandkey confluent@BIGDATA.COM&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用</span><br><span class="line"></span><br><span class="line">kinit -kt /etc/security/keytabs/confluent.keytab  confluent@BIGDATA.COM</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看</span><br><span class="line"></span><br><span class="line">klist</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Kerberos协议的组成角色"><a href="#Kerberos协议的组成角色" class="headerlink" title="Kerberos协议的组成角色"></a>Kerberos协议的组成角色</h1><p>在古希腊神话故事中，kerberos是一只具有三颗头颅的地狱恶犬，他守护在地狱之外，能够识别所有经此路过的亡灵，防止活着的入侵者闯入地狱。而真正的kerberos协议中也存在三个角色，分别是</p>
+<ul>
+<li><strong>客户端（client）</strong></li>
+<li><strong>服务端（Server）</strong></li>
+<li><strong>密钥分发中心（Key Distribution Center，KDC）</strong>，而密钥分发中心一般又分为<strong>AS（Authentication Server）</strong>、<strong>TGS（Ticket Granting Ticket）</strong></li>
+</ul>
+<h1 id="kerberos的认证原理"><a href="#kerberos的认证原理" class="headerlink" title="kerberos的认证原理"></a>kerberos的认证原理</h1><h1 id="客户端认证实际步骤"><a href="#客户端认证实际步骤" class="headerlink" title="客户端认证实际步骤"></a>客户端认证实际步骤</h1><p>以下操作前提需要先了解kafka在非Kerberos认证环境下的相关生产及消费的相关命令操作；</p>
+<p>操作环境：liunx，kafka客户端</p>
+<p>首先将认证文件放在规范的文件目录，例如：/opt/third/kafka/keytab 目录</p>
+<ol>
+<li>创建一个jaas.conf</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建配置文件（主要前提会用到kafka.keytab文件，需先生成，例如文件路径：/opt/third/kafka/keytab/kafka.keytab）</span></span><br><span class="line"><span class="built_in">cd</span> /opt/third/kafka/keytab/</span><br><span class="line">vi jaas.conf</span><br><span class="line">KafkaClient &#123;</span><br><span class="line">   com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">   useKeyTab=<span class="literal">true</span></span><br><span class="line">   keyTab=<span class="string">&quot;/opt/third/kafka/keytab/kafka.keytab&quot;</span>    <span class="comment"># keytab    文件路径，如果是ambari安装的，那么可以直接使用conf下的jaas.conf文件</span></span><br><span class="line">   principal=<span class="string">&quot;kafka@HADOOP.COM&quot;</span>;  <span class="comment">#认证的主题</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">  com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">  useKeyTab=<span class="literal">true</span></span><br><span class="line">  storeKey=<span class="literal">true</span></span><br><span class="line">  keyTab=<span class="string">&quot;/opt/third/kafka/keytab/kafka.keytab&quot;</span></span><br><span class="line">  principal=<span class="string">&quot;kafka@HADOOP.COM&quot;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以上步骤其实已经配置好了kerberos相关的配置文件，还需载入到系统环境变量中，注意，如果是root用户配置的，其他用户使用还需进行配置，除非通过该用户进行配置~/.bash_profile才行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">配置KAFKA_OPTS环境</span></span><br><span class="line">export KAFKA_OPTS=&quot;-Djava.security.auth.login.config=/opt/third/kafka/keytab/jaas.conf&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>生产者认证配置</p>
+<p>创建个配置文件(如producer.properties)，当然也可以配置在{KAFAK_HOME}/conf/producer.properties文件最后面，用于生产主题时指定的一些配置，如下：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">security.protocol=SASL_PLAINTEXT</span><br><span class="line">sasl.mechanism=GSSAPI</span><br><span class="line">sasl.kerberos.service.name=kafka #这个指定kerberos的域名，不是主机的ip地址</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>消费认证配置</li>
+</ol>
+<p>创建个配置文件(如consumer.properties)，当然也可以配置在{KAFAK_HOME}/conf/consumer.properties文件最后面，用于消费主题时指定的一些配置，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">security.protocol=SASL_PLAINTEXT</span><br><span class="line">sasl.mechanism=GSSAPI</span><br><span class="line">sasl.kerberos.service.name=kafka #这个指定kerberos的域名，不是主机的ip地址</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>kafka修改安装目录下<code>config/server.properties</code>配置</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">advertised.listeners=SASL_PLAINTEXT://IP:9092</span><br><span class="line">listeners=SASL_PLAINTEXT://IP:9092</span><br><span class="line">security.inter.broker.protocol=SASL_PLAINTEXT</span><br><span class="line">sasl.mechanism.inter.broker.protocol=GSSAPI</span><br><span class="line">sasl.enabled.mechanisms=GSSAPI</span><br><span class="line">sasl.kerberos.service.name=kafka   </span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>开始使用</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建topic</span></span><br><span class="line">sh /opt/third/kafka/bin/kafka-topics.sh --create --zookeeper emr-node1:2181,emr-node2:2181,emr-node3:2181 --replication-factor 3 --partitions 1 --topic first_topic</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生产</span></span><br><span class="line">sh /opt/third/kafka/bin/kafka-console-producer.sh --broker-list 192.168.0.85:9092,192.168.0.100:9092,192.168.0.204:9092 --topic first_topic --producer.config /opt/third/kafka/config/producer.properties</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">消费</span></span><br><span class="line">sh /opt/third/kafka/bin/kafka-console-consumer.sh --topic first_topic --from-beginning --bootstrap-server 192.168.0.85:9092,192.168.0.100:9092,192.168.0.204:9092 --consumer.config /opt/third/kafka/config/consumer.properties </span><br></pre></td></tr></table></figure>
+
+<p>第四步是kafka从topic创建、生产数据到消费数据全过程，这里每一步都会有日志输出，如果没有，说明消费可能已被消费，或者是消费者和生产者监听的topic不一致。</p>
+<p>实际遇到的问题</p>
+<p>（实际遇见的问题，由于两套kafka公用一个zk，生成的broker不一致，导致生产的数据无法被消费，这样的问题场景给开发人员用户造成很大的排出难点，会误以为是认证配置问题）</p>
+<p>排查步骤:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看zookeeper中维护的brokerId</span></span><br><span class="line">sh /opt/third/kafka/bin/kafka-topics.sh --describe --zookeeper emr-node1:2181,emr-node2:2181,emr-node3:2181 --topic first</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看kafka中topic对应的brokerId</span></span><br><span class="line">sh /opt/third/kafka/bin/kafka-consumer-groups.sh  --bootstrap-server 192.168.0.85:9092,192.168.0.100:9092,192.168.0.204:9092 --list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>排查发现topic对应的brokerId和zookeeper中维护的brokerId不一致，通过修改zookeeper的节点目录，删除zk维护节点数据（可能有权限问题），或者重装zookeeper可以解决该问题，主要原因是两个kafka连了同一个zk的/目录作为root目录数据有些冲突。所以换个root目录可以的（这个问题排查至少花费了3天时间。。。）</p>
+<h1 id="springboot集成Kerberos认证"><a href="#springboot集成Kerberos认证" class="headerlink" title="springboot集成Kerberos认证"></a>springboot集成Kerberos认证</h1><p>其实Kerberos认证并没有想象的那么复杂，理清所需的认证文件及引入步骤就好了，其实springboot引入主要通过System.setProperty()设置环境属性。</p>
+<p>创建kafka-client-jaas.conf、krb5.conf，配置文件中会用到kafka.keytab密钥文件。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">KafkaServer &#123;</span><br><span class="line">   com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">   useKeyTab=<span class="literal">true</span></span><br><span class="line">   keyTab=<span class="string">&quot;/opt/test/kafka/config/kerveros/kafka.keytab&quot;</span></span><br><span class="line">   storeKey=<span class="literal">true</span></span><br><span class="line">   useTicketCache=<span class="literal">false</span></span><br><span class="line">   serviceName=kafka</span><br><span class="line">   principal=<span class="string">&quot;kafka@HADOOP.COM&quot;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">KafkaClient &#123;</span><br><span class="line">   com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">   useKeyTab=<span class="literal">true</span></span><br><span class="line">   keyTab=<span class="string">&quot;/opt/test/kafka/config/kerveros/kafka.keytab&quot;</span></span><br><span class="line">   storeKey=<span class="literal">true</span></span><br><span class="line">   useTicketCache=<span class="literal">false</span></span><br><span class="line">   serviceName=kafka</span><br><span class="line">   principal=<span class="string">&quot;kafka@HADOOP.COM&quot;</span>;</span><br><span class="line">   username = <span class="string">&quot;user_abcd@GTMC.COM&quot;</span></span><br><span class="line">   password = <span class="string">&quot;user_abcd123$&quot;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Client &#123;</span><br><span class="line">        com.sun.security.auth.module.Krb5LoginModule required</span><br><span class="line">        useKeyTab=<span class="literal">true</span></span><br><span class="line">        keyTab=<span class="string">&quot;/opt/test/kafka/config/kerveros/kafka.keytab&quot;</span></span><br><span class="line">        storeKey=<span class="literal">true</span></span><br><span class="line">        useTicketCache=<span class="literal">false</span></span><br><span class="line">        principal=<span class="string">&quot;kafka@HADOOP.COM&quot;</span></span><br><span class="line">       serviceName=kafka;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[libdefaults]</span><br><span class="line">  renew_lifetime = 7d</span><br><span class="line">  forwardable = <span class="literal">true</span></span><br><span class="line">  default_realm = HADOOP.COM</span><br><span class="line">  ticket_lifetime = 24h</span><br><span class="line">  dns_lookup_realm = <span class="literal">false</span></span><br><span class="line">  dns_lookup_kdc = <span class="literal">false</span></span><br><span class="line">  default_ccache_name = /tmp/krb5cc_%&#123;uid&#125;</span><br><span class="line">  <span class="comment">#default_tgs_enctypes = aes des3-cbc-sha1 rc4 des-cbc-md5</span></span><br><span class="line">  <span class="comment">#default_tkt_enctypes = aes des3-cbc-sha1 rc4 des-cbc-md5</span></span><br><span class="line"></span><br><span class="line">[logging]</span><br><span class="line">  default = FILE:/var/log/krb5kdc.<span class="built_in">log</span></span><br><span class="line">  admin_server = FILE:/var/log/kadmind.log</span><br><span class="line">  kdc = FILE:/var/log/krb5kdc.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line">  HADOOP.COM = &#123;</span><br><span class="line">    admin_server = 192.168.10.36</span><br><span class="line">    kdc = 192.168.10.36</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="linux环境变量配置的6种方法"><a href="#linux环境变量配置的6种方法" class="headerlink" title="linux环境变量配置的6种方法"></a>linux<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&spm=1001.2101.3001.7020">环境变量</a>配置的6种方法</h1><h3 id="Linux读取环境变量"><a href="#Linux读取环境变量" class="headerlink" title="Linux读取环境变量"></a>Linux读取环境变量</h3><ul>
+<li><code>export</code>命令显示当前系统定义的所有环境变量</li>
+<li><code>echo $PATH</code>命令输出当前的<code>PATH</code>环境变量的值</li>
+</ul>
+<p>参考&amp;感谢，待迁移</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shaoming314/article/details/123973828">https://blog.csdn.net/shaoming314/article/details/123973828</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/kafka/" rel="tag"># kafka</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/20/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E4%B9%8BOneData/" rel="prev" title="数据中台-OneData">
+      <i class="fa fa-chevron-left"></i> 数据中台-OneData
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/08/%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="next" title="区块链">
+      区块链 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kerberos"><span class="nav-number">1.</span> <span class="nav-text">kerberos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基础概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos%E5%AE%89%E8%A3%85%EF%BC%88%E5%81%8F%E8%BF%90%E7%BB%B4%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Kerberos安装（偏运维）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">Kerberos基本使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BB%84%E6%88%90%E8%A7%92%E8%89%B2"><span class="nav-number">4.</span> <span class="nav-text">Kerberos协议的组成角色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kerberos%E7%9A%84%E8%AE%A4%E8%AF%81%E5%8E%9F%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">kerberos的认证原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%A4%E8%AF%81%E5%AE%9E%E9%99%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">6.</span> <span class="nav-text">客户端认证实际步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot%E9%9B%86%E6%88%90Kerberos%E8%AE%A4%E8%AF%81"><span class="nav-number">7.</span> <span class="nav-text">springboot集成Kerberos认证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E7%9A%846%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">linux环境变量配置的6种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E8%AF%BB%E5%8F%96%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">8.0.1.</span> <span class="nav-text">Linux读取环境变量</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Scala简介联邦理工学院洛桑（EPFL）的Martin Odersky于2001年基于Funnel的工作开始设计Scala。 Scala 是一门多范式（multi-paradigm）的编程语言，设计初衷是要集成面向对象编程和函数式编程的各种特性。 Scala 运行在 Java 虚拟机上，并兼容现有的 Java 程序。 Scala 源代码被编译成 Java 字节码，所以它可以运行于 JVM 之上，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala如门">
+<meta property="og:url" content="http://example.com/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="Scala简介联邦理工学院洛桑（EPFL）的Martin Odersky于2001年基于Funnel的工作开始设计Scala。 Scala 是一门多范式（multi-paradigm）的编程语言，设计初衷是要集成面向对象编程和函数式编程的各种特性。 Scala 运行在 Java 虚拟机上，并兼容现有的 Java 程序。 Scala 源代码被编译成 Java 字节码，所以它可以运行于 JVM 之上，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/scala%E5%85%A5%E9%97%A8.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbGRsb25l,size_16,color_FFFFFF,t_70.png">
+<meta property="article:published_time" content="2020-06-18T13:21:32.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.612Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="scala">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/scala%E5%85%A5%E9%97%A8.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbGRsb25l,size_16,color_FFFFFF,t_70.png">
+
+<link rel="canonical" href="http://example.com/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Scala如门 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Scala如门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-18 21:21:32" itemprop="dateCreated datePublished" datetime="2020-06-18T21:21:32+08:00">2020-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2020/06/18/大数据/scala入门/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Scala简介"><a href="#Scala简介" class="headerlink" title="Scala简介"></a>Scala简介</h1><p>联邦理工学院洛桑（EPFL）的Martin Odersky于2001年基于Funnel的工作开始设计Scala。</p>
+<p>Scala 是一门多范式（multi-paradigm）的编程语言，设计初衷是要集成面向对象编程和函数式编程的各种特性。</p>
+<p>Scala 运行在 Java 虚拟机上，并兼容现有的 Java 程序。</p>
+<p>Scala 源代码被编译成 Java 字节码，所以它可以运行于 JVM 之上，并可以调用现有的 Java 类库。</p>
+<h1 id="Scala环境搭建"><a href="#Scala环境搭建" class="headerlink" title="Scala环境搭建"></a>Scala环境搭建</h1><p>安装jdk</p>
+<p>安装Scala</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 下载</span><br><span class="line">https:<span class="comment">//www.scala-lang.org/download/</span></span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">cd ~/Download/</span><br><span class="line">tar -zxvf scala<span class="number">-2.12</span><span class="number">.8</span>.tgz</span><br><span class="line">mv scala<span class="number">-2.12</span><span class="number">.8</span> /usr/local/scala</span><br><span class="line"></span><br><span class="line"># 配置环境变量</span><br><span class="line">命令行输入：vim ~/.bash_profile进行编辑，增加环境变量：</span><br><span class="line"></span><br><span class="line">SCALA_HOME=/usr/local/scala</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$SCALA_HOME/bin</span><br><span class="line"></span><br><span class="line">#使环境变量生效，在命令行执行</span><br><span class="line">source  ~/.bash_profile</span><br><span class="line"></span><br><span class="line"># 验证</span><br><span class="line">命令行输入： scala</span><br></pre></td></tr></table></figure>
+
+<h1 id="Scala-hello-world"><a href="#Scala-hello-world" class="headerlink" title="Scala hello world"></a>Scala hello world</h1><p>HelloWorld.scala</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object HelloWorld&#123;</span><br><span class="line">	def main(args : Array[String])&#123;</span><br><span class="line">		println(&quot;HelloWorld&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译（类似java）"><a href="#编译（类似java）" class="headerlink" title="编译（类似java）"></a>编译（类似java）</h2><p>scalac HelloWorld.scala</p>
+<p>编译生成2个文件，其中有一个是和HelloWorld.scala对应的HelloWorld.class 。</p>
+<h2 id="反编译，-是指使用javap工具反编译class文件"><a href="#反编译，-是指使用javap工具反编译class文件" class="headerlink" title="反编译， 是指使用javap工具反编译class文件"></a>反编译， 是指使用javap工具反编译class文件</h2><p>反编译， 是指使用javap工具反编译class文件</p>
+<p>javap -c -v -classpath . HelloWorld</p>
+<p>javap -c -v -classpath . HelloWorld$</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>scala HelloWorld.scala</p>
+<h1 id="Scala-基础"><a href="#Scala-基础" class="headerlink" title="Scala 基础"></a>Scala 基础</h1><ul>
+<li>class和object区别</li>
+</ul>
+<p>object</p>
+<p>在scala中没有静态方法和静态字段，所以在scala中可以用object来实现这些功能</p>
+<p>scala中object：所有成员变量和方法默认都是 static 的，所以可以直接访问main方法</p>
+<p>class和object的一个差别是,单例对象不带参数,而类可以.因为你不能用new关键字实例化一个单例对象,所以没有机会传递给它参数</p>
+<p>class</p>
+<p>在scala中，类名可以和对象名为同一个名字，该对象称为该类的伴生对象,类和伴生对象可以相互访问他们的私有属性,但是它们必须在同一个源文件中</p>
+<h2 id="Scala关键字"><a href="#Scala关键字" class="headerlink" title="Scala关键字"></a>Scala关键字</h2><p>Scala只有39个关键字：</p>
+<ul>
+<li>package, import, class, object, trait, extends, with, type, forSome</li>
+<li>private, protected, abstract, sealed, final, implicit, lazy, override</li>
+<li>try, catch, finally, throw</li>
+<li>if, else, match, case, do, while, for, return, yield</li>
+<li>def, val, var </li>
+<li>this, super</li>
+<li>new</li>
+<li>true, false, null</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34367845/article/details/92169783">https://blog.csdn.net/weixin_34367845/article/details/92169783</a></p>
+<h2 id="Scala中的下划线到底有多少种应用场景"><a href="#Scala中的下划线到底有多少种应用场景" class="headerlink" title="Scala中的下划线到底有多少种应用场景"></a>Scala中的下划线到底有多少种应用场景</h2><p>1、作为“通配符”，类似Java中的*。如import scala.math._</p>
+<p>2、:<em>*作为一个整体，将某个参数当作参数序列处理！例如val s = sum(1 to 10:</em>*)就是将1 to 10当作参数序列处理。</p>
+<p>3、指代一个集合中的每个元素。例如我们要在一个Array a中筛出偶数，并乘以2，可以用以下办法：<br>a.filter(<em>%2==0).map(2*</em>)。<br>又如要对缓冲数组ArrayBuffer b排序，可以这样：<br>val bSorted = b.sorted(_</p>
+<p>4、在元组中，可以用方法_1, _2, _3访问组员。如a._2。其中句点可以用空格替代。</p>
+<p>5、使用模式匹配可以用来获取元组的组员，例如<br>val (first, second, third) = t<br>但如果不是所有的部件都需要，那么可以在不需要的部件位置上使用_。比如上一例中val (first, second, _) = t</p>
+<p>6、还有一点，下划线_代表的是某一类型的默认值。<br>对于Int来说，它是0。<br>对于Double来说，它是0.0<br>对于引用类型，它是null。</p>
+<h1 id="Scala-实战"><a href="#Scala-实战" class="headerlink" title="Scala 实战"></a>Scala 实战</h1><h1 id="Scala-进阶"><a href="#Scala-进阶" class="headerlink" title="Scala 进阶"></a>Scala 进阶</h1><h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><ul>
+<li><p>idea中scala与java代码互转</p>
+<p><img src="/scala%E5%85%A5%E9%97%A8.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbGRsb25l,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kwame211/article/details/86714347">https://blog.csdn.net/kwame211/article/details/86714347</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/scala/" rel="tag"># scala</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/16/java_space/Java-%E6%8F%92%E4%BB%B6%E5%8C%96%E7%BC%96%E7%A8%8B/" rel="prev" title="Java-插件化编程">
+      <i class="fa fa-chevron-left"></i> Java-插件化编程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/" rel="next" title="大数据之难">
+      大数据之难 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Scala简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">Scala环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala-hello-world"><span class="nav-number">3.</span> <span class="nav-text">Scala hello world</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%EF%BC%88%E7%B1%BB%E4%BC%BCjava%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">编译（类似java）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%EF%BC%8C-%E6%98%AF%E6%8C%87%E4%BD%BF%E7%94%A8javap%E5%B7%A5%E5%85%B7%E5%8F%8D%E7%BC%96%E8%AF%91class%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">反编译， 是指使用javap工具反编译class文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">3.3.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala-%E5%9F%BA%E7%A1%80"><span class="nav-number">4.</span> <span class="nav-text">Scala 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">4.1.</span> <span class="nav-text">Scala关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala%E4%B8%AD%E7%9A%84%E4%B8%8B%E5%88%92%E7%BA%BF%E5%88%B0%E5%BA%95%E6%9C%89%E5%A4%9A%E5%B0%91%E7%A7%8D%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.2.</span> <span class="nav-text">Scala中的下划线到底有多少种应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala-%E5%AE%9E%E6%88%98"><span class="nav-number">5.</span> <span class="nav-text">Scala 实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scala-%E8%BF%9B%E9%98%B6"><span class="nav-number">6.</span> <span class="nav-text">Scala 进阶</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">7.</span> <span class="nav-text">开发工具</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

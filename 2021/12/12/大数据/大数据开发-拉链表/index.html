@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="拉链表拉链表最直观区别就是在源表保留历史记录及更新时间；然后这两个很小的记录点能实现很强的数据追溯、回滚功能； 解决了备份数据回溯问题及资源占用问题； 拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。实现方案添加创建时间、修改时间字段，记录数据的修改时间及更新时间，如果没有修改过，更新时间记为999">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据开发-拉链表">
+<meta property="og:url" content="http://example.com/2021/12/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%8B%89%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="拉链表拉链表最直观区别就是在源表保留历史记录及更新时间；然后这两个很小的记录点能实现很强的数据追溯、回滚功能； 解决了备份数据回溯问题及资源占用问题； 拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。实现方案添加创建时间、修改时间字段，记录数据的修改时间及更新时间，如果没有修改过，更新时间记为999">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-12T12:08:08.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.731Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/12/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%8B%89%E9%93%BE%E8%A1%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>大数据开发-拉链表 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%8B%89%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据开发-拉链表
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-12 20:08:08" itemprop="dateCreated datePublished" datetime="2021-12-12T20:08:08+08:00">2021-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/12/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%8B%89%E9%93%BE%E8%A1%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/12/12/大数据/大数据开发-拉链表/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="拉链表"><a href="#拉链表" class="headerlink" title="拉链表"></a>拉链表</h1><p>拉链表最直观区别就是在源表保留历史记录及更新时间；然后这两个很小的记录点能实现很强的数据追溯、回滚功能；</p>
+<p>解决了备份数据回溯问题及资源占用问题；</p>
+<h6 id="拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。"><a href="#拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。" class="headerlink" title="拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。"></a>拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。</h6><h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>添加创建时间、修改时间字段，记录数据的修改时间及更新时间，如果没有修改过，更新时间记为9999-12-31</p>
+<h6 id="表1：订单表（记录原始的数据）"><a href="#表1：订单表（记录原始的数据）" class="headerlink" title="表1：订单表（记录原始的数据）"></a>表1：订单表（记录原始的数据）</h6><h6 id="表2：增量数据表（记录每日变更的数据）"><a href="#表2：增量数据表（记录每日变更的数据）" class="headerlink" title="表2：增量数据表（记录每日变更的数据）"></a>表2：增量数据表（记录每日变更的数据）</h6><h6 id="表3：历史拉链表（我们要得到的就是这张表）"><a href="#表3：历史拉链表（我们要得到的就是这张表）" class="headerlink" title="表3：历史拉链表（我们要得到的就是这张表）"></a>表3：历史拉链表（我们要得到的就是这张表）</h6><h6 id="表4：临时历史拉链表（临时表，处理好之后将数据覆盖到历史拉链表中）"><a href="#表4：临时历史拉链表（临时表，处理好之后将数据覆盖到历史拉链表中）" class="headerlink" title="表4：临时历史拉链表（临时表，处理好之后将数据覆盖到历史拉链表中）"></a>表4：临时历史拉链表（临时表，处理好之后将数据覆盖到历史拉链表中）</h6><p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41902618/article/details/109811283">https://blog.csdn.net/qq_41902618/article/details/109811283</a></p>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><p>数据的使用主要是当前最新的数据和追溯某一天数据：</p>
+<p>查询最新的数据</p>
+<p>select * from order_his where dw_end_date = ‘9999-12-31’</p>
+<p>查询某一天的数据（数据一定会存在有效时间’9999-12-31’，不是最初就最后修改的一条）</p>
+<p>select * from order_his where dw_begin_date &lt;= ‘2012-06-21’ and end_date &gt;=’2012-06-21’</p>
+<h1 id="更新方案"><a href="#更新方案" class="headerlink" title="更新方案"></a>更新方案</h1><h1 id="回滚方案"><a href="#回滚方案" class="headerlink" title="回滚方案"></a>回滚方案</h1><p>假设恢复到t天之前的数据，即未融合t天数据之前的拉链表，假设标记的开始日期和结束日期分别为s、t，具体分析如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 当t-1&gt;e时，s数据、e数据在t天之前产生，保留即可</span><br><span class="line">2 当t-1=e时，e数据在t天产生，需修改</span><br><span class="line">3 当s&lt;t&lt;=e时，e数据在t+n天产生，需修改</span><br><span class="line">4 当s&gt;=t时，s数据、e数据在t+n天产生，删除即可</span><br></pre></td></tr></table></figure>
+
+
+
+<p>mysql拉链表</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Jims2016/p/11045969.html">https://www.cnblogs.com/Jims2016/p/11045969.html</a></p>
+<p>直观</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_38068807/article/details/100162747">https://blog.csdn.net/sinat_38068807/article/details/100162747</a></p>
+<p>非拉链</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">create table deal_order</span><br><span class="line">(</span><br><span class="line">    order_id varchar(20) comment &#x27;订单ID&#x27;,        </span><br><span class="line">    order_updatetime date comment &#x27;订单更新时间&#x27;,         </span><br><span class="line">    order_status_cn varchar(50) comment &#x27;订单更新状态&#x27;   </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#初始数据</span><br><span class="line">insert into deal_order values(&#x27;100001&#x27;,date_format(&#x27;2017-05-07 12:23:18&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;订单创建&#x27;);</span><br><span class="line">insert into deal_order values(&#x27;100002&#x27;,date_format(&#x27;2017-05-07 16:48:05&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;订单创建&#x27;);</span><br><span class="line">insert into deal_order values(&#x27;100003&#x27;,date_format(&#x27;2017-05-07 20:47:25&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;支付完成&#x27;);</span><br><span class="line"></span><br><span class="line">select * from deal_order;</span><br><span class="line"></span><br><span class="line">#增量变更数据</span><br><span class="line">update deal_order</span><br><span class="line">   set order_updatetime = date_format(&#x27;2017-05-08 09:12:46&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),order_status_cn = &#x27;等待支付&#x27;</span><br><span class="line"> where order_id = &#x27;100001&#x27;;</span><br><span class="line">update deal_order</span><br><span class="line">   set order_updatetime = date_format(&#x27;2017-05-08 13:25:15&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),order_status_cn = &#x27;已发货&#x27;</span><br><span class="line"> where order_id = &#x27;100003&#x27;;</span><br><span class="line">insert into deal_order values(&#x27;100004&#x27;,date_format(&#x27;2017-05-08 16:11:48&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待发货&#x27;);</span><br><span class="line">insert into deal_order values(&#x27;100005&#x27;,date_format(&#x27;2017-05-08 18:23:31&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待发货&#x27;);</span><br><span class="line"></span><br><span class="line">update deal_order</span><br><span class="line">   set order_updatetime = date_format(&#x27;2017-05-09 11:28:35&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),order_status_cn = &#x27;订单关闭&#x27;</span><br><span class="line"> where order_id = &#x27;100002&#x27;;</span><br><span class="line">update deal_order</span><br><span class="line">   set order_updatetime = date_format(&#x27;2017-05-09 14:48:48&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),order_status_cn = &#x27;交易完成&#x27;</span><br><span class="line"> where order_id = &#x27;100003&#x27;;</span><br><span class="line">update deal_order</span><br><span class="line">   set order_updatetime = date_format(&#x27;2017-05-09 17:09:34&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),order_status_cn = &#x27;支付成功&#x27;</span><br><span class="line"> where order_id = &#x27;100005&#x27;;</span><br><span class="line">insert into deal_order values(&#x27;100006&#x27;,date_format(&#x27;2017-05-09 19:49:55&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待发货&#x27;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>拉链（应该还有一个增量表，每天将增量数据插入到历史拉链表）</p>
+<p>每天查询源表新增及变更的表（一般源表有创建时间和修改时间、状态），存入增量表（记录每天的增量数据），然后按当天时间增量表插入历史拉链表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">create table deal_order_zipper_tb</span><br><span class="line">(</span><br><span class="line">    order_id varchar(20) comment &#x27;订单ID&#x27;,</span><br><span class="line">    order_updatetime date comment &#x27;订单更新时间&#x27;,</span><br><span class="line">    order_status_cn varchar(50) comment &#x27;订单当前状态&#x27;,</span><br><span class="line">    order_start_time date comment &#x27;该记录生命周期开始时间（包括该时间点）&#x27;,</span><br><span class="line">    order_end_time date comment &#x27;该记录生命周期结束时间（不包括该时间点）&#x27;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100001&#x27;,date_format(&#x27;2017-05-07 12:23:18&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;订单创建&#x27;,date_format(&#x27;2017-05-07 12:23:18&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;2017-05-08 09:12:46&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100001&#x27;,date_format(&#x27;2017-05-07 12:23:18&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待支付&#x27;,date_format(&#x27;2017-05-08 09:12:46&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;9999-12-31 23:59:59&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100002&#x27;,date_format(&#x27;2017-05-07 16:48:05&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;订单创建&#x27;,date_format(&#x27;2017-05-07 16:48:05&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;2017-05-09 11:28:35&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100002&#x27;,date_format(&#x27;2017-05-07 16:48:05&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;订单关闭&#x27;,date_format(&#x27;2017-05-09 11:28:35&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;9999-12-31 23:59:59&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100003&#x27;,date_format(&#x27;2017-05-07 20:47:25&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;支付完成&#x27;,date_format(&#x27;2017-05-07 20:47:25&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;2017-05-08 13:25:15&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100003&#x27;,date_format(&#x27;2017-05-07 20:47:25&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;已发货&#x27;,date_format(&#x27;2017-05-08 13:25:15&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;2017-05-09 14:48:48&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100003&#x27;,date_format(&#x27;2017-05-07 20:47:25&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;交易完成&#x27;,date_format(&#x27;2017-05-09 14:48:48&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;9999-12-31 23:59:59&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100004&#x27;,date_format(&#x27;2017-05-08 16:11:48&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待发货&#x27;,date_format(&#x27;2017-05-08 16:11:48&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;9999-12-31 23:59:59&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100005&#x27;,date_format(&#x27;2017-05-08 18:23:31&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待发货&#x27;,date_format(&#x27;2017-05-08 18:23:31&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;2017-05-09 17:09:34&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100005&#x27;,date_format(&#x27;2017-05-08 18:23:31&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;支付成功&#x27;,date_format(&#x27;2017-05-09 17:09:34&#x27;, &#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;9999-12-31 23:59:59&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line">insert into deal_order_zipper_tb values(&#x27;100006&#x27;,date_format(&#x27;2017-05-09 19:49:55&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),&#x27;等待发货&#x27;,date_format(&#x27;2017-05-09 19:49:55&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;),date_format(&#x27;9999-12-31 23:59:59&#x27;,&#x27;%Y-%m-%d %H:%i:%S&#x27;));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from deal_order_zipper_tb;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#如果需要查询2017年5月8日的历史快照（这里意思不是说查2017年5月8日当天的更新数据，而是截止2017年5月8日的数据，所以是开始时间是2017年5月8日及之前，并且有效时间大于2017年5月8日（否则为失效数据）），SQL：</span><br><span class="line">select *</span><br><span class="line">       from deal_order_zipper_tb d</span><br><span class="line">       where d.order_start_time &lt;= date_format(&#x27;2017-05-08&#x27;, &#x27;%Y-%m-%d&#x27;)</span><br><span class="line">       and d.order_end_time &gt; date_format(&#x27;2017-05-08&#x27;, &#x27;%Y-%m-%d&#x27;);</span><br><span class="line">#或</span><br><span class="line">select *</span><br><span class="line">       from deal_order_zipper_tb d</span><br><span class="line">       where d.order_start_time &lt; date_format(&#x27;2017-05-09&#x27;, &#x27;%Y-%m-%d&#x27;)</span><br><span class="line">       and d.order_end_time &gt;= date_format(&#x27;2017-05-09&#x27;, &#x27;%Y-%m-%d&#x27;);</span><br><span class="line">       </span><br><span class="line">#查询当前有效的数据</span><br><span class="line">select *</span><br><span class="line">       from deal_order_zipper_tb d</span><br><span class="line">       where d.order_end_time = date_format(&#x27;9999-12-31&#x27;,&#x27;%Y-%m-%d&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="拉链表难点"><a href="#拉链表难点" class="headerlink" title="拉链表难点"></a>拉链表难点</h1><p>拉链表当然也会遇到查询性能的问题，比如说我们存放了10年的拉链数据，那么这张表势必会比较大，当查询的时候性能就比较低了，可以通过以下两个思路来解决：</p>
+<p>在一些查询引擎中，我们对start_date和end_date做索引，这样能提高不少性能。<br>保留部分历史数据，比如说我们一张表里面存放全量的拉链表数据，然后再对外暴露一张只提供近3个月数据的拉链表。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sheep8521/article/details/89187601">https://blog.csdn.net/sheep8521/article/details/89187601</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/09/DataX%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/" rel="prev" title="DataX从入门到进阶">
+      <i class="fa fa-chevron-left"></i> DataX从入门到进阶
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/29/flink_space/flink%E5%BC%80%E5%8F%91-%E5%AE%9E%E6%97%B6%E5%9C%BA%E6%99%AF/" rel="next" title="Flink开发-实时场景">
+      Flink开发-实时场景 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%89%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">拉链表</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8B%89%E9%93%BE%E8%A1%A8%E5%B0%B1%E6%98%AF%E7%94%A8%E6%9D%A5%E5%AD%98%E5%82%A8%E5%8F%98%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%EF%BC%8C%E6%AF%8F%E4%B8%80%E4%BB%BD%E6%95%B0%E6%8D%AE%E9%83%BD%E6%9C%89%E5%AF%B9%E5%BA%94%E7%9A%84%E6%9C%89%E6%95%88%E6%9C%9F%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E8%BF%9B%E8%A1%8C%E7%9A%84%E6%93%8D%E4%BD%9C%E5%B0%B1%E6%98%AF%E5%B0%86%E5%8F%98%E5%8A%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%96%B0%E5%A2%9E%EF%BC%8C%E5%90%8C%E6%97%B6%E5%B0%86%E5%8F%98%E5%8A%A8%E5%AF%B9%E5%BA%94%E7%9A%84%E5%89%8D%E4%B8%80%E6%9D%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%89%E6%95%88%E6%9C%9F%E8%BF%9B%E8%A1%8C%E5%8F%98%E6%9B%B4%E3%80%82"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">拉链表就是用来存储变化的数据的，每一份数据都有对应的有效期，我们需要进行的操作就是将变动的数据进行新增，同时将变动对应的前一条数据的有效期进行变更。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">实现方案</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A1%A81%EF%BC%9A%E8%AE%A2%E5%8D%95%E8%A1%A8%EF%BC%88%E8%AE%B0%E5%BD%95%E5%8E%9F%E5%A7%8B%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">2.0.0.0.0.1.</span> <span class="nav-text">表1：订单表（记录原始的数据）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A1%A82%EF%BC%9A%E5%A2%9E%E9%87%8F%E6%95%B0%E6%8D%AE%E8%A1%A8%EF%BC%88%E8%AE%B0%E5%BD%95%E6%AF%8F%E6%97%A5%E5%8F%98%E6%9B%B4%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">2.0.0.0.0.2.</span> <span class="nav-text">表2：增量数据表（记录每日变更的数据）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A1%A83%EF%BC%9A%E5%8E%86%E5%8F%B2%E6%8B%89%E9%93%BE%E8%A1%A8%EF%BC%88%E6%88%91%E4%BB%AC%E8%A6%81%E5%BE%97%E5%88%B0%E7%9A%84%E5%B0%B1%E6%98%AF%E8%BF%99%E5%BC%A0%E8%A1%A8%EF%BC%89"><span class="nav-number">2.0.0.0.0.3.</span> <span class="nav-text">表3：历史拉链表（我们要得到的就是这张表）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%A1%A84%EF%BC%9A%E4%B8%B4%E6%97%B6%E5%8E%86%E5%8F%B2%E6%8B%89%E9%93%BE%E8%A1%A8%EF%BC%88%E4%B8%B4%E6%97%B6%E8%A1%A8%EF%BC%8C%E5%A4%84%E7%90%86%E5%A5%BD%E4%B9%8B%E5%90%8E%E5%B0%86%E6%95%B0%E6%8D%AE%E8%A6%86%E7%9B%96%E5%88%B0%E5%8E%86%E5%8F%B2%E6%8B%89%E9%93%BE%E8%A1%A8%E4%B8%AD%EF%BC%89"><span class="nav-number">2.0.0.0.0.4.</span> <span class="nav-text">表4：临时历史拉链表（临时表，处理好之后将数据覆盖到历史拉链表中）</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">使用说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">更新方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E6%BB%9A%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">回滚方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%89%E9%93%BE%E8%A1%A8%E9%9A%BE%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">拉链表难点</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

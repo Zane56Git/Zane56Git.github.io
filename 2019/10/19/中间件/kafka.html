@@ -1,0 +1,96 @@
+<hr>
+<p>title: kafka实战<br>tags: </p>
+<ul>
+<li>kafka<br>categories:</li>
+<li>中间件<br>toc: true<br>date: 2018-04-03 13:52:25</li>
+</ul>
+<hr>
+<h1 id="kafka实战"><a href="#kafka实战" class="headerlink" title="kafka实战"></a>kafka实战</h1><h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p>borker</p>
+<p>kafka controller</p>
+<p>topic、partition、offset</p>
+<p>log &amp; segment</p>
+<p>producer消息/数据生产者</p>
+<p>consumer [group]消息/数据消费者&amp;offset</p>
+<h2 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h2><p>kafkatool、</p>
+<h2 id="Kafka命令行操作"><a href="#Kafka命令行操作" class="headerlink" title="Kafka命令行操作"></a>Kafka命令行操作</h2><p><strong>//启动kafka服务，三台主机分别输入此指令：</strong></p>
+<hr>
+<p>kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;</p>
+<hr>
+<p><strong>//以后台的方式启动</strong></p>
+<hr>
+<p>nohup kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;</p>
+<hr>
+<p><strong>//查看topic名</strong></p>
+<hr>
+<p>kafka-topics.sh –list –zookeeper hadoop-001:2181</p>
+<hr>
+<p><strong>//创建topic名</strong></p>
+<hr>
+<p>kafka-topics.sh –create –zookeeper hadoop-001:2181 –replication-factor 3 –partitions 1 –topic first</p>
+<hr>
+<p><strong>//创建生产者</strong></p>
+<hr>
+<p>kafka-console-producer.sh –broker-list hadoop-001:9092,hadoop-002:9092,hadoop-003:9092 –topic first</p>
+<hr>
+<p><strong>//创建消费者</strong></p>
+<hr>
+<p>kafka-console-consumer.sh –zookeeper hadoop-001:2181 –from-beginning –topic first</p>
+<hr>
+<p><strong>1）查看当前服务器中的所有topic</strong></p>
+<hr>
+<p> kafka-topics.sh –list –zookeeper hadoop-001:2181</p>
+<hr>
+<p><strong>2）创建topic</strong></p>
+<hr>
+<p>kafka-topics.sh –create –zookeeper hadoop-001:2181 –replication-factor 3 –partitions 1 –topic first</p>
+<p>选项说明：</p>
+<p>–topic 定义topic名</p>
+<p>–replication-factor 定义副本数</p>
+<p>–partitions 定义分区数</p>
+<hr>
+<p><strong>3） 删除topic</strong></p>
+<hr>
+<p>kafka-topics.sh –delete –zookeeper hadoop-001:2181 –topic first</p>
+<hr>
+<p>需要server.properties中设置delete.topic.enable=true否则只是标记删除或者直接重启。</p>
+<p><strong>4）发送消息</strong></p>
+<hr>
+<p>kafka-console-producer.sh –broker-list hadoop-001:9092 –topic first</p>
+<hr>
+<p>&gt;hello world</p>
+<p>&gt;hadoop hadoop</p>
+<p><strong>5）消费消息</strong></p>
+<hr>
+<p>kafka-console-consumer.sh –zookeeper hadoop-001:2181 –from-beginning –topic first</p>
+<hr>
+<p><strong>6）查看某个Topic的详情</strong></p>
+<hr>
+<p>kafka-topics.sh –topic first –describe –zookeeper hadoop-002:2181<a href="https://www.cnblogs.com/Transkai/p/10877289.html">https://www.cnblogs.com/Transkai/p/10877289.html</a></p>
+<h2 id="SpringBoot集成kafka全面实战"><a href="#SpringBoot集成kafka全面实战" class="headerlink" title="SpringBoot集成kafka全面实战"></a>SpringBoot集成kafka全面实战</h2><p>在开始前我们先创建两个topic：topic1、topic2，其分区和副本数都设置为2，用来测试</p>
+<p>当然我们也可以不手动创建topic，在执行代码kafkaTemplate.send(“topic1”, normalMessage)发送消息时，kafka会帮我们自动完成topic的创建工作，但这种情况下创建的topic默认只有一个分区，分区也没有副本。所以，我们可以在项目中新建一个配置类专门用来初始化topic</p>
+<p>参考：<a href="https://blog.csdn.net/yuanlong122716/article/details/105160545/">https://blog.csdn.net/yuanlong122716/article/details/105160545/</a></p>
+<p>步骤：（4步集成）<br>1、引入pom依赖<br>2、配置类-专门用来初始化topic<br>3、application.propertise配置<br>4、简单使用：<br>简单生产者<br>简单消费</p>
+<ul>
+<li>consumer [group]消息/数据消费者&amp;offset<br>kafka规定，同一个分区（partition）下的数据只能被通一个consumer group中的一个线程消费，这样就避免了不同线程之间争夺通一个资源，通过这种设计kafka做到了无锁，这样可以避免锁竞争造成效率下降。因此建议consumer group里面的线程数应当和分区数保持一致，这样做可以有效的利用线程资源，线程多了会被浪费掉，少了一个线程可能会处理多个分区的数据。如果你需要多个业务消费同一个消息，由于不同的consumer group对同意主题分区的offset是分开存储的，我们可以创建多个consumer group实现多个线程来消费同一个消息的目的。</li>
+</ul>
+<p><a href="https://segmentfault.com/a/1190000017503896?utm_source=tag-newest">这里可参考</a></p>
+<ul>
+<li>kafak高可用及高阶方案（动态扩展）<br>zk集群、kafka集群<br>（待补充）</li>
+</ul>
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>3.0之后已自带zk</p>
+<ul>
+<li>kafka 3.0</li>
+</ul>
+<pre><code># 命令sh xx-server-start.sh ../config/xxx.properties &amp;
+sh zookeeper-server-start.sh ../config/zookeeper.properties &amp;
+sh kafka-server-start.sh ../config/server.properties &amp;
+#以上消费者已启动
+#启动一个消费者
+</code></pre>
+<h1 id="kafka管理界面-kafka-eagle"><a href="#kafka管理界面-kafka-eagle" class="headerlink" title="kafka管理界面 kafka-eagle"></a>kafka管理界面 kafka-eagle</h1><p>给kafka配一个web版的管理页面或仪表盘，管理起来更加方便</p>
+<ul>
+<li>源码： <a href="https://links.jianshu.com/go?to=https://github.com/smartloli/kafka-eagle/">https://github.com/smartloli/kafka-eagle/</a></li>
+<li>官网：<a href="https://links.jianshu.com/go?to=https://www.kafka-eagle.org/">https://www.kafka-eagle.org/</a></li>
+<li>下载： <a href="https://links.jianshu.com/go?to=http://download.kafka-eagle.org/">http://download.kafka-eagle.org/</a></li>
+<li>安装文档： <a href="https://links.jianshu.com/go?to=https://docs.kafka-eagle.org/2.env-and-install">https://docs.kafka-eagle.org/2.env-and-install</a></li>
+</ul>

@@ -1,0 +1,205 @@
+<hr>
+<p>title: redis进阶<br>tags:</p>
+<ul>
+<li>redis<br>categories:</li>
+<li>中间件<br>toc: true<br>date: 2018-10-29 20:11:22</li>
+</ul>
+<hr>
+<p>进阶</p>
+<p>查看全部key数量</p>
+<p>dbsize</p>
+<p>info memory</p>
+<p>redis 集群清除全部数据<br>flushall</p>
+<h1 id="集群监控"><a href="#集群监控" class="headerlink" title="集群监控"></a>集群监控</h1><p><a href="https://blog.51cto.com/xiangcun168/1923302">https://blog.51cto.com/xiangcun168/1923302</a></p>
+<h1 id="redis数据倾斜解决方案"><a href="#redis数据倾斜解决方案" class="headerlink" title="redis数据倾斜解决方案"></a>redis数据倾斜解决方案</h1><p><a href="https://www.cnblogs.com/foreverlearnxzw/p/14001896.html">https://www.cnblogs.com/foreverlearnxzw/p/14001896.html</a></p>
+<p>一次redis调优——连接池优化<br><a href="https://www.pianshen.com/article/3715107869/">https://www.pianshen.com/article/3715107869/</a></p>
+<h1 id="SpringBoot整合redis使用Lettuce客户端超时问题"><a href="#SpringBoot整合redis使用Lettuce客户端超时问题" class="headerlink" title="SpringBoot整合redis使用Lettuce客户端超时问题"></a>SpringBoot整合redis使用Lettuce客户端超时问题</h1><p><a href="https://www.cnblogs.com/shouyaya/p/14607270.html">https://www.cnblogs.com/shouyaya/p/14607270.html</a></p>
+<h1 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h1><p>连接池在很多场景都有使用，例如数据库连接池</p>
+<p>数据库一次性访问人数有限，每次访问都会创建一个连接对象，影响效率</p>
+<p>原理</p>
+<p><a href="https://blog.csdn.net/csdn_shilin/article/details/109147790">https://blog.csdn.net/csdn_shilin/article/details/109147790</a></p>
+<h1 id="redis连接池调优"><a href="#redis连接池调优" class="headerlink" title="redis连接池调优"></a>redis连接池调优</h1><pre><code>config get maxclients
+info clients
+CLIENT LIST获取客户端列表
+
+CLIENT SETNAME    设置当前连接点redis的名称
+
+CLIENT GETNAME    查看当前连接的名称
+
+CLIENT KILL ip:port    杀死指定连接
+</code></pre>
+<pre><code>redis-c(devhost01:6371)&gt;info clients
+&quot;# Clients
+connected_clients:6                            当前连接数
+client_recent_max_input_buffer:8        连接数峰值
+client_recent_max_output_buffer:0
+blocked_clients:0
+tracking_clients:0
+clients_in_timeout_table:0
+&quot;
+</code></pre>
+<p>实际连接数分析</p>
+<p>单机redis启动后，连接数为0，如果通过可视化工具打开连接到redis，则连接数为0；</p>
+<p>如果再打开命令行，则连接数+1，为2；（每打开一次命令行连接，就多一个连接）</p>
+<p>空闲连接数是指应用端占用空闲连接数</p>
+<p>最大连接数是指应用端所限制的最大连接数，并非redis服务端的连接数</p>
+<p>当应用最小连接数为2，操作时连接数最大为2</p>
+<p>集群redis启动后，一个节点 的连接数为集群主节点数-1，例如三主三从，1个主节点连接数为2</p>
+<pre><code>疑惑点
+min-idle、max-idle、max-active之间没有大小约束，很容易产生误解，按道理min-idle、max-idle需小于max-active
+应用端连接数受max-active限制，max-active为2，min-idle、max-idle再大，该应用连接数也为2
+# 初始连接数=最小空闲连接数&gt;0:(最小)空闲连接数?1
+# 应用连接数&lt;=最大连接数
+单个节点，没有并发时，不会占满空闲连接数，连接1个，空闲占1个，共两个，2个节点，则为4个连接数，如果可视化工具已经连接了1个，则一共5个连接数；
+</code></pre>
+<p>实战待验证：</p>
+<p>只启动一个服务，看占用数</p>
+<h2 id="lettuce偶现Connection-reset-by-peer异常排查"><a href="#lettuce偶现Connection-reset-by-peer异常排查" class="headerlink" title="lettuce偶现Connection reset by peer异常排查"></a>lettuce偶现Connection reset by peer异常排查</h2><p>场景：多个服务，每个服务多个节点，连接同一个redis集群。</p>
+<p>查看当前连接数：info clients    </p>
+<p>查看redis最大连接数:CONFIG GET maxclients</p>
+<p>Connection reset by peer: socket write error</p>
+<p><em>①：服务器的并发连接数超过了其承载量，服务器会将其中一些连接<strong>Down</strong>掉；</em> </p>
+<p><em>②：客户关掉了浏览器，而服务器还在给客户端发送数据；</em> </p>
+<p><em>③：浏览器端按了**Stop</em></p>
+<p><a href="https://singgel.blog.csdn.net/article/details/111608179">https://singgel.blog.csdn.net/article/details/111608179</a></p>
+<p>redis集群搭建</p>
+<p>三步</p>
+<p>1、创建挂在目录及配置文件</p>
+<p>2、docker-compose.yml</p>
+<p>3、进入容器创建集群（这一步不可少，因为docker-compose up -d只是创建了6个redis实例并没有构建成cluster集群）</p>
+<p>1、创建挂在目录及配置文件</p>
+<p>创建目录和文件、结构如下：</p>
+<pre><code class="shell">├── docker-compose.yml
+├── redis-6371
+│   ├── conf
+│   │   └── redis.conf
+│   └── data
+├── redis-6372
+│   ├── conf
+│   │   └── redis.conf
+│   └── data
+├── redis-6373
+│   ├── conf
+│   │   └── redis.conf
+│   └── data
+├── redis-6374
+│   ├── conf
+│   │   └── redis.conf
+│   └── data
+├── redis-6375
+│   ├── conf
+│   │   └── redis.conf
+│   └── data
+└── redis-6376
+    ├── conf
+    │   └── redis.conf
+    └── data
+</code></pre>
+<h2 id="redis-conf-配置文件"><a href="#redis-conf-配置文件" class="headerlink" title="redis.conf 配置文件"></a>redis.conf 配置文件</h2><pre><code>port 6371
+cluster-enabled yes
+cluster-config-file nodes-6371.conf
+cluster-node-timeout 5000
+appendonly yes
+protected-mode no
+requirepass 1234
+masterauth 1234
+cluster-announce-ip 10.35.30.39 # 这里是宿主机IP
+cluster-announce-port 6371
+cluster-announce-bus-port 16371
+</code></pre>
+<h2 id="2、docker-compose-配置文件"><a href="#2、docker-compose-配置文件" class="headerlink" title="2、docker-compose 配置文件"></a>2、docker-compose 配置文件</h2><pre><code>version: &quot;3&quot;
+
+# 定义服务，可以多个
+services:
+  redis-6371: # 服务名称
+    image: redis # 创建容器时所需的镜像
+    container_name: redis-6371 # 容器名称
+    restart: always # 容器总是重新启动
+    volumes: # 数据卷，目录挂载
+      - ./redis-6371/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6371/data:/data
+    ports:
+      - 6371:6371
+      - 16371:16371
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6372:
+    image: redis
+    container_name: redis-6372
+    volumes:
+      - ./redis-6372/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6372/data:/data
+    ports:
+      - 6372:6372
+      - 16372:16372
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6373:
+    image: redis
+    container_name: redis-6373
+    volumes:
+      - ./redis-6373/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6373/data:/data
+    ports:
+      - 6373:6373
+      - 16373:16373
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+      
+  redis-6374:
+    image: redis
+    container_name: redis-6374
+    restart: always
+    volumes:
+      - ./redis-6374/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6374/data:/data
+    ports:
+      - 6374:6374
+      - 16374:16374
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6375:
+    image: redis
+    container_name: redis-6375
+    volumes:
+      - ./redis-6375/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6375/data:/data
+    ports:
+      - 6375:6375
+      - 16375:16375
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6376:
+    image: redis
+    container_name: redis-6376
+    volumes:
+      - ./redis-6376/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6376/data:/data
+    ports:
+      - 6376:6376
+      - 16376:16376
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+</code></pre>
+<p>编写完成后使用<code>docker-compose up -d</code>启动容器。</p>
+<p>3、进入容器，创建集群(ip为宿主机ip)</p>
+<pre><code class="shell">redis-cli -a 1234 --cluster create ip:6371 ip:6372 ip:6373 ip:6374 ip:6375 ip:6376 --cluster-replicas 1
+</code></pre>
+<p>版权声明：本文为CSDN博主「January丶」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_39340792/article/details/113766933">https://blog.csdn.net/qq_39340792/article/details/113766933</a></p>
+<p>redis弹窗控制</p>
+<p><a href="https://juejin.cn/post/6844903815053852679">https://juejin.cn/post/6844903815053852679</a></p>
+<h1 id="Springboot整合redis：bitmaps用法"><a href="#Springboot整合redis：bitmaps用法" class="headerlink" title="Springboot整合redis：bitmaps用法"></a><a href="https://www.cnblogs.com/jiehanshi/p/14140729.html">Springboot整合redis：bitmaps用法</a></h1><p><a href="https://www.cnblogs.com/jiehanshi/p/14140729.html">https://www.cnblogs.com/jiehanshi/p/14140729.html</a></p>
+<p>一百万个用户数据</p>
+<h1 id="redis-bitmap-存放手机号"><a href="#redis-bitmap-存放手机号" class="headerlink" title="redis bitmap 存放手机号"></a>redis bitmap 存放手机号</h1><p><a href="https://www.jianshu.com/p/932fac6b4cd6">https://www.jianshu.com/p/932fac6b4cd6</a></p>
+<p>redis bitmap 布隆过滤器</p>
+<p>核心要点：bitmap 使用了整数类型作为位移量，这样恰恰影响redis非整数数据类型的存储；</p>
+<p>那么基于bitmap布隆过滤器是如何实现非整数数据的位移量数据的呢？</p>
+<p>主要是通过计算一个元素值哈希后映射到Bitmap的多个bit上（Guava算法同理），如果对应的bit上都是true，则说明该元素存在，否则为不存在，相对于bigmap的存储，布隆过滤器无非是将一个元素哈希成多个位移值，</p>
+<p>之前的bigmap值判断只是1个元素对应一个偏移量的值</p>
+<p>现在是1个元素对应多个偏移量的值求并，</p>
+<p>java方式</p>
+<p><a href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/5384697?fr=aladdin">https://baike.baidu.com/item/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/5384697?fr=aladdin</a></p>

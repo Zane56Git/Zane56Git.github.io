@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。 Flink  引言Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。Flin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink-基础知识及入门">
+<meta property="og:url" content="http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。 Flink  引言Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。Flin">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/flink/2.png">
+<meta property="og:image" content="http://example.com/flink/1.png">
+<meta property="og:image" content="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/checkpoints.svg">
+<meta property="og:image" content="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/event_processing_time.svg">
+<meta property="og:image" content="http://example.com/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8.assets/10dfa9ec8a1363279b1fa20879c055e409fac7f0.jpeg">
+<meta property="article:published_time" content="2018-03-29T12:18:18.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.220Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="Flink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/flink/2.png">
+
+<link rel="canonical" href="http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Flink-基础知识及入门 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flink-基础知识及入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-03-29T20:18:18+08:00">2018-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/29/flink_space/flink-基础知识及入门/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
+<p>Flink</p>
+<p><img src="/flink/2.png"></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
+<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
+<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
+<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
+<h1 id="Flink计算引擎，到底计算了什么？"><a href="#Flink计算引擎，到底计算了什么？" class="headerlink" title="Flink计算引擎，到底计算了什么？"></a>Flink计算引擎，到底计算了什么？</h1><p>我们一只说Flink是一种计算引擎，那实际在计算什么呢？</p>
+<p>计算框架已经从第一代的雅虎开源的Hadoop体系进化到目前主流的Spark框架，到现在的Flink。<br>前面两套框架的计算主要是从强依赖硬盘存储能力的计算发展到了内存计算，大大增强了计算力。下一代计算引擎，也就是第三代计算引擎Flink</p>
+<p>流计算<br><a target="_blank" rel="noopener" href="https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457">https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457</a></p>
+<ul>
+<li>内存模型图</li>
+</ul>
+<p><img src="/flink/1.png"></p>
+<h1 id="Flink核心概念"><a href="#Flink核心概念" class="headerlink" title="Flink核心概念"></a>Flink核心概念</h1><p>flink三大核心概念：source、transformations、sink</p>
+<ul>
+<li>并行数据流</li>
+</ul>
+<p>Flink程序本质上是并行的，分布式的。在执行过程中，一个流包含一个或多个流分区 ，而每一个算子包含一个或多个算子子任务 。每个算子子任务间彼此独立，以不同的线程执行，甚至有可能运行在不同的机器或容器上。</p>
+<p>算子子任务的数量即这一特定算子的并行度 。一个流的并行度即其生产算子的并行度。相同程序中的不同的算子可能有不同级别的并行度。</p>
+<p>一对一模式(one-to-one)</p>
+<p>重分配模式(redistribution)</p>
+<h2 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h2><p><img src="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/checkpoints.svg" alt="checkpoints and snapshots"></p>
+<ul>
+<li>JobManager &amp; TaskManager</li>
+</ul>
+<p>Flink 整个系统主要由两个组件组成，分别为 JobManager 和 TaskManager，Flink 架构也遵循 Master - Slave 架构设计原则，JobManager 为 Master 节点，TaskManager 为 Worker （Slave）节点。</p>
+<h2 id="Flink-API"><a href="#Flink-API" class="headerlink" title="Flink API"></a>Flink API</h2><p>DataStream API</p>
+<p>DataSet API</p>
+<p>Table API</p>
+<p>SQL</p>
+<h2 id="Time（时间语义）"><a href="#Time（时间语义）" class="headerlink" title="Time（时间语义）"></a>Time（时间语义）</h2><ul>
+<li>时间种类</li>
+</ul>
+<p>Event Time（事件时间）、Ingestion Time（提取时间）、Processing Time（处理时间）</p>
+<p><img src="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/event_processing_time.svg" alt="Event Time and Processing Time"></p>
+<ul>
+<li>数据错乱问题解决方案</li>
+</ul>
+<p>watermark（水位线）、allowLateness（延迟处理）、sideOutput Stream（侧输出流）</p>
+<h2 id="windows（-窗口）"><a href="#windows（-窗口）" class="headerlink" title="windows（ 窗口）"></a>windows（ 窗口）</h2><p>聚合事件（比如计数、求和）在流上的工作方式与在批处理中不同。比如，对流中的所有元素进行计数是不可能的，因为通常流是无限的（无界的）。相反，流上的聚合需要由 <strong>窗口</strong> 来划定范围，比如 “计算过去的5分钟” ，或者 “最后100个元素的和” 。</p>
+<p>Window类型<br>划分窗口就两种方式：</p>
+<p>根据时间进行截取(time-driven-window)，比如每1分钟统计一次或每10分钟统计一次。<br>根据数据进行截取(data-driven-window)，比如每5个数据统计一次或每50个数据统计一次。</p>
+<ul>
+<li>时间窗口</li>
+</ul>
+<p>滚动窗口 （没有重叠）</p>
+<p>滑动窗口 （有重叠）</p>
+<p>会话窗口 （由不活动的间隙所打断）</p>
+<ul>
+<li>计数窗口<br>滚动计数</li>
+</ul>
+<p>滑动窗口</p>
+<h2 id="状态机制"><a href="#状态机制" class="headerlink" title="状态机制"></a>状态机制</h2><ul>
+<li>Keyed State</li>
+<li>算子状态 (Operator State)</li>
+<li>广播状态 (Broadcast State)</li>
+</ul>
+<h2 id="Flink-CDC"><a href="#Flink-CDC" class="headerlink" title="Flink CDC"></a>Flink CDC</h2><p>CDC 的全称是 Change Data Capture ，在广义的概念上，只要是能捕获数据变更的技术，我们都可以称之为 CDC 。目前通常描述的 CDC 技术主要面向数据库的变更，是一种用于捕获数据库中数据变更的技术。</p>
+<p>CDC工具有很多种；</p>
+<p><img src="/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8.assets/10dfa9ec8a1363279b1fa20879c055e409fac7f0.jpeg" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc</a></p>
+<h2 id="待完善的知识点"><a href="#待完善的知识点" class="headerlink" title="待完善的知识点"></a>待完善的知识点</h2><ul>
+<li>Flink时间语义与窗口应用</li>
+<li>Flink 流join实战</li>
+<li>Flink SQL使用</li>
+<li>Flink CEP使用</li>
+</ul>
+<h3 id="算子"><a href="#算子" class="headerlink" title="算子"></a>算子</h3><h3 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h3><p>Flink 提供了Tuple 元组的概念，支持使用Tuple1到Tuple25，分别定义1个字段到25个字段。</p>
+<ul>
+<li>Tuple数量不能满足的问题</li>
+</ul>
+<p>由于Flink只提供了Tuple1~Tuple25，也就是最多只能支持一列转为二十五列。但是在实际场景中，有可能需求远大于二十五列。</p>
+<p>Flink 为处理一列转多列的场景提供了两种返回类型 Tuple 和 Row</p>
+<ul>
+<li>Tuple 只支持1~25个字段，且不能为null，不支持拓展</li>
+<li>Row 支持null同时也无限制字段数，但如果需要使用Row，必须重载实现getResultType方法</li>
+<li>通过采用Row Type 成功地处理了一列转二十六列的场景(使用Tuple时，字段值不能为null，且最多只能存在25个字段，而Row支持字段值为null，且可以无限制个数)。</li>
+</ul>
+<h1 id="flink-run-examples"><a href="#flink-run-examples" class="headerlink" title="flink run examples"></a>flink run examples</h1><p>先启动flink<br>./bin/start-cluster.sh</p>
+<p>bin/flink run examples/batch/WordCount.jar</p>
+<h1 id="Flink开发入门"><a href="#Flink开发入门" class="headerlink" title="Flink开发入门"></a>Flink开发入门</h1><p>主要基于java、scala进行开发</p>
+<h2 id="通过Flink项目模板搭建项目"><a href="#通过Flink项目模板搭建项目" class="headerlink" title="通过Flink项目模板搭建项目"></a>通过Flink项目模板搭建项目</h2><p>搭建主要有两种方式，可以通过maven archetype和Quickstart Shell进行构建</p>
+<ul>
+<li>maven archetype</li>
+</ul>
+<p> 输入命令“mvn archetype:generate” 创建项目骨架（注意目标可区分java/scala），如下：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line"></span><br><span class="line">-DarchetypeGroupId=org.apache.flink</span><br><span class="line"></span><br><span class="line">-DarchetypeArtifactId=flink-quickstart-java</span><br><span class="line"></span><br><span class="line">-DarchetypeVersion=1.8.0</span><br><span class="line"></span><br><span class="line">-DgroupId=com.rickie</span><br><span class="line"></span><br><span class="line">-DartifactId=flink-tutorial</span><br><span class="line"></span><br><span class="line">-Dversion=0.1</span><br><span class="line"></span><br><span class="line">-Dpackage=com.rickie.tutorial</span><br><span class="line"></span><br><span class="line">-DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Quickstart Shell<br>(linux上执行)<br>curl <a target="_blank" rel="noopener" href="https://flink.apache.org/q/quickstart.sh">https://flink.apache.org/q/quickstart.sh</a> | bash</li>
+</ul>
+<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>开发-运行-打包-flink运行（指定运行类）</p>
+<p>多种source方式接入数据</p>
+<ul>
+<li>多种source开发demo</li>
+</ul>
+<p>1、source为定好的数据</p>
+<p>2、source为socket输入的数据（先监听端口）</p>
+<p>3、source为从文件获取数据</p>
+<p>4、source为中间件的数据，例如MQ</p>
+<ul>
+<li>多种方式提交任务</li>
+</ul>
+<p>web端提交jar运行</p>
+<p>命令行提交（启动集群再运行，或通过on  yarn运行）</p>
+<h1 id="应用场景（有流数据的地方就可以用flink）"><a href="#应用场景（有流数据的地方就可以用flink）" class="headerlink" title="应用场景（有流数据的地方就可以用flink）"></a>应用场景（有流数据的地方就可以用flink）</h1><p>简单举几个例子，大数据处理可适用在在如下一些场景:</p>
+<pre><code>医疗大数据、看病更高效(病例病理分析、基因数据分析)
+电商大数据、精准营销法宝(杀熟、哈哈哈哈或)
+零售大数据、最懂消费者(用户画像，精准推送)
+金融大数据、理财利器 (大数据选股)
+交通大数据、畅通出行 (城市大脑)
+</code></pre>
+<ul>
+<li>事件驱动型应用</li>
+<li>数据分析应用</li>
+<li>数据管道应用</li>
+</ul>
+<ol>
+<li>事件驱动型应用<br>典型的事件驱动型应用实例</li>
+</ol>
+<ul>
+<li>反欺诈</li>
+<li>异常检测</li>
+<li>基于规则的报警</li>
+<li>业务流程监控</li>
+<li>（社交网络）Web 应用</li>
+</ul>
+<ol start="2">
+<li>数据分析应用<br>典型的数据分析应用实例</li>
+</ol>
+<ul>
+<li>电信网络质量监控</li>
+<li>移动应用中的产品更新及实验评估分析</li>
+<li>消费者技术中的实时数据即席分析</li>
+<li>大规模图分析</li>
+</ul>
+<ol start="3">
+<li>数据管道应用<br>典型的数据管道应用实例</li>
+</ol>
+<ul>
+<li>电子商务中的实时查询索引构建</li>
+<li>电子商务中的持续 ETL</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Flink/" rel="tag"># Flink</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="prev" title="git基本使用">
+      <i class="fa fa-chevron-left"></i> git基本使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/" rel="next" title="kafka实战">
+      kafka实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flink%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E%EF%BC%8C%E5%88%B0%E5%BA%95%E8%AE%A1%E7%AE%97%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Flink计算引擎，到底计算了什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flink%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">Flink核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="nav-number">3.1.</span> <span class="nav-text">运行机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink-API"><span class="nav-number">3.2.</span> <span class="nav-text">Flink API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time%EF%BC%88%E6%97%B6%E9%97%B4%E8%AF%AD%E4%B9%89%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">Time（时间语义）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%EF%BC%88-%E7%AA%97%E5%8F%A3%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">windows（ 窗口）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA%E5%88%B6"><span class="nav-number">3.5.</span> <span class="nav-text">状态机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flink-CDC"><span class="nav-number">3.6.</span> <span class="nav-text">Flink CDC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%85%E5%AE%8C%E5%96%84%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">3.7.</span> <span class="nav-text">待完善的知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%AD%90"><span class="nav-number">3.7.1.</span> <span class="nav-text">算子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuple-%E5%85%83%E7%BB%84"><span class="nav-number">3.7.2.</span> <span class="nav-text">Tuple 元组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flink-run-examples"><span class="nav-number">4.</span> <span class="nav-text">flink run examples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flink%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8"><span class="nav-number">5.</span> <span class="nav-text">Flink开发入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Flink%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.1.</span> <span class="nav-text">通过Flink项目模板搭建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-number">5.2.</span> <span class="nav-text">开发流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%88%E6%9C%89%E6%B5%81%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9C%B0%E6%96%B9%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%94%A8flink%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">应用场景（有流数据的地方就可以用flink）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

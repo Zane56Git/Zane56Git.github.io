@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="杂杂——是这个世界上最为普通的想象。 这里只为简单记录日常的杂言琐事。  对于学历现实社会中，学历及其重要，学历也及其工具化。  学历代表了你所能接触到的层次，因为那与等级挂钩。 三生万物引入美团技术：https:&#x2F;&#x2F;tech.meituan.com&#x2F;2019&#x2F;02&#x2F;28&#x2F;java-dynamic-trace.html  个人使命宣言（待完善、迁移）主要记录人生哲学、基本信念（说明自己想要成为什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杂谈">
+<meta property="og:url" content="http://example.com/2018/01/08/zane_space/Zane%E4%B9%8B%E6%9D%82%E8%B0%88/index.html">
+<meta property="og:site_name" content="Zane’s Space">
+<meta property="og:description" content="杂杂——是这个世界上最为普通的想象。 这里只为简单记录日常的杂言琐事。  对于学历现实社会中，学历及其重要，学历也及其工具化。  学历代表了你所能接触到的层次，因为那与等级挂钩。 三生万物引入美团技术：https:&#x2F;&#x2F;tech.meituan.com&#x2F;2019&#x2F;02&#x2F;28&#x2F;java-dynamic-trace.html  个人使命宣言（待完善、迁移）主要记录人生哲学、基本信念（说明自己想要成为什么">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/Users/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/Zane%E4%B9%8B%E6%9D%82%E8%B0%88.assets/image-20220315155042947-7330645.png">
+<meta property="article:published_time" content="2018-01-08T12:18:18.000Z">
+<meta property="article:modified_time" content="2023-06-15T06:53:48.583Z">
+<meta property="article:author" content="Zane">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Users/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/Zane%E4%B9%8B%E6%9D%82%E8%B0%88.assets/image-20220315155042947-7330645.png">
+
+<link rel="canonical" href="http://example.com/2018/01/08/zane_space/Zane%E4%B9%8B%E6%9D%82%E8%B0%88/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>杂谈 | Zane’s Space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Zane’s Space</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">this is zane’s zone</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/08/zane_space/Zane%E4%B9%8B%E6%9D%82%E8%B0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          杂谈
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-08 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-08T20:18:18+08:00">2018-01-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/08/zane_space/Zane%E4%B9%8B%E6%9D%82%E8%B0%88/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/01/08/zane_space/Zane之杂谈/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h1><p>杂——是这个世界上最为普通的想象。</p>
+<p>这里只为简单记录日常的杂言琐事。</p>
+<ul>
+<li>对于学历<br>现实社会中，学历及其重要，学历也及其工具化。</li>
+</ul>
+<p>学历代表了你所能接触到的层次，因为那与等级挂钩。</p>
+<h1 id="三生万物"><a href="#三生万物" class="headerlink" title="三生万物"></a>三生万物</h1><p>引入美团技术：<a target="_blank" rel="noopener" href="https://tech.meituan.com/2019/02/28/java-dynamic-trace.html">https://tech.meituan.com/2019/02/28/java-dynamic-trace.html</a></p>
+<p><img src="/Users/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/Zane%E4%B9%8B%E6%9D%82%E8%B0%88.assets/image-20220315155042947-7330645.png" alt="image-20220315155042947"></p>
+<h1 id="个人使命宣言（待完善、迁移）"><a href="#个人使命宣言（待完善、迁移）" class="headerlink" title="个人使命宣言（待完善、迁移）"></a>个人使命宣言（待完善、迁移）</h1><p>主要记录人生哲学、基本信念（说明自己想要成为什么样的人，成就什么样的事业（奉献和成就））及为此奠基的价值观和原则、目标规划。</p>
+<p>以改善城市（地球）环境为价值理念，从空气质量、水质、道路环境进行分析潜在的社会价值</p>
+<p>从人类的基础设施进行改造及优化，尽可能规避和及时响应天灾人祸，例如交通事故、火灾、洪灾、旱灾、地震</p>
+<p>向往的方向：利用算法、数据，解决天灾人祸，服务人类衣食行住，讨索未知事物、新能源、新材料。</p>
+<h1 id="三观"><a href="#三观" class="headerlink" title="三观"></a>三观</h1><p>世界观：世间万物各有不同，也各有其存在的意义</p>
+<p>人生观：不畏失败，不急迫成功，得失自然，有你有我有大家（你做了很多事，都应该是要更好地过好这一生）</p>
+<p>价值观：（现阶段）我的价值观就是不断去挖掘我的价值（我做某件事的价值？）</p>
+<h1 id="现在的你"><a href="#现在的你" class="headerlink" title="现在的你"></a>现在的你</h1><p>你不够优秀就要不断提升自我，多向优秀的人学习！</p>
+<p>尴尬是避免不了的，学会与尴尬并存</p>
+<p>严于律己，从内而外改造自己</p>
+<h1 id="玄"><a href="#玄" class="headerlink" title="玄"></a>玄</h1><p>无即是有，有即是无，无路才有路</p>
+<p>你什么都想做，那就应该什么都不做；静下来好好想，选一个最优的方向，专心致志地去做；</p>
+<p>有些人没有亲自去实践，但是他基于他的学识、认知主导了技术的发展方向，这便是思考和升华。</p>
+<p>你理想去做的事应该是为了服务于人类活动及更好地回馈社会。</p>
+<p>致敬看得远的人，因为看见，所以存在。</p>
+<p>各个年代有各个年代生存的意义及奋斗的目标。</p>
+<h1 id="OWNER"><a href="#OWNER" class="headerlink" title="OWNER"></a>OWNER</h1><p>一件事交给你</p>
+<ul>
+<li>你会怎么做？</li>
+<li>我会这样做</li>
+</ul>
+<p>规范化的重要性：一句话，减少没必要调整</p>
+<p>雷州</p>
+<p>雷州，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%BF%E4%B8%9C%E7%9C%81/132473">广东省</a>辖县级市，由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B9%9B%E6%B1%9F%E5%B8%82/425574">湛江市</a>代管，建市前称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B5%B7%E5%BA%B7%E5%8E%BF/5243246">海康县</a>，位于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD/1122445">中国</a>大陆最南端的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9B%B7%E5%B7%9E%E5%8D%8A%E5%B2%9B/432557">雷州半岛</a>中部。东濒<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%97%E6%B5%B7/27429">南海</a>，西靠北部湾，北与湛江市郊、遂溪县接壤，南与徐闻县毗邻。</p>
+<p>总面积3664.44平方公里。</p>
+<p>截至2020年末，雷州市共辖3个街道、18个镇。</p>
+<p> [1] 根据第七次人口普查数据，截至2020年11月1日零时，雷州常住人口为1321091人。</p>
+<p>产业</p>
+<p><strong>京基集团</strong></p>
+<p>陈华，中国<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%BF%E4%B8%9C%E7%9C%81/132473">广东省</a><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B9%9B%E6%B1%9F%E5%B8%82/425574">湛江市</a>吴川人，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%AC%E5%9F%BA%E9%9B%86%E5%9B%A2/10986819">京基集团</a>的创始人、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%91%A3%E4%BA%8B%E9%95%BF/356514">董事长</a>，康达尔集团实际控制人</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/06/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4/" rel="prev" title="数据库-HIVE开发步骤">
+      <i class="fa fa-chevron-left"></i> 数据库-HIVE开发步骤
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6/" rel="next" title="数据仓库-从入门到进阶">
+      数据仓库-从入门到进阶 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="SOHUCS"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%82"><span class="nav-number">1.</span> <span class="nav-text">杂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%94%9F%E4%B8%87%E7%89%A9"><span class="nav-number">2.</span> <span class="nav-text">三生万物</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E4%BD%BF%E5%91%BD%E5%AE%A3%E8%A8%80%EF%BC%88%E5%BE%85%E5%AE%8C%E5%96%84%E3%80%81%E8%BF%81%E7%A7%BB%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">个人使命宣言（待完善、迁移）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E8%A7%82"><span class="nav-number">4.</span> <span class="nav-text">三观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%B0%E5%9C%A8%E7%9A%84%E4%BD%A0"><span class="nav-number">5.</span> <span class="nav-text">现在的你</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%84"><span class="nav-number">6.</span> <span class="nav-text">玄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OWNER"><span class="nav-number">7.</span> <span class="nav-text">OWNER</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zane"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zane</p>
+  <div class="site-description" itemprop="description">不知生活，何来人生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Zane56Git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Zane56Git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zane56stars.xyz/" title="https:&#x2F;&#x2F;www.zane56stars.xyz&#x2F;" rel="noopener" target="_blank">zone</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script>
+  NexT.utils.loadComments(document.querySelector('#SOHUCS'), () => {
+    var appid = 'cyvu6phQy';
+    var conf = 'e2641b7937f8a9a80a321d9b48dee788';
+    var width = window.innerWidth || document.documentElement.clientWidth;
+    if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+    } else {
+      var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+    }
+  });
+  </script>
+  <script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+
+</body>
+</html>

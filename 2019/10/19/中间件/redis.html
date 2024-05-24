@@ -1,0 +1,31 @@
+<hr>
+<p>title: redis<br>tags:</p>
+<ul>
+<li>redis<br>categories:</li>
+<li>中间件<br>toc: true<br>date: 2017-10-29 20:11:22</li>
+</ul>
+<hr>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>REmote DIctionary Server(Redis) 是一个由 Salvatore Sanfilippo 写的 key-value 存储系统，是跨平台的非关系型数据库。</p>
+<p>Redis 是一个开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存、分布式、可选持久性的键值对(Key-Value)存储数据库，并提供多种语言的 API。 </p>
+<ul>
+<li>相关资源</li>
+</ul>
+<p>Redis 官网：<a href="https://redis.io/">https://redis.io/</a></p>
+<p>源码地址：<a href="https://github.com/redis/redis">https://github.com/redis/redis</a></p>
+<p>Redis 在线测试：<a href="http://try.redis.io/">http://try.redis.io/</a></p>
+<p>Redis 命令参考：<a href="http://doc.redisfans.com/">http://doc.redisfans.com/</a></p>
+<h1 id="基础要素"><a href="#基础要素" class="headerlink" title="基础要素"></a>基础要素</h1><p>##基础数据类型<br>5大数据类型：string、list、hash、set、zset</p>
+<p>3个高级数据结构：Bitmaps、Hyperloglogs、GEO。</p>
+<p>Strings：最大512MB<br>Lists： 2^32-1个数据 (4294967295)<br>Sets： 2^32-1个数据 (4294967295)<br>Hashes：2^32-1个键值对 (4294967295)<br>Sorted sets：与Sets类型类似，没有明确说明。应该也是2^32-1个数据</p>
+<p><strong>redis一个实例能存多少个key?</strong></p>
+<p>官方说单例能处理key：2.5亿个，参考链接:<a href="https://redis.io/topics/faq">https://redis.io/topics/faq</a></p>
+<p>一个key或是value大小最大是512M</p>
+<h1 id="搭建部署"><a href="#搭建部署" class="headerlink" title="搭建部署"></a>搭建部署</h1><h2 id="单机"><a href="#单机" class="headerlink" title="单机"></a>单机</h2><p>建议安装绿色版（windows）、docker安装（linux）</p>
+<h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><p>三主三从</p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="基础案例"><a href="#基础案例" class="headerlink" title="基础案例"></a>基础案例</h1><h1 id="高阶方案"><a href="#高阶方案" class="headerlink" title="高阶方案"></a>高阶方案</h1><h2 id="管道的使用"><a href="#管道的使用" class="headerlink" title="管道的使用"></a>管道的使用</h2><p>redisTemplate.executePipelined</p>
+<p>redisTemplate.executePipelined(new SessionCallback() {<br>            //执行流水线<br>            @Override<br>            public Object execute(RedisOperations operations) throws DataAccessException {<br>            return null;<br>            }<br>});</p>
+<h2 id="布隆过滤器的使用"><a href="#布隆过滤器的使用" class="headerlink" title="布隆过滤器的使用"></a>布隆过滤器的使用</h2><p>基于bigmap实现布隆过滤器</p>
+<h2 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h2><ul>
+<li>redis持久化<br>快照、AOF<h2 id="key复制"><a href="#key复制" class="headerlink" title="key复制"></a>key复制</h2></li>
+<li>redis中Set集合SortSet有序集合的复制<br>单机redis可用，集群不行。<br><a href="https://blog.csdn.net/chwshuang/article/details/52850093#commentBox">https://blog.csdn.net/chwshuang/article/details/52850093#commentBox</a><br>redis-cluster里做zset的复制有什么方案？<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>（待完善）</li>
+</ul>

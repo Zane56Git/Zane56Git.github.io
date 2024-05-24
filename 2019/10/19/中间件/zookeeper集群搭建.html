@@ -1,0 +1,87 @@
+<hr>
+<p>title: zookeeper集群搭建<br>tags:</p>
+<ul>
+<li>zookeeper</li>
+<li>hadoop<br>categories:</li>
+<li>大数据<br>toc: true<br>date: 2018/1/19 0:18:18</li>
+</ul>
+<hr>
+<h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><p><a href="https://www.apache.org/">https://www.apache.org/</a></p>
+<p>肯定要学习zookeeper，这IT的动物那么多，怎么能少了zookeeper呢！</p>
+<p>确实应该多去了解zookeeper，zookeeper在微服务、大数据中起着重要的角色！</p>
+<h1 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h1><pre><code class="shell">curl -O https://archive.apache.org/dist/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
+</code></pre>
+<pre><code class="shell">scp -r zookeeper-3.4.10.tar.gz root@hadoop2:`pwd`
+scp -r zookeeper-3.4.10.tar.gz root@hadoop3:`pwd`
+</code></pre>
+<pre><code class="shell">tar -zxvf zookeeper-3.4.10.tar.gz
+</code></pre>
+<pre><code class="shell">cp zoo_sample.cfg zoo.cfg
+vim zoo.cfg
+
+#配置集群
+dataDir=/data/zookeeper
+server.1=hadoop1:2888:3888
+server.2=hadoop2:2888:3888
+server.3=hadoop3:2888:3888
+</code></pre>
+<p>在配置的文件目录/data/zookeeper目录下，新建myid文件并编辑(用于标识在zookeeper集群的编号)</p>
+<pre><code class="shell">cd /data/zookeeper
+vi myid
+1(每一台输入对应的序号保存即可)
+</code></pre>
+<pre><code class="shell">cd /usr/local/softwareinstall/zookeeper-3.4.10
+bin/zkServer.sh start          //启动zookeeper
+bin/zkServer.sh stop           //停止zookeeper
+bin/zkServer.sh status         //查看zookeeper状态
+</code></pre>
+<p><a href="https://www.cnblogs.com/hxuhongming/p/12819916.html">https://www.cnblogs.com/hxuhongming/p/12819916.html</a></p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
+<li>启动</li>
+</ul>
+<pre><code class="sh">./bin/zkServer.sh start
+</code></pre>
+<ul>
+<li>客户端连接</li>
+</ul>
+<pre><code class="sh">#linux
+./zkCli.sh -server 127.0.0.1:2181
+#wwindos
+./zkCli.cmd -server 127.0.0.1:2181
+</code></pre>
+<ul>
+<li>节点的增删修改</li>
+</ul>
+<pre><code class="sh">ls2命令是ls和stat两个命令的结合体，可以获取给定节点下的子节点以及给定节点的状态信息
+
+#查看该节点下的子节点
+ls /
+ls /zk_test
+#创建znode
+create [-s] [-e] path data acl
+-s：创建的是带序列号的节点，序列号用0填充节点路径。
+-e：创建的是临时节点。
+path：znode的路径，ZooKeeper中没有相对路径，所有路径都必须以&#39;/&#39;开头。
+data：znode携带的数据。
+acl：这个节点的ACL。
+
+create /zk_test mydata1
+
+create -s /test1 222
+
+
+#查询
+get /
+
+#修改
+set /zk_test &quot;andy&quot;
+
+#删除
+delete /zk_test/zk_child
+rmr /zk_test/zk_child
+zookeeper新版本剔除了 rmr 命令，使用 deleteall 代替即可。
+</code></pre>
+<ul>
+<li>history和redo</li>
+</ul>
+<p><code>history</code>命令可以列出最近操作的10条命令历史，并给出每个历史命令的编号。<code>redo</code>命令可以根据历史命令的编号重新调用这些命令。</p>
