@@ -20,21 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="程序&#x3D;数据结构+算法AI&#x3D;数据+算法 机器学习 机器学习,顾名思义,就是研究计算机如何学习和模拟人类的行为,并根据已学得的知识对该行为进行增强和改进。 线性代数 学习路线环境搭建 Python安装  安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anacon">
+  <meta name="description" content="python 环境搭建 Python安装  安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anaconda，它是Python的一个发行版本，安装好它后就不用再去下载上述Python包，其本身已经包含了，比较方便。 anaconda （开源的Python发行版">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习">
-<meta property="og:url" content="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="python-环境搭建">
+<meta property="og:url" content="http://example.com/2019/10/24/python_space/python-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Zane’s Space">
-<meta property="og:description" content="程序&#x3D;数据结构+算法AI&#x3D;数据+算法 机器学习 机器学习,顾名思义,就是研究计算机如何学习和模拟人类的行为,并根据已学得的知识对该行为进行增强和改进。 线性代数 学习路线环境搭建 Python安装  安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anacon">
+<meta property="og:description" content="python 环境搭建 Python安装  安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anaconda，它是Python的一个发行版本，安装好它后就不用再去下载上述Python包，其本身已经包含了，比较方便。 anaconda （开源的Python发行版">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2018-06-07T13:18:18.000Z">
-<meta property="article:modified_time" content="2023-06-15T06:53:48.198Z">
+<meta property="og:image" content="http://example.com/images/Jupyter%E7%BB%98%E5%9B%BE1.png">
+<meta property="article:published_time" content="2019-10-24T13:18:18.000Z">
+<meta property="article:modified_time" content="2024-05-24T01:55:01.480Z">
 <meta property="article:author" content="Zane">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="AI">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/Jupyter%E7%BB%98%E5%9B%BE1.png">
 
-<link rel="canonical" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+<link rel="canonical" href="http://example.com/2019/10/24/python_space/python-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>机器学习 | Zane’s Space</title>
+  <title>python-环境搭建 | Zane’s Space</title>
   
 
 
@@ -178,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/24/python_space/python-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -191,7 +194,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          机器学习
+          python-环境搭建
         </h1>
 
         <div class="post-meta">
@@ -201,14 +204,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-06-07 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T21:18:18+08:00">2018-06-07</time>
+              <time title="创建时间：2019-10-24 21:18:18" itemprop="dateCreated datePublished" datetime="2019-10-24T21:18:18+08:00">2019-10-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+                <time title="修改时间：2024-05-24 09:55:01" itemprop="dateModified" datetime="2024-05-24T09:55:01+08:00">2024-05-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,8 +233,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/06/07/AI/机器学习/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2019/10/24/python_space/python-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/10/24/python_space/python-环境搭建/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -247,32 +250,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>程序=数据结构+算法<br>AI=数据+算法</p>
-<p>机器学习</p>
-<p>机器学习,顾名思义,就是研究计算机如何学习和模拟人类的行为,并根据已学得的知识对该行为进行增强和改进。</p>
-<p>线性代数</p>
-<h1 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h1><h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+        <p>python</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
 <li>Python安装</li>
 </ol>
 <p>安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anaconda，它是Python的一个发行版本，安装好它后就不用再去下载上述Python包，其本身已经包含了，比较方便。</p>
 <p>anaconda （开源的Python发行版本）<a target="_blank" rel="noopener" href="https://www.anaconda.com/products/individual">https://www.anaconda.com/products/individual</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29486768">https://zhuanlan.zhihu.com/p/29486768</a></p>
-<h1 id="深度学习环境搭建：win10-anaconda-tensorflow（cpu版本）-keras"><a href="#深度学习环境搭建：win10-anaconda-tensorflow（cpu版本）-keras" class="headerlink" title="深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras"></a>深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39926594/article/details/104693969">https://blog.csdn.net/weixin_39926594/article/details/104693969</a></p>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>如果在IT行业(尤其是互联网)里溜达一圈，你会发现机器学习在以下热点问题中有广泛应用：</p>
-<ol>
-<li>计算机视觉</li>
+<h1 id="jupyter-notebook-使用"><a href="#jupyter-notebook-使用" class="headerlink" title="jupyter notebook 使用"></a>jupyter notebook 使用</h1><p>开发工具 | 你真的会用jupyter吗？<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36344771/article/details/94851571">https://blog.csdn.net/qq_36344771/article/details/94851571</a></p>
+<h2 id="python入门之-使用Jupyter进行matplotlib绘图"><a href="#python入门之-使用Jupyter进行matplotlib绘图" class="headerlink" title="python入门之-使用Jupyter进行matplotlib绘图"></a>python入门之-使用Jupyter进行matplotlib绘图</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将图片内嵌在交互窗口，而不是弹出一个图片窗口</span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">matplotlib inline</span> </span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line"> </span><br><span class="line">x = np.arange(20)</span><br><span class="line">y = x**2</span><br><span class="line"> </span><br><span class="line">plt.plot(x, y)</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">下面行不写会出现 [&lt;matplotlib.lines.Line2D at 0x111814390&gt;] 字样</span></span><br><span class="line">plt.show() </span><br></pre></td></tr></table></figure>
+
+<p><img src="/./images/Jupyter%E7%BB%98%E5%9B%BE1.png"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lifudong1/article/details/81592353">https://blog.csdn.net/lifudong1/article/details/81592353</a></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">mnist = tf.keras.datasets.mnist</span><br><span class="line"></span><br><span class="line">(x_train, y_train), (x_test, y_test) = mnist.load_data()</span><br><span class="line">x_train, x_test = x_train / 255.0, x_test / 255.0</span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">  tf.keras.layers.Flatten(input_shape=(28, 28)),</span><br><span class="line">  tf.keras.layers.Dense(128, activation=&#x27;relu&#x27;),</span><br><span class="line">  tf.keras.layers.Dropout(0.2),</span><br><span class="line">  tf.keras.layers.Dense(10, activation=&#x27;softmax&#x27;)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=&#x27;adam&#x27;,</span><br><span class="line">              loss=&#x27;sparse_categorical_crossentropy&#x27;,</span><br><span class="line">              metrics=[&#x27;accuracy&#x27;])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, epochs=5)</span><br><span class="line"></span><br><span class="line">model.evaluate(x_test,  y_test, verbose=2)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Anaconda是什么？"><a href="#Anaconda是什么？" class="headerlink" title="Anaconda是什么？"></a>Anaconda是什么？</h1><p>Anaconda是Python的包管理器和环境管理器，Anaconda是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统，<br>提供了包管理与环境管理的功能，可以很方便地解决多版本python并存、切换以及各种第三方包安装问题。</p>
+<p>总结：Anaconda解决了官方Python的两大痛点：</p>
+<p>（1）提供了包管理功能，Windows平台安装第三方包经常失败的场景得以解决。</p>
+<p>（2）提供环境管理功能，解决了多版本Python并存、切换的问题。</p>
+<h2 id="修改Anaconda镜像地址"><a href="#修改Anaconda镜像地址" class="headerlink" title="修改Anaconda镜像地址"></a>修改Anaconda镜像地址</h2><h1 id="Anaconda下载安装"><a href="#Anaconda下载安装" class="headerlink" title="Anaconda下载安装"></a>Anaconda下载安装</h1><p>Anaconda的下载页参见官网（<a target="_blank" rel="noopener" href="https://www.anaconda.com/%EF%BC%89%E4%B8%8B%E8%BD%BD%EF%BC%8CLinux%E3%80%81Mac%E3%80%81Windows%E5%9D%87%E6%94%AF%E6%8C%81%E3%80%82">https://www.anaconda.com/）下载，Linux、Mac、Windows均支持。</a></p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>爬虫<br>Web应用开发<br>科学计算<br>云计算<br>人工智能应用（机器学习、深度学习）<br>系统运维工程项目（自动化运维）<br>数据分析</p>
+<h1 id="python都可以做什么？"><a href="#python都可以做什么？" class="headerlink" title="python都可以做什么？"></a>python都可以做什么？</h1><ol>
+<li>Web开发</li>
+<li>网络编程</li>
+<li>爬虫开发</li>
+<li>云计算开发</li>
+<li>人工智能（推荐）</li>
+<li>自动化运维</li>
+<li>金融分析</li>
+<li>科学运算</li>
+<li>游戏开发</li>
+<li>桌面软件</li>
 </ol>
-<p>典型的应用包括：人脸识别、车牌识别、扫描文字识别、图片内容识别、图片搜索等等。<br>2. 自然语言处理</p>
-<p>典型的应用包括：搜索引擎智能匹配、文本内容理解、文本情绪判断，语音识别、输入法、机器翻译等等。<br>3. 社会网络分析</p>
-<p>典型的应用包括：用户画像、网络关联分析、欺诈作弊发现、热点发现等等。<br>4. 推荐</p>
-<p>典型的应用包括：虾米音乐的“歌曲推荐”，某宝的“猜你喜欢”等等。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sunyunlong_1/article/details/80816606">https://blog.csdn.net/sunyunlong_1/article/details/80816606</a></p>
-<h1 id="机器学习算法"><a href="#机器学习算法" class="headerlink" title="机器学习算法"></a>机器学习算法</h1><ul>
-<li>梯度下降算法<br>梯度下降（gradient descent）在机器学习中应用十分的广泛，不论是在线性回归还是Logistic回归中，它的主要目的是通过迭代找到目标函数的最小值，或者收敛到最小值。</li>
-</ul>
-<p>##监督学习算法<br>##无监督学习算法</p>
-<h1 id="jupyter-使用"><a href="#jupyter-使用" class="headerlink" title="jupyter 使用"></a>jupyter 使用</h1><h1 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h1><h2 id="octave"><a href="#octave" class="headerlink" title="octave"></a>octave</h2><p>octave是一门科学计算语言，类似于matlab，但其占用内存小，所以广受机器学习爱好者的喜爱</p>
-<h2 id="matlab"><a href="#matlab" class="headerlink" title="matlab"></a>matlab</h2>
+<p>pycharm破解(2021年亲测)pycharm激活码完美2099年<br><a target="_blank" rel="noopener" href="http://www.python66.com/bbs/140.html">http://www.python66.com/bbs/140.html</a></p>
+
     </div>
 
     
@@ -283,6 +294,7 @@
           <div class="post-tags">
               <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
               <a href="/tags/AI/" rel="tag"># AI</a>
+              <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
         
@@ -291,12 +303,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/" rel="prev" title="推荐系统概念及模型">
-      <i class="fa fa-chevron-left"></i> 推荐系统概念及模型
+    <a href="/2019/10/24/python_space/python%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" rel="prev" title="python实际应用">
+      <i class="fa fa-chevron-left"></i> python实际应用
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/" rel="next" title="机器学习-入门规划">
-      机器学习-入门规划 <i class="fa fa-chevron-right"></i>
+    <a href="/2019/10/24/java_space/JAVA-%E9%AB%98%E6%95%88%E6%9E%84%E9%80%A0%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A5%9E%E5%99%A8/" rel="next" title="高效构造对象的神器">
+      高效构造对象的神器 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -361,7 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">学习路线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%EF%BC%9Awin10-anaconda-tensorflow%EF%BC%88cpu%E7%89%88%E6%9C%AC%EF%BC%89-keras"><span class="nav-number">3.</span> <span class="nav-text">深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">机器学习算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jupyter-%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">jupyter 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80"><span class="nav-number">7.</span> <span class="nav-text">开发语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#octave"><span class="nav-number">7.1.</span> <span class="nav-text">octave</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matlab"><span class="nav-number">7.2.</span> <span class="nav-text">matlab</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jupyter-notebook-%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">jupyter notebook 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E5%85%A5%E9%97%A8%E4%B9%8B-%E4%BD%BF%E7%94%A8Jupyter%E8%BF%9B%E8%A1%8Cmatplotlib%E7%BB%98%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">python入门之-使用Jupyter进行matplotlib绘图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">Anaconda是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9Anaconda%E9%95%9C%E5%83%8F%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.</span> <span class="nav-text">修改Anaconda镜像地址</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">Anaconda下载安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">5.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">python都可以做什么？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -377,7 +389,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">230</span>
+          <span class="site-state-item-count">229</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
