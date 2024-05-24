@@ -174,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/10/24/java_space/JAVA-%E6%B3%A8%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -188,340 +188,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2017/10/24/java_space/JAVA-%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">java-注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-10-24 21:18:18" itemprop="dateCreated datePublished" datetime="2017-10-24T21:18:18+08:00">2017-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2017/10/24/java_space/JAVA-%E6%B3%A8%E8%A7%A3/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/10/24/java_space/JAVA-%E6%B3%A8%E8%A7%A3/" class="cy_cmt_count" data-xid="2017/10/24/java_space/JAVA-注解/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Java-注解（Annotation）"><a href="#Java-注解（Annotation）" class="headerlink" title="Java 注解（Annotation）"></a>Java 注解（Annotation）</h2><p>Java 注解（Annotation）又称 Java 标注，是 JDK5.0 引入的一种注释机制。</p>
-<p>Java 注解（标注）可以通过反射获取标注内容。在编译器生成类文件时，标注可以被嵌入到字节码中。Java 虚拟机可以保留标注内容，在运行时可以获取到标注内容 。</p>
-<h3 id="内置的注解"><a href="#内置的注解" class="headerlink" title="内置的注解"></a>内置的注解</h3><p>Java 定义了一套注解，共有 7 个，3 个在 java.lang 中，剩下 4 个在 java.lang.annotation 中。</p>
-<p><strong>作用在代码的注解是</strong></p>
-<ul>
-<li>@Override - 检查该方法是否是重写方法。如果发现其父类，或者是引用的接口中并没有该方法时，会报编译错误。</li>
-<li>@Deprecated - 标记过时方法。如果使用该方法，会报编译警告。</li>
-<li>@SuppressWarnings - 指示编译器去忽略注解中声明的警告。</li>
-</ul>
-<p>作用在其他注解的注解(或者说 元注解)是:</p>
-<ul>
-<li>@Retention - 标识这个注解怎么保存，是只在代码中，还是编入class文件中，或者是在运行时可以通过反射访问。</li>
-<li>@Documented - 标记这些注解是否包含在用户文档中。</li>
-<li>@Target - 标记这个注解应该是哪种 Java 成员。</li>
-<li>@Inherited - 标记这个注解是继承于哪个注解类(默认 注解并没有继承于任何子类)</li>
-</ul>
-<p>从 Java 7 开始，额外添加了 3 个注解:</p>
-<ul>
-<li>@SafeVarargs - Java 7 开始支持，忽略任何使用参数为泛型变量的方法或构造函数调用产生的警告。</li>
-<li>@FunctionalInterface - Java 8 开始支持，标识一个匿名函数或函数式接口。</li>
-<li>@Repeatable - Java 8 开始支持，标识某注解可以在同一个声明上使用多次。</li>
-</ul>
-<p>常用注解说明</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Deprecated  -- @Deprecated 所标注内容，不再被建议使用。</span><br><span class="line">@Override    -- @Override 只能标注方法，表示该方法覆盖父类中的方法。</span><br><span class="line">@Documented  -- @Documented 所标注内容，可以出现在javadoc中。</span><br><span class="line">@Inherited   -- @Inherited只能被用来标注“Annotation类型”，它所标注的Annotation具有继承性。</span><br><span class="line">@Retention   -- @Retention只能被用来标注“Annotation类型”，而且它被用来指定Annotation的RetentionPolicy属性。</span><br><span class="line">@Target      -- @Target只能被用来标注“Annotation类型”，而且它被用来指定Annotation的ElementType属性。</span><br><span class="line">@SuppressWarnings -- @SuppressWarnings 所标注内容产生的警告，编译器会对这些警告保持静默。</span><br></pre></td></tr></table></figure>
-
-<h2 id="注解样例"><a href="#注解样例" class="headerlink" title="注解样例"></a>注解样例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Deprecated &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>例如，若某个方法被 @Deprecated 标注，则该方法不再被建议使用。如果有开发人员试图使用或重写被 @Deprecated 标示的方法，编译器会给相应的提示信息。</p>
-<h2 id="注解实战"><a href="#注解实战" class="headerlink" title="注解实战"></a>注解实战</h2><p>实际项目中，我们可以通过注解控制权限拦截、控制数据源切换、控制日志打印、控制限流开关</p>
-<p>下面简单创建一个注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation1 &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1、 @interface – 它的用来修饰 Deprecated，意味着 Deprecated 实现了 java.lang.annotation.Annotation 接口；即 Deprecated 就是一个注解。 (02) @Documented – 它的作用是说明该注解能出现在 javadoc 中。</p>
-<p>2、定义 Annotation 时，@Documented 可有可无；若没有定义，则 Annotation 不会出现在 javadoc 中。</p>
-<p>3、ElementType 是 Annotation 的类型属性。而 @Target 的作用，就是来指定 Annotation 的类型属性。定义 Annotation 时，@Target 可有可无。若有 @Target，则该 Annotation 只能用于它所指定的地方；若没有 @Target，则该 Annotation 可以用于任何地方。</p>
-<p>4、RetentionPolicy 是 Annotation 的策略属性，而 @Retention 的作用，就是指定 Annotation 的策略属性。@Retention(RetentionPolicy.RUNTIME) 的意思就是指定该 Annotation 的策略是 RetentionPolicy.RUNTIME。这就意味着，编译器会将该 Annotation 信息保留在 .class 文件中，并且能被虚拟机读取。定义 Annotation 时，@Retention 可有可无。若没有 @Retention，则默认是 RetentionPolicy.CLASS。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/java-annotation.html">https://www.runoob.com/w3cnote/java-annotation.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/10/24/java_space/JAVA-%E7%B1%BB%E5%8A%A0%E8%BD%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/10/24/java_space/JAVA-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" class="post-title-link" itemprop="url">类加载的过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-10-24 21:18:18" itemprop="dateCreated datePublished" datetime="2017-10-24T21:18:18+08:00">2017-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2017/10/24/java_space/JAVA-%E7%B1%BB%E5%8A%A0%E8%BD%BD/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/10/24/java_space/JAVA-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" class="cy_cmt_count" data-xid="2017/10/24/java_space/JAVA-类加载/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>java文件<br>编译<br>class<br>类装载器</p>
-<p>java文件通过编译器变成了.class文件，接下来类加载器又将这些.class文件加载到JVM中。其中类装载器的作用其实就是类的加载。</p>
-<p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 <code>java.lang.Class</code>对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的 <code>Class</code>对象， <code>Class</code>对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34426768">https://zhuanlan.zhihu.com/p/34426768</a></p>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&amp;mid=2247483934&amp;idx=1&amp;sn=41c46eceb2add54b7cde9eeb01412a90&amp;chksm=ebf6da61dc81537721d36aadb5d20613b0449762842f9128753e716ce5fefe2b659d8654c4e8&amp;scene=21#wechat_redirect">https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&amp;mid=2247483934&amp;idx=1&amp;sn=41c46eceb2add54b7cde9eeb01412a90&amp;chksm=ebf6da61dc81537721d36aadb5d20613b0449762842f9128753e716ce5fefe2b659d8654c4e8&amp;scene=21#wechat_redirect</a></p>
-<h2 id="Java-类加载（类的生命周期）"><a href="#Java-类加载（类的生命周期）" class="headerlink" title="Java-类加载（类的生命周期）"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jhxxb/p/10900405.html">Java-类加载（类的生命周期）</a></h2><p>类从被加载到虚拟机内存开始，到卸载出内存为止。</p>
-<h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><h1 id="加载方式"><a href="#加载方式" class="headerlink" title="加载方式"></a>加载方式</h1><p><strong>隐式加载</strong>：程序代码中不通过调用ClassLoader来加载需要的类，而是通过JVM类自动加载需要的类到内存中。例如，当我们在类中继承或者引用某个类的时候，</p>
-<p>JVM在解析当前这个类的时，发现引用的类不在内存中，那么就会自动将这些类加载到内存中。</p>
-<p><strong>显式加载</strong>：代码中通过Class.forName（），this.getClass.getClassLoader.LoadClass（），自定义类加载器中的findClass（）方法等。</p>
-<p>显式加载的时候，当我们获取到class对象之后，需要调用class对象的new instans()生成实例。</p>
-<h1 id="类编译"><a href="#类编译" class="headerlink" title="类编译"></a>类编译</h1><p>Java中不带package的程序和带package的程序编译的方式是不同的。</p>
-<p>一、不带package的程序</p>
-<p>建立个HelloWorld.java的文件</p>
-<p>1.编译</p>
-<p>编译的指令是javac</p>
-<p>javac HelloWorld.java 回车</p>
-<p>2.运行</p>
-<p>Java HelloWorld 回车 </p>
-<p>二、带package的程序</p>
-<p>1.编译</p>
-<p>编译的指令是javac</p>
-<p>javac HelloWorld.java 回车</p>
-<p>2.运行</p>
-<p>运行时候需要注意了，不能文件的根目录，是到文件的包目录的上层目录——可以理解为工程目录下，然后运行，文件名前需要加上包名。（ net.test 为包名）</p>
-<p>java  net.test.HelloWorld 回车</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/10/09/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/10/09/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-title-link" itemprop="url">分布式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-10-09 21:18:18" itemprop="dateCreated datePublished" datetime="2017-10-09T21:18:18+08:00">2017-10-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2017/10/09/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/10/09/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F/" class="cy_cmt_count" data-xid="2017/10/09/分布式/分布式/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>分布式</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/08/28/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/28/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">前端项目规范</a>
+            <a href="/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">程序框图设计</a>
         </h2>
 
         <div class="post-meta">
@@ -546,7 +213,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
                 </span>
             </span>
 
@@ -560,8 +227,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2017/08/28/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/08/28/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%A7%84%E8%8C%83/" class="cy_cmt_count" data-xid="2017/08/28/前端项目规范/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/" class="cy_cmt_count" data-xid="2017/08/28/架构之路/架构之路-思维设计/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -577,101 +244,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="前端开发"><a href="#前端开发" class="headerlink" title="前端开发"></a>前端开发</h1><h2 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h2><h2 id="http请求管理"><a href="#http请求管理" class="headerlink" title="http请求管理"></a>http请求管理</h2><p>get、post</p>
-<h3 id="外链请求管理"><a href="#外链请求管理" class="headerlink" title="外链请求管理"></a>外链请求管理</h3><h3 id="内链请求管理"><a href="#内链请求管理" class="headerlink" title="内链请求管理"></a>内链请求管理</h3><h3 id="静态请求管理"><a href="#静态请求管理" class="headerlink" title="静态请求管理"></a>静态请求管理</h3><h2 id="api路由管理"><a href="#api路由管理" class="headerlink" title="api路由管理"></a>api路由管理</h2><p>所有请求接口统一分类管理</p>
-<h2 id="跨域处理"><a href="#跨域处理" class="headerlink" title="跨域处理"></a>跨域处理</h2><h2 id="路由权限管理"><a href="#路由权限管理" class="headerlink" title="路由权限管理"></a>路由权限管理</h2><h2 id="页面管理"><a href="#页面管理" class="headerlink" title="页面管理"></a>页面管理</h2><h2 id="排版样式管理"><a href="#排版样式管理" class="headerlink" title="排版样式管理"></a>排版样式管理</h2><h2 id="主体个性化管理"><a href="#主体个性化管理" class="headerlink" title="主体个性化管理"></a>主体个性化管理</h2><h2 id="静态文件管理"><a href="#静态文件管理" class="headerlink" title="静态文件管理"></a>静态文件管理</h2><h2 id="打包管理"><a href="#打包管理" class="headerlink" title="打包管理"></a>打包管理</h2><h2 id="部署管理"><a href="#部署管理" class="headerlink" title="部署管理"></a>部署管理</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/08/28/%E5%88%86%E5%B8%83%E5%BC%8F/%E9%AB%98%E5%B9%B6%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/28/%E5%88%86%E5%B8%83%E5%BC%8F/%E9%AB%98%E5%B9%B6%E5%8F%91/" class="post-title-link" itemprop="url">高并发</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-28 22:18:36" itemprop="dateCreated datePublished" datetime="2017-08-28T22:18:36+08:00">2017-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2017/08/28/%E5%88%86%E5%B8%83%E5%BC%8F/%E9%AB%98%E5%B9%B6%E5%8F%91/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/08/28/%E5%88%86%E5%B8%83%E5%BC%8F/%E9%AB%98%E5%B9%B6%E5%8F%91/" class="cy_cmt_count" data-xid="2017/08/28/分布式/高并发/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="高并发的产生原因"><a href="#高并发的产生原因" class="headerlink" title="高并发的产生原因"></a>高并发的产生原因</h1><p>一张图（待补充）</p>
-<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><h2 id="秒杀"><a href="#秒杀" class="headerlink" title="秒杀"></a>秒杀</h2><p>抢票、网购</p>
-<h2 id="选课"><a href="#选课" class="headerlink" title="选课"></a>选课</h2><h2 id="非法攻击"><a href="#非法攻击" class="headerlink" title="非法攻击"></a>非法攻击</h2><h1 id="相关解决方案"><a href="#相关解决方案" class="headerlink" title="相关解决方案"></a>相关解决方案</h1><h2 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h2><p>现在只有不带唯一索引Insert和计算式Update及使用分布式数据库会引起幂等性问题的</p>
-<h2 id="服务器能承受同时在线人数"><a href="#服务器能承受同时在线人数" class="headerlink" title="服务器能承受同时在线人数"></a>服务器能承受同时在线人数</h2><h2 id="计算并发用户数"><a href="#计算并发用户数" class="headerlink" title="计算并发用户数"></a>计算并发用户数</h2><h2 id="模拟高并发的测试"><a href="#模拟高并发的测试" class="headerlink" title="模拟高并发的测试"></a>模拟高并发的测试</h2><h2 id="如何提高系统的吞吐量"><a href="#如何提高系统的吞吐量" class="headerlink" title="如何提高系统的吞吐量"></a>如何提高系统的吞吐量</h2><h2 id="Java异步非阻塞编程的几种方式"><a href="#Java异步非阻塞编程的几种方式" class="headerlink" title="Java异步非阻塞编程的几种方式"></a>Java异步非阻塞编程的几种方式</h2>
+          <p>推荐使用processon<br><a target="_blank" rel="noopener" href="https://www.processon.com/">https://www.processon.com/</a></p>
+<h1 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h1><p>可完成</p>
+<h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p>可完成</p>
+<h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p>可完成</p>
+<h1 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h1><p>待整理</p>
+<h1 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h1><p>待完善</p>
+<h1 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h1><p>时序图中包括如下元素：角色，对象，生命线，控制焦点和消息。</p>
+<ul>
+<li>微信支付的统一下单接口业务流程时序图</li>
+</ul>
+<h1 id="数据库建模"><a href="#数据库建模" class="headerlink" title="数据库建模"></a>数据库建模</h1>
       
     </div>
 
@@ -772,105 +355,6 @@
 <p>实现支持高并发接口</p>
 <p>模拟高并发请求</p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">程序框图设计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-28 22:18:36" itemprop="dateCreated datePublished" datetime="2017-08-28T22:18:36+08:00">2017-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/08/28/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF/%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF-%E6%80%9D%E7%BB%B4%E8%AE%BE%E8%AE%A1/" class="cy_cmt_count" data-xid="2017/08/28/架构之路/架构之路-思维设计/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>推荐使用processon<br><a target="_blank" rel="noopener" href="https://www.processon.com/">https://www.processon.com/</a></p>
-<h1 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h1><p>可完成</p>
-<h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p>可完成</p>
-<h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p>可完成</p>
-<h1 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h1><p>待整理</p>
-<h1 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h1><p>待完善</p>
-<h1 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h1><p>时序图中包括如下元素：角色，对象，生命线，控制焦点和消息。</p>
-<ul>
-<li>微信支付的统一下单接口业务流程时序图</li>
-</ul>
-<h1 id="数据库建模"><a href="#数据库建模" class="headerlink" title="数据库建模"></a>数据库建模</h1>
       
     </div>
 
@@ -1212,10 +696,558 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/06/06/A_hexo%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/06/A_hexo%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">hexo搭建使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-06 21:21:24" itemprop="dateCreated datePublished" datetime="2017-06-06T21:21:24+08:00">2017-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 11:40:41" itemprop="dateModified" datetime="2024-05-24T11:40:41+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" itemprop="url" rel="index"><span itemprop="name">基础设施</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2017/06/06/A_hexo%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2017/06/06/A_hexo%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2017/06/06/A_hexo搭建使用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="hexo文档教程"><a href="#hexo文档教程" class="headerlink" title="hexo文档教程"></a>hexo文档教程</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p>
+<h2 id="hexo搭建使用"><a href="#hexo搭建使用" class="headerlink" title="hexo搭建使用"></a>hexo搭建使用</h2><p>npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a><br>npm install -g hexo-cli<br>hexo -v<br>rm -rf node_modules &amp;&amp; npm install –force</p>
+<h3 id="下载安装搭建"><a href="#下载安装搭建" class="headerlink" title="下载安装搭建"></a>下载安装搭建</h3><h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>默认使用4000端口，用hexo s -p 80 ，可以暂时修改启动端口。</p>
+<p>编译项目，输入命令：hexo g<br>运行项目，输入命令：hexo s</p>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="构建生成静态文件"><a href="#构建生成静态文件" class="headerlink" title="构建生成静态文件"></a>构建生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>hexo d -g</p>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="图片展示问题"><a href="#图片展示问题" class="headerlink" title="图片展示问题"></a>图片展示问题</h3><p>可以通过hexo命令创建文本，会自动生成同名目录，同个分类的文档目录都放在一个文件夹内，便于管理。</p>
+<p>方便管理文档，建议将文档按目录管理，图片在各个目录创建一个index默认文件，并且同名的目录用来存放图片</p>
+<p>建议使用yuque-hexo插件，让雨雀来管理和同步hexo文档</p>
+<h3 id="主题管理"><a href="#主题管理" class="headerlink" title="主题管理"></a>主题管理</h3><p>Next主题美化,可参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/nightmare_dimple/article/details/86661502">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></p>
+<h3 id="站点管理"><a href="#站点管理" class="headerlink" title="站点管理"></a>站点管理</h3><p>修改博客站点标题、作者、头像</p>
+<h3 id="hexo文章分类、标签设置"><a href="#hexo文章分类、标签设置" class="headerlink" title="hexo文章分类、标签设置"></a>hexo文章分类、标签设置</h3><p>其实很简单，config文件放开配置，然后创建相关文件</p>
+<p>注意：type有要求，并且不要编辑自定义内容，这样可以使用主题生成页面</p>
+<p>type: “tags”</p>
+<p>type: “categories”</p>
+<h2 id="giee和github的集成hexo的搭建及使用"><a href="#giee和github的集成hexo的搭建及使用" class="headerlink" title="giee和github的集成hexo的搭建及使用"></a>giee和github的集成hexo的搭建及使用</h2><p>gitee集成简单（但国内2021年5月份后停止page使用，暂无使用）</p>
+<p>略</p>
+<p>github集成hexo说明（3步）</p>
+<p>创建仓库（用于存储hexo博客仓库）<br>注意：仓库是公开的，url包含用户名，</p>
+<p>设置ssh，开发电脑生成ssh密钥（生成位置~/.ssh/id_rsa.pub），github 设置密钥</p>
+<p>hexo安装git插件，部署到git</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/grave2015/article/details/79961843#commentBox"></a></p>
+<p>可能是安装的时候没有安装完全，有一些依赖没有安装完成 </p>
+<p>执行 npm ls –depth 0 命令</p>
+<p>npm ls –depth 0</p>
+<ul>
+<li>插入图片设置<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bzsheng/p/13802829.html">https://www.cnblogs.com/bzsheng/p/13802829.html</a></li>
+</ul>
+<h1 id="hexo站点"><a href="#hexo站点" class="headerlink" title="hexo站点"></a>hexo站点</h1><p>用swiftype为Hexo添加站内搜索</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fsong/p/11759136.html">https://www.cnblogs.com/fsong/p/11759136.html</a></p>
+<ul>
+<li>常用步骤<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">安装hexocli</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">安装依赖</span><br><span class="line">npm install --force</span><br><span class="line"></span><br><span class="line">生成静态文件</span><br><span class="line">hexo -g</span><br><span class="line"></span><br><span class="line">清理</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">启动</span><br><span class="line">hexo s</span><br><span class="line"></span><br><span class="line">远程部署</span><br><span class="line">hexo -d</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/06/06/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/06/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE/" class="post-title-link" itemprop="url">数据库-HIVE</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2017-06-06T20:08:08+08:00">2017-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2017/06/06/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2017/06/06/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-HIVE/" class="cy_cmt_count" data-xid="2017/06/06/大数据/大数据-HIVE/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Hive 由 Facebook 实现并开源，是基于 Hadoop 的一个数据仓库工具，底层数据是存储在 HDFS 上。Hive的本质是将 SQL 语句转换为 MapReduce 任务运行。</p>
+<p>Hive属于<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93&spm=1001.2101.3001.7020">数据仓库</a>的概念范畴，主要用于进行数据分析用，不适合实时数据查询。可以完成海量数据的存储，存储在HDFS上，不需要类似关系数据库那样的固定格式限制，对应的表实际上就是hadoop hdfs上的文件夹，表中数据相当于文件。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#解压并配置环境变量</span><br><span class="line">vi ~/.bash_profile</span><br><span class="line">export HIVE_HOME=/home/deploy/software/flink-1.10.0集群搭建/apache-hive-2.3.9-bin</span><br><span class="line">export PATH=$HIVE_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line">source ~/.bash_profile</span><br><span class="line"></span><br><span class="line">#修改配置文件</span><br><span class="line">cp hive-env.sh.template hive-env.sh</span><br><span class="line">cp hive-default.xml.template hive-site.xml</span><br><span class="line">cp hive-log4j2.properties.template hive-log4j2.properties</span><br><span class="line">cp hive-exec-log4j2.properties.template hive-exec-log4j2.properties</span><br><span class="line"></span><br><span class="line">#修改 hive-env.sh(到这一步hive就可以启动了)</span><br><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home</span><br><span class="line">export HIVE_HOME=/opt/third/apache-hive-2.3.9-bin</span><br><span class="line">export HADOOP_HOME=/opt/third/hadoop-2.10.0</span><br><span class="line">export HIVE_CONF_DIR=/opt/third/apache-hive-2.3.9-bin/conf</span><br><span class="line"></span><br><span class="line">#修改 hive-env.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建HDFS目录（开启hadoop：start-all-sh）"><a href="#创建HDFS目录（开启hadoop：start-all-sh）" class="headerlink" title="创建HDFS目录（开启hadoop：start-all.sh）"></a>创建HDFS目录（开启hadoop：start-all.sh）</h2><p>Hadoop集群配置</p>
+<p>（1）必须启动hdfs和yarn</p>
+<h2 id="启动hive"><a href="#启动hive" class="headerlink" title="启动hive"></a>启动hive</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive --service metastore</span><br><span class="line">hive</span><br></pre></td></tr></table></figure>
+
+<h2 id="元数据Metastore"><a href="#元数据Metastore" class="headerlink" title="元数据Metastore"></a><strong>元数据Metastore</strong></h2><p>在Hive的具体使用中，首先面临的问题便是如何定义表结构信息，跟结构化的数据映射成功。所谓的映射指的是一种对应关系。在Hive中需要描述清楚表跟文件之间的映射关系、列和字段之间的关系等信息。这些描述映射关系的数据的称之为Hive的元数据。</p>
+<p>Metadata即元数据。元数据包含用Hive创建的database、table、表的字段等元信息。元数据存储在关系型数据库中。如hive内置的Derby、第三方如MySQL等。</p>
+<h1 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h1><h2 id="HQL"><a href="#HQL" class="headerlink" title="HQL"></a>HQL</h2><h2 id="将结构化的数据映射为一张数据库表"><a href="#将结构化的数据映射为一张数据库表" class="headerlink" title="将结构化的数据映射为一张数据库表"></a>将结构化的数据映射为一张数据库表</h2><h1 id="hive表类型"><a href="#hive表类型" class="headerlink" title="hive表类型"></a>hive表类型</h1><p>hive中是有多种表类型的，可以分为四种：内部表，外部表，<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%8C%BA%E8%A1%A8&spm=1001.2101.3001.7020">分区表</a>，桶表</p>
+<ul>
+<li><p>内部表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内部表是hive默认表类型，表数据默认存储在warehouse目录中，在加载数据的过程中，实际数据会被移动到warehouse目录中，当删除表时，表的数据和元数据将会被同时删除</span><br></pre></td></tr></table></figure></li>
+<li><p>外部表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create external table external_table (</span><br><span class="line">key string</span><br><span class="line">) location &#x27;/data/external&#x27;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>内部表和外部表的相互转化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 内部表转外部表 </span><br><span class="line">alter table tblName set tblproperties (&#x27;external&#x27;=&#x27;true&#x27;);</span><br><span class="line">-- 外部表转内部表 </span><br><span class="line">alter table tblName set tblproperties (&#x27;external&#x27;=&#x27;false&#x27;);</span><br></pre></td></tr></table></figure></li>
+<li><p>分区表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table partition_1 (</span><br><span class="line">id int,</span><br><span class="line">name string </span><br><span class="line">) partitioned by (dt string)</span><br><span class="line">row format delimited</span><br><span class="line">fields terminated by &#x27;\t&#x27;;</span><br><span class="line"></span><br><span class="line">load data local inpath &#x27;/data/soft/hivedata/partition_1.data&#x27; into table;</span><br></pre></td></tr></table></figure></li>
+<li><p>外部分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create external table ex_par(</span><br><span class="line">id int,</span><br><span class="line">name string</span><br><span class="line">)partitioned by(dt string) </span><br><span class="line"> row format delimited  </span><br><span class="line"> fields terminated by &#x27;\t&#x27;</span><br><span class="line"> location &#x27;/data/ex_par&#x27;;</span><br></pre></td></tr></table></figure></li>
+<li><p>桶表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table bucket_tb(</span><br><span class="line">id int</span><br><span class="line">) clustered by (id) into 4 buckets;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create view v1 as select  t3_new.id,t3_new.stu_name from t3_new;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="hive分区表（侧重动态分区表）"><a href="#hive分区表（侧重动态分区表）" class="headerlink" title="hive分区表（侧重动态分区表）"></a>hive分区表（侧重动态分区表）</h2><p>数据分区的概念以及存在很久了，通常使用分区来水平分散压力，将数据从物理上移到和使用最频繁的用户更近的地方，以及实现其目的。hive中有分区表的概念，我们可以看到分区具重要性能优势，而且分区表还可以将数据以一种符合逻辑的方式进行组织，比如分层存储</p>
+<p>分区表分别有静态分区和动态分区</p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%8C%BA%E8%A1%A8&spm=1001.2101.3001.7020">分区表</a>实际上就是对应一个 HDFS 文件系统上的独立的<strong>文件夹</strong>，该文件夹下是该分区所有的数据文件。Hive 中的<strong>分区就是分目录</strong>，把一个大的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E9%9B%86&spm=1001.2101.3001.7020">数据集</a>根据业务需要分割成小的数据集。在查询时通过 WHERE 子句中的表达式选择查询所需要的指定的分区，这样的查询效率会提高很多。</p>
+<p>如果没有分区的存在，那么每次查询Hive将会进行全表扫描。对于小数据量的表来说，全表扫描并不会慢到无法忍受，但是对于大数据量来讲，比如几年的数据，每次查询都要扫描几年的所有数据，除了浪费时间之外，还浪费集群资源。</p>
+<h2 id="文件存储格式"><a href="#文件存储格式" class="headerlink" title="*文件存储格式*"></a><em><strong>*文件存储格式*</strong></em></h2><p>Hive支持的存储数的格式主要有：TEXTFILE 、SEQUENCEFILE、ORC、PARQUET。</p>
+<p>TEXTFILE和SEQUENCEFILE的存储格式都是基于行存储的；</p>
+<p>ORC和PARQUET是基于列式存储的。</p>
+<p>存储文件的压缩比总结：</p>
+<p>ORC &gt;  Parquet &gt;  textFile（默认）</p>
+<p>存储文件的查询速度总结：查询速度相近。</p>
+<p>在实际的项目开发当中，hive表的数据存储格式一般选择：orc或parquet。压缩方式一般选择snappy，lzo。</p>
+<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><h2 id="Flink-to-Hive-小时级场景"><a href="#Flink-to-Hive-小时级场景" class="headerlink" title="Flink-to-Hive 小时级场景"></a><strong>Flink-to-Hive 小时级场景</strong></h2><p>从Database 中的 Binlog 导出到 Kafka，同时 Log Server 数据也会上报到 Kafka。所有数据实时落地到 Kafka 之后，通过 Flink 抽取到 HDFS。下图中 HDFS 到 Hive 之间为虚线，即 Flink 并非直接落地到 Hive，Flink 落地到 HDFS 后，再落地到 Hive 的时间可能是小时级、半小时级甚至分钟级，需要知道数据的 Event time 已经到何时，再触发 alter table，add partition，add location 等，写入其分区。</p>
+<h2 id="HUE安装与使用-也可使用Dbeaver"><a href="#HUE安装与使用-也可使用Dbeaver" class="headerlink" title="HUE安装与使用(也可使用Dbeaver)"></a>HUE安装与使用(也可使用Dbeaver)</h2><p>Hue官方网站：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://gethue.com/">https://gethue.com/</a><br>HUE官方用户手册：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://docs.gethue.com/">https://docs.gethue.com/</a><br>官方安装文档：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://docs.gethue.com/administrator/installation/install/">https://docs.gethue.com/administrator/installation/install/</a><br>HUE下载地址：[<a target="_blank" rel="noopener" href="https://docs.gethue.com/releases/">https://docs.gethue.com/releases/</a></p>
+<p>HUE是一个开源的Apache Hadoop UI系统，早期由Cloudera开发，现已贡献给开源社区。它是基于Python Web框架Django实现的。通过使用Hue我们可以通过浏览器方式操纵Hadoop集群。例如put、get、执行MapReduce Job等等。</p>
+<h1 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h1><p>hive 7连3</p>
+<h2 id="Hive经典案例之蚂蚁森林"><a href="#Hive经典案例之蚂蚁森林" class="headerlink" title="Hive经典案例之蚂蚁森林"></a>Hive经典案例之蚂蚁森林</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bigdataJ/article/details/108228207">https://blog.csdn.net/bigdataJ/article/details/108228207</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">数据库-存储过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2017-06-06T20:08:08+08:00">2017-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2017/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2017/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="cy_cmt_count" data-xid="2017/06/06/数据库/数据库-存储过程/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://www.manongjc.com/detail/9-ojebelvwatsjgkl.html">http://www.manongjc.com/detail/9-ojebelvwatsjgkl.html</a></p>
+<p>这里通过遍历查询数据，然后更新表数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-- 创建存储过程之前需判断该存储过程是否已存在，若存在则删除</span><br><span class="line">DROP PROCEDURE IF EXISTS init_reportUrl;</span><br><span class="line">-- 创建存储过程</span><br><span class="line">CREATE PROCEDURE init_reportUrl()</span><br><span class="line">BEGIN</span><br><span class="line">-- 定义变量</span><br><span class="line">DECLARE s int DEFAULT 0;</span><br><span class="line">DECLARE report_id varchar(255);</span><br><span class="line">DECLARE report_url varchar(256);</span><br><span class="line">-- 定义游标，并将sql结果集赋值到游标中</span><br><span class="line">DECLARE report CURSOR FOR select reportId,reportUrl from patrolReportHistory;</span><br><span class="line">-- 声明当游标遍历完后将标志变量置成某个值</span><br><span class="line">DECLARE CONTINUE HANDLER FOR NOT FOUND SET s=1;</span><br><span class="line">-- 打开游标</span><br><span class="line">open report;</span><br><span class="line">-- 将游标中的值赋值给变量，注意：变量名不要和返回的列名同名，变量顺序要和sql结果列的顺序一致</span><br><span class="line">fetch report into report_id,report_url;</span><br><span class="line">-- 当s不等于1，也就是未遍历完时，会一直循环</span><br><span class="line">while s&lt;&gt;1 do</span><br><span class="line">-- 执行业务逻辑</span><br><span class="line">update patrolreporthistory set reportUrl = CONCAT(&#x27;patrolReport.html?monitorId=&#x27;,substring(report_url,15,1),&#x27;&amp;reportId=&#x27;,report_id) where reportId=report_id;</span><br><span class="line">-- 将游标中的值再赋值给变量，供下次循环使用</span><br><span class="line">fetch report into report_id,report_url;</span><br><span class="line">-- 当s等于1时表明遍历以完成，退出循环</span><br><span class="line">end while;</span><br><span class="line">-- 关闭游标</span><br><span class="line">close report;</span><br><span class="line">END;</span><br><span class="line">-- 执行存储过程</span><br><span class="line">call init_reportUrl()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">JAVA中的设计模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2017-03-16T19:21:26+08:00">2017-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="cy_cmt_count" data-xid="2017/03/16/java_space/Java中的设计模式/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="单例模式（枚举）"><a href="#单例模式（枚举）" class="headerlink" title="单例模式（枚举）"></a>单例模式（枚举）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dtwave.oms.data.transform.job;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisInfomation</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> use;</span><br><span class="line">    <span class="comment">//私有化构造函数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">RedisInfomation</span><span class="params">()</span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个静态枚举类</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">enum</span> <span class="title class_">SingletonEnum</span>&#123;</span><br><span class="line">        <span class="comment">//创建一个枚举对象，该对象天生为单例</span></span><br><span class="line">        INSTANCE;</span><br><span class="line">        <span class="keyword">private</span> RedisInfomation user;</span><br><span class="line">        <span class="comment">//私有化枚举的构造函数</span></span><br><span class="line">        <span class="keyword">private</span> <span class="title function_">SingletonEnum</span><span class="params">()</span>&#123;</span><br><span class="line">            user=<span class="keyword">new</span> <span class="title class_">RedisInfomation</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> RedisInfomation <span class="title function_">getInstnce</span><span class="params">()</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//对外暴露一个获取User对象的静态方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> RedisInfomation <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonEnum.INSTANCE.getInstnce();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E9%94%81/" class="post-title-link" itemprop="url">JAVA程序中的锁</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2017-03-16T19:21:26+08:00">2017-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E9%94%81/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2017/03/16/java_space/Java%E4%B8%AD%E7%9A%84%E9%94%81/" class="cy_cmt_count" data-xid="2017/03/16/java_space/Java中的锁/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>锁的原理<br>现在的Java语言中，提供了2种锁，一种是语言特性提供的内置锁（用synchronized修饰使用），还有一种是 java.util.concurrent.locks 包中的锁。</p>
+<h1 id="Java中每个对象都有一个内置锁"><a href="#Java中每个对象都有一个内置锁" class="headerlink" title="Java中每个对象都有一个内置锁"></a>Java中每个对象都有一个内置锁</h1><p>当程序运行到非静态的synchronized同步方法上时，自动获得与正在执行代码类的当前实例（this实例）有关的锁。获得一个对象的锁也称为获取锁、锁定对象、在对象上锁定或在对象上同步。<br>当程序运行到synchronized同步方法或代码块时才该对象锁才起作用。<br>一个对象只有一个锁。所以，如果一个线程获得该锁，就没有其他线程可以获得锁，直到第一个线程释放（或返回）锁。这也意味着任何其他线程都不能进入该对象上的synchronized方法或代码块，直到该锁被释放。</p>
+<h1 id="内置锁在Java语言中的表现"><a href="#内置锁在Java语言中的表现" class="headerlink" title="内置锁在Java语言中的表现"></a>内置锁在Java语言中的表现</h1><p>        多线程的锁，其实本质上就是给一块内存空间的访问添加访问权限，因为Java中是没有办法直接对某一块内存进行操作的，又因为Java是面向对象的语言，一切皆对象，所以具体的表现就是某一个对象承担锁的功能，每一个对象都可以是一个锁。内置锁，使用方式就是使用 synchronized 关键字，synchronized 方法或者 synchronized 代码块。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xyhuangjinfu/p/6505329.html">https://www.cnblogs.com/xyhuangjinfu/p/6505329.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/18/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/20/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1283,7 +1315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -174,593 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">推荐系统算法基础和大项目实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-08 20:20:20" itemprop="dateCreated datePublished" datetime="2018-08-08T20:20:20+08:00">2018-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%92%8C%E5%A4%A7%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="cy_cmt_count" data-xid="2018/08/08/算法与数据结构/推荐系统算法基础和大项目实战/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>物以类聚、人以群分</p>
-<p>头条、抖音、快手、淘宝</p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>信息过载&amp;用户需求不明确（满足这两个条件才好推行）</p>
-<ul>
-<li>分类目录（1990）：hao123、yahoo</li>
-<li>搜索引擎-主动（2000）：google、baidu</li>
-<li>推荐系统-被动（2010）：个推</li>
-</ul>
-<h1 id="技术框架"><a href="#技术框架" class="headerlink" title="技术框架"></a>技术框架</h1><h2 id="实现技术"><a href="#实现技术" class="headerlink" title="实现技术"></a>实现技术</h2><p>基于python实现推荐算法</p>
-<h2 id="lambda架构"><a href="#lambda架构" class="headerlink" title="lambda架构"></a>lambda架构</h2><p>离线计算</p>
-<p>实时计算</p>
-<p>消息中间件</p>
-<h2 id="推荐算法"><a href="#推荐算法" class="headerlink" title="推荐算法"></a>推荐算法</h2><p>流程：</p>
-<p>1、推荐算法</p>
-<p>2、排序</p>
-<p>3、策略调整（例如部分内容屏蔽）</p>
-<p>海量-召回-候选-排序-规则-topN-展示-结果页面</p>
-<h1 id="推荐系统和web项目"><a href="#推荐系统和web项目" class="headerlink" title="推荐系统和web项目"></a>推荐系统和web项目</h1><p>web：系统稳定、结果固定</p>
-<p>推荐：信息过滤、指标增长（增强业务）、结果可预估（涉及概率）</p>
-<h1 id="推荐系统设计"><a href="#推荐系统设计" class="headerlink" title="推荐系统设计"></a>推荐系统设计</h1><p>UI和UE（前端界面）</p>
-<p>数据（lambda）</p>
-<p>业务知识</p>
-<p>算法</p>
-<h1 id="推荐系统冷启动"><a href="#推荐系统冷启动" class="headerlink" title="推荐系统冷启动"></a>推荐系统冷启动</h1><ul>
-<li>用户冷启动（用户画像构建、打标签）</li>
-<li>物品冷启动（物品画像构建、打标签）</li>
-<li>系统冷启动（暂无用户行为数据、基于内容推荐，随着用户行为进行协调过滤）</li>
-</ul>
-<h1 id="数据来源？"><a href="#数据来源？" class="headerlink" title="数据来源？"></a>数据来源？</h1><ul>
-<li><p>显示数据</p>
-<p>采集、点击数据</p>
-</li>
-<li><p>隐形数据</p>
-<p>历史数据</p>
-<p>购物车</p>
-</li>
-</ul>
-<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>社会化推荐</p>
-<p>基于内容推荐（协同过滤、文本挖掘）</p>
-<p>流行度推荐（热门）</p>
-<p>基于用户推荐（协同过滤）</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fZ4y1F7K1?p=2&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1fZ4y1F7K1?p=2&amp;spm_id_from=pageDriver</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">推荐系统算法模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-08 20:20:20" itemprop="dateCreated datePublished" datetime="2018-08-08T20:20:20+08:00">2018-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9E%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/08/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9E%8B/" class="cy_cmt_count" data-xid="2018/08/08/算法与数据结构/推荐系统算法模型/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>物以类聚、人以群分</p>
-<h2 id="基于内容的推荐"><a href="#基于内容的推荐" class="headerlink" title="基于内容的推荐"></a>基于内容的推荐</h2><p><strong>基于内容推荐的原理是根据用户感兴趣的物品A，找到和A内容信息相近的物品B，从而将B推荐给A。</strong></p>
-<p><strong>而提取用户偏好的物品特征是基于内容推荐算法的关键，基于内容的推荐过程是用户喜欢的物品和特征的描述。</strong></p>
-<p><strong>物品的特征有属性、描述等，图书的特征是一些文本内容，特征提取可能涉及文本处理相关技术，将文本内容转化为可计算的向量形式，实现对物品的特征建模，应用推荐算法进行内容推荐。</strong></p>
-<p><strong>除此之外，还有相似度计算（根据关键词进行相似度计算，常用的算法有TF-IDF）。基于内容的推荐优点是简单有效，推荐结果直观，容易理解，不需要领域知识。不需要用户的历史行为数据，比如对物品的评价等。</strong></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/legendaryhaha/article/details/90573238">https://blog.csdn.net/legendaryhaha/article/details/90573238</a></p>
-<h1 id="协同过滤算法"><a href="#协同过滤算法" class="headerlink" title="协同过滤算法"></a>协同过滤算法</h1><p>协同过滤 CF（Collaborative Filtering）简单来说是利用某<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%B4%E8%B6%A3/5720174">兴趣</a>相投、拥有共同经验之群体的喜好来推荐用户感兴趣的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BF%A1%E6%81%AF/111163">信息</a>，个人通过合作的机制给予信息相当程度的回应（如评分）并记录下来以达到过滤的目的进而帮助别人<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AD%9B%E9%80%89/10883707">筛选</a>信息，回应不一定局限于特别感兴趣的，特别不感兴趣信息的纪录也相当重要。</p>
-<p>协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物以群分。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42575310/article/details/94602375">https://blog.csdn.net/weixin_42575310/article/details/94602375</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013473512/article/details/78694958">https://blog.csdn.net/u013473512/article/details/78694958</a></p>
-<h2 id="基于用户的协同过滤算法"><a href="#基于用户的协同过滤算法" class="headerlink" title="基于用户的协同过滤算法"></a><strong>基于用户的协同过滤算法</strong></h2><p><strong>计算用户相似度的方法有3种：<a target="_blank" rel="noopener" href="https://blog.csdn.net/legendaryhaha/article/details/90550740">余弦相似性、皮尔森系数相关和修正的余弦相似性</a>。</strong></p>
-<ul>
-<li>找到与目标用户兴趣相似的用户集合</li>
-<li>找到这个集合中的用户喜欢的，且目标用户没有用过的物品，推荐给目标用户</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>用户</th>
-<th>商品1（评分）</th>
-<th>商品2（评分）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>用户1</td>
-<td>2.3</td>
-<td>8.9</td>
-</tr>
-<tr>
-<td>用户2</td>
-<td>6.2</td>
-<td>5.6</td>
-</tr>
-<tr>
-<td>用户3</td>
-<td>2.8</td>
-<td>3.4</td>
-</tr>
-<tr>
-<td>用户4</td>
-<td>3.5</td>
-<td>4.5</td>
-</tr>
-</tbody></table>
-<p>待完善</p>
-<h2 id="基于物品的协同过滤算法"><a href="#基于物品的协同过滤算法" class="headerlink" title="基于物品的协同过滤算法"></a>基于物品的协同过滤算法</h2><p>设想：（互补品和替代品）</p>
-<p>物品本身权重（或者新用户推荐来源于用户物品推荐或物品权重推荐）</p>
-<p>用户物品推荐可以根据物品购买数量，商品评分</p>
-<p>“用户浏览了一本jvm的书”</p>
-<p>“用户搜索了一本jvm的书”</p>
-<p>“用户收藏了一本jvm的书”</p>
-<p>“用户购买了一本jvm的书”</p>
-<p>多次浏览1、搜索2、收藏3、购买5</p>
-<p>和书籍相关的（笔、书包）（互补品）：通过类目标签、</p>
-<p>和该书相似的书（java相关、IT相关）（替代品）：通过类目标签、相似用户的物品</p>
-<p>浏览此商品的顾客也同时浏览的（互补品和替代品）</p>
-<p>买该书的人相关的产品（java相关、IT相关）</p>
-<p>关联商品（互补品和替代品）</p>
-<p>一起购买的商品（新指标）</p>
-<p>产品的指标，一扯就多了。。。</p>
-<p>千人千面基于用户，非千人千面应该基于系统（可涉及类目本身权重、人工干预）</p>
-<p>基于商品给你推荐</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/08/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">项目管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-08 20:18:18" itemprop="dateCreated datePublished" datetime="2018-08-08T20:18:18+08:00">2018-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/08/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/08/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="cy_cmt_count" data-xid="2018/08/08/项目管理/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>重要之重</p>
-<p>软件工程阶段设计：</p>
-<p>学习&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ixiaoyang8/p/14125348.html">https://www.cnblogs.com/ixiaoyang8/p/14125348.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/zane_space/Zane%E4%B9%8B%E8%AE%A1%E5%88%92%E5%8F%8A%E6%8E%A8%E8%BF%9B%EF%BC%88%E6%80%BB%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/08/zane_space/Zane%E4%B9%8B%E8%AE%A1%E5%88%92%E5%8F%8A%E6%8E%A8%E8%BF%9B%EF%BC%88%E6%80%BB%EF%BC%89/" class="post-title-link" itemprop="url">Zane之计划及推进（总）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-08 20:18:18" itemprop="dateCreated datePublished" datetime="2018-08-08T20:18:18+08:00">2018-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/08/zane_space/Zane%E4%B9%8B%E8%AE%A1%E5%88%92%E5%8F%8A%E6%8E%A8%E8%BF%9B%EF%BC%88%E6%80%BB%EF%BC%89/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/08/zane_space/Zane%E4%B9%8B%E8%AE%A1%E5%88%92%E5%8F%8A%E6%8E%A8%E8%BF%9B%EF%BC%88%E6%80%BB%EF%BC%89/" class="cy_cmt_count" data-xid="2018/08/08/zane_space/Zane之计划及推进（总）/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>高效</p>
-<h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>计划总记录</p>
-<p>（先后主次，层级推进，保一或并行）</p>
-<h1 id="开发计划"><a href="#开发计划" class="headerlink" title="开发计划"></a>开发计划</h1><h2 id="优化脚手架（基础建设-快速完善）"><a href="#优化脚手架（基础建设-快速完善）" class="headerlink" title="优化脚手架（基础建设-快速完善）"></a>优化脚手架（基础建设-快速完善）</h2><h3 id="脚手架衍生应用系统"><a href="#脚手架衍生应用系统" class="headerlink" title="脚手架衍生应用系统"></a>脚手架衍生应用系统</h3><ul>
-<li>多数据源demo-完成</li>
-<li>多数据源读写分离-完成</li>
-<li>调度系统-完成</li>
-<li>认证系统</li>
-<li>用户中心</li>
-</ul>
-<p>代码生成（待优化：LocalDateTime、模块路径）</p>
-<p>1、确定表</p>
-<p>2、生成代码，按路径合并代码，一般不缺少依赖包就可以正常启动了</p>
-<p>3、</p>
-<h2 id="大数据开发路线"><a href="#大数据开发路线" class="headerlink" title="大数据开发路线"></a>大数据开发路线</h2><h2 id="公众号规范管理"><a href="#公众号规范管理" class="headerlink" title="公众号规范管理"></a>公众号规范管理</h2><p>博文同步<br>方式1：md转pdf，pdf转图片，公众号插入图片</p>
-<h2 id="性能压测"><a href="#性能压测" class="headerlink" title="性能压测"></a>性能压测</h2><p>重中之重，一定要加强重视及运用</p>
-<h1 id="小程序计划"><a href="#小程序计划" class="headerlink" title="小程序计划"></a>小程序计划</h1><h2 id="前端初步搭建已完成"><a href="#前端初步搭建已完成" class="headerlink" title="前端初步搭建已完成"></a>前端初步搭建已完成</h2><p>调用后端接口待完善</p>
-<h2 id="产品线待规划。。。"><a href="#产品线待规划。。。" class="headerlink" title="产品线待规划。。。"></a>产品线待规划。。。</h2><p>访客记录-基础aop</p>
-<p> 用户群体：面向所有的微信用户</p>
-<p>功能需求：发表、查看个人评论、说说</p>
-<h2 id="后端应用搭建"><a href="#后端应用搭建" class="headerlink" title="后端应用搭建"></a>后端应用搭建</h2><p>确定框架即可搭建</p>
-<p>eladmin、ruoyi、jeecgboot</p>
-<h1 id="读书时长计算"><a href="#读书时长计算" class="headerlink" title="读书时长计算"></a>读书时长计算</h1><p>一般人的阅读速度平均为（300～500）字／分钟。</p>
-<p>1页140个字，则1分钟约可看3页，60分钟看180页</p>
-<p>1000页，可看333分钟，约5.5个小时；</p>
-<p>如果每天能花2个小时看书，3天可看一本书</p>
-<p>如果每天能花1个小时看书，1周可看一本书</p>
-<h1 id="临时记录"><a href="#临时记录" class="headerlink" title="临时记录"></a>临时记录</h1><ul>
-<li>需要处理了解开源项目</li>
-</ul>
-<p>flink</p>
-<p><a target="_blank" rel="noopener" href="https://gitee.com/OS_Zane/Flink-UserBehaviorAnalysis">https://gitee.com/OS_Zane/Flink-UserBehaviorAnalysis</a></p>
-<p><a target="_blank" rel="noopener" href="https://gitee.com/ruanshumeng/UserBehaviorAnalysis">https://gitee.com/ruanshumeng/UserBehaviorAnalysis</a></p>
-<h1 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h1><p>Q&amp;A</p>
-<p>review</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/08/08/A_%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87-%E5%9F%BA%E7%A1%80%E6%A8%A1%E6%9D%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/08/A_%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87-%E5%9F%BA%E7%A1%80%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">技术博文-基础模板</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-08 08:08:08" itemprop="dateCreated datePublished" datetime="2018-08-08T08:08:08+08:00">2018-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" itemprop="url" rel="index"><span itemprop="name">基础设施</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/08/08/A_%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87-%E5%9F%BA%E7%A1%80%E6%A8%A1%E6%9D%BF/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/08/08/A_%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87-%E5%9F%BA%E7%A1%80%E6%A8%A1%E6%9D%BF/" class="cy_cmt_count" data-xid="2018/08/08/A_技术博文-基础模板/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h1 id="基础要素"><a href="#基础要素" class="headerlink" title="基础要素"></a>基础要素</h1><h1 id="搭建部署"><a href="#搭建部署" class="headerlink" title="搭建部署"></a>搭建部署</h1><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="基础案例"><a href="#基础案例" class="headerlink" title="基础案例"></a>基础案例</h1><h1 id="高级方案"><a href="#高级方案" class="headerlink" title="高级方案"></a>高级方案</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/07/20/%E5%89%8D%E7%AB%AF-nvm%EF%BC%88node%E3%80%81npm%E7%AE%A1%E7%90%86%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1321,10 +734,830 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">机器学习-入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-07 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T21:18:18+08:00">2018-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 09:52:21" itemprop="dateModified" datetime="2024-05-24T09:52:21+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/" class="cy_cmt_count" data-xid="2018/06/07/AI/机器学习-入门/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>程序=数据结构+算法<br>AI=数据+算法</p>
+<p>机器学习</p>
+<p>机器学习,顾名思义,就是研究计算机如何学习和模拟人类的行为,并根据已学得的知识对该行为进行增强和改进。</p>
+<p>线性代数</p>
+<h1 id="机器学习第一步"><a href="#机器学习第一步" class="headerlink" title="机器学习第一步"></a>机器学习第一步</h1><p>吴恩达(Andrew Ng)老师的课程：</p>
+<p>coursera课程主页<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
+<p>吴恩达老师推荐开发语言使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MATLAB&spm=1001.2101.3001.7020">MATLAB</a>或者octave</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p>Spark MLlib</p>
+<p>Flink ML</p>
+<p>Alink</p>
+<p>Python</p>
+<p>Matlab</p>
+<p>（首先推荐Octave，简单方便，并且开源免费。Matlab也非常的优秀，需付费，如果你能够使用它，那么建议使用matlab。</p>
+<p>Python、numpy、R语言，也有很多人选择，但开发较慢。）</p>
+<h1 id="西瓜书"><a href="#西瓜书" class="headerlink" title="西瓜书"></a>西瓜书</h1><h1 id="南瓜书"><a href="#南瓜书" class="headerlink" title="南瓜书"></a>南瓜书</h1><p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/pumpkin-book/#/">https://datawhalechina.github.io/pumpkin-book/#/</a></p>
+<h1 id="环境搭建-1"><a href="#环境搭建-1" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+<li>Python安装</li>
+</ol>
+<p>安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anaconda，它是Python的一个发行版本，安装好它后就不用再去下载上述Python包，其本身已经包含了，比较方便。</p>
+<p>anaconda （开源的Python发行版本）<a target="_blank" rel="noopener" href="https://www.anaconda.com/products/individual">https://www.anaconda.com/products/individual</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29486768">https://zhuanlan.zhihu.com/p/29486768</a></p>
+<h1 id="深度学习环境搭建：win10-anaconda-tensorflow（cpu版本）-keras"><a href="#深度学习环境搭建：win10-anaconda-tensorflow（cpu版本）-keras" class="headerlink" title="深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras"></a>深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39926594/article/details/104693969">https://blog.csdn.net/weixin_39926594/article/details/104693969</a></p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>如果在IT行业(尤其是互联网)里溜达一圈，你会发现机器学习在以下热点问题中有广泛应用：</p>
+<ol>
+<li>计算机视觉</li>
+</ol>
+<p>典型的应用包括：人脸识别、车牌识别、扫描文字识别、图片内容识别、图片搜索等等。<br>2. 自然语言处理</p>
+<p>典型的应用包括：搜索引擎智能匹配、文本内容理解、文本情绪判断，语音识别、输入法、机器翻译等等。<br>3. 社会网络分析</p>
+<p>典型的应用包括：用户画像、网络关联分析、欺诈作弊发现、热点发现等等。<br>4. 推荐</p>
+<p>典型的应用包括：虾米音乐的“歌曲推荐”，某宝的“猜你喜欢”等等。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sunyunlong_1/article/details/80816606">https://blog.csdn.net/sunyunlong_1/article/details/80816606</a></p>
+<h1 id="机器学习算法"><a href="#机器学习算法" class="headerlink" title="机器学习算法"></a>机器学习算法</h1><ul>
+<li>梯度下降算法<br>梯度下降（gradient descent）在机器学习中应用十分的广泛，不论是在线性回归还是Logistic回归中，它的主要目的是通过迭代找到目标函数的最小值，或者收敛到最小值。</li>
+</ul>
+<p>##监督学习算法<br>##无监督学习算法</p>
+<h1 id="jupyter-使用"><a href="#jupyter-使用" class="headerlink" title="jupyter 使用"></a>jupyter 使用</h1><h1 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h1><h2 id="octave"><a href="#octave" class="headerlink" title="octave"></a>octave</h2><p>octave是一门科学计算语言，类似于matlab，但其占用内存小，所以广受机器学习爱好者的喜爱</p>
+<h2 id="matlab"><a href="#matlab" class="headerlink" title="matlab"></a>matlab</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">推荐系统概念及模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-07 20:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T20:18:18+08:00">2018-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/" class="cy_cmt_count" data-xid="2018/06/07/算法与数据结构/推荐系统概念及模型/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="推荐系统概念及模型"><a href="#推荐系统概念及模型" class="headerlink" title="推荐系统概念及模型"></a>推荐系统概念及模型</h1><p>用户画像</p>
+<p>内容画像</p>
+<p>匹配度</p>
+<h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><p>猜你喜欢</p>
+<p>热门商品</p>
+<p>好评商品</p>
+<p>实时热门商品</p>
+<p>看过还看</p>
+<p>猜你喜欢：基于用户行为推荐，当用户对商品进行评分时，Flink 根据用户历史评分商品，结合 itemCF 计算推荐结果。<br>热门商品：历史热门商品<br>好评商品：评分较高的商品<br>实时热门商品： 使用 Flink 时间滑动窗口，对过去一个小时热门商品进行统计，每 5 分钟滑动一次。</p>
+<h1 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h1><p>实时推荐</p>
+<p>离线推荐</p>
+<h1 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h1><p>产品表</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>title</th>
+<th>score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D0001</td>
+<td>测试商品1</td>
+<td></td>
+</tr>
+<tr>
+<td>D0002</td>
+<td>测试商品2</td>
+<td></td>
+</tr>
+<tr>
+<td>D0003</td>
+<td>测试商品3</td>
+<td></td>
+</tr>
+<tr>
+<td>D0004</td>
+<td>测试商品4</td>
+<td></td>
+</tr>
+<tr>
+<td>D0005</td>
+<td>测试商品5</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>用户产品评分表</p>
+<table>
+<thead>
+<tr>
+<th>userid</th>
+<th>productID</th>
+<th>score</th>
+<th>iflike</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U0001</td>
+<td>D0001</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0001</td>
+<td>D0002</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0001</td>
+<td>D0003</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0001</td>
+<td>D0004</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>U0001</td>
+<td>D0005</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>D0001</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>D0002</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>D0003</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>D0004</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>D0001</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>D0002</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>D0003</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>D0004</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>可以通过用户评分确定用户是否喜欢该商品例如（4-5分）为喜欢，记为1，否则为0</p>
+<p>由上可以用户与物品的关系</p>
+<table>
+<thead>
+<tr>
+<th>用户</th>
+<th>商品…</th>
+<th>集合数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U0001</td>
+<td>D0001、D0002、D0003、D0005</td>
+<td>4</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>D0003、D0004</td>
+<td>2</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>D0002、D0003</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>如何一下子计算所有用户之间的相似度呢？为计算方便，通常首先需要建立“物品—用户”的倒排表，如下图所示：</p>
+<table>
+<thead>
+<tr>
+<th>商品</th>
+<th align="left">用户…</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D0001</td>
+<td align="left">U0001</td>
+</tr>
+<tr>
+<td>D0002</td>
+<td align="left">U0001、U0002</td>
+</tr>
+<tr>
+<td>D0003</td>
+<td align="left">U0001、U0002、U0003</td>
+</tr>
+<tr>
+<td>D0004</td>
+<td align="left">U0002</td>
+</tr>
+<tr>
+<td>D0005</td>
+<td align="left">U0001</td>
+</tr>
+</tbody></table>
+<p>然后对于每个物品，喜欢他的用户，两两之间相同物品加1。例如喜欢物品 a 的用户有 A 和 B，那么在矩阵中他们两两加1。如下图所示：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>U0001</th>
+<th>U0002</th>
+<th>U0003</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U0001</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<h2 id="1、发现兴趣相似的用户"><a href="#1、发现兴趣相似的用户" class="headerlink" title="1、发现兴趣相似的用户"></a>1、发现兴趣相似的用户</h2><p>由上计算出用户之间的相似度</p>
+<p>通常用 Jaccard 公式或者余弦相似度计算两个用户之间的相似度。设 N(u) 为用户 u 喜欢的物品集合，N(v) 为用户 v 喜欢的物品集合，那么 u 和 v 的相似度是多少呢：</p>
+<ul>
+<li>Jaccard 公式</li>
+</ul>
+<p>$$<br>x = \frac{\left | N{(u)}\cap  N {(v)}\right |}{\left | N{(u)}\cup N{(v)} \right |}<br>$$</p>
+<ul>
+<li>余弦相似度</li>
+</ul>
+<p>$$<br>x = \frac{\left | N{(u)}\cap  N {(v)}\right |}{\sqrt{\left | N{(u)}| \ast   |N{(v)} \right |}}<br>$$</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a894ebba4a1a">https://www.jianshu.com/p/a894ebba4a1a</a></p>
+<p>由Jaccard计算结果如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>U0001</th>
+<th>U0002</th>
+<th>U0003</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U0001</td>
+<td>0</td>
+<td>1/5</td>
+<td>2/4</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>1/5</td>
+<td>0</td>
+<td>1/3</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>2/4</td>
+<td>1/3</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>由余弦计算结果如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>U0001</th>
+<th>U0002</th>
+<th>U0003</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U0001</td>
+<td>0</td>
+<td>1/根号8 = 0.35355</td>
+<td>2/根号8 = 0.70711</td>
+</tr>
+<tr>
+<td>U0002</td>
+<td>1/根号8 = 0.35355</td>
+<td>0</td>
+<td>1/根号4 = 0.5</td>
+</tr>
+<tr>
+<td>U0003</td>
+<td>2/根号8 = 0.70711</td>
+<td>1/根号4 = 0.5</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>可看出：</p>
+<p>与U0001比较相似的用户是U0003，</p>
+<p>与U0003比较相似的用户是U0001，可以把U0001中的商品D0001、D0005推荐给U0003；</p>
+<p>与U0002比较相似的用户是U0003，可以把U0003中的商品D0002推荐给U0002；</p>
+<h2 id="2、推荐物品"><a href="#2、推荐物品" class="headerlink" title="2、推荐物品"></a>2、推荐物品</h2><p>首先需要从矩阵中找出与目标用户 u 最相似的 K 个用户（上面已完成），用集合 S(u, K) 表示，将 S 中用户喜欢的物品全部提取出来，并去除 u 已经喜欢的物品。对于每个候选物品 i ，用户 u 对它感兴趣的程度用如下公式计算：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/winone361/article/details/45457445?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">https://blog.csdn.net/winone361/article/details/45457445?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/06/GRPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/06/GRPC/" class="post-title-link" itemprop="url">GRPC基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-06 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-06T21:18:18+08:00">2018-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/rpc/" itemprop="url" rel="index"><span itemprop="name">rpc</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/06/GRPC/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/06/GRPC/" class="cy_cmt_count" data-xid="2018/06/06/GRPC/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="那么什么是gRPC呢？"><a href="#那么什么是gRPC呢？" class="headerlink" title="那么什么是gRPC呢？"></a>那么什么是gRPC呢？</h1><p>gRPC客户端可以直接调用另外一台机器上服务器应用程序的方法，就像调用本地对象一样，这使得创建分布式的应用和服务更加方便。</p>
+<p>gRPC请求 对标 应用间的http请求，fegin调用、网关调用，同时可以比作调用本地对象。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/06/hadoop_space/hadoop-HBase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/06/hadoop_space/hadoop-HBase/" class="post-title-link" itemprop="url">数据库-HBase</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2018-06-06T20:08:08+08:00">2018-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/06/hadoop_space/hadoop-HBase/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/06/hadoop_space/hadoop-HBase/" class="cy_cmt_count" data-xid="2018/06/06/hadoop_space/hadoop-HBase/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>HBase是一个分布式的、面向列的开源数据库</p>
+<p>HBase 简介<br>HBase（Hadoop database）是一个分布式、可扩展、面向列的 NoSQL 数据库，本质上是一个 Key-Value 系统，底层存储基于 HDFS，原生支持 MapReduce 计算框架，具有高吞吐、低延时的读写特点。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h1 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h1><h2 id><a href="#" class="headerlink" title></a></h2><h2 id="将结构化的数据映射为一张数据库表"><a href="#将结构化的数据映射为一张数据库表" class="headerlink" title="将结构化的数据映射为一张数据库表"></a>将结构化的数据映射为一张数据库表</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">博客目录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-03 13:58:05" itemprop="dateCreated datePublished" datetime="2018-06-03T13:58:05+08:00">2018-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="cy_cmt_count" data-xid="2018/06/03/博客目录/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h1><h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><h2 id="K8s"><a href="#K8s" class="headerlink" title="K8s"></a>K8s</h2><h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="vue、ant-Design"><a href="#vue、ant-Design" class="headerlink" title="vue、ant Design"></a>vue、ant Design</h2><h1 id="微信开发"><a href="#微信开发" class="headerlink" title="微信开发"></a>微信开发</h1><h2 id="公众号、小程序"><a href="#公众号、小程序" class="headerlink" title="公众号、小程序"></a>公众号、小程序</h2><h1 id="移动支付"><a href="#移动支付" class="headerlink" title="移动支付"></a>移动支付</h1><pre><code>微信支付
+支付宝支付
+</code></pre>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h2 id="oracle"><a href="#oracle" class="headerlink" title="oracle"></a>oracle</h2><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><h1 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h1><h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><pre><code>分布式id
+分布式锁
+分布式事务
+分布式事务解决方案
+分布式数据库读写分离
+</code></pre>
+<h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><pre><code>redis
+rabbitmq
+kafka
+</code></pre>
+<h1 id="集成框架"><a href="#集成框架" class="headerlink" title="集成框架"></a>集成框架</h1><h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><h2 id="druid"><a href="#druid" class="headerlink" title="druid"></a>druid</h2><h2 id="shrio"><a href="#shrio" class="headerlink" title="shrio"></a>shrio</h2><h1 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h1><pre><code>hadoop
+flink
+blink
+flume
+hbase
+hive
+kafka
+spark
+storm
+storm-kafka
+zookeeper
+</code></pre>
+<h1 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h1><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><h2 id="item2"><a href="#item2" class="headerlink" title="item2"></a>item2</h2><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><ul>
+<li>idea不显示gradle的视图解决办法</li>
+<li>maven项目转换为gradle项目</li>
+<li>gradle项目转为maven项目</li>
+<li>怎么在IDEA里搜索jar包里的类的方法和配置</li>
+<li>IDEA自带HTTP请求（如同postman）<h2 id="部署神插件-Cloud-ToolkKit"><a href="#部署神插件-Cloud-ToolkKit" class="headerlink" title="部署神插件-Cloud-ToolkKit"></a>部署神插件-Cloud-ToolkKit</h2><h2 id="语雀"><a href="#语雀" class="headerlink" title="语雀"></a>语雀</h2><h2 id="TAPD"><a href="#TAPD" class="headerlink" title="TAPD"></a>TAPD</h2><h2 id="Teambition"><a href="#Teambition" class="headerlink" title="Teambition"></a>Teambition</h2><a target="_blank" rel="noopener" href="https://www.teambition.com/">https://www.teambition.com/</a><h2 id="禅道"><a href="#禅道" class="headerlink" title="禅道"></a>禅道</h2><h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1392,7 +1625,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

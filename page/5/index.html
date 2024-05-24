@@ -174,572 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/29/flink_space/flink%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/29/flink_space/flink%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">Flink开发实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-29 20:28:16" itemprop="dateCreated datePublished" datetime="2020-10-29T20:28:16+08:00">2020-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/10/29/flink_space/flink%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2020/10/29/flink_space/flink%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" class="cy_cmt_count" data-xid="2020/10/29/flink_space/flink开发实战/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。</p>
-<p>flink开发实战</p>
-<p>#项目模板<br>jdk1.8、maven3.0.4</p>
-<p>##Java模板</p>
-<ul>
-<li>maven archetype</li>
-</ul>
-<p> 输入命令“mvn archetype:generate” 创建项目骨架，如下：</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line"></span><br><span class="line">-DarchetypeGroupId=org.apache.flink</span><br><span class="line"></span><br><span class="line">-DarchetypeArtifactId=flink-quickstart-java</span><br><span class="line"></span><br><span class="line">-DarchetypeVersion=1.8.0</span><br><span class="line"></span><br><span class="line">-DgroupId=com.rickie</span><br><span class="line"></span><br><span class="line">-DartifactId=flink-tutorial</span><br><span class="line"></span><br><span class="line">-Dversion=0.1</span><br><span class="line"></span><br><span class="line">-Dpackage=com.rickie.tutorial</span><br><span class="line"></span><br><span class="line">-DinteractiveMode=false</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39038178/article/details/118601895?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">https://blog.csdn.net/qq_39038178/article/details/118601895?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242</a></p>
-<ul>
-<li>Quickstart Shell<br>(linux上执行)<br>curl <a target="_blank" rel="noopener" href="https://flink.apache.org/q/quickstart.sh">https://flink.apache.org/q/quickstart.sh</a> | bash</li>
-</ul>
-<p>##Scala模板</p>
-<h1 id="数据源头类型"><a href="#数据源头类型" class="headerlink" title="数据源头类型"></a>数据源头类型</h1><p>文件、消息中间件、数据库、socket。。。（明确源头便于开发）</p>
-<h1 id="创建一个项目"><a href="#创建一个项目" class="headerlink" title="创建一个项目"></a>创建一个项目</h1><p>创建项目的前提是有一个可用的flink环境（需先安装flink）</p>
-<h2 id="Flink快速构建项目quickstart"><a href="#Flink快速构建项目quickstart" class="headerlink" title="Flink快速构建项目quickstart"></a>Flink快速构建项目quickstart</h2><h3 id="一条命令创建一个项目"><a href="#一条命令创建一个项目" class="headerlink" title="一条命令创建一个项目"></a>一条命令创建一个项目</h3><p>(命令主要是引入了flink-quickstart-java包，输入groupId、artifactId即可)</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/muyingmiao/article/details/101570909">https://blog.csdn.net/muyingmiao/article/details/101570909</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DarchetypeGroupId=org.apache.flink -DarchetypeArtifactId=flink-quickstart-java  -DarchetypeVersion=1.12.0</span><br></pre></td></tr></table></figure>
-
-<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><p>上面创建完项目之后，包含了两个类：<em>StreamingJob</em> 和 <em>BatchJob</em> 分别是 <em>DataStream</em> and <em>DataSet</em> 程序的基础骨架程序。启动flink即可进行开发</p>
-<ul>
-<li>常见错误</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">报错1</span><br><span class="line">“No operators defined in streaming topology. Cannot execute.”</span><br><span class="line"></span><br><span class="line">报错2</span><br><span class="line">“Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError”</span><br><span class="line">注释掉，&lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">注意项目的pom文件给这些依赖加上&lt;scope&gt;provided&lt;/scope&gt;（表示执行和打包都不用此依赖，只有编译时用）不进行这些依赖的打包,因为这些依赖集群的环境都有了，不排除的话，会导致jar包很大，同时还容易很集群的依赖冲突</span><br><span class="line"></span><br><span class="line">在 Intellij Idea  中使用maven时，所有 scope 为 provided 的依赖都是不会被加入到 classpath 中的，目前该bug尚未被修复。</span><br><span class="line"></span><br><span class="line">scala版本需要注意idea和项目pom.xml的scala版本需要匹配</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>flink应用运行步骤：</li>
-</ul>
-<ol>
-<li>接入flink环境</li>
-<li>指定数据源</li>
-<li>计算处理</li>
-<li>执行任务</li>
-<li>打包</li>
-<li>运行</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&lt;scope&gt;provided&lt;/scope&gt;--&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="开发建议"><a href="#开发建议" class="headerlink" title="开发建议"></a>开发建议</h1><p>建议使用kafka作为数据源，模拟生产json数据发送至kafka，由flink处理kafk数据</p>
-<p>对于每一个技术场景，使用kafka不同topic模拟数据，flink进行接收kafka数据进行处理，将对应的技术点进行巩固。</p>
-<h2 id="开发实战-自定义UDF函数"><a href="#开发实战-自定义UDF函数" class="headerlink" title="开发实战-自定义UDF函数"></a>开发实战-自定义UDF函数</h2><p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yoyowin/p/14667145.html">https://www.cnblogs.com/yoyowin/p/14667145.html</a></p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/muyingmiao/article/details/101570909">https://blog.csdn.net/muyingmiao/article/details/101570909</a></p>
-<h1 id="待迁移"><a href="#待迁移" class="headerlink" title="待迁移"></a>待迁移</h1><h2 id="Kafka数据每5分钟同步到Hive"><a href="#Kafka数据每5分钟同步到Hive" class="headerlink" title="Kafka数据每5分钟同步到Hive"></a>Kafka数据每5分钟同步到Hive</h2><p>我们简单来描述一下数据场景，比如有这样一个数据场景，有一批实时流数据实时写入Kafka，然后需要对Topic中的数据进行每隔5分钟进行落地到Hive，进行每5分钟分区存储。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Kafka2Hdfs</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Logger</span> <span class="variable">LOG</span> <span class="operator">=</span> LoggerFactory.getLogger(Kafka2Hdfs.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (args.length != <span class="number">3</span>) &#123;</span><br><span class="line">            LOG.error(<span class="string">&quot;kafka(server01:9092), hdfs(hdfs://cluster01/data/), flink(parallelism=2) must be exist.&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">bootStrapServer</span> <span class="operator">=</span> args[<span class="number">0</span>];</span><br><span class="line">        <span class="type">String</span> <span class="variable">hdfsPath</span> <span class="operator">=</span> args[<span class="number">1</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">parallelism</span> <span class="operator">=</span> Integer.parseInt(args[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="type">StreamExecutionEnvironment</span> <span class="variable">env</span> <span class="operator">=</span> StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        env.enableCheckpointing(<span class="number">5000</span>);</span><br><span class="line">        env.setParallelism(parallelism);</span><br><span class="line">        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);</span><br><span class="line"></span><br><span class="line">        DataStream&lt;String&gt; transction = env.addSource(<span class="keyword">new</span> <span class="title class_">FlinkKafkaConsumer010</span>&lt;&gt;(<span class="string">&quot;test_bll_data&quot;</span>, <span class="keyword">new</span> <span class="title class_">SimpleStringSchema</span>(), configByKafkaServer(bootStrapServer)));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Storage into hdfs</span></span><br><span class="line">        BucketingSink&lt;String&gt; sink = <span class="keyword">new</span> <span class="title class_">BucketingSink</span>&lt;&gt;(hdfsPath);</span><br><span class="line"></span><br><span class="line">        sink.setBucketer(<span class="keyword">new</span> <span class="title class_">JDateTimeBucketer</span>&lt;String&gt;(<span class="string">&quot;HH-mm&quot;</span>));<span class="comment">// 自定义存储到HDFS上的文件名，用小时和分钟来命名，方便后面算策略</span></span><br><span class="line"></span><br><span class="line">        sink.setBatchSize(<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">4</span>); <span class="comment">// this is 5MB</span></span><br><span class="line">        sink.setBatchRolloverInterval(<span class="number">1000</span> * <span class="number">30</span>); <span class="comment">// 30s producer a file into hdfs</span></span><br><span class="line">        transction.addSink(sink);</span><br><span class="line"></span><br><span class="line">        env.execute(<span class="string">&quot;Kafka2Hdfs&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title function_">configByKafkaServer</span><span class="params">(String bootStrapServer)</span> &#123;</span><br><span class="line">        <span class="type">Properties</span> <span class="variable">props</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">        props.setProperty(<span class="string">&quot;bootstrap.servers&quot;</span>, bootStrapServer);</span><br><span class="line">        props.setProperty(<span class="string">&quot;group.id&quot;</span>, <span class="string">&quot;test_bll_group&quot;</span>);</span><br><span class="line">        props.put(<span class="string">&quot;enable.auto.commit&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">        props.put(<span class="string">&quot;auto.commit.interval.ms&quot;</span>, <span class="string">&quot;1000&quot;</span>);</span><br><span class="line">        props.put(<span class="string">&quot;key.deserializer&quot;</span>, <span class="string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);</span><br><span class="line">        props.put(<span class="string">&quot;value.deserializer&quot;</span>, <span class="string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> props;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartloli/p/14193432.html">https://www.cnblogs.com/smartloli/p/14193432.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">wrk压测进阶</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-24 21:22:22" itemprop="dateCreated datePublished" datetime="2020-10-24T21:22:22+08:00">2020-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">性能压测</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/" class="cy_cmt_count" data-xid="2020/10/24/性能压测/wrk压测进阶/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>以下主要记录wrk由浅到深进行性能压测</p>
-<p>1、首先，明确接口三要素</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">地址：http://url</span><br><span class="line">请求方式：get/post/put/delete</span><br><span class="line">参数：&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2、切换进入wrk根目录<br>#实战<br>##wrk简单压测（一条命令，Get请求）<br>最简单的压力测试示例，get请求，固定url固定参数</p>
-<p>总共是12个线程,100个连接(不是一个线程对应一个连接)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c100 -d30s http://www.baidu.com  </span><br></pre></td></tr></table></figure>
-<p>如果想看看响应时间的分布,可以增加–latency:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c100 -d30s --latency http://www.baidu.com </span><br></pre></td></tr></table></figure>
-
-<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ac185e01cc30">https://www.jianshu.com/p/ac185e01cc30</a></p>
-<p>##wrk中Post接口测试（读取lua文件）</p>
-<p>##wrk外部参数压测（读取外部lua）<br>如下差不多</p>
-<p>##wrk发送随机参数-（get）</p>
-<p>执行命令为  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t5 -c10 -d 1s -T5s --latency -s test1.lua  http://www.baidu.com</span><br></pre></td></tr></table></figure>
-<p>test1.lua </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request = function()</span><br><span class="line">num = math.random(1000,9999)</span><br><span class="line">   path = &quot;/test.html?t=&quot; .. num</span><br><span class="line">   return wrk.format(&quot;GET&quot;, path)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<p>##wrk动态参数压测</p>
-<ol>
-<li>可以通过lua脚本生成动态参数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">loginmap = &#123;&#125;</span><br><span class="line">counter = 0</span><br><span class="line">--初始化方法</span><br><span class="line">function init(args)</span><br><span class="line">--循环遍历生成测试数据</span><br><span class="line">        counter = 0</span><br><span class="line">		local test = &#x27;&#123;&quot;activityPage&quot;: &quot;cdsy&quot;,&quot;distributorRegion&quot;:  &quot;北京市&quot;,&quot;driveRegion&quot;: &quot;code1,code2,code3&quot;,&quot;models&quot;: &quot;CMYHV,ALPHV,WLDHV&quot;,&quot;phone&quot;: &quot;13800138000&quot;,&quot;userId&quot;: 123456&#125;&#x27;</span><br><span class="line">		for i=1000000,1,-1 do</span><br><span class="line">			local data = &#x27;&#123;&quot;activityPage&quot;: &quot;cdsy&quot;,&quot;distributorRegion&quot;:  &quot;北京市&quot;,&quot;driveRegion&quot;: &quot;code1,code2,code3&quot;,&quot;models&quot;: &quot;CMYHV,ALPHV,WLDHV&quot;,&quot;phone&quot;: &quot;13800138000&quot;,&quot;userId&quot;: &#x27;</span><br><span class="line">			data=data .. i .. &#x27;&#125;&#x27;;</span><br><span class="line">			--print(data)</span><br><span class="line">			loginmap[counter] = data</span><br><span class="line">		    print(i)</span><br><span class="line">			counter = counter + 1</span><br><span class="line">		end</span><br><span class="line">		counter = 0</span><br><span class="line">end</span><br><span class="line">--执行的主方法</span><br><span class="line">request = function()</span><br><span class="line">        local body1 = &#x27;[&#123;&quot;layerDefinitionVersion&quot;:&quot;V1.0.0&quot;,&quot;layerName&quot;:&quot;poi&quot;,&quot;partitionNames&quot;:[&#123;&#x27;</span><br><span class="line">        local body2 = &#x27;&#125;]&#125;]&#x27;</span><br><span class="line">        print(counter)</span><br><span class="line">        print(&quot;长度：&quot;,table.getn(loginmap))</span><br><span class="line">        counter = counter+1</span><br><span class="line">        print(&quot;++:&quot;,counter)</span><br><span class="line">        if( counter &lt; 10 )</span><br><span class="line">        then</span><br><span class="line">                parms = loginmap[counter-1]</span><br><span class="line">				print(&quot;++++++++++++++++++++++++++++++++++++++++++&quot;)</span><br><span class="line">				print(parms)</span><br><span class="line">				print(&quot;++++++++++++++++++++++++++++++++++++++++++&quot;)</span><br><span class="line">      --        print(parms)</span><br><span class="line">      --接口地址后面可以配置多个参数</span><br><span class="line">                path = &quot;/api/app/activity/query?productVersion=latest&quot;</span><br><span class="line">                method = &quot;POST&quot;</span><br><span class="line">                wrk.headers[&quot;Content-Type&quot;] = &quot;application/json&quot;</span><br><span class="line">                wrk.headers[&quot;clientId&quot;] = &quot;103&quot;</span><br><span class="line">                wrk.headers[&quot;orgId&quot;] = &quot;1&quot;</span><br><span class="line">                return  wrk.format(method,path,wrk.headers,parms)</span><br><span class="line">        end</span><br><span class="line">        print(&quot;countera 的值为:并结束请求&quot;, counter); --日志打印</span><br><span class="line">end</span><br><span class="line"> </span><br><span class="line">--接口返回值设置并打印</span><br><span class="line">a=1</span><br><span class="line">function response(status, headers, body)</span><br><span class="line">   if(true)  -- 执行的每一次方法都打印返回值</span><br><span class="line">   then</span><br><span class="line">--           a=2</span><br><span class="line">          print(body)</span><br><span class="line">      end</span><br><span class="line">        print(status) --打印状态</span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>可以通过lua读取外部文件进行作为动态参数 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">待完善</span><br></pre></td></tr></table></figure></li>
-<li>执行测试<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wrk -t1 -c1 -d1s -s ./startpost.lua --latency http://localhost:8998</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>#wrk参数设定<br>wrk参数主要根据机器系统参数相关，主要通过调整线程数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-t 线程数量</span><br><span class="line">-c 保持的连接数</span><br><span class="line">-d 持续时间</span><br><span class="line">-s 执行自定义脚本</span><br><span class="line">–latency 打印统计数据</span><br><span class="line">–timeout 超时时间</span><br></pre></td></tr></table></figure>
-
-<p>#结果查看（参考网上说明）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@jerrik /]# wrk -t12 -c100 -d30s http://www.baidu.com  </span><br><span class="line">Running 30s test @ http://www.baidu.com</span><br><span class="line">  12 threads and 100 connections</span><br><span class="line">  Thread Stats   Avg      Stdev     Max   +/- Stdev</span><br><span class="line">    Latency   211.76ms  304.92ms   1.97s    88.17%</span><br><span class="line">    Req/Sec    72.93     68.72   797.00     90.97%</span><br><span class="line">  23725 requests in 30.05s, 347.47MB read</span><br><span class="line">  Socket errors: connect 0, read 48, write 0, timeout 50</span><br><span class="line">Requests/sec:    789.57</span><br><span class="line">Transfer/sec:     11.56MB</span><br><span class="line">[root@jerrik /]# </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">12 threads and 100 connections:</span><br><span class="line">总共是12个线程,100个连接(不是一个线程对应一个连接)</span><br><span class="line">latency和Req/Sec:</span><br><span class="line">代表单个线程的统计数据,latency代表延迟时间,Req/Sec代表单个线程每秒完成的请求数，他们都具有平均值, 标准偏差, 最大值, 正负一个标准差占比。一般我们来说我们主要关注平均值和最大值. 标准差如果太大说明样本本身离散程度比较高. 有可能系统性能波动很大.</span><br><span class="line">23725 requests in 30.05s, 347.47MB read</span><br><span class="line">在30秒之内总共有23725个请求,总共读取347.47MB的数据</span><br><span class="line">Socket errors: connect 0, read 48, write 0, timeout 50</span><br><span class="line">总共有48个读错误,50个超时.</span><br><span class="line">Requests/sec和Transfer/sec</span><br><span class="line"></span><br><span class="line">作者：jerrik</span><br><span class="line">链接：https://www.jianshu.com/p/ac185e01cc30</span><br><span class="line">来源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
-
-
-<p>#总结<br>总体wrk压测还是比较简单的，主要是先清楚简单的测试命令，然后在通过lua脚本实现post请求压测，后续加强性能压测。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Arthas-使用记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-24 20:48:08" itemprop="dateCreated datePublished" datetime="2020-10-24T20:48:08+08:00">2020-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 09:58:23" itemprop="dateModified" datetime="2024-05-24T09:58:23+08:00">2024-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="cy_cmt_count" data-xid="2020/10/24/开发工具/Arthas-使用记录/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>官网：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/zh-cn/">https://arthas.aliyun.com/zh-cn/</a></p>
-<p>文档：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/">https://arthas.aliyun.com/doc/</a></p>
-<h1 id="自问"><a href="#自问" class="headerlink" title="自问"></a>自问</h1><p>为什么要用这个工具？该如何使用？使用了什么功能？</p>
-<p>慢慢进阶吧…</p>
-<h1 id="实际应用场景"><a href="#实际应用场景" class="headerlink" title="实际应用场景"></a>实际应用场景</h1><p>监控java应用</p>
-<p>(建议通过快速启动sh脚本快速启动运用，提示使用效率。)</p>
-<p>如需监控生产环境的java应用。可以服务器上启动一个arthas-boot.jar，然后可以通过IP访问的arthas控制台进行使用了</p>
-<ol>
-<li>java -jar arthas-boot.jar</li>
-</ol>
-<p>Web Console，用户在attach成功之后，可以直接访问：<a target="_blank" rel="noopener" href="http://ip:3658/%E3%80%82">http://IP:3658/。</a></p>
-<h1 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h1><h1 id="Arthas-Tunnel"><a href="#Arthas-Tunnel" class="headerlink" title="Arthas Tunnel"></a>Arthas Tunnel</h1><h2 id="使用arthas-tunnel-server连接远程arthas"><a href="#使用arthas-tunnel-server连接远程arthas" class="headerlink" title="使用arthas tunnel server连接远程arthas"></a>使用arthas tunnel server连接远程arthas</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">数学建模-线性回归</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-20 21:18:18" itemprop="dateCreated datePublished" datetime="2020-10-20T21:18:18+08:00">2020-10-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="cy_cmt_count" data-xid="2020/10/20/算法与数据结构/数学应用-线性回归/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在这，建议大家读一下吴军老师的《数学之美》，这本书让我真正感受到IT应用是真的有涉及数学的，只是自己接触的层面太低了！</p>
-<h1 id="数学建模"><a href="#数学建模" class="headerlink" title="数学建模"></a>数学建模</h1><p>试问多少人真正了解数学在IT发展中的实际应用，可能很多都听过说过，学习计算机需要一定的数学功底，这句话貌似是对的，但也不完成对；</p>
-<p>其实大部分人在实际IT开发中很少真正运用到数学模型，因为大部分业务流程只是运用到了开发语言的一些api，再者就是一些逻辑处理，在我看来这些都不涉及数学；</p>
-<p>真正的数学运用，应该是用到数学模型，数学运用，将实际数学知识应用到开发代码中进行运行。</p>
-<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>必修三，第二章，统计，属于回归分析，主要是介绍变量间的相互关系。<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6/6027765?fr=aladdin">https://baike.baidu.com/item/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6/6027765?fr=aladdin</a></p>
-<p>线性回归方程是利用数理统计中的回归分析，来确定两种或两种以上变数间相互依赖的定量关系的一种统计分析方法之一。<br>线性回归也是回归分析中第一种经过严格研究并在实际应用中广泛使用的类型。按自变量个数可分为一元线性回归分析方程和多元线性回归分析方程。</p>
-<h2 id="简单线性回归（一元线性回归）"><a href="#简单线性回归（一元线性回归）" class="headerlink" title="简单线性回归（一元线性回归）"></a>简单线性回归（一元线性回归）</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%96%B9%E7%A8%8B/6953911?fr=aladdin">https://baike.baidu.com/item/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%96%B9%E7%A8%8B/6953911?fr=aladdin</a></p>
-<h2 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h2><h1 id="线性回归应用场景"><a href="#线性回归应用场景" class="headerlink" title="线性回归应用场景"></a>线性回归应用场景</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/" class="post-title-link" itemprop="url">大数据-BI</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 00:18:18" itemprop="dateCreated datePublished" datetime="2020-09-19T00:18:18+08:00">2020-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 10:03:20" itemprop="dateModified" datetime="2024-05-24T10:03:20+08:00">2024-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/" class="cy_cmt_count" data-xid="2020/09/19/大数据/大数据-BI/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>BI工具</p>
-<p>Sugar、Superset、DataV、FineBI、Quick BI、Tableau、Power BI、SmartBI</p>
-<h2 id="使用FineBI连接数据库表数据生成报表"><a href="#使用FineBI连接数据库表数据生成报表" class="headerlink" title="使用FineBI连接数据库表数据生成报表"></a>使用FineBI连接数据库表数据生成报表</h2><ul>
-<li>生成报表</li>
-</ul>
-<p>1、新建数据库链接</p>
-<p>2、拉去字段到开发表格上</p>
-<p>3、保存并预览即可，通过浏览器参考报表</p>
-<ul>
-<li>生成图表</li>
-</ul>
-<p>1、新建数据库链接</p>
-<p>2、插入图表</p>
-<p>3、右侧选项栏设置图表数据即可</p>
-<h1 id="根据数据分析维度进行开发报表"><a href="#根据数据分析维度进行开发报表" class="headerlink" title="根据数据分析维度进行开发报表"></a>根据数据分析维度进行开发报表</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/zane_space/IT%E4%B9%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1244,10 +678,563 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-druid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-druid/" class="post-title-link" itemprop="url">大数据之分析引擎-Druid</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-01 00:18:18" itemprop="dateCreated datePublished" datetime="2020-07-01T00:18:18+08:00">2020-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 10:06:48" itemprop="dateModified" datetime="2024-05-24T10:06:48+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/07/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-druid/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/07/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-druid/" class="cy_cmt_count" data-xid="2020/07/01/大数据/大数据开发-druid/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Druid概述"><a href="#Druid概述" class="headerlink" title="Druid概述"></a>Druid概述</h1><p>官网：<a target="_blank" rel="noopener" href="https://druid.apache.org/">https://druid.apache.org</a></p>
+<p>海量实时存储（百万/秒，数据库千/秒），druid(万亿/秒)。hbase常用于海量数据直接存储或分析后数据实时查询等，druid常作为流数据计算后实时查询。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="单机版安装部署"><a href="#单机版安装部署" class="headerlink" title="单机版安装部署"></a>单机版安装部署</h2><p>下载、解压安装</p>
+<p>添加zk</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/" class="post-title-link" itemprop="url">大数据开发-架构发展</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-29 20:18:18" itemprop="dateCreated datePublished" datetime="2020-06-29T20:18:18+08:00">2020-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/" class="cy_cmt_count" data-xid="2020/06/29/大数据/大数据开发-架构发展/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>大数据开发时往往要完成数据建模</p>
+<p>开发规范</p>
+<p><strong>从数仓到Kappa架构</strong></p>
+<p><img src="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=.png" alt="【OLAP】从数仓到Kappa架构_实时计算"></p>
+<p><img src="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=-20220411171650645.png" alt="【OLAP】从数仓到Kappa架构_流处理_02"></p>
+<p><img src="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=-20220411171621525.png" alt="img"></p>
+<p><img src="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=-20220411171708397.png" alt="【OLAP】从数仓到Kappa架构_批处理_04"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15076212/3946445">https://blog.51cto.com/u_15076212/3946445</a></p>
+<p>数据湖可以存储多种数据，包括图片、视频，解决传统数仓的业务场景</p>
+<p><img src="/2020/06/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%9E%B6%E6%9E%84%E5%8F%91%E5%B1%95/image-20220424191408052-0798850.png" alt="image-20220424191408052"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%95%E5%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%95%E5%BA%A7/" class="post-title-link" itemprop="url">大数据底座-CDH、HDP、CDP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-19 22:18:18" itemprop="dateCreated datePublished" datetime="2020-06-19T22:18:18+08:00">2020-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%95%E5%BA%A7/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%95%E5%BA%A7/" class="cy_cmt_count" data-xid="2020/06/19/大数据/大数据底座/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>说到大数据，离不开Hadoop。大数据涉及的组件是在太多了，各个组件存在兼容适配问题。那么就会有大数据底座的概念。</p>
+<p>底座主要有：Apache（最原始的版本，所有发行版均基于这个版本进行改进）、Cloudera版本（Cloudera’s Distribution Including Apache Hadoop，简称CDH）、Hortonworks版本(Hortonworks Data Platform，简称HDP），对于国内而言，绝大多数选择CDH版本</p>
+<p>Hadoop的发行版本有很多，有华为发行版，Intel发行版，Cloudera发行版（CDH），MapR版本,以及HortonWorks（HDP）、Transwarp Data Hub (TDH)版本等。所有发行版都是基于Apache Hadoop衍生出来的，产生这些版本的原因，是由于Apache Hadoop的开源协议决定的：任何人可以对其进行修改，并作为开源或商业产品发布和销售。</p>
+<p>以下主要记录一下CDH、HDP、CDP</p>
+<h1 id="底座类型"><a href="#底座类型" class="headerlink" title="底座类型"></a>底座类型</h1><h2 id="Apache社区版"><a href="#Apache社区版" class="headerlink" title="Apache社区版"></a>Apache社区版</h2><p><strong>Apache Hadoop 不足之处   版本管理混乱 部署过程繁琐、升级过程复杂 兼容性差 安全性低</strong></p>
+<h2 id="Cloudera发行版（CDH）"><a href="#Cloudera发行版（CDH）" class="headerlink" title="Cloudera发行版（CDH）"></a>Cloudera发行版（CDH）</h2><p>CDH是你一个很好地选择。</p>
+<p>通过基于Web的用户界面,支持大多数Hadoop组件，包括HDFS、MapReduce、Hive、Pig、 Hbase、Zookeeper、Sqoop,简化了<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%A4%A7%E6%95%B0%E6%8D%AE&spm=1001.2101.3001.7020">大数据</a>平台的安装、使用难度。</p>
+<p><img src="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BA%95%E5%BA%A7/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTQ2NTU3,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<ul>
+<li><p>CDH特点</p>
+<p>版本划分清晰<br>版本更新速度快<br>支持Kerberos安全认证<br>文档清晰<br>支持多种安装方式（Cloudera Manager方式）<br>安装方式</p>
+</li>
+<li><p>Cloudera Manager<br>Yum<br>Rpm<br>Tarball</p>
+</li>
+<li><p>CDH5.4</p>
+<p><a target="_blank" rel="noopener" href="http://archive.cloudera.com/cdh5/">http://archive.cloudera.com/cdh5/</a></p>
+</li>
+<li><p>Cloudera Manager5.4.3：</p>
+<p><a target="_blank" rel="noopener" href="http://www.cloudera.com/downloads/manager/5-4-3.html">http://www.cloudera.com/downloads/manager/5-4-3.html</a></p>
+</li>
+</ul>
+<h2 id="Hontonworks发行版（HDP）"><a href="#Hontonworks发行版（HDP）" class="headerlink" title="Hontonworks发行版（HDP）"></a>Hontonworks发行版（HDP）</h2><h2 id="CDP"><a href="#CDP" class="headerlink" title="CDP"></a>CDP</h2><p>在Cloudera和Hortonworks合并后，Cloudera公司推出了新一代的数据平台产品CDP Data Center（以下简称为CDP），在2019年11月30日已经正式GA。</p>
+<p>CDP的版本号延续了之前CDH的版本号，从7.0开始，目前最新的版本号为7.0.3.0。</p>
+<h1 id="底座CDP、CDH、HDP共性组件"><a href="#底座CDP、CDH、HDP共性组件" class="headerlink" title="底座CDP、CDH、HDP共性组件"></a>底座CDP、CDH、HDP共性组件</h1><h2 id="CDP、CDH、HDP中都包含的部分"><a href="#CDP、CDH、HDP中都包含的部分" class="headerlink" title="CDP、CDH、HDP中都包含的部分"></a>CDP、CDH、HDP中都包含的部分</h2><p>Apache Hadoop（HDFS/YARN/MR）<br>Apache HBase<br>Apache Hive<br>Apache Oozie<br>Apache Spark<br>Apache Sqoop<br>Apache Zookeeper<br>Apache Parquet<br>Apache Phoenix（*CDH中需要额外安装）ig<br>————————————————<br>这里记录参考&amp;感谢：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_20554629/article/details/106303820">https://blog.csdn.net/sinat_20554629/article/details/106303820</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/" class="post-title-link" itemprop="url">大数据之难</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-19 00:18:18" itemprop="dateCreated datePublished" datetime="2020-06-19T00:18:18+08:00">2020-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/" class="cy_cmt_count" data-xid="2020/06/19/大数据/大数据之难/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>作为java开发转大数据，个人对大数据之难的感受：</p>
+<ul>
+<li>数据之难</li>
+</ul>
+<p>1、知识体系庞大，解决方案多导致架构多样化；</p>
+<p>2、环境搭建复杂，涉足组件多，版本依赖性严重，占用资源多；</p>
+<p>3、实战少，难以提升；</p>
+<p>4、需结合实际场景，场景应该来源于运营人员的需求，而不是开发人员自行设定；</p>
+<ul>
+<li>大数据组件标准</li>
+</ul>
+<p>虽然大数据有很多框架组件，但其实大部分数据库语句都类似，所以并没有想象得难，大量的技术组件百花齐放，但大浪淘沙，终究会尘埃落定。</p>
+<ul>
+<li>建议</li>
+</ul>
+<p>1、确定需要学习的大数据场景及涉及生态组件，不同场景规划技术框图；</p>
+<p>2、准备好自动管理的linux脚本，方便快速恢复开发环境；</p>
+<p>3、模拟数据，从数据源到数据处理，最后数据输出，形成开发闭环；</p>
+<p>4、熟悉不同架构的组件及API，模拟场景进行运用；</p>
+<p>5、平常心，只是接触晚，实践少，并不代表大数据很难；</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Scala如门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-18 21:21:32" itemprop="dateCreated datePublished" datetime="2020-06-18T21:21:32+08:00">2020-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/" class="cy_cmt_count" data-xid="2020/06/18/大数据/scala入门/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Scala简介"><a href="#Scala简介" class="headerlink" title="Scala简介"></a>Scala简介</h1><p>联邦理工学院洛桑（EPFL）的Martin Odersky于2001年基于Funnel的工作开始设计Scala。</p>
+<p>Scala 是一门多范式（multi-paradigm）的编程语言，设计初衷是要集成面向对象编程和函数式编程的各种特性。</p>
+<p>Scala 运行在 Java 虚拟机上，并兼容现有的 Java 程序。</p>
+<p>Scala 源代码被编译成 Java 字节码，所以它可以运行于 JVM 之上，并可以调用现有的 Java 类库。</p>
+<h1 id="Scala环境搭建"><a href="#Scala环境搭建" class="headerlink" title="Scala环境搭建"></a>Scala环境搭建</h1><p>安装jdk</p>
+<p>安装Scala</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 下载</span><br><span class="line">https:<span class="comment">//www.scala-lang.org/download/</span></span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">cd ~/Download/</span><br><span class="line">tar -zxvf scala<span class="number">-2.12</span><span class="number">.8</span>.tgz</span><br><span class="line">mv scala<span class="number">-2.12</span><span class="number">.8</span> /usr/local/scala</span><br><span class="line"></span><br><span class="line"># 配置环境变量</span><br><span class="line">命令行输入：vim ~/.bash_profile进行编辑，增加环境变量：</span><br><span class="line"></span><br><span class="line">SCALA_HOME=/usr/local/scala</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$SCALA_HOME/bin</span><br><span class="line"></span><br><span class="line">#使环境变量生效，在命令行执行</span><br><span class="line">source  ~/.bash_profile</span><br><span class="line"></span><br><span class="line"># 验证</span><br><span class="line">命令行输入： scala</span><br></pre></td></tr></table></figure>
+
+<h1 id="Scala-hello-world"><a href="#Scala-hello-world" class="headerlink" title="Scala hello world"></a>Scala hello world</h1><p>HelloWorld.scala</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object HelloWorld&#123;</span><br><span class="line">	def main(args : Array[String])&#123;</span><br><span class="line">		println(&quot;HelloWorld&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译（类似java）"><a href="#编译（类似java）" class="headerlink" title="编译（类似java）"></a>编译（类似java）</h2><p>scalac HelloWorld.scala</p>
+<p>编译生成2个文件，其中有一个是和HelloWorld.scala对应的HelloWorld.class 。</p>
+<h2 id="反编译，-是指使用javap工具反编译class文件"><a href="#反编译，-是指使用javap工具反编译class文件" class="headerlink" title="反编译， 是指使用javap工具反编译class文件"></a>反编译， 是指使用javap工具反编译class文件</h2><p>反编译， 是指使用javap工具反编译class文件</p>
+<p>javap -c -v -classpath . HelloWorld</p>
+<p>javap -c -v -classpath . HelloWorld$</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>scala HelloWorld.scala</p>
+<h1 id="Scala-基础"><a href="#Scala-基础" class="headerlink" title="Scala 基础"></a>Scala 基础</h1><ul>
+<li>class和object区别</li>
+</ul>
+<p>object</p>
+<p>在scala中没有静态方法和静态字段，所以在scala中可以用object来实现这些功能</p>
+<p>scala中object：所有成员变量和方法默认都是 static 的，所以可以直接访问main方法</p>
+<p>class和object的一个差别是,单例对象不带参数,而类可以.因为你不能用new关键字实例化一个单例对象,所以没有机会传递给它参数</p>
+<p>class</p>
+<p>在scala中，类名可以和对象名为同一个名字，该对象称为该类的伴生对象,类和伴生对象可以相互访问他们的私有属性,但是它们必须在同一个源文件中</p>
+<h2 id="Scala关键字"><a href="#Scala关键字" class="headerlink" title="Scala关键字"></a>Scala关键字</h2><p>Scala只有39个关键字：</p>
+<ul>
+<li>package, import, class, object, trait, extends, with, type, forSome</li>
+<li>private, protected, abstract, sealed, final, implicit, lazy, override</li>
+<li>try, catch, finally, throw</li>
+<li>if, else, match, case, do, while, for, return, yield</li>
+<li>def, val, var </li>
+<li>this, super</li>
+<li>new</li>
+<li>true, false, null</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34367845/article/details/92169783">https://blog.csdn.net/weixin_34367845/article/details/92169783</a></p>
+<h2 id="Scala中的下划线到底有多少种应用场景"><a href="#Scala中的下划线到底有多少种应用场景" class="headerlink" title="Scala中的下划线到底有多少种应用场景"></a>Scala中的下划线到底有多少种应用场景</h2><p>1、作为“通配符”，类似Java中的*。如import scala.math._</p>
+<p>2、:<em>*作为一个整体，将某个参数当作参数序列处理！例如val s = sum(1 to 10:</em>*)就是将1 to 10当作参数序列处理。</p>
+<p>3、指代一个集合中的每个元素。例如我们要在一个Array a中筛出偶数，并乘以2，可以用以下办法：<br>a.filter(<em>%2==0).map(2*</em>)。<br>又如要对缓冲数组ArrayBuffer b排序，可以这样：<br>val bSorted = b.sorted(_</p>
+<p>4、在元组中，可以用方法_1, _2, _3访问组员。如a._2。其中句点可以用空格替代。</p>
+<p>5、使用模式匹配可以用来获取元组的组员，例如<br>val (first, second, third) = t<br>但如果不是所有的部件都需要，那么可以在不需要的部件位置上使用_。比如上一例中val (first, second, _) = t</p>
+<p>6、还有一点，下划线_代表的是某一类型的默认值。<br>对于Int来说，它是0。<br>对于Double来说，它是0.0<br>对于引用类型，它是null。</p>
+<h1 id="Scala-实战"><a href="#Scala-实战" class="headerlink" title="Scala 实战"></a>Scala 实战</h1><h1 id="Scala-进阶"><a href="#Scala-进阶" class="headerlink" title="Scala 进阶"></a>Scala 进阶</h1><h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><ul>
+<li><p>idea中scala与java代码互转</p>
+<p><img src="/2020/06/18/%E5%A4%A7%E6%95%B0%E6%8D%AE/scala%E5%85%A5%E9%97%A8/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbGRsb25l,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kwame211/article/details/86714347">https://blog.csdn.net/kwame211/article/details/86714347</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1315,7 +1302,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -174,721 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/" class="post-title-link" itemprop="url">数据仓库-离线数仓</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-01 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-01T00:18:18+08:00">2018-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/" class="cy_cmt_count" data-xid="2018/03/01/大数据/数据仓库-离线数仓/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165963780">https://zhuanlan.zhihu.com/p/165963780</a></p>
-<p><img src="/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/v2-61df03fbf73fb2d5bf4cace5df248a81_1440w.jpg" alt="《数据仓库篇》——离线数仓数据链路和组件"></p>
-<p>离线数仓</p>
-<p>储存主要是在hadoop的HDFS中，实际仓库管理是HIVE</p>
-<p>维度数据</p>
-<ul>
-<li>日维度</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：日维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：1990-01-01 到 2050-12-31</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        date_add(&quot;1990-01-01&quot;, a.pos) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2050-12-31&quot;, &quot;1990-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_day</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> date_id,</span><br><span class="line">    date_code <span class="keyword">as</span> date_code,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> date_name,</span><br><span class="line">    <span class="keyword">year</span>(date_sub(next_day(date_code, <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_code) <span class="keyword">as</span> week_id,</span><br><span class="line">    substr(regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="number">1</span>, <span class="number">6</span>) <span class="keyword">as</span> month_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> season_id,</span><br><span class="line">    <span class="keyword">year</span>(date_code) <span class="keyword">as</span> year_id,</span><br><span class="line">    regexp_replace(date_add(date_code, <span class="number">-1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> pre_date_id,</span><br><span class="line">    regexp_replace(date_add(date_code, <span class="number">1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> after_date_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> is_workday,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> un_workday_name,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>时段维度</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：时段维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：凌晨 到 下班时间</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> dim_date_hour <span class="keyword">partition</span>(ds <span class="operator">=</span> <span class="string">&#x27;1&#x27;</span>) <span class="keyword">values</span></span><br><span class="line">(<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;深夜到凌晨&#x27;</span>,<span class="string">&#x27;00:00:00&#x27;</span>,<span class="string">&#x27;06:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;6&#x27;</span>,<span class="string">&#x27;清晨&#x27;</span>,<span class="string">&#x27;06:00:00&#x27;</span>,<span class="string">&#x27;09:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;9&#x27;</span>,<span class="string">&#x27;上午&#x27;</span>,<span class="string">&#x27;09:00:00&#x27;</span>,<span class="string">&#x27;12:30:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;12&#x27;</span>,<span class="string">&#x27;午休时间&#x27;</span>,<span class="string">&#x27;12:30:00&#x27;</span>,<span class="string">&#x27;14:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;14&#x27;</span>,<span class="string">&#x27;下午&#x27;</span>,<span class="string">&#x27;14:00:00&#x27;</span>,<span class="string">&#x27;18:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;18&#x27;</span>,<span class="string">&#x27;下班时间&#x27;</span>,<span class="string">&#x27;18:00:00&#x27;</span>,<span class="string">&#x27;24:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>月维度</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：月维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年1月 到 2300年1月</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        add_months(&quot;2000-01-01&quot;, a.pos) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2010-01-31&quot;, &quot;2000-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_month</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    substr(regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="number">1</span>, <span class="number">4</span>) <span class="keyword">as</span> year_id,</span><br><span class="line">    substr(regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="number">1</span>, <span class="number">6</span>) <span class="keyword">as</span> month_id,</span><br><span class="line">    substr(date_code, <span class="number">1</span>, <span class="number">7</span>) <span class="keyword">as</span> month_code,</span><br><span class="line">    substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="keyword">as</span> month_short_code,</span><br><span class="line">    concat(<span class="keyword">year</span>(date_code), <span class="string">&#x27;年&#x27;</span>, substr(date_code, <span class="number">6</span>, <span class="number">2</span>), <span class="string">&#x27;月&#x27;</span>) <span class="keyword">as</span> month_name,</span><br><span class="line">    concat(substr(date_code, <span class="number">6</span>, <span class="number">2</span>), <span class="string">&#x27;月&#x27;</span>) <span class="keyword">as</span> month_short_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> month_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(last_day(date_code)),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(last_day(date_code), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(last_day(date_code), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> month_last_date,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">-1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> after_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">-12</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_year_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">12</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> after_year_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">-3</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">3</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> after_season_month_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>季维度</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：季维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年第1季度 到 2460年第1季度</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        add_months(&quot;2000-01-01&quot;, a.pos <span class="operator">*</span> <span class="number">3</span>) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2005-01-31&quot;, &quot;2000-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_season</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;Q&#x27;</span>,</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> season_code,</span><br><span class="line">    concat(<span class="string">&#x27;Q&#x27;</span>, <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span>) <span class="keyword">as</span> season_short_code,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年第&#x27;</span>,</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span>,</span><br><span class="line">        <span class="string">&#x27;季度&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> season_name,</span><br><span class="line">    concat(<span class="string">&#x27;第&#x27;</span>, <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span>, <span class="string">&#x27;季度&#x27;</span>) <span class="keyword">as</span> season_short_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> season_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(last_day(add_months(date_code, <span class="number">2</span>))),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">2</span>)), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">2</span>)), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> season_last_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">-1</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">-1</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">3</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">3</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> after_season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">-12</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">-12</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">12</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">12</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>周维度</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：周维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年第1周 到 2070年第29周</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        date_add(&quot;2000-01-03&quot;, a.pos <span class="operator">*</span> <span class="number">7</span>) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2010-01-31&quot;, &quot;2000-01-03&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_week</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    <span class="keyword">year</span>(date_sub(next_day(date_code, <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_code) <span class="keyword">as</span> week_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_sub(next_day(date_code, <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)),</span><br><span class="line">        <span class="string">&#x27;年第&#x27;</span>,</span><br><span class="line">        substr(<span class="number">100</span> <span class="operator">+</span> weekofyear(date_code), <span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;周&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> week_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> week_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_add(date_code, <span class="number">6</span>)),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_add(date_code, <span class="number">6</span>), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_add(date_code, <span class="number">6</span>), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> week_last_date,</span><br><span class="line">    <span class="keyword">year</span>(</span><br><span class="line">        date_sub(next_day(date_add(date_code, <span class="number">-1</span>), <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)</span><br><span class="line">    ) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_add(date_code, <span class="number">-1</span>)) <span class="keyword">as</span> pre_week_id,</span><br><span class="line">    <span class="keyword">year</span>(date_sub(next_day(date_add(date_code, <span class="number">7</span>), <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_add(date_code, <span class="number">7</span>)) <span class="keyword">as</span> after_week_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>年维度</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：年维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年 到 2396年</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        add_months(&quot;2000-01-01&quot;, a.pos <span class="operator">*</span> <span class="number">12</span>) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2001-01-31&quot;, &quot;2000-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_year</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    <span class="keyword">year</span>(date_code) <span class="keyword">as</span> year_id,</span><br><span class="line">    concat(<span class="keyword">year</span>(date_code), <span class="string">&#x27;年&#x27;</span>) <span class="keyword">as</span> year_name,</span><br><span class="line">    concat(substr(date_code, <span class="number">3</span>, <span class="number">2</span>), <span class="string">&#x27;年&#x27;</span>) <span class="keyword">as</span> year_short_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> year_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(last_day(add_months(date_code, <span class="number">11</span>))),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">11</span>)), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">11</span>)), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> year_last_date,</span><br><span class="line">    <span class="keyword">year</span>(add_months(date_code, <span class="number">-1</span>)) <span class="keyword">as</span> pre_year_id,</span><br><span class="line">    <span class="keyword">year</span>(add_months(date_code, <span class="number">12</span>)) <span class="keyword">as</span> after_year_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="数仓术语"><a href="#数仓术语" class="headerlink" title="数仓术语"></a>数仓术语</h1><ol>
-<li>实体</li>
-<li>维度</li>
-<li>度量</li>
-<li>粒度</li>
-<li>口径</li>
-<li>指标</li>
-<li>标签</li>
-<li>自然键（主键）</li>
-<li>持久键（例如身份证）</li>
-<li>代理键</li>
-<li>退化维度</li>
-<li>下钻</li>
-<li>上卷</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Flink-环境搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-28 20:18:18" itemprop="dateCreated datePublished" datetime="2018-02-28T20:18:18+08:00">2018-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/02/28/flink_space/flink-环境搭建/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
-<p>Flink</p>
-<p><img src="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png"></p>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>前提条件：需先安装zookeeper与hadoop</p>
-<p>zookeeper安装</p>
-<p>hadoop安装</p>
-<p>机器配置<br>3台 linux centos7（虚拟机即可）<br>修改主机名、固定ip<br>免密<br>安装jdk</p>
-<ul>
-<li>hadoop1: 4g内存 2核 80g硬盘 作为master节点</li>
-<li>hadoop2 1g内存 1核 8g硬盘 作为slave节点</li>
-<li>hadoop3: 1g内存 1核 8g硬盘 作为slave节点</li>
-</ul>
-<h1 id="Flink版本"><a href="#Flink版本" class="headerlink" title="Flink版本"></a>Flink版本</h1><p><a target="_blank" rel="noopener" href="https://flink.apache.org/downloads.html">https://flink.apache.org/downloads.html</a></p>
-<p>首先我需要清楚flink会使用到哪些工具，最好了解相关软件之间的依赖版本。</p>
-<p>下面主要针对flink1.7说明相关工具</p>
-<ul>
-<li>jdk 1.8+</li>
-<li>scala 2.1.1</li>
-<li>maven 3.0.4+</li>
-<li>hadoop 2.4\2.6\2.7\2.8</li>
-<li>flink 1.7</li>
-</ul>
-<h1 id="Flink单机安装"><a href="#Flink单机安装" class="headerlink" title="Flink单机安装"></a>Flink单机安装</h1><p>Flink 有三种部署模式，分别是 Local、Standalone Cluster 和 Yarn Cluster。</p>
-<ul>
-<li>Local模式</li>
-</ul>
-<p>对于 Local 模式来说，JobManager 和 TaskManager 会公用一个 JVM 来完成 Workload。如果要验证一个简单的应用，Local 模式是最方便的。实际应用中大多使用 Standalone 或者 Yarn Cluster，而local模式只是将安装包解压启动（./bin/start-local.sh 或 ./bin/start-cluster.sh）即可，在这里不在演示。</p>
-<ul>
-<li><p>Standalone 模式</p>
-</li>
-<li><p>Flink 的 HA</p>
-</li>
-</ul>
-<p>首先，我们需要知道 Flink 有两种部署的模式，分别是 Standalone 以及 Yarn Cluster 模式。对于 Standalone 来说，Flink 必须依赖于 Zookeeper 来实现 JobManager 的 HA（Zookeeper 已经成为了大部分开源框架 HA 必不可少的模块）。在 Zookeeper 的帮助下，一个 Standalone 的 Flink 集群会同时有多个活着的 JobManager，其中只有一个处于工作状态，其他处于 Standby 状态。当工作中的 JobManager 失去连接后（如宕机或 Crash），Zookeeper 会从 Standby 中选举新的 JobManager 来接管 Flink 集群。</p>
-<p>对于 Yarn Cluaster 模式来说，Flink 就要依靠 Yarn 本身来对 JobManager 做 HA 了。其实这里完全是 Yarn 的机制。对于 Yarn Cluster 模式来说，JobManager 和 TaskManager 都是被 Yarn 启动在 Yarn 的 Container 中。此时的 JobManager，其实应该称之为 Flink Application Master。也就说它的故障恢复，就完全依靠着 Yarn 中的 ResourceManager（和 MapReduce 的 AppMaster 一样）。由于完全依赖了 Yarn，因此不同版本的 Yarn 可能会有细微的差异。这里不再做深究。</p>
-<h2 id="单节点安装-mac环境"><a href="#单节点安装-mac环境" class="headerlink" title="单节点安装(mac环境)"></a>单节点安装(mac环境)</h2><p>Mac上安装flink，推荐通过 homebrew 来安装（一条命令完成）：</p>
-<p><code>brew install apache-flink</code></p>
-<ul>
-<li><p>下载安装，或离线安装（下载压缩包），略</p>
-</li>
-<li><p>启动</p>
-</li>
-</ul>
-<p>查看flink安装信息</p>
-<p><code>brew info apache-flink</code><br>例如：安装目录为：<br>/opt/homebrew/Cellar/apache-flink/1.12.2</p>
-<p>bin  目录</p>
-<p>/opt/homebrew/Cellar/apache-flink/1.12.2/libexec/bin</p>
-<p>启动</p>
-<p>./libexec/bin/start-cluster.sh</p>
-<p>启动flink sql</p>
-<p>sql-client.sh embedded</p>
-<ul>
-<li>访问web页面</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a></p>
-<ul>
-<li>重装</li>
-</ul>
-<h1 id="Flink集群部署"><a href="#Flink集群部署" class="headerlink" title="Flink集群部署"></a>Flink集群部署</h1><p>目前 Flink 支持多种部署模式：本地、集群（Standalone / YARN）、云（GCE / EC2）、kubenetes。</p>
-<p><img src="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.jpg"></p>
-<p>下面主要记录一下flink on yarn模式部署</p>
-<h2 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h2><p>Standalone Cluster 和 Yarn Cluster<br>Flink的Standalone和on Yarn模式都属于集群运行模式，但是有很大的不同，在实际环境中，使用Flink on Yarn模式者居多。</p>
-<pre><code>Local——本地单机模式，学习测试使用
-Standlone——独立集群模式，flink自带集群，学习测试使用
-standloneHA——独立集群的高可用模式，flink自带集群，开发测试使用
-On Yarn——计算机资源同意由Hadoop Yarn管理，生产模式使用
-</code></pre>
-<p>###Standalone Cluster<br>Master-Slave架构，JobManager运行在Master节点，TaskManager运行在Slave节点，与HDFS/Hadoop无关</p>
-<p>Active JobManager挂掉时，通过Zookeeper选举多个Standby JobManager成为Active JobManager来保证高可用</p>
-<p>Standalone Cluster HA<br>由于jobmanager的HA配置依赖于zookeeper，因此，需要先配置zookeeper<br>而且，由于Flink的state backend要依赖hdfs，因此，要部署hdfs</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lmalds/article/details/52981042">https://blog.csdn.net/lmalds/article/details/52981042</a><br>###Yarn Cluster</p>
-<ul>
-<li>Flink yarn session</li>
-<li>Flink run</li>
-</ul>
-<p>yarn-session.sh –help</p>
-<p>在配置HA前，先通过-q看一下我的yarn集群的资源情况：</p>
-<p>yarn-session.sh –q</p>
-<h3 id="Flink-on-Yarn-HA-配置（4步）"><a href="#Flink-on-Yarn-HA-配置（4步）" class="headerlink" title="Flink on Yarn HA 配置（4步）"></a>Flink on Yarn HA 配置（4步）</h3><p>1、配置准备<br>在配置Flink On Yarn之前，必须保证hdfs和yarn都已经开启，可以通过$HADOOP_HOME/sbin/start-all.sh启动hdfs和yarn。<br>2、配置AM在尝试重启的最大次数（yarn-site.xml）<br>3、配置Application Attempts（flink-conf.yaml）<br>4、配置zookeeper信息</p>
-<ul>
-<li>启动</li>
-</ul>
-<p>默认<br>bin/yarn-session.sh</p>
-<p>启动一个yarn-session有2个Taskmanager，jobmanager内存2GB，taskManager2GB内存</p>
-<p>./bin/yarn-session.sh -n 2 -jm 1024 -tm 1024</p>
-<h1 id="Flink本地环境搭建（待整合）"><a href="#Flink本地环境搭建（待整合）" class="headerlink" title="Flink本地环境搭建（待整合）"></a>Flink本地环境搭建（待整合）</h1><p>学习Flink需要对Hadoop和Strom有所了解</p>
-<p>Hadoop实现了MapReduce需要Map和Reduce</p>
-<p>Strom实现了Topology，需要Spout和Bolt</p>
-<p>Hadoop认识与安装</p>
-<p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/hadoop/">https://www.w3cschool.cn/hadoop/</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fanxin_i/article/details/80425461">https://blog.csdn.net/fanxin_i/article/details/80425461</a></p>
-<p>我的记录时间：20201218</p>
-<p>Apache Flink® 1.12.0 是我们最新的稳定版本。</p>
-<p>运行部署</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ldsweely/p/12033590.html">https://www.cnblogs.com/ldsweely/p/12033590.html</a></p>
-<h1 id="Apache-Flink-仪表板"><a href="#Apache-Flink-仪表板" class="headerlink" title="Apache Flink 仪表板"></a>Apache Flink 仪表板</h1><p><img src="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.jpg"></p>
-<h2 id="Overview-概述"><a href="#Overview-概述" class="headerlink" title="Overview(概述)"></a>Overview(概述)</h2><h2 id="Jobs（工作任务）"><a href="#Jobs（工作任务）" class="headerlink" title="Jobs（工作任务）"></a>Jobs（工作任务）</h2><p>这里主要包含运行中和已完成的任务</p>
-<h2 id="Task-Managers（定时任务管理）"><a href="#Task-Managers（定时任务管理）" class="headerlink" title="Task Managers（定时任务管理）"></a>Task Managers（定时任务管理）</h2><h2 id="Job-Manager（任务管理）"><a href="#Job-Manager（任务管理）" class="headerlink" title="Job Manager（任务管理）"></a>Job Manager（任务管理）</h2><h2 id="Submit-New-Job（提交新工作任务）"><a href="#Submit-New-Job（提交新工作任务）" class="headerlink" title="Submit New Job（提交新工作任务）"></a>Submit New Job（提交新工作任务）</h2><h1 id="运维-开发"><a href="#运维-开发" class="headerlink" title="运维+开发"></a>运维+开发</h1><p>#杂<br>最简单的部署<br>直接单包解压（配置环境变量）启动<br>./start-cluster.sh </p>
-<p>FLINK HADOOP_CLASSPATH设置，集成hadoop<br>如果配置flink启动引入hadoop路径，这样可以省去引入hadoop相关包，但是这样容易生产包冲突（flink和hadoop都存在这个包）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33358554/article/details/110918177">https://blog.csdn.net/qq_33358554/article/details/110918177</a></p>
-<p>scp -r <del>/soft/flink/flink-1.10.0  hadoop@hadoop3:</del>/soft/flink/</p>
-<ul>
-<li>flink1.10 在yarn上运行job报内存超出-问题排查</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ASN_forever/article/details/106372923"></a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/flink_space/flink%20ML/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/29/flink_space/flink%20ML/" class="post-title-link" itemprop="url">Flink ML</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-29T20:18:18+08:00">2018-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 13:15:04" itemprop="dateModified" datetime="2024-05-24T13:15:04+08:00">2024-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/29/flink_space/flink%20ML/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/29/flink_space/flink%20ML/" class="cy_cmt_count" data-xid="2018/01/29/flink_space/flink ML/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Flink<br><img src="/2018/01/29/flink_space/flink%20ML/2.png" style="zoom:80%"> </p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
-<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
-<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
-<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
-<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
-<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
-<h1 id="Flink-ML"><a href="#Flink-ML" class="headerlink" title="Flink ML"></a>Flink ML</h1><h3 id="机器学习及flinkML算法"><a href="#机器学习及flinkML算法" class="headerlink" title="机器学习及flinkML算法"></a><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0&spm=1001.2101.3001.7020">机器学习</a>及flinkML算法</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/healthsun/article/details/90669798">https://blog.csdn.net/healthsun/article/details/90669798</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/flink_space/flink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/29/flink_space/flink/" class="post-title-link" itemprop="url">Flink</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-29T20:18:18+08:00">2018-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/29/flink_space/flink/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/29/flink_space/flink/" class="cy_cmt_count" data-xid="2018/01/29/flink_space/flink/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
-<p>Flink</p>
-<p><img src="/2018/01/29/flink_space/flink/2.png"></p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
-<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
-<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
-<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
-<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
-<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
-<h1 id="Flink计算引擎，到底计算了什么？"><a href="#Flink计算引擎，到底计算了什么？" class="headerlink" title="Flink计算引擎，到底计算了什么？"></a>Flink计算引擎，到底计算了什么？</h1><p>我们一只说Flink是一种计算引擎，那实际在计算什么呢？</p>
-<p>计算框架已经从第一代的雅虎开源的Hadoop体系进化到目前主流的Spark框架，到现在的Flink。<br>前面两套框架的计算主要是从强依赖硬盘存储能力的计算发展到了内存计算，大大增强了计算力。下一代计算引擎，也就是第三代计算引擎Flink</p>
-<p>流计算<br><a target="_blank" rel="noopener" href="https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457">https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457</a></p>
-<h1 id="应用场景（有流数据的地方就可以用flink）"><a href="#应用场景（有流数据的地方就可以用flink）" class="headerlink" title="应用场景（有流数据的地方就可以用flink）"></a>应用场景（有流数据的地方就可以用flink）</h1><p>简单举几个例子，大数据处理可适用在在如下一些场景:</p>
-<pre><code>医疗大数据、看病更高效(病例病理分析、基因数据分析)
-电商大数据、精准营销法宝(杀熟、哈哈哈哈或)
-零售大数据、最懂消费者(用户画像，精准推送)
-金融大数据、理财利器 (大数据选股)
-交通大数据、畅通出行 (城市大脑)
-</code></pre>
-<ul>
-<li>事件驱动型应用</li>
-<li>数据分析应用</li>
-<li>数据管道应用</li>
-</ul>
-<ol>
-<li>事件驱动型应用<br>典型的事件驱动型应用实例</li>
-</ol>
-<ul>
-<li>反欺诈</li>
-<li>异常检测</li>
-<li>基于规则的报警</li>
-<li>业务流程监控</li>
-<li>（社交网络）Web 应用</li>
-</ul>
-<ol start="2">
-<li>数据分析应用<br>典型的数据分析应用实例</li>
-</ol>
-<ul>
-<li>电信网络质量监控</li>
-<li>移动应用中的产品更新及实验评估分析</li>
-<li>消费者技术中的实时数据即席分析</li>
-<li>大规模图分析</li>
-</ul>
-<ol start="3">
-<li>数据管道应用<br>典型的数据管道应用实例</li>
-</ol>
-<ul>
-<li>电子商务中的实时查询索引构建</li>
-<li>电子商务中的持续 ETL</li>
-</ul>
-<h1 id="Apache-Flink-仪表板"><a href="#Apache-Flink-仪表板" class="headerlink" title="Apache Flink 仪表板"></a>Apache Flink 仪表板</h1><p><img src="/2018/01/29/flink_space/flink/2-16470735025064.jpg"></p>
-<h2 id="Overview-概述"><a href="#Overview-概述" class="headerlink" title="Overview(概述)"></a>Overview(概述)</h2><h2 id="Jobs（工作任务）"><a href="#Jobs（工作任务）" class="headerlink" title="Jobs（工作任务）"></a>Jobs（工作任务）</h2><p>这里主要包含运行中和已完成的任务</p>
-<h2 id="Task-Managers（定时任务管理）"><a href="#Task-Managers（定时任务管理）" class="headerlink" title="Task Managers（定时任务管理）"></a>Task Managers（定时任务管理）</h2><h2 id="Job-Manager（任务管理）"><a href="#Job-Manager（任务管理）" class="headerlink" title="Job Manager（任务管理）"></a>Job Manager（任务管理）</h2><h2 id="Submit-New-Job（提交新工作任务）"><a href="#Submit-New-Job（提交新工作任务）" class="headerlink" title="Submit New Job（提交新工作任务）"></a>Submit New Job（提交新工作任务）</h2><h1 id="运维-开发"><a href="#运维-开发" class="headerlink" title="运维+开发"></a>运维+开发</h1><p>#杂<br>最简单的部署<br>直接单包解压（配置环境变量）启动<br>./start-cluster.sh </p>
-<p>FLINK HADOOP_CLASSPATH设置，集成hadoop<br>如果配置flink启动引入hadoop路径，这样可以省去引入hadoop相关包，但是这样容易生产包冲突（flink和hadoop都存在这个包）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33358554/article/details/110918177">https://blog.csdn.net/qq_33358554/article/details/110918177</a></p>
-<p>scp -r <del>/soft/flink/flink-1.10.0  hadoop@hadoop3:</del>/soft/flink/</p>
-<h1 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h1><p>windows&amp;time</p>
-<p>先说需求场景：<br>每天凌晨2点统计前一天的订单量<br>每个整点统计前24小时的总发货量</p>
-<p>实际数据：<br>例如，一条日志进入Flink的时间为2021-01-22 10:00:00.123，到达Window的系统时间为2021-01-22 10:00:01.234，日志的内容如下：<br>2021-01-06 18:37:15.624 INFO Fail over to rm2</p>
-<h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><p>划分窗口就两种方式：</p>
-<p>根据时间进行截取(time-driven-window)，比如每1分钟统计一次或每10分钟统计一次。<br>根据数据进行截取(data-driven-window)，比如每5个数据统计一次或每50个数据统计一次。</p>
-<h3 id="时间窗口"><a href="#时间窗口" class="headerlink" title="时间窗口"></a>时间窗口</h3><p>滚动窗口</p>
-<p>适用场景：适合做BI统计等（做每个时间段的聚合计算）。</p>
-<p>滑动窗口<br>适用场景：对最近一个时间段内的统计（求某接口最近5min的失败率来决定是否要报警）。</p>
-<p>会话窗口<br>计算每个用户在活跃期间总共购买的商品数量，还可以用于判断用户会话是否失效</p>
-<h3 id="计数窗口"><a href="#计数窗口" class="headerlink" title="计数窗口"></a>计数窗口</h3><h2 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h2><p>第一秒数据产生（t1），经过消息队列后在第二秒数据到达处理系统（t2），第三秒数据被处理完毕（t3）。那么这三个时间点就有了三个不同的含义。第一秒代表数据发生时间，第二秒代表数据摄取抑或是到达时间，第三秒代表数据被处理的时间。而这也是Flink的三种时间模式。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yjmyzz/p/flink-3-window.html">https://www.cnblogs.com/yjmyzz/p/flink-3-window.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/346960667">https://zhuanlan.zhihu.com/p/346960667</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/feiyun126/p/15069033.html">https://www.cnblogs.com/feiyun126/p/15069033.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lp284558195/article/details/103802738">https://blog.csdn.net/lp284558195/article/details/103802738</a></p>
-<p>触发器</p>
-<p>trigger触发器接口有五个方法允许trigger对不同的事件做出反应：</p>
-<p>onElement()进入窗口的每个元素都会调用该方法。</p>
-<p>onEventTime()事件时间timer触发的时候被调用。</p>
-<p>onProcessingTime()处理时间timer触发的时候会被调用。</p>
-<p>onMerge()有状态的触发器相关，并在它们相应的窗口合并时合并两个触发器的状态，例如使用会话窗口。</p>
-<p>clear()该方法主要是执行窗口的删除操作。</p>
-<p>内置和自定义触发器<br>Flink带有一些内置触发器。</p>
-<p>EventTimeTrigger基于事件时间和watermark机制来对窗口进行触发计算。</p>
-<p>ProcessingTimeTrigger基于处理时间触发。</p>
-<p>CountTrigger窗口元素数超过预先给定的限制值的话会触发计算。</p>
-<p>PurgingTrigger作为其它trigger的参数，将其转化为一个purging触发器。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Storm环境搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-29T20:18:18+08:00">2018-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/01/29/大数据/Storm环境搭建/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
-<p>为了学习Flink，首先也了解一下Storm</p>
-<p><img src="/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png"></p>
-<h1 id="Storm是什么？"><a href="#Storm是什么？" class="headerlink" title="Storm是什么？"></a>Storm是什么？</h1><p>Storm是一个流式计算框架，数据源源不断的产生，源源不断的收集，源源不断的计算。<br>（数据实时产生、实时传输、实时计算、实时展示）<br>Storm只负责数据的计算，不负责数据的存储。</p>
-<h1 id="实时计算在计算什么？"><a href="#实时计算在计算什么？" class="headerlink" title="实时计算在计算什么？"></a>实时计算在计算什么？</h1><p>所谓”实时计算”，应该叫”实时流计算”，如果不知道实时计算在计算什么，首先要知道流计算是什么？</p>
-<ul>
-<li><p>流计算<br>在传统的数据处理流程中，总是先收集数据，然后将数据放到数据库中。当人们需要的时候通过数据库对数据做查询，得到答案或进行相关的处理。<br>这样看起来虽然非常合理，但是结果却非常的紧凑，尤其是在一些实时搜索应用环境中的某些具体问题，类似于MapReduce方式的离线处理并不能很好地解决问题。<br>这就引出了一种新的数据计算结构—流计算方式。</p>
-</li>
-<li><p>实时流计算<br>其实实时计算主要是基于流数据进行统计分析，例如不间断、按窗口统计分析，对实时的数据流持续的进行查询或计算。<br>可以很好地对大规模流动数据在不断变化的运动过程中实时地进行分析，捕捉到可能有用的信息，并把结果发送到下一计算节点。</p>
-</li>
-</ul>
-<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>实时处理消息以及更新数据库，基于最基础的实时计算语义和API（实时数据处理领域）；<br>基于最基础的实时计算语义和API（实时数据分析领域）；</p>
-<h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><p><a target="_blank" rel="noopener" href="http://storm.apache.org/">http://storm.apache.org/</a></p>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>storm是依赖于zookeeper的,搭建storm集群前,必须先把zookeeper集群搭建好</p>
-<ol>
-<li>新建用户</li>
-<li>设置免密登录</li>
-<li>软件包下载</li>
-<li>安装JDK</li>
-<li>安装zookeeper</li>
-<li>安装Storm</li>
-<li>启动<br><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></li>
-</ol>
-<p>可参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/followees/p/8998551.html">https://www.cnblogs.com/followees/p/8998551.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E5%9C%BA%E6%99%AF%E5%AE%9E%E8%B7%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1462,10 +747,670 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-Hue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop-Hue/" class="post-title-link" itemprop="url">hadoop-Hue</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-Hue/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-Hue/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-Hue/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hue是一个开源的Apache Hadoop UI系统，由Cloudera Desktop演化而来，最后Cloudera公司将其贡献给Apache基金会的Hadoop社区，它是基于Python Web框架Django实现的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-YARN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop-YARN/" class="post-title-link" itemprop="url">hadoop-YARN</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-YARN/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-YARN/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-YARN/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hadoop YARN：Hadoop集群资源管理框架（Yet Another Resource Negotiator）,用于作业调度和集群资源管理。</p>
+<p>YARN使用了轻量级资源隔离机制Cgroup进行资源隔离</p>
+<p>主要管理什么呢？</p>
+<p>内存、CPU、磁盘、网络等</p>
+<p><strong>一、YARN简介</strong></p>
+<p>YARN（Yet Another Resource Negotiator）是一个通用的资源管理平台，可为各类计算框架提供资源的管理和调度。YARN可以将多种计算框架（如离线处理MapReduce、在线处理的Storm、内存计算框架Spark等）部署到一个公共集群中，共享集群的资源，并提供如下功能。</p>
+<p><strong>二、YARN体系架构</strong></p>
+<p>YARN是Master/Slave结构，主要由<strong>ResourceManager、NodeManager、ApplicationMaster和Container</strong>等几个组件构成。YARN架构如下所示。</p>
+<h1 id="Yarn-UI"><a href="#Yarn-UI" class="headerlink" title="Yarn UI"></a>Yarn UI</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903893080473614">https://juejin.cn/post/6844903893080473614</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop/" class="post-title-link" itemprop="url">hadoop</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 09:30:45" itemprop="dateModified" datetime="2024-05-24T09:30:45+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>hadoop</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Hadoop 是一个开源的分布式计算和存储（计算+存储）框架，允许使用简单的编程模型在跨计算机集群的分布式环境中存储和处理大数据。它的设计是从单个服务器扩展到数千个机器，每个都提供本地计算和存储。</p>
+<p>Hadoop三大组件：<br>分布式文件系统：HDFS —— 实现将文件分布式存储在很多的服务器上<br>分布式运算编程框架：MapReduce——实现多台机器的分布式并行运算。<br>分布式资源调度平台：YARN —— 帮用户调度大量的mapreduce程序，并合理分配运算资源</p>
+<p>Hadoop中NameNode和DataNode</p>
+<p>HDFS主要分为两大角色，NameNode与DataNode，NameNode主要负责管理元数据，DataNode主要负责存储文件块。NameNode来管理datanode与文件块的映射关系。</p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="单机安装"><a href="#单机安装" class="headerlink" title="单机安装"></a>单机安装</h1><h2 id="mac安装"><a href="#mac安装" class="headerlink" title="mac安装"></a>mac安装</h2><ol>
+<li>如同jdk，下载解压，配置即可</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置hadoop环境变量</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/Users/zane/software/hadoop-2.10.0</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出编辑模式，使用 :wq 保存修改，然后运行 source 命令使文件中的修改立即生效：</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile	</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改 Hadoop 的配置文件</li>
+</ol>
+<p>需要修改的 Hadoop 配置文件都在目录 etc/hadoop 下，包括：</p>
+<ul>
+<li>hadoop-env.sh</li>
+<li>core-site.xml</li>
+<li>hdfs-site.xml</li>
+<li>mapred-site.xml</li>
+<li>yarn-site.xml</li>
+</ul>
+<ol>
+<li><p>修改hadoop-env.sh文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home</span><br><span class="line">export HADOOP_CONF_DIR=/Users/Cyan/coding/hadoop/hadoop-2.8.2/etc/hadoop</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 core-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--用来指定hadoop运行时产生文件的存放目录  自己创建--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/Users/Cyan/coding/hadoop/hadoop-2.8.2/tmp&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 hdfs-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;1&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!--不是root用户也可以写文件到hdfs--&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.permissions&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;false&lt;/value&gt;    &lt;!--关闭防火墙--&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">        &lt;!--把路径换成本地的name坐在位置--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/home/hadoop/cdh4/hadoop/dfs/name&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;!--在本地新建一个存放hadoop数据的文件夹，然后将路径在这里配置一下--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;/data1/hadoop&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 mapred-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;!--指定mapreduce运行在yarn上--&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改 yarn-site.xml 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="启动-Hadoop（三步启动）"><a href="#启动-Hadoop（三步启动）" class="headerlink" title="启动 Hadoop（三步启动）"></a><strong>启动 Hadoop（三步启动）</strong></h2><p><strong>1. 启动 NameNode</strong></p>
+<p>在终端运行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 启动 HDFS</strong></p>
+<p>在终端首先进入 /sbin 目录，执行启动脚本（注意mac需要开启远程登录权限）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/software/hadoop-2.10.0/sbin</span><br><span class="line">./start-dfs.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.启动 yarn</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/software/hadoop-2.10.0/sbin</span><br><span class="line">./ start-yarn.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p><a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070/</a></p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1:50075/datanode.html">http://127.0.0.1:50075/datanode.html</a>    </p>
+<p>注意点：</p>
+<p>刚装好<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/hadoop">Hadoop</a>的时候，每次输入命令运行都会出现</p>
+<blockquote>
+<p>WARN util.NativeCodeLoader: Unable to load native-<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/hadoop">hadoop</a> library for your platform… using builtin-<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://lib.csdn.net/base/java">Java </a>classes where applicable</p>
+</blockquote>
+<p>解决方法：<br> 在hadoop-2.6.5/etc/hadoop/log4j.properties的文件最后添加log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR，去除警告信息</p>
+<p>参考&amp;感谢：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33117305">https://zhuanlan.zhihu.com/p/33117305</a></p>
+<h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/windows-docker-install.html">Windows 上 Docker 安装</a></p>
+<p><strong>注：</strong>Windows 用户建议使用虚拟机方案安装 Docker，使用Docker安装，再使用docker进行安装hadoop。</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/hadoop-setup.html">https://www.runoob.com/w3cnote/hadoop-setup.html</a></p>
+<h1 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h1><ul>
+<li>机器配置</li>
+</ul>
+<p>一台master,2台slave,</p>
+<p>免密，关闭防火墙<br>systemctl stop friewalld<br>systemctl disable firewalld.service</p>
+<ul>
+<li>创建Hadoop用户</li>
+</ul>
+<p>sudo useradd -m hadoop -s /bin/bash</p>
+<p>实际操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m deploy -s /bin/bash</span><br><span class="line"></span><br><span class="line">passwd deploy</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看权限</span></span><br><span class="line">vi /etc/passwd</span><br><span class="line">（可修改为管理员权限）</span><br><span class="line">visudo</span><br><span class="line">（通过root可加入当前用户操作sudo权限	）</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 为hadoop用户添加管理员权限</p>
+<p>linux添加管理员用户（简单粗暴）<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/20b68a889a0147796cec621d.html">https://jingyan.baidu.com/article/20b68a889a0147796cec621d.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">设置完密码以后，设置一下权限，usermod -g root ceshi  执行这个命令，赋予权限</span><br><span class="line">赋予权限以后，切换一下用户看一下是否是管理员，执行su ceshi 切换到用户为ceshi  ，以$开头是普通用户。</span><br><span class="line">赋予了管理员权限，但是登录用户和管理员不是一个权限，我查看一下执行</span><br><span class="line"></span><br><span class="line">vi /etc/passwd  测试这个用户和root不是一个用户组  </span><br><span class="line"></span><br><span class="line">例如：root:x:0:0:root:/root:/bin/bash</span><br><span class="line">hadoop:x:0:0::/home/hadoop:/bin/bash</span><br><span class="line">用户名:密码:Uid:Gid:描述:家目录:登录使用shell</span><br><span class="line"></span><br><span class="line">把测试用户的用户组修改成0，保存以后再次切换用户，就是管理员用户了。</span><br></pre></td></tr></table></figure>
+
+<p>centos7添加管理员用户<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/MySundays/article/details/88549963">https://blog.csdn.net/MySundays/article/details/88549963</a></p>
+<ul>
+<li>(六大步)<br>1、下载</li>
+</ul>
+<p>curl -O <a target="_blank" rel="noopener" href="https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz">https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz</a></p>
+<p>2、远程传输到hadoop2、hadoop3节点同目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp hadoop-3.1.3.tar.gz  root@hadoop2:`pwd`</span><br><span class="line">scp hadoop-3.1.3.tar.gz  root@hadoop3:`pwd`</span><br></pre></td></tr></table></figure>
+<p>3、解压安装包(3台节点同时操作)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-3.1.3.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>4、添加hadoop环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/usr/local/software/install/hadoop-3.1.3</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile   #使修改生效</span><br></pre></td></tr></table></figure>
+
+<p>5、修改配置文件</p>
+<p>注：除了个别提示，其余文件只用修改hadoop1中的即可</p>
+<p>(1)core-site.xml 添加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"> &lt;!--定义namenode地址 默认9000--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hdfs://hadoop1:9003&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line"> &lt;!--修改用于hadoop存储数据的默认位置--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;/data/hadoop&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>(2)workers（slaves）文件 （hadoop3.0以后slaves更名为workers）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /soft/hadoop/hadoop-2.10.0/etc/hadoop/</span><br><span class="line">vi slaves</span><br><span class="line"></span><br><span class="line">#每一台都存入子节点保存即可</span><br><span class="line">hadoop2</span><br><span class="line">hadoop3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(3)hadoop-env.sh文件<br>export JAVA_HOME=/usr/java/jdk1.8.0_25</p>
+<p>(4)yarn-site.xml文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;!-- hadoop1 修改为你的机器名或者ip --&gt;</span><br><span class="line">        &lt;value&gt;hadoop1:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hdfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;!-- 备份次数 --&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hdfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>(5)注：该步骤需要四台都配置<br>修改hdfs-site.xml(部分教程不修改该文件，待完善)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;!-- hserver1 修改为你的机器名或者ip --&gt;</span><br><span class="line">        &lt;value&gt;hdp-01:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/hadoop/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;!-- 备份次数 --&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/hadoop/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>(6)修改/usr/local/softwareinstall/hadoop-3.1.3/sbin/目录下的<br>start-dfs.sh、start-yarn.sh文件，<br>在文件头添加如下用户设置(对应的stop-dfs.sh、stop-yarn.sh也要修改，此处为hadoop3的特殊配置处，不修改，启动失败)。 </p>
+<p>start-dfs.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HDFS_DATANODE_SECURE_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
+
+<p>start-yarn.sh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
+
+<p>6、启动集群(hdfs集群和yarn集群) 只需在master节点(hadoop1)上操作即可，</p>
+<p>6.1 启动hdfs集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format   #格式化hdfs文件系统</span><br><span class="line">start-dfs.sh   #启动hdfs集群</span><br><span class="line">stop-dfs.sh   #停止hdfs集群</span><br></pre></td></tr></table></figure>
+<p>6.2 启动yarn集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-yarn.sh    #启动yarn集群</span><br><span class="line">stop-yarn.sh     #停止yarnjiqun</span><br></pre></td></tr></table></figure>
+<p>补充：可用start-all.sh一次性启动hdfs、yarn集群</p>
+<p>6.3 进程验证 </p>
+<h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>1、主从机器相互免密</p>
+<p>2、hadoop3.0以后slaves更名为workers</p>
+<p>3、hdfs namenode -format   #格式化hdfs文件系统（记住启动前先格式化hdfs，不然NameNode启动失败）</p>
+<p>4、访问页面问题：It looks like you are making an HTTP request to a Hadoop IPC port. This is not the correct port for the web interface on this daemon.</p>
+<p>可通过查看端口使用情况来排查 netstat -nltp</p>
+<p>具体见下面说明：</p>
+<p>hadoop管理界面：<a target="_blank" rel="noopener" href="http://localhost:8088/">http://localhost:8088</a><br><a target="_blank" rel="noopener" href="http://192.168.60.131:8088/cluster">http://192.168.60.131:8088/cluster</a></p>
+<p>NameNode界面：<a target="_blank" rel="noopener" href="http://localhost:50070/">http://localhost:50070</a><br><a target="_blank" rel="noopener" href="http://192.168.60.131:50070/">http://192.168.60.131:50070/</a></p>
+<p>HDFS NameNode界面：<a target="_blank" rel="noopener" href="http://localhost:8042/">http://localhost:8042</a></p>
+<h1 id="hadoop-version"><a href="#hadoop-version" class="headerlink" title="hadoop version"></a>hadoop version</h1><p> hadoop version</p>
+<h1 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hxuhongming/p/12872007.html">https://www.cnblogs.com/hxuhongming/p/12872007.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mengzj233/p/9756099.html">https://www.cnblogs.com/mengzj233/p/9756099.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xym4869/p/8821312.html">https://www.cnblogs.com/xym4869/p/8821312.html</a></p>
+<p>主要配置文件<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pingzizhuanshu/p/8964025.html">https://www.cnblogs.com/pingzizhuanshu/p/8964025.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop-%E8%AF%B4%E6%98%8E%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop-%E8%AF%B4%E6%98%8E%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">hadoop-说明及使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 10:57:38" itemprop="dateModified" datetime="2024-05-24T10:57:38+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop-%E8%AF%B4%E6%98%8E%E5%8F%8A%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop-%E8%AF%B4%E6%98%8E%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop-说明及使用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hadoop概念"><a href="#hadoop概念" class="headerlink" title="hadoop概念"></a>hadoop概念</h1><p>Hadoop 是一个开源的分布式计算和存储（计算+存储）框架</p>
+<p>Hadoop 主要包含 HDFS 和 MapReduce 两大组件，HDFS 负责分布储存数据，MapReduce 负责对数据进行映射、规约处理，并汇总处理结果。</p>
+<h2 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h2><p>hdfs web端：<a target="_blank" rel="noopener" href="http://localhost:50070/explorer.html#/">http://localhost:50070/explorer.html#/</a></p>
+<p>Hadoop Distributed File System，Hadoop 分布式文件系统，简称 HDFS。</p>
+<p>HDFS 用于在集群中储存文件，它所使用的核心思想是 Google 的 GFS 思想，可以存储很大的文件。</p>
+<h3 id="HDFS-的节点"><a href="#HDFS-的节点" class="headerlink" title="HDFS 的节点"></a>HDFS 的节点</h3><h3 id="命名节点-NameNode"><a href="#命名节点-NameNode" class="headerlink" title="命名节点 (NameNode)"></a>命名节点 (NameNode)</h3><h3 id="数据节点-DataNode"><a href="#数据节点-DataNode" class="headerlink" title="数据节点 (DataNode)"></a>数据节点 (DataNode)</h3><h3 id="副命名节点-Secondary-NameNode"><a href="#副命名节点-Secondary-NameNode" class="headerlink" title="副命名节点 (Secondary NameNode)"></a>副命名节点 (Secondary NameNode)</h3><h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>MapReduce的思想就是“分而治之”。</p>
+<p>Mapreduce是一个计算框架，既然是做计算的框架，那么表现形式就是有个输入（input），mapreduce操作这个输入（input），通过本身定义好的计算模型，得到一个输出（output），这个输出就是我们所需要的结果。</p>
+<p>在运行一个mapreduce计算任务时候，任务过程被分为两个阶段：map阶段和reduce阶段，每个阶段都是用键值对（key/value）作为输入（input）和输出（output）。而程序员要做的就是定义好这两个阶段的函数：map函数和reduce函数。</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33581278/article/details/83375296">https://blog.csdn.net/qq_33581278/article/details/83375296</a></p>
+<ul>
+<li><p>开发demo</p>
+</li>
+<li><p>数据倾斜问题</p>
+<p>数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E9%9B%86&spm=1001.2101.3001.7020">数据集</a>中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。</p>
+</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>hadoop目录下的share有相关demo包</p>
+<p>$HADOOP_HOME/share/hadoop/hdfs</p>
+<p>$HADOOP_HOME/share/hadoop/mapreduce</p>
+<h2 id="上传文件及查看"><a href="#上传文件及查看" class="headerlink" title="上传文件及查看"></a>上传文件及查看</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">20056	2002420	2010-04-15 11:24:49</span><br><span class="line">20064	2002422	2010-04-15 11:35:54</span><br><span class="line">20056	2003066	2010-04-15 11:43:01</span><br><span class="line">20056	2003055	2010-04-15 11:43:06</span><br><span class="line">20056	1010183	2010-04-15 11:45:24</span><br><span class="line">20056	2002422	2010-04-15 11:45:49</span><br><span class="line">20056	2003200	2010-04-15 11:45:54</span><br><span class="line">20056	2003094	2010-04-15 11:45:57</span><br><span class="line">20056	2003064	2010-04-15 11:46:04</span><br><span class="line">20056	1010178	2010-04-15 16:15:20</span><br><span class="line">20076	2003101	2010-04-15 16:37:27</span><br><span class="line">20076	2003103	2010-04-15 16:37:05</span><br><span class="line">20076	2003200	2010-04-15 16:37:18</span><br><span class="line">20076	2003066	2010-04-15 16:37:31</span><br><span class="line">20054	2003103	2010-04-15 16:40:14</span><br><span class="line">20054	2003200	2010-04-15 16:40:16</span><br></pre></td></tr></table></figure>
+
+
+
+<p>#创建文件目录</p>
+<p>hadoop fs -put /buyer_favorite /mymapreduce1/in</p>
+<p>#上传文件</p>
+<p>hadoop fs -put ～/tmp/tmpflie/buyer_favorite /mymapreduce1/in</p>
+<p>#查看文件目录下的文件</p>
+<p>hadoop fs -ls -R /mymapreduce1</p>
+<p>#查看文件</p>
+<p>hadoop fs -cat /mymapreduce1/in/buyer_favorite</p>
+<h1 id="hdfs（web-ui地址）"><a href="#hdfs（web-ui地址）" class="headerlink" title="hdfs（web ui地址）"></a>hdfs（web ui地址）</h1><p><a target="_blank" rel="noopener" href="http://localhost:50070/explorer.html">http://localhost:50070/explorer.html</a></p>
+<p><img src="/images/image-20220317014308630-7452591.png" alt="image-20220317014308630"></p>
+<h1 id="hdfs（hdfs文件路径写法）"><a href="#hdfs（hdfs文件路径写法）" class="headerlink" title="hdfs（hdfs文件路径写法）"></a>hdfs（hdfs文件路径写法）</h1><p>hdfs://IP:9000/data/flie.txt</p>
+<p>hdfs地址主要适用于应用程序调用</p>
+<p>例如：</p>
+<p>input path 路径：     hdfs://127.0.0.1:9000/mymapreduce1/in/love<br>output path 路径：    hdfs://127.0.0.1:9000/output/20220317014121</p>
+<h2 id="WordCount"><a href="#WordCount" class="headerlink" title="WordCount"></a>WordCount</h2><p>//重写map方法并抛出异常</p>
+<p>//重写reduce并抛出异常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.StringTokenizer;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line">import org.apache.hadoop.mapreduce.Reducer;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line">public class WordCount &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException &#123;</span><br><span class="line">        Job job = Job.getInstance();</span><br><span class="line">        job.setJobName(&quot;WordCount&quot;);//Job的名字</span><br><span class="line">        job.setJarByClass(WordCount.class);//</span><br><span class="line">        job.setMapperClass(doMapper.class);</span><br><span class="line">        job.setReducerClass(doReducer.class);</span><br><span class="line">        job.setOutputKeyClass(Text.class);</span><br><span class="line">        job.setOutputValueClass(IntWritable.class);</span><br><span class="line">        Path in = new Path(&quot;hdfs://localhost:9000/mymapreduce1/in/buyer_favorite1&quot;);//原本文件的位置</span><br><span class="line">        Path out = new Path(&quot;hdfs://localhost:9000/mymapreduce1/out&quot;);//输出结果文件的位置</span><br><span class="line">        FileInputFormat.addInputPath(job, in);</span><br><span class="line">        FileOutputFormat.setOutputPath(job, out);</span><br><span class="line">        System.exit(job.waitForCompletion(true) ? 0 : 1);</span><br><span class="line">    &#125;</span><br><span class="line">    public static class doMapper extends Mapper&lt;Object, Text, Text, IntWritable&gt;&#123;</span><br><span class="line">    	//第一个Object表示输入key的类型；第二个Text表示输入value的类型；第三个Text表示输出键的类型；第四个IntWritable表示输出值的类型  </span><br><span class="line">        public static final IntWritable one = new IntWritable(1);//one 就是 1，是等会输出的value，不需要改变，所以设置为final</span><br><span class="line">        public static Text word = new Text(); //等会输出的key</span><br><span class="line">        @Override</span><br><span class="line">        //重写map方法并抛出异常</span><br><span class="line">        protected void map(Object key, Text value, Context context)</span><br><span class="line">                    throws IOException, InterruptedException &#123;</span><br><span class="line">            StringTokenizer tokenizer = new StringTokenizer(value.toString(), &quot;\t&quot;);//将输入的vlaue按照&quot;\t&quot; 分割</span><br><span class="line">                word.set(tokenizer.nextToken());//将word 的内容设置为分割的字符串</span><br><span class="line">                context.write(word, one);//输出map后的数据，key是word，value是1，如[100181, 1]....</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static class doReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;&#123;</span><br><span class="line">        private IntWritable result = new IntWritable();//等会输出结果的value</span><br><span class="line">        @Override</span><br><span class="line">        //重写reduce并抛出异常</span><br><span class="line">        protected void reduce(Text key, Iterable&lt;IntWritable&gt; values, Context context)</span><br><span class="line">        throws IOException, InterruptedException &#123;</span><br><span class="line">        int sum = 0;//每个商品出现的次数</span><br><span class="line">        for (IntWritable value : values) &#123;</span><br><span class="line">        	sum += value.get();//遍历map后传过来的values，并将值相同的value相加</span><br><span class="line">        &#125;</span><br><span class="line">        result.set(sum);//设置result，其结果就是每种商品出现的次数之和</span><br><span class="line">        context.write(key, result);//输出结果</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/hadoop_space/hadoop%E7%94%9F%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/hadoop_space/hadoop%E7%94%9F%E6%80%81/" class="post-title-link" itemprop="url">hadoop生态</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/hadoop_space/hadoop%E7%94%9F%E6%80%81/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/hadoop_space/hadoop%E7%94%9F%E6%80%81/" class="cy_cmt_count" data-xid="2018/01/19/hadoop_space/hadoop生态/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>hadoop</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25062299/article/details/95592877">https://blog.csdn.net/qq_25062299/article/details/95592877</a></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Hadoop是一个开源框架，允许使用简单的编程模型在跨计算机集群的分布式环境中存储和处理大数据。它的设计是从单个服务器扩展到数千个机器，每个都提供本地计算和存储。</p>
+<p>Hadoop三大组件：<br>分布式文件系统：HDFS —— 实现将文件分布式存储在很多的服务器上<br>分布式运算编程框架：MapReduce——实现多台机器的分布式并行运算。<br>分布式资源调度平台：YARN —— 帮用户调度大量的mapreduce程序，并合理分配运算资源</p>
+<p>Hadoop中NameNode和DataNode</p>
+<p>HDFS主要分为两大角色，NameNode与DataNode，NameNode主要负责管理元数据，DataNode主要负责存储文件块。NameNode来管理datanode与文件块的映射关系。</p>
+<h1 id="hadoop生态"><a href="#hadoop生态" class="headerlink" title="hadoop生态"></a>hadoop生态</h1><p>zk</p>
+<p>flume（agent-&gt;source、channel、sink）、sqoop</p>
+<p>oozie</p>
+<p>hive、hbase</p>
+<p>pig、spark</p>
+<p>ML</p>
+<h1 id="Flume用户行为数据采集"><a href="#Flume用户行为数据采集" class="headerlink" title="Flume用户行为数据采集"></a>Flume用户行为数据采集</h1><p>Flume使用场景：适用于日志文件实时采集</p>
+<p>创建flume连接kafka到hdfs配置文件%FLUME%/conf/kafka2hdfs.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agent.sources = kafka_source</span><br><span class="line">agent.channels = mem_channel</span><br><span class="line">agent.sinks = hdfs_sink</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>通过<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=flume&spm=1001.2101.3001.7020">flume</a>获取kafka实时数据并转存储到hdfs。</p>
+<p>转存到<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=hdfs&spm=1001.2101.3001.7020">hdfs</a>后，再通过load data命令加载到Hive表中，hive再处理用户行为数据，最终输出到mysql呈现到用户端。</p>
+<p>（方案2:java kafka写入数据到HDFS）</p>
+<p>测试：kafka生成一条消息，flume消费落地到hdfs</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xieedeni/article/details/120511421">https://blog.csdn.net/xieedeni/article/details/120511421</a></p>
+<p>采集工具：datax，kettle，logstash、scribe、sqoop</p>
+<p>数据采集工具Flume</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/346979122">https://zhuanlan.zhihu.com/p/346979122</a></p>
+<h1 id="Sqoop"><a href="#Sqoop" class="headerlink" title="Sqoop"></a>Sqoop</h1><p>Sqoop 是一款开源的工具，主要用于在 Hadoop(Hive)与传统的数据库(mysql、postgresql…) 间进行数据的传递，可以将一个关系型数据库（例如 ： MySQL ,Oracle ,Postgres 等）中的数据导进到 Hadoop 的 HDFS 中，也可以将 HDFS 的数据导进到关系型数据库中。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1533,7 +1478,7 @@ Cloudera公司的发行版，我们将该版本称为CDH(Cloudera Distribution H
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

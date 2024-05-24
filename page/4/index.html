@@ -174,241 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/flink_space/flink-%E5%9F%BA%E4%BA%8EFlink%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/06/flink_space/flink-%E5%9F%BA%E4%BA%8EFlink%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/" class="post-title-link" itemprop="url">基于Flink构建实时数仓</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-06 20:28:36" itemprop="dateCreated datePublished" datetime="2021-06-06T20:28:36+08:00">2021-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/06/06/flink_space/flink-%E5%9F%BA%E4%BA%8EFlink%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/06/06/flink_space/flink-%E5%9F%BA%E4%BA%8EFlink%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/" class="cy_cmt_count" data-xid="2021/06/06/flink_space/flink-基于Flink构建实时数仓/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。</p>
-<p>基于Flink构建实时数仓</p>
-<h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="数据采集（将数据接入ODS层）"><a href="#数据采集（将数据接入ODS层）" class="headerlink" title="数据采集（将数据接入ODS层）"></a>数据采集（将数据接入ODS层）</h1><h2 id="用户行为数据采集"><a href="#用户行为数据采集" class="headerlink" title="用户行为数据采集"></a>用户行为数据采集</h2><h2 id="业务数据采集"><a href="#业务数据采集" class="headerlink" title="业务数据采集"></a>业务数据采集</h2><h1 id="Flink-CDC"><a href="#Flink-CDC" class="headerlink" title="Flink CDC"></a>Flink CDC</h1><p>CDC,Change Data Capture,变更数据获取的简称，使用CDC我们可以监控数据库中已提交的更改（包括INSERT,DELETE,UPDATE等）并将这些更改发送到下游，供下游使用。</p>
-<h2 id="Flink-CDC种类"><a href="#Flink-CDC种类" class="headerlink" title="Flink CDC种类"></a>Flink CDC种类</h2><ul>
-<li>基于查询</li>
-<li>基于binlog（推荐）</li>
-</ul>
-<ol>
-<li>flink DataStream API</li>
-</ol>
-<p>缺点：需要自定义反序列化器（其实也灵活）<br>监听mysql数据表操作顺序（场景：mysql监控多库多表）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.获取执行环境</span><br><span class="line">2.通过FlinkCDC构建SourceFunction并读取数据</span><br><span class="line">3.打印数据</span><br><span class="line">4.启动任务</span><br></pre></td></tr></table></figure>
-<p>flink任务实际运行<br>1、flink集群先启动<br>2、通过命令启动flink jar包（相当于提交任务）</p>
-<p>断点续传，积极ck</p>
-<ol start="2">
-<li>flink Table/SQL（场景：mysql监控单库单表）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.获取执行环境</span><br><span class="line">2.DDL方式简表</span><br><span class="line">3.查询数据</span><br><span class="line">4.将动态表转换为流</span><br><span class="line">5.启动任务</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><ul>
-<li><p>mysql监控多库多表（监控数据可以写入kafka进行处理）</p>
-</li>
-<li><p>qq登录日志，计算每个人连续登录的最大天数</p>
-</li>
-<li><p>flink CDC与Maxwell、Canal</p>
-</li>
-<li><p>Maxwell（模仿数据库主从复制）实现监控抓取数据（flink实现原理一样）</p>
-</li>
-<li><p>Canal （阿里巴巴异地机房数据同步）</p>
-<h1 id="Flink-CDC-自定义反序列化器"><a href="#Flink-CDC-自定义反序列化器" class="headerlink" title="Flink CDC 自定义反序列化器"></a>Flink CDC 自定义反序列化器</h1><p>例如在使用flink进行日志采集中，涉及数据格式问题无法解析，下游无法处理。<br>通过自定义反序列化器修改数据结构格式，可调整为Json格式进行传输，下游处理就很方便了。</p>
-<h1 id="数仓搭建"><a href="#数仓搭建" class="headerlink" title="数仓搭建"></a>数仓搭建</h1><p>##数仓环境搭建<br>实时数据分层（离线数仓还有DWT-历史累积数据层）：<br>ODS（原始数据层）、DWD（明细数据层）、DWM（数据主题层）、DWS（服务数据层）、ADS（数据应用层）<br>###Hive环境搭建</p>
-</li>
-<li><p>数据管理<br>Hive（数仓核心）</p>
-</li>
-<li><p>数据计算<br>Hive on Spark（HQL语法，推荐）<br>Spark on Hive（Spark SQL语法，兼容低，性能差些）</p>
-</li>
-</ul>
-<h1 id="DWD"><a href="#DWD" class="headerlink" title="DWD"></a>DWD</h1><p>DWD（Kafka）事实表 &amp; DIM（HBase）维度表</p>
-<ul>
-<li><p>行为数据处理<br>//数据流：web/app-&gt;Nginx-&gt;springboot-&gt;kafka(ods)-&gt;flinkApp-&gt;Kafka(dwd)<br>//模拟：mocklog-&gt;Nginx-logger.sh-&gt;Kafka(zk)-BaseLogApp-Kafka</p>
-</li>
-<li><p>业务数据处理<br>新增了业务表怎么办呢？<br>动态分流（zk监控即通知、mysql存储配置、mysql使用广播流（推荐）</p>
-<h2 id="根据不同主题-指标"><a href="#根据不同主题-指标" class="headerlink" title="根据不同主题/指标"></a>根据不同主题/指标</h2><p>统计订单GMV<br>根据业务数据拆分不同个topic</p>
-</li>
-</ul>
-<h1 id="DWM"><a href="#DWM" class="headerlink" title="DWM"></a>DWM</h1><ul>
-<li>实际需求场景</li>
-</ul>
-<h2 id="UV（DAU）日活"><a href="#UV（DAU）日活" class="headerlink" title="UV（DAU）日活"></a>UV（DAU）日活</h2><h2 id="网站跳出明细"><a href="#网站跳出明细" class="headerlink" title="网站跳出明细"></a>网站跳出明细</h2><h2 id="订单宽表"><a href="#订单宽表" class="headerlink" title="订单宽表"></a>订单宽表</h2><p>宽表会涉及很多维度表</p>
-<p>事实表：订单主表、订单明细表（双流join）<br>维度表：用户表、地区表、商品表</p>
-<ul>
-<li>flink join<br>window join<br>interval join</li>
-</ul>
-<h1 id="DWS"><a href="#DWS" class="headerlink" title="DWS"></a>DWS</h1><p>场景：关键字主题表统计</p>
-<h1 id="ADS"><a href="#ADS" class="headerlink" title="ADS"></a>ADS</h1><h1 id="ClickHouse（俄罗斯Yandex于2016年开眼的列式存储数据库DBMS）"><a href="#ClickHouse（俄罗斯Yandex于2016年开眼的列式存储数据库DBMS）" class="headerlink" title="ClickHouse（俄罗斯Yandex于2016年开眼的列式存储数据库DBMS）"></a>ClickHouse（俄罗斯Yandex于2016年开眼的列式存储数据库DBMS）</h1><p>擅长于聚合操作<br>高吞吐的写入操作</p>
-<h1 id="实战。。。"><a href="#实战。。。" class="headerlink" title="实战。。。"></a>实战。。。</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%9B%BE%E6%95%B0%E6%8D%AEHugeGraph/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%9B%BE%E6%95%B0%E6%8D%AEHugeGraph/" class="post-title-link" itemprop="url">数据库-HugeGraph</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2021-06-06T20:08:08+08:00">2021-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%9B%BE%E6%95%B0%E6%8D%AEHugeGraph/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%9B%BE%E6%95%B0%E6%8D%AEHugeGraph/" class="cy_cmt_count" data-xid="2021/06/06/数据库/数据库-图数据HugeGraph/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="HugeGraph"><a href="#HugeGraph" class="headerlink" title="HugeGraph"></a>HugeGraph</h1><p>图数据库：HugeGraph、Neo4j</p>
-<p>知识图谱</p>
-<p>用户关系</p>
-<p>数据融合</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/15/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -487,237 +252,6 @@
 <p>参考：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/stulzq/p/8971531.html">https://www.cnblogs.com/stulzq/p/8971531.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://my.oschina.net/bugly/blog/774790">https://my.oschina.net/bugly/blog/774790</a><br>使用 Arthas 定位根因<br><a target="_blank" rel="noopener" href="https://my.oschina.net/u/3874284/blog/4948876?_from=gitee_rec">https://my.oschina.net/u/3874284/blog/4948876?_from=gitee_rec</a></p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/10/flink_space/Flink%20SQL%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/10/flink_space/Flink%20SQL%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0/" class="post-title-link" itemprop="url">Flink SQL快速构建实时计算平台</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-10 23:13:30" itemprop="dateCreated datePublished" datetime="2021-05-10T23:13:30+08:00">2021-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/05/10/flink_space/Flink%20SQL%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/05/10/flink_space/Flink%20SQL%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0/" class="cy_cmt_count" data-xid="2021/05/10/flink_space/Flink SQL快速构建实时计算平台/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Flink SQL快速构建实时计算平台</p>
-<h1 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h1><p>KAFKA模拟数据——FLINK SQL处理数据——FLINK计算处理——ES——KIBANA</p>
-<p>模拟数据-已完成<br>ES、KIBANA安装</p>
-<ul>
-<li>待完成<br>##利用FLINK SQL 构建Flink实时计算平台</li>
-<li>进入FLINK SQL 交互式界面<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">FLINK_HOME/bin/sql-client.sh embedded</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">FLINK_HOME/bin/sql-client.sh embedded --jar <span class="variable">$FLINK_HOME</span>/lib/flink-sql-connector-kafka_2.11-1.10.0.jar</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>创建一个user_behavior 表接收kafka中Topic为user_behavior的数据(配置kafka数据接入)</li>
-</ul>
-<p>注意：需要先启动flink</p>
-<p>验证成功</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">create table user_behavior(</span><br><span class="line">user_id BIGINT,</span><br><span class="line">item_id BIGINT,</span><br><span class="line">category_id BIGINT,</span><br><span class="line">behavior STRING,</span><br><span class="line">ts TIMESTAMP(3),</span><br><span class="line">proctime as PROCTIME(),</span><br><span class="line">WATERMARK FOR ts as ts - INTERVAL &#x27;5&#x27; SECOND</span><br><span class="line">) with(</span><br><span class="line">  &#x27;connector.type&#x27; = &#x27;kafka&#x27;,   </span><br><span class="line">  &#x27;connector.version&#x27; = &#x27;universal&#x27;,</span><br><span class="line">  &#x27;connector.topic&#x27; = &#x27;user_behavior&#x27;,</span><br><span class="line">  &#x27;connector.properties.zookeeper.connect&#x27; = &#x27;hadoop1:2181,hadoop2:2181,hadoop3:2181&#x27;,</span><br><span class="line">  &#x27;connector.properties.bootstrap.servers&#x27; = &#x27;hadoop1:9092&#x27;,</span><br><span class="line">  &#x27;format.type&#x27; = &#x27;json&#x27;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>select * from user_behavior;</p>
-<p>注意：select * from default_catalog.default_database.user_behavior ;<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huangqingshi/p/12496743.html">https://www.cnblogs.com/huangqingshi/p/12496743.html</a></p>
-<p>bin/kafka-server-start.sh config/server.properties</p>
-<p>后台运行<br>bin/kafka-server-start.sh -daemon config/server.properties</p>
-<p>bin/kafka-console-consumer.sh –bootstrap-server hadoop1:9092 –topic user_behavior</p>
-<ul>
-<li>创建一个user_details表(配置elasticsearch数据接入)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create table <span class="title function_">user_details</span><span class="params">(</span></span><br><span class="line"><span class="params">user_id BIGINT,</span></span><br><span class="line"><span class="params">item_id BIGINT,</span></span><br><span class="line"><span class="params">category_id BIGINT,</span></span><br><span class="line"><span class="params">behavior STRING,</span></span><br><span class="line"><span class="params">ts TIMESTAMP(<span class="number">3</span>)</span></span><br><span class="line">)</span><br><span class="line">with(</span><br><span class="line"><span class="string">&#x27;connector.type&#x27;</span> = <span class="string">&#x27;elasticsearch&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.version&#x27;</span> = <span class="string">&#x27;6&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.hosts&#x27;</span> = <span class="string">&#x27;http://192.168.112.100:9200&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.index&#x27;</span> = <span class="string">&#x27;user_details&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;connector.document-type&#x27;</span> = <span class="string">&#x27;user_behavior&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;format.type&#x27;</span> = <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;update-mode&#x27;</span> = <span class="string">&#x27;upsert&#x27;</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li>每十分钟统计一次最大的用户独立数</li>
-</ul>
-<p>待完善</p>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013343882/article/details/104496132">https://blog.csdn.net/u013343882/article/details/104496132</a></p>
-<p>java demo</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zz-ksw/p/12938611.html">https://www.cnblogs.com/zz-ksw/p/12938611.html</a></p>
-<h1 id="FlinkSql客户端执行SQL文件"><a href="#FlinkSql客户端执行SQL文件" class="headerlink" title="FlinkSql客户端执行SQL文件"></a>FlinkSql客户端执行SQL文件</h1><p><a target="_blank" rel="noopener" href="https://github.com/Chengyanan1008/flink-sql-submit-client">https://github.com/Chengyanan1008/flink-sql-submit-client</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26502245/article/details/107520111">https://blog.csdn.net/qq_26502245/article/details/107520111</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/29/flink_space/flink%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/29/flink_space/flink%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">Flink开发路线</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-29 20:28:16" itemprop="dateCreated datePublished" datetime="2021-03-29T20:28:16+08:00">2021-03-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/03/29/flink_space/flink%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/03/29/flink_space/flink%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF/" class="cy_cmt_count" data-xid="2021/03/29/flink_space/flink开发路线/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。</p>
-<h1 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h1><p>Flink的核心内容：时间与水印</p>
-<h1 id="数据流API"><a href="#数据流API" class="headerlink" title="数据流API"></a>数据流API</h1><h2 id="执行模式"><a href="#执行模式" class="headerlink" title="执行模式"></a>执行模式</h2><p>（批处理/流式处理）</p>
-<h2 id="活动时间"><a href="#活动时间" class="headerlink" title="活动时间"></a>活动时间</h2><p>生成水印</p>
-<p>内置之水印生成器</p>
-<h3 id="时间类型"><a href="#时间类型" class="headerlink" title="时间类型"></a>时间类型</h3><p><strong>事件时间</strong>（即事件实际发生的时间，生产时间）</p>
-<p><strong>摄入时间</strong>（事件进入Flink流处理框架的时间）</p>
-<p><strong>处理时间</strong>*（事件被处理的时间）</p>
-<h3 id="水印"><a href="#水印" class="headerlink" title="水印"></a>水印</h3><p>官网有言：如果你想使用事件时间（EventTime），你还需要提供一个时间戳提取器（Timestamp Extractor）和水印生成器（Watermark Generator）。</p>
-<p>水印是一个标记的时间戳</p>
-<ul>
-<li>生成水印</li>
-<li>内置水印生成器</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#单调递增的时间戳</span><br><span class="line">WatermarkStrategy.forMonotonousTimestamps();</span><br><span class="line">或</span><br><span class="line">#固定的延迟量</span><br><span class="line">WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
-
-<h2 id="状态和容错"><a href="#状态和容错" class="headerlink" title="状态和容错"></a>状态和容错</h2><p>虽然数据流中的许多操作一次只查看一个单独的<em>事件</em>（例如事件解析器），但有些操作会记住跨多个事件的信息（例如窗口操作符）。这些操作称为<strong>有状态</strong>的。</p>
-<p>Flink有两种基本的状态：Operator State算子状态和Keyed State键控状态；</p>
-<p>主要区别就是作用范围不一样，算子状态的作用范围就是限定为算子任务（也就是当前一个分区执行的时候，所有数据来了都能访问到状态）。键控状态中并不是当前分区所有的数据都能访问所有的状态，而是按照keyby之后的key做划分，当前key只能访问自己的状态</p>
-<h1 id="表API和SQL"><a href="#表API和SQL" class="headerlink" title="表API和SQL"></a>表API和SQL</h1>
       
     </div>
 
@@ -1242,10 +776,433 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">wrk压测进阶</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-24 21:22:22" itemprop="dateCreated datePublished" datetime="2020-10-24T21:22:22+08:00">2020-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">性能压测</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/10/24/%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/wrk%E5%8E%8B%E6%B5%8B%E8%BF%9B%E9%98%B6/" class="cy_cmt_count" data-xid="2020/10/24/性能压测/wrk压测进阶/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>以下主要记录wrk由浅到深进行性能压测</p>
+<p>1、首先，明确接口三要素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">地址：http://url</span><br><span class="line">请求方式：get/post/put/delete</span><br><span class="line">参数：&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、切换进入wrk根目录<br>#实战<br>##wrk简单压测（一条命令，Get请求）<br>最简单的压力测试示例，get请求，固定url固定参数</p>
+<p>总共是12个线程,100个连接(不是一个线程对应一个连接)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c100 -d30s http://www.baidu.com  </span><br></pre></td></tr></table></figure>
+<p>如果想看看响应时间的分布,可以增加–latency:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c100 -d30s --latency http://www.baidu.com </span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ac185e01cc30">https://www.jianshu.com/p/ac185e01cc30</a></p>
+<p>##wrk中Post接口测试（读取lua文件）</p>
+<p>##wrk外部参数压测（读取外部lua）<br>如下差不多</p>
+<p>##wrk发送随机参数-（get）</p>
+<p>执行命令为  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t5 -c10 -d 1s -T5s --latency -s test1.lua  http://www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>test1.lua </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request = function()</span><br><span class="line">num = math.random(1000,9999)</span><br><span class="line">   path = &quot;/test.html?t=&quot; .. num</span><br><span class="line">   return wrk.format(&quot;GET&quot;, path)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>##wrk动态参数压测</p>
+<ol>
+<li>可以通过lua脚本生成动态参数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">loginmap = &#123;&#125;</span><br><span class="line">counter = 0</span><br><span class="line">--初始化方法</span><br><span class="line">function init(args)</span><br><span class="line">--循环遍历生成测试数据</span><br><span class="line">        counter = 0</span><br><span class="line">		local test = &#x27;&#123;&quot;activityPage&quot;: &quot;cdsy&quot;,&quot;distributorRegion&quot;:  &quot;北京市&quot;,&quot;driveRegion&quot;: &quot;code1,code2,code3&quot;,&quot;models&quot;: &quot;CMYHV,ALPHV,WLDHV&quot;,&quot;phone&quot;: &quot;13800138000&quot;,&quot;userId&quot;: 123456&#125;&#x27;</span><br><span class="line">		for i=1000000,1,-1 do</span><br><span class="line">			local data = &#x27;&#123;&quot;activityPage&quot;: &quot;cdsy&quot;,&quot;distributorRegion&quot;:  &quot;北京市&quot;,&quot;driveRegion&quot;: &quot;code1,code2,code3&quot;,&quot;models&quot;: &quot;CMYHV,ALPHV,WLDHV&quot;,&quot;phone&quot;: &quot;13800138000&quot;,&quot;userId&quot;: &#x27;</span><br><span class="line">			data=data .. i .. &#x27;&#125;&#x27;;</span><br><span class="line">			--print(data)</span><br><span class="line">			loginmap[counter] = data</span><br><span class="line">		    print(i)</span><br><span class="line">			counter = counter + 1</span><br><span class="line">		end</span><br><span class="line">		counter = 0</span><br><span class="line">end</span><br><span class="line">--执行的主方法</span><br><span class="line">request = function()</span><br><span class="line">        local body1 = &#x27;[&#123;&quot;layerDefinitionVersion&quot;:&quot;V1.0.0&quot;,&quot;layerName&quot;:&quot;poi&quot;,&quot;partitionNames&quot;:[&#123;&#x27;</span><br><span class="line">        local body2 = &#x27;&#125;]&#125;]&#x27;</span><br><span class="line">        print(counter)</span><br><span class="line">        print(&quot;长度：&quot;,table.getn(loginmap))</span><br><span class="line">        counter = counter+1</span><br><span class="line">        print(&quot;++:&quot;,counter)</span><br><span class="line">        if( counter &lt; 10 )</span><br><span class="line">        then</span><br><span class="line">                parms = loginmap[counter-1]</span><br><span class="line">				print(&quot;++++++++++++++++++++++++++++++++++++++++++&quot;)</span><br><span class="line">				print(parms)</span><br><span class="line">				print(&quot;++++++++++++++++++++++++++++++++++++++++++&quot;)</span><br><span class="line">      --        print(parms)</span><br><span class="line">      --接口地址后面可以配置多个参数</span><br><span class="line">                path = &quot;/api/app/activity/query?productVersion=latest&quot;</span><br><span class="line">                method = &quot;POST&quot;</span><br><span class="line">                wrk.headers[&quot;Content-Type&quot;] = &quot;application/json&quot;</span><br><span class="line">                wrk.headers[&quot;clientId&quot;] = &quot;103&quot;</span><br><span class="line">                wrk.headers[&quot;orgId&quot;] = &quot;1&quot;</span><br><span class="line">                return  wrk.format(method,path,wrk.headers,parms)</span><br><span class="line">        end</span><br><span class="line">        print(&quot;countera 的值为:并结束请求&quot;, counter); --日志打印</span><br><span class="line">end</span><br><span class="line"> </span><br><span class="line">--接口返回值设置并打印</span><br><span class="line">a=1</span><br><span class="line">function response(status, headers, body)</span><br><span class="line">   if(true)  -- 执行的每一次方法都打印返回值</span><br><span class="line">   then</span><br><span class="line">--           a=2</span><br><span class="line">          print(body)</span><br><span class="line">      end</span><br><span class="line">        print(status) --打印状态</span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>可以通过lua读取外部文件进行作为动态参数 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">待完善</span><br></pre></td></tr></table></figure></li>
+<li>执行测试<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wrk -t1 -c1 -d1s -s ./startpost.lua --latency http://localhost:8998</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>#wrk参数设定<br>wrk参数主要根据机器系统参数相关，主要通过调整线程数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-t 线程数量</span><br><span class="line">-c 保持的连接数</span><br><span class="line">-d 持续时间</span><br><span class="line">-s 执行自定义脚本</span><br><span class="line">–latency 打印统计数据</span><br><span class="line">–timeout 超时时间</span><br></pre></td></tr></table></figure>
+
+<p>#结果查看（参考网上说明）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@jerrik /]# wrk -t12 -c100 -d30s http://www.baidu.com  </span><br><span class="line">Running 30s test @ http://www.baidu.com</span><br><span class="line">  12 threads and 100 connections</span><br><span class="line">  Thread Stats   Avg      Stdev     Max   +/- Stdev</span><br><span class="line">    Latency   211.76ms  304.92ms   1.97s    88.17%</span><br><span class="line">    Req/Sec    72.93     68.72   797.00     90.97%</span><br><span class="line">  23725 requests in 30.05s, 347.47MB read</span><br><span class="line">  Socket errors: connect 0, read 48, write 0, timeout 50</span><br><span class="line">Requests/sec:    789.57</span><br><span class="line">Transfer/sec:     11.56MB</span><br><span class="line">[root@jerrik /]# </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">12 threads and 100 connections:</span><br><span class="line">总共是12个线程,100个连接(不是一个线程对应一个连接)</span><br><span class="line">latency和Req/Sec:</span><br><span class="line">代表单个线程的统计数据,latency代表延迟时间,Req/Sec代表单个线程每秒完成的请求数，他们都具有平均值, 标准偏差, 最大值, 正负一个标准差占比。一般我们来说我们主要关注平均值和最大值. 标准差如果太大说明样本本身离散程度比较高. 有可能系统性能波动很大.</span><br><span class="line">23725 requests in 30.05s, 347.47MB read</span><br><span class="line">在30秒之内总共有23725个请求,总共读取347.47MB的数据</span><br><span class="line">Socket errors: connect 0, read 48, write 0, timeout 50</span><br><span class="line">总共有48个读错误,50个超时.</span><br><span class="line">Requests/sec和Transfer/sec</span><br><span class="line"></span><br><span class="line">作者：jerrik</span><br><span class="line">链接：https://www.jianshu.com/p/ac185e01cc30</span><br><span class="line">来源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+
+<p>#总结<br>总体wrk压测还是比较简单的，主要是先清楚简单的测试命令，然后在通过lua脚本实现post请求压测，后续加强性能压测。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Arthas-使用记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-24 20:48:08" itemprop="dateCreated datePublished" datetime="2020-10-24T20:48:08+08:00">2020-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 09:58:23" itemprop="dateModified" datetime="2024-05-24T09:58:23+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/10/24/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Arthas-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="cy_cmt_count" data-xid="2020/10/24/开发工具/Arthas-使用记录/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>官网：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/zh-cn/">https://arthas.aliyun.com/zh-cn/</a></p>
+<p>文档：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/">https://arthas.aliyun.com/doc/</a></p>
+<h1 id="自问"><a href="#自问" class="headerlink" title="自问"></a>自问</h1><p>为什么要用这个工具？该如何使用？使用了什么功能？</p>
+<p>慢慢进阶吧…</p>
+<h1 id="实际应用场景"><a href="#实际应用场景" class="headerlink" title="实际应用场景"></a>实际应用场景</h1><p>监控java应用</p>
+<p>(建议通过快速启动sh脚本快速启动运用，提示使用效率。)</p>
+<p>如需监控生产环境的java应用。可以服务器上启动一个arthas-boot.jar，然后可以通过IP访问的arthas控制台进行使用了</p>
+<ol>
+<li>java -jar arthas-boot.jar</li>
+</ol>
+<p>Web Console，用户在attach成功之后，可以直接访问：<a target="_blank" rel="noopener" href="http://ip:3658/%E3%80%82">http://IP:3658/。</a></p>
+<h1 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h1><h1 id="Arthas-Tunnel"><a href="#Arthas-Tunnel" class="headerlink" title="Arthas Tunnel"></a>Arthas Tunnel</h1><h2 id="使用arthas-tunnel-server连接远程arthas"><a href="#使用arthas-tunnel-server连接远程arthas" class="headerlink" title="使用arthas tunnel server连接远程arthas"></a>使用arthas tunnel server连接远程arthas</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">数学建模-线性回归</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-20 21:18:18" itemprop="dateCreated datePublished" datetime="2020-10-20T21:18:18+08:00">2020-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="cy_cmt_count" data-xid="2020/10/20/算法与数据结构/数学应用-线性回归/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在这，建议大家读一下吴军老师的《数学之美》，这本书让我真正感受到IT应用是真的有涉及数学的，只是自己接触的层面太低了！</p>
+<h1 id="数学建模"><a href="#数学建模" class="headerlink" title="数学建模"></a>数学建模</h1><p>试问多少人真正了解数学在IT发展中的实际应用，可能很多都听过说过，学习计算机需要一定的数学功底，这句话貌似是对的，但也不完成对；</p>
+<p>其实大部分人在实际IT开发中很少真正运用到数学模型，因为大部分业务流程只是运用到了开发语言的一些api，再者就是一些逻辑处理，在我看来这些都不涉及数学；</p>
+<p>真正的数学运用，应该是用到数学模型，数学运用，将实际数学知识应用到开发代码中进行运行。</p>
+<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>必修三，第二章，统计，属于回归分析，主要是介绍变量间的相互关系。<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6/6027765?fr=aladdin">https://baike.baidu.com/item/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6/6027765?fr=aladdin</a></p>
+<p>线性回归方程是利用数理统计中的回归分析，来确定两种或两种以上变数间相互依赖的定量关系的一种统计分析方法之一。<br>线性回归也是回归分析中第一种经过严格研究并在实际应用中广泛使用的类型。按自变量个数可分为一元线性回归分析方程和多元线性回归分析方程。</p>
+<h2 id="简单线性回归（一元线性回归）"><a href="#简单线性回归（一元线性回归）" class="headerlink" title="简单线性回归（一元线性回归）"></a>简单线性回归（一元线性回归）</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%96%B9%E7%A8%8B/6953911?fr=aladdin">https://baike.baidu.com/item/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%96%B9%E7%A8%8B/6953911?fr=aladdin</a></p>
+<h2 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h2><h1 id="线性回归应用场景"><a href="#线性回归应用场景" class="headerlink" title="线性回归应用场景"></a>线性回归应用场景</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/" class="post-title-link" itemprop="url">大数据-BI</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-19 00:18:18" itemprop="dateCreated datePublished" datetime="2020-09-19T00:18:18+08:00">2020-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 10:03:20" itemprop="dateModified" datetime="2024-05-24T10:03:20+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/" class="cy_cmt_count" data-xid="2020/09/19/大数据/大数据-BI/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>BI工具</p>
+<p>Sugar、Superset、DataV、FineBI、Quick BI、Tableau、Power BI、SmartBI</p>
+<h2 id="使用FineBI连接数据库表数据生成报表"><a href="#使用FineBI连接数据库表数据生成报表" class="headerlink" title="使用FineBI连接数据库表数据生成报表"></a>使用FineBI连接数据库表数据生成报表</h2><ul>
+<li>生成报表</li>
+</ul>
+<p>1、新建数据库链接</p>
+<p>2、拉去字段到开发表格上</p>
+<p>3、保存并预览即可，通过浏览器参考报表</p>
+<ul>
+<li>生成图表</li>
+</ul>
+<p>1、新建数据库链接</p>
+<p>2、插入图表</p>
+<p>3、右侧选项栏设置图表数据即可</p>
+<h1 id="根据数据分析维度进行开发报表"><a href="#根据数据分析维度进行开发报表" class="headerlink" title="根据数据分析维度进行开发报表"></a>根据数据分析维度进行开发报表</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1313,7 +1270,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

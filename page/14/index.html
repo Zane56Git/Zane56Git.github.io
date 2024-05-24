@@ -174,826 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">机器学习-入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-07 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T21:18:18+08:00">2018-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-24 09:52:21" itemprop="dateModified" datetime="2024-05-24T09:52:21+08:00">2024-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8/" class="cy_cmt_count" data-xid="2018/06/07/AI/机器学习-入门/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>程序=数据结构+算法<br>AI=数据+算法</p>
-<p>机器学习</p>
-<p>机器学习,顾名思义,就是研究计算机如何学习和模拟人类的行为,并根据已学得的知识对该行为进行增强和改进。</p>
-<p>线性代数</p>
-<h1 id="机器学习第一步"><a href="#机器学习第一步" class="headerlink" title="机器学习第一步"></a>机器学习第一步</h1><p>吴恩达(Andrew Ng)老师的课程：</p>
-<p>coursera课程主页<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
-<p>吴恩达老师推荐开发语言使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MATLAB&spm=1001.2101.3001.7020">MATLAB</a>或者octave</p>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p>Spark MLlib</p>
-<p>Flink ML</p>
-<p>Alink</p>
-<p>Python</p>
-<p>Matlab</p>
-<p>（首先推荐Octave，简单方便，并且开源免费。Matlab也非常的优秀，需付费，如果你能够使用它，那么建议使用matlab。</p>
-<p>Python、numpy、R语言，也有很多人选择，但开发较慢。）</p>
-<h1 id="西瓜书"><a href="#西瓜书" class="headerlink" title="西瓜书"></a>西瓜书</h1><h1 id="南瓜书"><a href="#南瓜书" class="headerlink" title="南瓜书"></a>南瓜书</h1><p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/pumpkin-book/#/">https://datawhalechina.github.io/pumpkin-book/#/</a></p>
-<h1 id="环境搭建-1"><a href="#环境搭建-1" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
-<li>Python安装</li>
-</ol>
-<p>安装好Python后，还需要安装机器学习所需要的Python科学计算包 ，例如:numpy+mkl、scipy、matplotlib等。不过这里我们并不安装原始的Python版本，而是安装anaconda，它是Python的一个发行版本，安装好它后就不用再去下载上述Python包，其本身已经包含了，比较方便。</p>
-<p>anaconda （开源的Python发行版本）<a target="_blank" rel="noopener" href="https://www.anaconda.com/products/individual">https://www.anaconda.com/products/individual</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29486768">https://zhuanlan.zhihu.com/p/29486768</a></p>
-<h1 id="深度学习环境搭建：win10-anaconda-tensorflow（cpu版本）-keras"><a href="#深度学习环境搭建：win10-anaconda-tensorflow（cpu版本）-keras" class="headerlink" title="深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras"></a>深度学习环境搭建：win10 + anaconda + tensorflow（cpu版本） + keras</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39926594/article/details/104693969">https://blog.csdn.net/weixin_39926594/article/details/104693969</a></p>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>如果在IT行业(尤其是互联网)里溜达一圈，你会发现机器学习在以下热点问题中有广泛应用：</p>
-<ol>
-<li>计算机视觉</li>
-</ol>
-<p>典型的应用包括：人脸识别、车牌识别、扫描文字识别、图片内容识别、图片搜索等等。<br>2. 自然语言处理</p>
-<p>典型的应用包括：搜索引擎智能匹配、文本内容理解、文本情绪判断，语音识别、输入法、机器翻译等等。<br>3. 社会网络分析</p>
-<p>典型的应用包括：用户画像、网络关联分析、欺诈作弊发现、热点发现等等。<br>4. 推荐</p>
-<p>典型的应用包括：虾米音乐的“歌曲推荐”，某宝的“猜你喜欢”等等。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sunyunlong_1/article/details/80816606">https://blog.csdn.net/sunyunlong_1/article/details/80816606</a></p>
-<h1 id="机器学习算法"><a href="#机器学习算法" class="headerlink" title="机器学习算法"></a>机器学习算法</h1><ul>
-<li>梯度下降算法<br>梯度下降（gradient descent）在机器学习中应用十分的广泛，不论是在线性回归还是Logistic回归中，它的主要目的是通过迭代找到目标函数的最小值，或者收敛到最小值。</li>
-</ul>
-<p>##监督学习算法<br>##无监督学习算法</p>
-<h1 id="jupyter-使用"><a href="#jupyter-使用" class="headerlink" title="jupyter 使用"></a>jupyter 使用</h1><h1 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h1><h2 id="octave"><a href="#octave" class="headerlink" title="octave"></a>octave</h2><p>octave是一门科学计算语言，类似于matlab，但其占用内存小，所以广受机器学习爱好者的喜爱</p>
-<h2 id="matlab"><a href="#matlab" class="headerlink" title="matlab"></a>matlab</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">推荐系统概念及模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-07 20:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T20:18:18+08:00">2018-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/06/07/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5%E5%8F%8A%E6%A8%A1%E5%9E%8B/" class="cy_cmt_count" data-xid="2018/06/07/算法与数据结构/推荐系统概念及模型/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="推荐系统概念及模型"><a href="#推荐系统概念及模型" class="headerlink" title="推荐系统概念及模型"></a>推荐系统概念及模型</h1><p>用户画像</p>
-<p>内容画像</p>
-<p>匹配度</p>
-<h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><p>猜你喜欢</p>
-<p>热门商品</p>
-<p>好评商品</p>
-<p>实时热门商品</p>
-<p>看过还看</p>
-<p>猜你喜欢：基于用户行为推荐，当用户对商品进行评分时，Flink 根据用户历史评分商品，结合 itemCF 计算推荐结果。<br>热门商品：历史热门商品<br>好评商品：评分较高的商品<br>实时热门商品： 使用 Flink 时间滑动窗口，对过去一个小时热门商品进行统计，每 5 分钟滑动一次。</p>
-<h1 id="计算模型"><a href="#计算模型" class="headerlink" title="计算模型"></a>计算模型</h1><p>实时推荐</p>
-<p>离线推荐</p>
-<h1 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h1><p>产品表</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>title</th>
-<th>score</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>D0001</td>
-<td>测试商品1</td>
-<td></td>
-</tr>
-<tr>
-<td>D0002</td>
-<td>测试商品2</td>
-<td></td>
-</tr>
-<tr>
-<td>D0003</td>
-<td>测试商品3</td>
-<td></td>
-</tr>
-<tr>
-<td>D0004</td>
-<td>测试商品4</td>
-<td></td>
-</tr>
-<tr>
-<td>D0005</td>
-<td>测试商品5</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>用户产品评分表</p>
-<table>
-<thead>
-<tr>
-<th>userid</th>
-<th>productID</th>
-<th>score</th>
-<th>iflike</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U0001</td>
-<td>D0001</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0001</td>
-<td>D0002</td>
-<td>5</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0001</td>
-<td>D0003</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0001</td>
-<td>D0004</td>
-<td>2</td>
-<td>0</td>
-</tr>
-<tr>
-<td>U0001</td>
-<td>D0005</td>
-<td>5</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>D0001</td>
-<td>2</td>
-<td>0</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>D0002</td>
-<td>3</td>
-<td>0</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>D0003</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>D0004</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>D0001</td>
-<td>2</td>
-<td>0</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>D0002</td>
-<td>5</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>D0003</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>D0004</td>
-<td>3</td>
-<td>0</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>可以通过用户评分确定用户是否喜欢该商品例如（4-5分）为喜欢，记为1，否则为0</p>
-<p>由上可以用户与物品的关系</p>
-<table>
-<thead>
-<tr>
-<th>用户</th>
-<th>商品…</th>
-<th>集合数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U0001</td>
-<td>D0001、D0002、D0003、D0005</td>
-<td>4</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>D0003、D0004</td>
-<td>2</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>D0002、D0003</td>
-<td>2</td>
-</tr>
-</tbody></table>
-<p>如何一下子计算所有用户之间的相似度呢？为计算方便，通常首先需要建立“物品—用户”的倒排表，如下图所示：</p>
-<table>
-<thead>
-<tr>
-<th>商品</th>
-<th align="left">用户…</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>D0001</td>
-<td align="left">U0001</td>
-</tr>
-<tr>
-<td>D0002</td>
-<td align="left">U0001、U0002</td>
-</tr>
-<tr>
-<td>D0003</td>
-<td align="left">U0001、U0002、U0003</td>
-</tr>
-<tr>
-<td>D0004</td>
-<td align="left">U0002</td>
-</tr>
-<tr>
-<td>D0005</td>
-<td align="left">U0001</td>
-</tr>
-</tbody></table>
-<p>然后对于每个物品，喜欢他的用户，两两之间相同物品加1。例如喜欢物品 a 的用户有 A 和 B，那么在矩阵中他们两两加1。如下图所示：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>U0001</th>
-<th>U0002</th>
-<th>U0003</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U0001</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<h2 id="1、发现兴趣相似的用户"><a href="#1、发现兴趣相似的用户" class="headerlink" title="1、发现兴趣相似的用户"></a>1、发现兴趣相似的用户</h2><p>由上计算出用户之间的相似度</p>
-<p>通常用 Jaccard 公式或者余弦相似度计算两个用户之间的相似度。设 N(u) 为用户 u 喜欢的物品集合，N(v) 为用户 v 喜欢的物品集合，那么 u 和 v 的相似度是多少呢：</p>
-<ul>
-<li>Jaccard 公式</li>
-</ul>
-<p>$$<br>x = \frac{\left | N{(u)}\cap  N {(v)}\right |}{\left | N{(u)}\cup N{(v)} \right |}<br>$$</p>
-<ul>
-<li>余弦相似度</li>
-</ul>
-<p>$$<br>x = \frac{\left | N{(u)}\cap  N {(v)}\right |}{\sqrt{\left | N{(u)}| \ast   |N{(v)} \right |}}<br>$$</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a894ebba4a1a">https://www.jianshu.com/p/a894ebba4a1a</a></p>
-<p>由Jaccard计算结果如下：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>U0001</th>
-<th>U0002</th>
-<th>U0003</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U0001</td>
-<td>0</td>
-<td>1/5</td>
-<td>2/4</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>1/5</td>
-<td>0</td>
-<td>1/3</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>2/4</td>
-<td>1/3</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<p>由余弦计算结果如下：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>U0001</th>
-<th>U0002</th>
-<th>U0003</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U0001</td>
-<td>0</td>
-<td>1/根号8 = 0.35355</td>
-<td>2/根号8 = 0.70711</td>
-</tr>
-<tr>
-<td>U0002</td>
-<td>1/根号8 = 0.35355</td>
-<td>0</td>
-<td>1/根号4 = 0.5</td>
-</tr>
-<tr>
-<td>U0003</td>
-<td>2/根号8 = 0.70711</td>
-<td>1/根号4 = 0.5</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<p>可看出：</p>
-<p>与U0001比较相似的用户是U0003，</p>
-<p>与U0003比较相似的用户是U0001，可以把U0001中的商品D0001、D0005推荐给U0003；</p>
-<p>与U0002比较相似的用户是U0003，可以把U0003中的商品D0002推荐给U0002；</p>
-<h2 id="2、推荐物品"><a href="#2、推荐物品" class="headerlink" title="2、推荐物品"></a>2、推荐物品</h2><p>首先需要从矩阵中找出与目标用户 u 最相似的 K 个用户（上面已完成），用集合 S(u, K) 表示，将 S 中用户喜欢的物品全部提取出来，并去除 u 已经喜欢的物品。对于每个候选物品 i ，用户 u 对它感兴趣的程度用如下公式计算：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/winone361/article/details/45457445?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">https://blog.csdn.net/winone361/article/details/45457445?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/06/GRPC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/06/GRPC/" class="post-title-link" itemprop="url">GRPC基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-06 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-06T21:18:18+08:00">2018-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/rpc/" itemprop="url" rel="index"><span itemprop="name">rpc</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/06/06/GRPC/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/06/06/GRPC/" class="cy_cmt_count" data-xid="2018/06/06/GRPC/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="那么什么是gRPC呢？"><a href="#那么什么是gRPC呢？" class="headerlink" title="那么什么是gRPC呢？"></a>那么什么是gRPC呢？</h1><p>gRPC客户端可以直接调用另外一台机器上服务器应用程序的方法，就像调用本地对象一样，这使得创建分布式的应用和服务更加方便。</p>
-<p>gRPC请求 对标 应用间的http请求，fegin调用、网关调用，同时可以比作调用本地对象。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/06/hadoop_space/hadoop-HBase/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/06/hadoop_space/hadoop-HBase/" class="post-title-link" itemprop="url">数据库-HBase</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-06 20:08:08" itemprop="dateCreated datePublished" datetime="2018-06-06T20:08:08+08:00">2018-06-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/06/06/hadoop_space/hadoop-HBase/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/06/06/hadoop_space/hadoop-HBase/" class="cy_cmt_count" data-xid="2018/06/06/hadoop_space/hadoop-HBase/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>HBase是一个分布式的、面向列的开源数据库</p>
-<p>HBase 简介<br>HBase（Hadoop database）是一个分布式、可扩展、面向列的 NoSQL 数据库，本质上是一个 Key-Value 系统，底层存储基于 HDFS，原生支持 MapReduce 计算框架，具有高吞吐、低延时的读写特点。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h1 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h1><h2 id><a href="#" class="headerlink" title></a></h2><h2 id="将结构化的数据映射为一张数据库表"><a href="#将结构化的数据映射为一张数据库表" class="headerlink" title="将结构化的数据映射为一张数据库表"></a>将结构化的数据映射为一张数据库表</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">博客目录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-03 13:58:05" itemprop="dateCreated datePublished" datetime="2018-06-03T13:58:05+08:00">2018-06-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="cy_cmt_count" data-xid="2018/06/03/博客目录/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h1><h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><h2 id="K8s"><a href="#K8s" class="headerlink" title="K8s"></a>K8s</h2><h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="vue、ant-Design"><a href="#vue、ant-Design" class="headerlink" title="vue、ant Design"></a>vue、ant Design</h2><h1 id="微信开发"><a href="#微信开发" class="headerlink" title="微信开发"></a>微信开发</h1><h2 id="公众号、小程序"><a href="#公众号、小程序" class="headerlink" title="公众号、小程序"></a>公众号、小程序</h2><h1 id="移动支付"><a href="#移动支付" class="headerlink" title="移动支付"></a>移动支付</h1><pre><code>微信支付
-支付宝支付
-</code></pre>
-<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h2 id="oracle"><a href="#oracle" class="headerlink" title="oracle"></a>oracle</h2><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><h1 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h1><h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><pre><code>分布式id
-分布式锁
-分布式事务
-分布式事务解决方案
-分布式数据库读写分离
-</code></pre>
-<h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><pre><code>redis
-rabbitmq
-kafka
-</code></pre>
-<h1 id="集成框架"><a href="#集成框架" class="headerlink" title="集成框架"></a>集成框架</h1><h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><h2 id="druid"><a href="#druid" class="headerlink" title="druid"></a>druid</h2><h2 id="shrio"><a href="#shrio" class="headerlink" title="shrio"></a>shrio</h2><h1 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h1><pre><code>hadoop
-flink
-blink
-flume
-hbase
-hive
-kafka
-spark
-storm
-storm-kafka
-zookeeper
-</code></pre>
-<h1 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h1><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><h2 id="item2"><a href="#item2" class="headerlink" title="item2"></a>item2</h2><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><ul>
-<li>idea不显示gradle的视图解决办法</li>
-<li>maven项目转换为gradle项目</li>
-<li>gradle项目转为maven项目</li>
-<li>怎么在IDEA里搜索jar包里的类的方法和配置</li>
-<li>IDEA自带HTTP请求（如同postman）<h2 id="部署神插件-Cloud-ToolkKit"><a href="#部署神插件-Cloud-ToolkKit" class="headerlink" title="部署神插件-Cloud-ToolkKit"></a>部署神插件-Cloud-ToolkKit</h2><h2 id="语雀"><a href="#语雀" class="headerlink" title="语雀"></a>语雀</h2><h2 id="TAPD"><a href="#TAPD" class="headerlink" title="TAPD"></a>TAPD</h2><h2 id="Teambition"><a href="#Teambition" class="headerlink" title="Teambition"></a>Teambition</h2><a target="_blank" rel="noopener" href="https://www.teambition.com/">https://www.teambition.com/</a><h2 id="禅道"><a href="#禅道" class="headerlink" title="禅道"></a>禅道</h2><h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E6%9C%BA%E5%99%A8%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1087,118 +267,6 @@ zookeeper
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangyy3/p/12454728.html">https://www.cnblogs.com/zhangyy3/p/12454728.html</a></p>
 <p>注意:第3点后,创建分区后需要重启再对/dev/sda3进行格式化,不重启导致格式化失败</p>
 <p>mkfs.xfs /dev/sda3</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/" class="post-title-link" itemprop="url">Linux-运维</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-17 20:01:30" itemprop="dateCreated datePublished" datetime="2018-05-17T20:01:30+08:00">2018-05-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-运维/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Linux机器启动重启排查</p>
-<p><strong>登录机器，执行last或uptime等命令，查看重启时间</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last | grep reboot</span><br></pre></td></tr></table></figure>
-
-
-
-<p>/var/log/messages：系统日志</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -Ei &#x27;error|Fail&#x27; /var/log/messages</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<ul>
-<li>部署规范</li>
-</ul>
-<p>服务名-版本</p>
-<p>配置文件分离</p>
-<p>jars分离</p>
-<p>lib包分离</p>
-<p>日志文件分离</p>
-<p>日志大小限制、日志保留时长限制</p>
-<p>日志按环境等级分离管理</p>
 
       
     </div>
@@ -1315,6 +383,118 @@ zookeeper
 <p>合并文件</p>
 <p>cat x* &gt;new_file</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50247813/article/details/127246452">https://blog.csdn.net/qq_50247813/article/details/127246452</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/" class="post-title-link" itemprop="url">Linux-运维</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-17 20:01:30" itemprop="dateCreated datePublished" datetime="2018-05-17T20:01:30+08:00">2018-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-运维/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Linux机器启动重启排查</p>
+<p><strong>登录机器，执行last或uptime等命令，查看重启时间</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last | grep reboot</span><br></pre></td></tr></table></figure>
+
+
+
+<p>/var/log/messages：系统日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -Ei &#x27;error|Fail&#x27; /var/log/messages</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li>部署规范</li>
+</ul>
+<p>服务名-版本</p>
+<p>配置文件分离</p>
+<p>jars分离</p>
+<p>lib包分离</p>
+<p>日志文件分离</p>
+<p>日志大小限制、日志保留时长限制</p>
+<p>日志按环境等级分离管理</p>
 
       
     </div>
@@ -1525,10 +705,789 @@ zookeeper
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/" class="post-title-link" itemprop="url">kafka实战</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-03 13:52:25" itemprop="dateCreated datePublished" datetime="2018-04-03T13:52:25+08:00">2018-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/" class="cy_cmt_count" data-xid="2018/04/03/中间件/kafka/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="kafka实战"><a href="#kafka实战" class="headerlink" title="kafka实战"></a>kafka实战</h1><h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p>borker</p>
+<p>kafka controller</p>
+<p>topic、partition、offset</p>
+<p>log &amp; segment</p>
+<p>producer消息/数据生产者</p>
+<p>consumer [group]消息/数据消费者&amp;offset</p>
+<h2 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h2><p>kafkatool、</p>
+<h2 id="Kafka命令行操作"><a href="#Kafka命令行操作" class="headerlink" title="Kafka命令行操作"></a>Kafka命令行操作</h2><p><strong>//启动kafka服务，三台主机分别输入此指令：</strong></p>
+<hr>
+<p>kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;</p>
+<hr>
+<p><strong>//以后台的方式启动</strong></p>
+<hr>
+<p>nohup kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;</p>
+<hr>
+<p><strong>//查看topic名</strong></p>
+<hr>
+<p>kafka-topics.sh –list –zookeeper hadoop-001:2181</p>
+<hr>
+<p><strong>//创建topic名</strong></p>
+<hr>
+<p>kafka-topics.sh –create –zookeeper hadoop-001:2181 –replication-factor 3 –partitions 1 –topic first</p>
+<hr>
+<p><strong>//创建生产者</strong></p>
+<hr>
+<p>kafka-console-producer.sh –broker-list hadoop-001:9092,hadoop-002:9092,hadoop-003:9092 –topic first</p>
+<hr>
+<p><strong>//创建消费者</strong></p>
+<hr>
+<p>kafka-console-consumer.sh –zookeeper hadoop-001:2181 –from-beginning –topic first</p>
+<hr>
+<p><strong>1）查看当前服务器中的所有topic</strong></p>
+<hr>
+<p> kafka-topics.sh –list –zookeeper hadoop-001:2181</p>
+<hr>
+<p><strong>2）创建topic</strong></p>
+<hr>
+<p>kafka-topics.sh –create –zookeeper hadoop-001:2181 –replication-factor 3 –partitions 1 –topic first</p>
+<p>选项说明：</p>
+<p>–topic 定义topic名</p>
+<p>–replication-factor 定义副本数</p>
+<p>–partitions 定义分区数</p>
+<hr>
+<p><strong>3） 删除topic</strong></p>
+<hr>
+<p>kafka-topics.sh –delete –zookeeper hadoop-001:2181 –topic first</p>
+<hr>
+<p>需要server.properties中设置delete.topic.enable=true否则只是标记删除或者直接重启。</p>
+<p><strong>4）发送消息</strong></p>
+<hr>
+<p>kafka-console-producer.sh –broker-list hadoop-001:9092 –topic first</p>
+<hr>
+<p>&gt;hello world</p>
+<p>&gt;hadoop hadoop</p>
+<p><strong>5）消费消息</strong></p>
+<hr>
+<p>kafka-console-consumer.sh –zookeeper hadoop-001:2181 –from-beginning –topic first</p>
+<hr>
+<p><strong>6）查看某个Topic的详情</strong></p>
+<hr>
+<p>kafka-topics.sh –topic first –describe –zookeeper hadoop-002:2181<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Transkai/p/10877289.html">https://www.cnblogs.com/Transkai/p/10877289.html</a></p>
+<h2 id="SpringBoot集成kafka全面实战"><a href="#SpringBoot集成kafka全面实战" class="headerlink" title="SpringBoot集成kafka全面实战"></a>SpringBoot集成kafka全面实战</h2><p>在开始前我们先创建两个topic：topic1、topic2，其分区和副本数都设置为2，用来测试</p>
+<p>当然我们也可以不手动创建topic，在执行代码kafkaTemplate.send(“topic1”, normalMessage)发送消息时，kafka会帮我们自动完成topic的创建工作，但这种情况下创建的topic默认只有一个分区，分区也没有副本。所以，我们可以在项目中新建一个配置类专门用来初始化topic</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanlong122716/article/details/105160545/">https://blog.csdn.net/yuanlong122716/article/details/105160545/</a></p>
+<p>步骤：（4步集成）<br>1、引入pom依赖<br>2、配置类-专门用来初始化topic<br>3、application.propertise配置<br>4、简单使用：<br>简单生产者<br>简单消费</p>
+<ul>
+<li>consumer [group]消息/数据消费者&amp;offset<br>kafka规定，同一个分区（partition）下的数据只能被通一个consumer group中的一个线程消费，这样就避免了不同线程之间争夺通一个资源，通过这种设计kafka做到了无锁，这样可以避免锁竞争造成效率下降。因此建议consumer group里面的线程数应当和分区数保持一致，这样做可以有效的利用线程资源，线程多了会被浪费掉，少了一个线程可能会处理多个分区的数据。如果你需要多个业务消费同一个消息，由于不同的consumer group对同意主题分区的offset是分开存储的，我们可以创建多个consumer group实现多个线程来消费同一个消息的目的。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017503896?utm_source=tag-newest">这里可参考</a></p>
+<ul>
+<li>kafak高可用及高阶方案（动态扩展）<br>zk集群、kafka集群<br>（待补充）</li>
+</ul>
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>3.0之后已自带zk</p>
+<ul>
+<li>kafka 3.0</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 命令sh xx-server-start.sh ../config/xxx.properties &amp;</span><br><span class="line">sh zookeeper-server-start.sh ../config/zookeeper.properties &amp;</span><br><span class="line">sh kafka-server-start.sh ../config/server.properties &amp;</span><br><span class="line">#以上消费者已启动</span><br><span class="line">#启动一个消费者</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="kafka管理界面-kafka-eagle"><a href="#kafka管理界面-kafka-eagle" class="headerlink" title="kafka管理界面 kafka-eagle"></a>kafka管理界面 kafka-eagle</h1><p>给kafka配一个web版的管理页面或仪表盘，管理起来更加方便</p>
+<ul>
+<li>源码： <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/smartloli/kafka-eagle/">https://github.com/smartloli/kafka-eagle/</a></li>
+<li>官网：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://www.kafka-eagle.org/">https://www.kafka-eagle.org/</a></li>
+<li>下载： <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://download.kafka-eagle.org/">http://download.kafka-eagle.org/</a></li>
+<li>安装文档： <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://docs.kafka-eagle.org/2.env-and-install">https://docs.kafka-eagle.org/2.env-and-install</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Flink-基础知识及入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-03-29T20:18:18+08:00">2018-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/" class="cy_cmt_count" data-xid="2018/03/29/flink_space/flink-基础知识及入门/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
+<p>Flink</p>
+<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/2.png"></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
+<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
+<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
+<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
+<h1 id="Flink计算引擎，到底计算了什么？"><a href="#Flink计算引擎，到底计算了什么？" class="headerlink" title="Flink计算引擎，到底计算了什么？"></a>Flink计算引擎，到底计算了什么？</h1><p>我们一只说Flink是一种计算引擎，那实际在计算什么呢？</p>
+<p>计算框架已经从第一代的雅虎开源的Hadoop体系进化到目前主流的Spark框架，到现在的Flink。<br>前面两套框架的计算主要是从强依赖硬盘存储能力的计算发展到了内存计算，大大增强了计算力。下一代计算引擎，也就是第三代计算引擎Flink</p>
+<p>流计算<br><a target="_blank" rel="noopener" href="https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457">https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457</a></p>
+<ul>
+<li>内存模型图</li>
+</ul>
+<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/1.png"></p>
+<h1 id="Flink核心概念"><a href="#Flink核心概念" class="headerlink" title="Flink核心概念"></a>Flink核心概念</h1><p>flink三大核心概念：source、transformations、sink</p>
+<ul>
+<li>并行数据流</li>
+</ul>
+<p>Flink程序本质上是并行的，分布式的。在执行过程中，一个流包含一个或多个流分区 ，而每一个算子包含一个或多个算子子任务 。每个算子子任务间彼此独立，以不同的线程执行，甚至有可能运行在不同的机器或容器上。</p>
+<p>算子子任务的数量即这一特定算子的并行度 。一个流的并行度即其生产算子的并行度。相同程序中的不同的算子可能有不同级别的并行度。</p>
+<p>一对一模式(one-to-one)</p>
+<p>重分配模式(redistribution)</p>
+<h2 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h2><p><img src="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/checkpoints.svg" alt="checkpoints and snapshots"></p>
+<ul>
+<li>JobManager &amp; TaskManager</li>
+</ul>
+<p>Flink 整个系统主要由两个组件组成，分别为 JobManager 和 TaskManager，Flink 架构也遵循 Master - Slave 架构设计原则，JobManager 为 Master 节点，TaskManager 为 Worker （Slave）节点。</p>
+<h2 id="Flink-API"><a href="#Flink-API" class="headerlink" title="Flink API"></a>Flink API</h2><p>DataStream API</p>
+<p>DataSet API</p>
+<p>Table API</p>
+<p>SQL</p>
+<h2 id="Time（时间语义）"><a href="#Time（时间语义）" class="headerlink" title="Time（时间语义）"></a>Time（时间语义）</h2><ul>
+<li>时间种类</li>
+</ul>
+<p>Event Time（事件时间）、Ingestion Time（提取时间）、Processing Time（处理时间）</p>
+<p><img src="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/event_processing_time.svg" alt="Event Time and Processing Time"></p>
+<ul>
+<li>数据错乱问题解决方案</li>
+</ul>
+<p>watermark（水位线）、allowLateness（延迟处理）、sideOutput Stream（侧输出流）</p>
+<h2 id="windows（-窗口）"><a href="#windows（-窗口）" class="headerlink" title="windows（ 窗口）"></a>windows（ 窗口）</h2><p>聚合事件（比如计数、求和）在流上的工作方式与在批处理中不同。比如，对流中的所有元素进行计数是不可能的，因为通常流是无限的（无界的）。相反，流上的聚合需要由 <strong>窗口</strong> 来划定范围，比如 “计算过去的5分钟” ，或者 “最后100个元素的和” 。</p>
+<p>Window类型<br>划分窗口就两种方式：</p>
+<p>根据时间进行截取(time-driven-window)，比如每1分钟统计一次或每10分钟统计一次。<br>根据数据进行截取(data-driven-window)，比如每5个数据统计一次或每50个数据统计一次。</p>
+<ul>
+<li>时间窗口</li>
+</ul>
+<p>滚动窗口 （没有重叠）</p>
+<p>滑动窗口 （有重叠）</p>
+<p>会话窗口 （由不活动的间隙所打断）</p>
+<ul>
+<li>计数窗口<br>滚动计数</li>
+</ul>
+<p>滑动窗口</p>
+<h2 id="状态机制"><a href="#状态机制" class="headerlink" title="状态机制"></a>状态机制</h2><ul>
+<li>Keyed State</li>
+<li>算子状态 (Operator State)</li>
+<li>广播状态 (Broadcast State)</li>
+</ul>
+<h2 id="Flink-CDC"><a href="#Flink-CDC" class="headerlink" title="Flink CDC"></a>Flink CDC</h2><p>CDC 的全称是 Change Data Capture ，在广义的概念上，只要是能捕获数据变更的技术，我们都可以称之为 CDC 。目前通常描述的 CDC 技术主要面向数据库的变更，是一种用于捕获数据库中数据变更的技术。</p>
+<p>CDC工具有很多种；</p>
+<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/10dfa9ec8a1363279b1fa20879c055e409fac7f0.jpeg" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc</a></p>
+<h2 id="待完善的知识点"><a href="#待完善的知识点" class="headerlink" title="待完善的知识点"></a>待完善的知识点</h2><ul>
+<li>Flink时间语义与窗口应用</li>
+<li>Flink 流join实战</li>
+<li>Flink SQL使用</li>
+<li>Flink CEP使用</li>
+</ul>
+<h3 id="算子"><a href="#算子" class="headerlink" title="算子"></a>算子</h3><h3 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h3><p>Flink 提供了Tuple 元组的概念，支持使用Tuple1到Tuple25，分别定义1个字段到25个字段。</p>
+<ul>
+<li>Tuple数量不能满足的问题</li>
+</ul>
+<p>由于Flink只提供了Tuple1~Tuple25，也就是最多只能支持一列转为二十五列。但是在实际场景中，有可能需求远大于二十五列。</p>
+<p>Flink 为处理一列转多列的场景提供了两种返回类型 Tuple 和 Row</p>
+<ul>
+<li>Tuple 只支持1~25个字段，且不能为null，不支持拓展</li>
+<li>Row 支持null同时也无限制字段数，但如果需要使用Row，必须重载实现getResultType方法</li>
+<li>通过采用Row Type 成功地处理了一列转二十六列的场景(使用Tuple时，字段值不能为null，且最多只能存在25个字段，而Row支持字段值为null，且可以无限制个数)。</li>
+</ul>
+<h1 id="flink-run-examples"><a href="#flink-run-examples" class="headerlink" title="flink run examples"></a>flink run examples</h1><p>先启动flink<br>./bin/start-cluster.sh</p>
+<p>bin/flink run examples/batch/WordCount.jar</p>
+<h1 id="Flink开发入门"><a href="#Flink开发入门" class="headerlink" title="Flink开发入门"></a>Flink开发入门</h1><p>主要基于java、scala进行开发</p>
+<h2 id="通过Flink项目模板搭建项目"><a href="#通过Flink项目模板搭建项目" class="headerlink" title="通过Flink项目模板搭建项目"></a>通过Flink项目模板搭建项目</h2><p>搭建主要有两种方式，可以通过maven archetype和Quickstart Shell进行构建</p>
+<ul>
+<li>maven archetype</li>
+</ul>
+<p> 输入命令“mvn archetype:generate” 创建项目骨架（注意目标可区分java/scala），如下：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line"></span><br><span class="line">-DarchetypeGroupId=org.apache.flink</span><br><span class="line"></span><br><span class="line">-DarchetypeArtifactId=flink-quickstart-java</span><br><span class="line"></span><br><span class="line">-DarchetypeVersion=1.8.0</span><br><span class="line"></span><br><span class="line">-DgroupId=com.rickie</span><br><span class="line"></span><br><span class="line">-DartifactId=flink-tutorial</span><br><span class="line"></span><br><span class="line">-Dversion=0.1</span><br><span class="line"></span><br><span class="line">-Dpackage=com.rickie.tutorial</span><br><span class="line"></span><br><span class="line">-DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Quickstart Shell<br>(linux上执行)<br>curl <a target="_blank" rel="noopener" href="https://flink.apache.org/q/quickstart.sh">https://flink.apache.org/q/quickstart.sh</a> | bash</li>
+</ul>
+<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>开发-运行-打包-flink运行（指定运行类）</p>
+<p>多种source方式接入数据</p>
+<ul>
+<li>多种source开发demo</li>
+</ul>
+<p>1、source为定好的数据</p>
+<p>2、source为socket输入的数据（先监听端口）</p>
+<p>3、source为从文件获取数据</p>
+<p>4、source为中间件的数据，例如MQ</p>
+<ul>
+<li>多种方式提交任务</li>
+</ul>
+<p>web端提交jar运行</p>
+<p>命令行提交（启动集群再运行，或通过on  yarn运行）</p>
+<h1 id="应用场景（有流数据的地方就可以用flink）"><a href="#应用场景（有流数据的地方就可以用flink）" class="headerlink" title="应用场景（有流数据的地方就可以用flink）"></a>应用场景（有流数据的地方就可以用flink）</h1><p>简单举几个例子，大数据处理可适用在在如下一些场景:</p>
+<pre><code>医疗大数据、看病更高效(病例病理分析、基因数据分析)
+电商大数据、精准营销法宝(杀熟、哈哈哈哈或)
+零售大数据、最懂消费者(用户画像，精准推送)
+金融大数据、理财利器 (大数据选股)
+交通大数据、畅通出行 (城市大脑)
+</code></pre>
+<ul>
+<li>事件驱动型应用</li>
+<li>数据分析应用</li>
+<li>数据管道应用</li>
+</ul>
+<ol>
+<li>事件驱动型应用<br>典型的事件驱动型应用实例</li>
+</ol>
+<ul>
+<li>反欺诈</li>
+<li>异常检测</li>
+<li>基于规则的报警</li>
+<li>业务流程监控</li>
+<li>（社交网络）Web 应用</li>
+</ul>
+<ol start="2">
+<li>数据分析应用<br>典型的数据分析应用实例</li>
+</ol>
+<ul>
+<li>电信网络质量监控</li>
+<li>移动应用中的产品更新及实验评估分析</li>
+<li>消费者技术中的实时数据即席分析</li>
+<li>大规模图分析</li>
+</ul>
+<ol start="3">
+<li>数据管道应用<br>典型的数据管道应用实例</li>
+</ol>
+<ul>
+<li>电子商务中的实时查询索引构建</li>
+<li>电子商务中的持续 ETL</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">git基本使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-19 10:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T10:18:18+08:00">2018-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/03/19/开发工具/git基本使用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="git创建项目"><a href="#git创建项目" class="headerlink" title="git创建项目"></a>git创建项目</h1><p>先有仓库还是先有项目？</p>
+<p>一般创建项目不需要考虑git，项目开发完之后再去管理git仓库即可</p>
+<p>可以本地初始化git项目。</p>
+<p>码云或git上创建一个仓库。</p>
+<h1 id="将项目初始化传至git"><a href="#将项目初始化传至git" class="headerlink" title="将项目初始化传至git"></a>将项目初始化传至git</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、初始化为git项目</span></span><br><span class="line">git init</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、添加所有文件</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、本地提交</span></span><br><span class="line">  git commit -m &#x27;first commit&#x27;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4、添加远程仓库（关联到远程库）</span></span><br><span class="line">git remote add origin 你的远程库地址</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">5、获取远程库与本地同步合并</span></span><br><span class="line">git pull --rebase origin master</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">6、把本地库的内容推送到远程</span></span><br><span class="line">git push -u origin master	</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/eedc/p/6168430.html">https://www.cnblogs.com/eedc/p/6168430.html</a></p>
+<h1 id="IntelliJ-IDEA-中修改当前项目-Git-仓库地址的方法"><a href="#IntelliJ-IDEA-中修改当前项目-Git-仓库地址的方法" class="headerlink" title="IntelliJ IDEA 中修改当前项目 Git 仓库地址的方法"></a>IntelliJ IDEA 中修改当前项目 Git 仓库地址的方法</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br><span class="line"></span><br><span class="line">git remote add origin http://git.xxxx.com/oct-group/index-service.git</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.obatis.com/article/1616066405665">https://www.obatis.com/article/1616066405665</a></p>
+<h1 id="git合并两个仓库的代码"><a href="#git合并两个仓库的代码" class="headerlink" title="git合并两个仓库的代码"></a>git合并两个仓库的代码</h1><p>1:将主仓库的地址添加到自己本地的远程仓库中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//git remote add 仓库名称 地址</span><br><span class="line">git remote add companyMaster git@github.weiwei.com:company/code.git</span><br></pre></td></tr></table></figure>
+
+<p>现在git remote 一下可以看见本地有两个远程仓库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:git remote</span><br><span class="line">companyMaster</span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
+
+<p>2:抓取仓库数据到本仓库中（接下来可以再idea或git可视化页面操作进行切换代码分支进行合并）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch companyMaster //git fetch 仓库名称</span><br></pre></td></tr></table></figure>
+
+<p>3:合并两个分支（也就是将两个仓库的代码merge）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge master1 //git merge 分支名称</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/" class="post-title-link" itemprop="url">大数据-PySpark</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-PySpark/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>PySpark 是 Spark 为 Python 开发者提供的 API。</p>
+<p>pyspark.sql 模块</p>
+<p>pyspark.streaming 模块</p>
+<p>pyspark.ml 包</p>
+<p>pyspark.mllib 包</p>
+<h2 id="PySpark-概述"><a href="#PySpark-概述" class="headerlink" title="PySpark - 概述"></a>PySpark - 概述</h2><p>Apache Spark是用 <strong>Scala编程语言</strong> 编写的。为了用Spark支持Python，Apache Spark社区发布了一个工具PySpark。使用PySpark，您也可以使用Python编程语言中的 <strong>RDD</strong> 。正是由于一个名为 <strong>Py4j</strong> 的库，他们才能实现这一目标。</p>
+<p>PySpark提供了 <strong>PySpark Shell</strong> ，它将Python API链接到spark核心并初始化Spark上下文。今天，大多数数据科学家和分析专家都使用Python，因为它具有丰富的库集。将Python与Spark集成对他们来说是一个福音。</p>
+<p><a target="_blank" rel="noopener" href="https://www.codingdict.com/article/8880">https://www.codingdict.com/article/8880</a></p>
+<p><em>一个简单的例子带你进入pyspark的大门，对！我们的入门程序不是wordcount，也不是hello world。我们不一样、不一样。</em></p>
+<p><em>目标：找到股息率大于3%的行业，将结果输出到指定目录。</em></p>
+<p><a target="_blank" rel="noopener" href="https://www.csdn.net/tags/MtTaYg3sNzU1NC1ibG9n.html">https://www.csdn.net/tags/MtTaYg3sNzU1NC1ibG9n.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/" class="post-title-link" itemprop="url">大数据-Spark</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-Spark/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><a target="_blank" rel="noopener" href="https://spark.apache.org/">https://spark.apache.org/</a></p>
+<p>2009年，Spark诞生于伯克利大学AMPLab，最初属于伯克利大学的研究性项目。</p>
+<p>2010年，正式开源。</p>
+<p>2013年，成为了Apache基金项目，同年，基于spark的开源商业公司Databricks成立。</p>
+<p>2014年，成为Apache基金的顶级项目。</p>
+<p>Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。<br>Spark 是使用 scala 实现的基于内存计算的大数据开源集群计算环境.提供了 java,scala, python,R 等语言的调用接口.</p>
+<p>Spark 运算比 Hadoop 的 MapReduce 框架快原因是：<br>Hadoop 在一次 MapReduce 运算之后,会将数据的运算结果从内存写入到磁盘中,第二次 Mapredue 运算时在从磁盘中读取数据,所以其瓶颈在2次运算间的多余 IO 消耗；<br>Spark 则是将数据一直缓存在内存中,直到计算得到最后的结果,再将结果写入到磁盘；</p>
+<p>大神解读：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34436165">https://zhuanlan.zhihu.com/p/34436165</a></p>
+<ul>
+<li>SparkSQL的进化之路</li>
+</ul>
+<p>1.0以前：  Shark</p>
+<p>1.1.x开始：SparkSQL(只是测试性的) SQL</p>
+<p>1.3.x:     SparkSQL(正式版本)+Dataframe</p>
+<p>1.5.x:     SparkSQL 钨丝计划</p>
+<p>1.6.x：    SparkSQL+DataFrame+DataSet(测试版本)</p>
+<p> 2.x:</p>
+<ul>
+<li>   SparkSQL+DataFrame+DataSet(正式版本)</li>
+<li>   SparkSQL:还有其他的优化</li>
+<li>   StructuredStreaming(DataSet)</li>
+</ul>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>分析统计，实时数据处理，图计算及机器学习</p>
+<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><ul>
+<li>Spark Core</li>
+<li>Spark SQL</li>
+<li>Spark Streaming</li>
+<li>MLlib</li>
+<li>GraphX</li>
+</ul>
+<h1 id="Spark之RDD"><a href="#Spark之RDD" class="headerlink" title="Spark之RDD"></a>Spark之RDD</h1><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。<br>RDD具有数据流模型的特点：自动容错、位置感知性调度和可伸缩性。RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度。</p>
+<ul>
+<li>Partition<br>一组分片（Partition），即数据集的基本组成单位。</li>
+</ul>
+<h2 id="RDD编程API"><a href="#RDD编程API" class="headerlink" title="RDD编程API"></a>RDD编程API</h2><p>Spark支持两个类型（算子）操作：Transformation和Action</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qingyunzong/p/8899715.html">https://www.cnblogs.com/qingyunzong/p/8899715.html</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Spark会用到HDFS与YARN，因此请先安装Hadoop</p>
+<p>**第一步:**安装Java JDK 1.7及以上版本，并配置好环境变量。本电脑安装的jdk是1.7.0_79版本的。</p>
+<p>**第二步:**安装Hadoop。本电脑安装的Hadoop是2.7.3版本的。</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yhl-yh/p/7651470.html">https://www.cnblogs.com/yhl-yh/p/7651470.html</a></p>
+<h1 id="Spark开发"><a href="#Spark开发" class="headerlink" title="Spark开发"></a>Spark开发</h1><ul>
+<li>scala</li>
+<li>java</li>
+</ul>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="Spark的运行模式"><a href="#Spark的运行模式" class="headerlink" title="Spark的运行模式"></a>Spark的运行模式</h2><ul>
+<li>1.<code>local</code>: 本地单进程模式，用于本地开发测试Spark代码。</li>
+<li>2.<code>standalone</code>:分布式集群模式，Master-Worker架构，Master负责调度，Worker负责具体Task的执行。</li>
+<li>3.<code>on yarn/mesos</code>:运行在yarn/mesos等资源管理框架之上，yarn/mesos提供资源管理，spark提供计算调度，并可与其他计算框架(如MapReduce/MPI/Storm)共同运行在同一个集群之上。</li>
+<li>4.<code>on cloud(EC2)</code>: 运行在AWS的EC2之上</li>
+</ul>
+<h1 id="伪分布式"><a href="#伪分布式" class="headerlink" title="伪分布式"></a><strong>伪分布式</strong></h1><h3 id="从微软镜像站下载"><a href="#从微软镜像站下载" class="headerlink" title="从微软镜像站下载"></a>从微软镜像站下载</h3><p> <a target="_blank" rel="noopener" href="http://mirrors.hust.edu.cn/apache/">http://mirrors.hust.edu.cn/apache/</a></p>
+<h3 id="从清华镜像站下载"><a href="#从清华镜像站下载" class="headerlink" title="从清华镜像站下载"></a>从清华镜像站下载</h3><p> <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache/">https://mirrors.tuna.tsinghua.edu.cn/apache/</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#解压包到对应规划目录</span></span><br><span class="line">tar -xvf spark-2.2.1-bin-hadoop2.7.tgz -C /opt/hadoop/apps</span><br><span class="line"><span class="comment">#创建软连接</span></span><br><span class="line"><span class="built_in">ln</span> -s spark-2.2.1-bin-hadoop2.7/ spark</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">export SPARK_HOME=/opt/hadoop/apps/spark-2.2.1-bin-hadoop2.7/</span><br><span class="line">export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置spark-site-xml"><a href="#配置spark-site-xml" class="headerlink" title="配置spark-site.xml"></a>配置spark-site.xml</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/opt/hadoop/apps/jdk1.8.0_161</span><br><span class="line">export HADOOP_HOME=/opt/hadoop/apps/hadoop-2.7.1/</span><br><span class="line">export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br><span class="line">export SPARK_MASTER_IP=master</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=1G</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动及验证"><a href="#启动及验证" class="headerlink" title="启动及验证"></a>启动及验证</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在spark/sbin目录下执行</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="web-UI"><a href="#web-UI" class="headerlink" title="web UI"></a>web UI</h1><h4 id="http-localhost-8080"><a href="#http-localhost-8080" class="headerlink" title="http://localhost:8080/"></a><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></h4><h2 id="spark-shell"><a href="#spark-shell" class="headerlink" title="spark-shell"></a>spark-shell</h2><h4 id="到spark的bin目录下-spark-shell命令查看"><a href="#到spark的bin目录下-spark-shell命令查看" class="headerlink" title="到spark的bin目录下./spark-shell命令查看"></a>到spark的bin目录下./spark-shell命令查看</h4><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="使用spark-shell完成单词统计功能"><a href="#使用spark-shell完成单词统计功能" class="headerlink" title="使用spark-shell完成单词统计功能"></a>使用spark-shell完成单词统计功能</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1596,7 +1555,7 @@ zookeeper
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

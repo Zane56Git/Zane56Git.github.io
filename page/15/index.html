@@ -174,785 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/" class="post-title-link" itemprop="url">kafka实战</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-03 13:52:25" itemprop="dateCreated datePublished" datetime="2018-04-03T13:52:25+08:00">2018-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/04/03/%E4%B8%AD%E9%97%B4%E4%BB%B6/kafka/" class="cy_cmt_count" data-xid="2018/04/03/中间件/kafka/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="kafka实战"><a href="#kafka实战" class="headerlink" title="kafka实战"></a>kafka实战</h1><h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p>borker</p>
-<p>kafka controller</p>
-<p>topic、partition、offset</p>
-<p>log &amp; segment</p>
-<p>producer消息/数据生产者</p>
-<p>consumer [group]消息/数据消费者&amp;offset</p>
-<h2 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h2><p>kafkatool、</p>
-<h2 id="Kafka命令行操作"><a href="#Kafka命令行操作" class="headerlink" title="Kafka命令行操作"></a>Kafka命令行操作</h2><p><strong>//启动kafka服务，三台主机分别输入此指令：</strong></p>
-<hr>
-<p>kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;</p>
-<hr>
-<p><strong>//以后台的方式启动</strong></p>
-<hr>
-<p>nohup kafka-server-start.sh $KAFKA_HOME/config/server.properties &amp;</p>
-<hr>
-<p><strong>//查看topic名</strong></p>
-<hr>
-<p>kafka-topics.sh –list –zookeeper hadoop-001:2181</p>
-<hr>
-<p><strong>//创建topic名</strong></p>
-<hr>
-<p>kafka-topics.sh –create –zookeeper hadoop-001:2181 –replication-factor 3 –partitions 1 –topic first</p>
-<hr>
-<p><strong>//创建生产者</strong></p>
-<hr>
-<p>kafka-console-producer.sh –broker-list hadoop-001:9092,hadoop-002:9092,hadoop-003:9092 –topic first</p>
-<hr>
-<p><strong>//创建消费者</strong></p>
-<hr>
-<p>kafka-console-consumer.sh –zookeeper hadoop-001:2181 –from-beginning –topic first</p>
-<hr>
-<p><strong>1）查看当前服务器中的所有topic</strong></p>
-<hr>
-<p> kafka-topics.sh –list –zookeeper hadoop-001:2181</p>
-<hr>
-<p><strong>2）创建topic</strong></p>
-<hr>
-<p>kafka-topics.sh –create –zookeeper hadoop-001:2181 –replication-factor 3 –partitions 1 –topic first</p>
-<p>选项说明：</p>
-<p>–topic 定义topic名</p>
-<p>–replication-factor 定义副本数</p>
-<p>–partitions 定义分区数</p>
-<hr>
-<p><strong>3） 删除topic</strong></p>
-<hr>
-<p>kafka-topics.sh –delete –zookeeper hadoop-001:2181 –topic first</p>
-<hr>
-<p>需要server.properties中设置delete.topic.enable=true否则只是标记删除或者直接重启。</p>
-<p><strong>4）发送消息</strong></p>
-<hr>
-<p>kafka-console-producer.sh –broker-list hadoop-001:9092 –topic first</p>
-<hr>
-<p>&gt;hello world</p>
-<p>&gt;hadoop hadoop</p>
-<p><strong>5）消费消息</strong></p>
-<hr>
-<p>kafka-console-consumer.sh –zookeeper hadoop-001:2181 –from-beginning –topic first</p>
-<hr>
-<p><strong>6）查看某个Topic的详情</strong></p>
-<hr>
-<p>kafka-topics.sh –topic first –describe –zookeeper hadoop-002:2181<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Transkai/p/10877289.html">https://www.cnblogs.com/Transkai/p/10877289.html</a></p>
-<h2 id="SpringBoot集成kafka全面实战"><a href="#SpringBoot集成kafka全面实战" class="headerlink" title="SpringBoot集成kafka全面实战"></a>SpringBoot集成kafka全面实战</h2><p>在开始前我们先创建两个topic：topic1、topic2，其分区和副本数都设置为2，用来测试</p>
-<p>当然我们也可以不手动创建topic，在执行代码kafkaTemplate.send(“topic1”, normalMessage)发送消息时，kafka会帮我们自动完成topic的创建工作，但这种情况下创建的topic默认只有一个分区，分区也没有副本。所以，我们可以在项目中新建一个配置类专门用来初始化topic</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanlong122716/article/details/105160545/">https://blog.csdn.net/yuanlong122716/article/details/105160545/</a></p>
-<p>步骤：（4步集成）<br>1、引入pom依赖<br>2、配置类-专门用来初始化topic<br>3、application.propertise配置<br>4、简单使用：<br>简单生产者<br>简单消费</p>
-<ul>
-<li>consumer [group]消息/数据消费者&amp;offset<br>kafka规定，同一个分区（partition）下的数据只能被通一个consumer group中的一个线程消费，这样就避免了不同线程之间争夺通一个资源，通过这种设计kafka做到了无锁，这样可以避免锁竞争造成效率下降。因此建议consumer group里面的线程数应当和分区数保持一致，这样做可以有效的利用线程资源，线程多了会被浪费掉，少了一个线程可能会处理多个分区的数据。如果你需要多个业务消费同一个消息，由于不同的consumer group对同意主题分区的offset是分开存储的，我们可以创建多个consumer group实现多个线程来消费同一个消息的目的。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017503896?utm_source=tag-newest">这里可参考</a></p>
-<ul>
-<li>kafak高可用及高阶方案（动态扩展）<br>zk集群、kafka集群<br>（待补充）</li>
-</ul>
-<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>3.0之后已自带zk</p>
-<ul>
-<li>kafka 3.0</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 命令sh xx-server-start.sh ../config/xxx.properties &amp;</span><br><span class="line">sh zookeeper-server-start.sh ../config/zookeeper.properties &amp;</span><br><span class="line">sh kafka-server-start.sh ../config/server.properties &amp;</span><br><span class="line">#以上消费者已启动</span><br><span class="line">#启动一个消费者</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="kafka管理界面-kafka-eagle"><a href="#kafka管理界面-kafka-eagle" class="headerlink" title="kafka管理界面 kafka-eagle"></a>kafka管理界面 kafka-eagle</h1><p>给kafka配一个web版的管理页面或仪表盘，管理起来更加方便</p>
-<ul>
-<li>源码： <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/smartloli/kafka-eagle/">https://github.com/smartloli/kafka-eagle/</a></li>
-<li>官网：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://www.kafka-eagle.org/">https://www.kafka-eagle.org/</a></li>
-<li>下载： <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://download.kafka-eagle.org/">http://download.kafka-eagle.org/</a></li>
-<li>安装文档： <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://docs.kafka-eagle.org/2.env-and-install">https://docs.kafka-eagle.org/2.env-and-install</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Flink-基础知识及入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-03-29T20:18:18+08:00">2018-03-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/" class="cy_cmt_count" data-xid="2018/03/29/flink_space/flink-基础知识及入门/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
-<p>Flink</p>
-<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/2.png"></p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
-<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
-<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
-<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
-<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
-<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
-<h1 id="Flink计算引擎，到底计算了什么？"><a href="#Flink计算引擎，到底计算了什么？" class="headerlink" title="Flink计算引擎，到底计算了什么？"></a>Flink计算引擎，到底计算了什么？</h1><p>我们一只说Flink是一种计算引擎，那实际在计算什么呢？</p>
-<p>计算框架已经从第一代的雅虎开源的Hadoop体系进化到目前主流的Spark框架，到现在的Flink。<br>前面两套框架的计算主要是从强依赖硬盘存储能力的计算发展到了内存计算，大大增强了计算力。下一代计算引擎，也就是第三代计算引擎Flink</p>
-<p>流计算<br><a target="_blank" rel="noopener" href="https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457">https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457</a></p>
-<ul>
-<li>内存模型图</li>
-</ul>
-<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/1.png"></p>
-<h1 id="Flink核心概念"><a href="#Flink核心概念" class="headerlink" title="Flink核心概念"></a>Flink核心概念</h1><p>flink三大核心概念：source、transformations、sink</p>
-<ul>
-<li>并行数据流</li>
-</ul>
-<p>Flink程序本质上是并行的，分布式的。在执行过程中，一个流包含一个或多个流分区 ，而每一个算子包含一个或多个算子子任务 。每个算子子任务间彼此独立，以不同的线程执行，甚至有可能运行在不同的机器或容器上。</p>
-<p>算子子任务的数量即这一特定算子的并行度 。一个流的并行度即其生产算子的并行度。相同程序中的不同的算子可能有不同级别的并行度。</p>
-<p>一对一模式(one-to-one)</p>
-<p>重分配模式(redistribution)</p>
-<h2 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h2><p><img src="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/checkpoints.svg" alt="checkpoints and snapshots"></p>
-<ul>
-<li>JobManager &amp; TaskManager</li>
-</ul>
-<p>Flink 整个系统主要由两个组件组成，分别为 JobManager 和 TaskManager，Flink 架构也遵循 Master - Slave 架构设计原则，JobManager 为 Master 节点，TaskManager 为 Worker （Slave）节点。</p>
-<h2 id="Flink-API"><a href="#Flink-API" class="headerlink" title="Flink API"></a>Flink API</h2><p>DataStream API</p>
-<p>DataSet API</p>
-<p>Table API</p>
-<p>SQL</p>
-<h2 id="Time（时间语义）"><a href="#Time（时间语义）" class="headerlink" title="Time（时间语义）"></a>Time（时间语义）</h2><ul>
-<li>时间种类</li>
-</ul>
-<p>Event Time（事件时间）、Ingestion Time（提取时间）、Processing Time（处理时间）</p>
-<p><img src="https://nightlies.apache.org/flink/flink-docs-release-1.14/fig/event_processing_time.svg" alt="Event Time and Processing Time"></p>
-<ul>
-<li>数据错乱问题解决方案</li>
-</ul>
-<p>watermark（水位线）、allowLateness（延迟处理）、sideOutput Stream（侧输出流）</p>
-<h2 id="windows（-窗口）"><a href="#windows（-窗口）" class="headerlink" title="windows（ 窗口）"></a>windows（ 窗口）</h2><p>聚合事件（比如计数、求和）在流上的工作方式与在批处理中不同。比如，对流中的所有元素进行计数是不可能的，因为通常流是无限的（无界的）。相反，流上的聚合需要由 <strong>窗口</strong> 来划定范围，比如 “计算过去的5分钟” ，或者 “最后100个元素的和” 。</p>
-<p>Window类型<br>划分窗口就两种方式：</p>
-<p>根据时间进行截取(time-driven-window)，比如每1分钟统计一次或每10分钟统计一次。<br>根据数据进行截取(data-driven-window)，比如每5个数据统计一次或每50个数据统计一次。</p>
-<ul>
-<li>时间窗口</li>
-</ul>
-<p>滚动窗口 （没有重叠）</p>
-<p>滑动窗口 （有重叠）</p>
-<p>会话窗口 （由不活动的间隙所打断）</p>
-<ul>
-<li>计数窗口<br>滚动计数</li>
-</ul>
-<p>滑动窗口</p>
-<h2 id="状态机制"><a href="#状态机制" class="headerlink" title="状态机制"></a>状态机制</h2><ul>
-<li>Keyed State</li>
-<li>算子状态 (Operator State)</li>
-<li>广播状态 (Broadcast State)</li>
-</ul>
-<h2 id="Flink-CDC"><a href="#Flink-CDC" class="headerlink" title="Flink CDC"></a>Flink CDC</h2><p>CDC 的全称是 Change Data Capture ，在广义的概念上，只要是能捕获数据变更的技术，我们都可以称之为 CDC 。目前通常描述的 CDC 技术主要面向数据库的变更，是一种用于捕获数据库中数据变更的技术。</p>
-<p>CDC工具有很多种；</p>
-<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/10dfa9ec8a1363279b1fa20879c055e409fac7f0.jpeg" alt="img"></p>
-<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc</a></p>
-<h2 id="待完善的知识点"><a href="#待完善的知识点" class="headerlink" title="待完善的知识点"></a>待完善的知识点</h2><ul>
-<li>Flink时间语义与窗口应用</li>
-<li>Flink 流join实战</li>
-<li>Flink SQL使用</li>
-<li>Flink CEP使用</li>
-</ul>
-<h3 id="算子"><a href="#算子" class="headerlink" title="算子"></a>算子</h3><h3 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h3><p>Flink 提供了Tuple 元组的概念，支持使用Tuple1到Tuple25，分别定义1个字段到25个字段。</p>
-<ul>
-<li>Tuple数量不能满足的问题</li>
-</ul>
-<p>由于Flink只提供了Tuple1~Tuple25，也就是最多只能支持一列转为二十五列。但是在实际场景中，有可能需求远大于二十五列。</p>
-<p>Flink 为处理一列转多列的场景提供了两种返回类型 Tuple 和 Row</p>
-<ul>
-<li>Tuple 只支持1~25个字段，且不能为null，不支持拓展</li>
-<li>Row 支持null同时也无限制字段数，但如果需要使用Row，必须重载实现getResultType方法</li>
-<li>通过采用Row Type 成功地处理了一列转二十六列的场景(使用Tuple时，字段值不能为null，且最多只能存在25个字段，而Row支持字段值为null，且可以无限制个数)。</li>
-</ul>
-<h1 id="flink-run-examples"><a href="#flink-run-examples" class="headerlink" title="flink run examples"></a>flink run examples</h1><p>先启动flink<br>./bin/start-cluster.sh</p>
-<p>bin/flink run examples/batch/WordCount.jar</p>
-<h1 id="Flink开发入门"><a href="#Flink开发入门" class="headerlink" title="Flink开发入门"></a>Flink开发入门</h1><p>主要基于java、scala进行开发</p>
-<h2 id="通过Flink项目模板搭建项目"><a href="#通过Flink项目模板搭建项目" class="headerlink" title="通过Flink项目模板搭建项目"></a>通过Flink项目模板搭建项目</h2><p>搭建主要有两种方式，可以通过maven archetype和Quickstart Shell进行构建</p>
-<ul>
-<li>maven archetype</li>
-</ul>
-<p> 输入命令“mvn archetype:generate” 创建项目骨架（注意目标可区分java/scala），如下：</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line"></span><br><span class="line">-DarchetypeGroupId=org.apache.flink</span><br><span class="line"></span><br><span class="line">-DarchetypeArtifactId=flink-quickstart-java</span><br><span class="line"></span><br><span class="line">-DarchetypeVersion=1.8.0</span><br><span class="line"></span><br><span class="line">-DgroupId=com.rickie</span><br><span class="line"></span><br><span class="line">-DartifactId=flink-tutorial</span><br><span class="line"></span><br><span class="line">-Dversion=0.1</span><br><span class="line"></span><br><span class="line">-Dpackage=com.rickie.tutorial</span><br><span class="line"></span><br><span class="line">-DinteractiveMode=false</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Quickstart Shell<br>(linux上执行)<br>curl <a target="_blank" rel="noopener" href="https://flink.apache.org/q/quickstart.sh">https://flink.apache.org/q/quickstart.sh</a> | bash</li>
-</ul>
-<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>开发-运行-打包-flink运行（指定运行类）</p>
-<p>多种source方式接入数据</p>
-<ul>
-<li>多种source开发demo</li>
-</ul>
-<p>1、source为定好的数据</p>
-<p>2、source为socket输入的数据（先监听端口）</p>
-<p>3、source为从文件获取数据</p>
-<p>4、source为中间件的数据，例如MQ</p>
-<ul>
-<li>多种方式提交任务</li>
-</ul>
-<p>web端提交jar运行</p>
-<p>命令行提交（启动集群再运行，或通过on  yarn运行）</p>
-<h1 id="应用场景（有流数据的地方就可以用flink）"><a href="#应用场景（有流数据的地方就可以用flink）" class="headerlink" title="应用场景（有流数据的地方就可以用flink）"></a>应用场景（有流数据的地方就可以用flink）</h1><p>简单举几个例子，大数据处理可适用在在如下一些场景:</p>
-<pre><code>医疗大数据、看病更高效(病例病理分析、基因数据分析)
-电商大数据、精准营销法宝(杀熟、哈哈哈哈或)
-零售大数据、最懂消费者(用户画像，精准推送)
-金融大数据、理财利器 (大数据选股)
-交通大数据、畅通出行 (城市大脑)
-</code></pre>
-<ul>
-<li>事件驱动型应用</li>
-<li>数据分析应用</li>
-<li>数据管道应用</li>
-</ul>
-<ol>
-<li>事件驱动型应用<br>典型的事件驱动型应用实例</li>
-</ol>
-<ul>
-<li>反欺诈</li>
-<li>异常检测</li>
-<li>基于规则的报警</li>
-<li>业务流程监控</li>
-<li>（社交网络）Web 应用</li>
-</ul>
-<ol start="2">
-<li>数据分析应用<br>典型的数据分析应用实例</li>
-</ol>
-<ul>
-<li>电信网络质量监控</li>
-<li>移动应用中的产品更新及实验评估分析</li>
-<li>消费者技术中的实时数据即席分析</li>
-<li>大规模图分析</li>
-</ul>
-<ol start="3">
-<li>数据管道应用<br>典型的数据管道应用实例</li>
-</ol>
-<ul>
-<li>电子商务中的实时查询索引构建</li>
-<li>电子商务中的持续 ETL</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">git基本使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-19 10:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T10:18:18+08:00">2018-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="cy_cmt_count" data-xid="2018/03/19/开发工具/git基本使用/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="git创建项目"><a href="#git创建项目" class="headerlink" title="git创建项目"></a>git创建项目</h1><p>先有仓库还是先有项目？</p>
-<p>一般创建项目不需要考虑git，项目开发完之后再去管理git仓库即可</p>
-<p>可以本地初始化git项目。</p>
-<p>码云或git上创建一个仓库。</p>
-<h1 id="将项目初始化传至git"><a href="#将项目初始化传至git" class="headerlink" title="将项目初始化传至git"></a>将项目初始化传至git</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、初始化为git项目</span></span><br><span class="line">git init</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、添加所有文件</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、本地提交</span></span><br><span class="line">  git commit -m &#x27;first commit&#x27;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4、添加远程仓库（关联到远程库）</span></span><br><span class="line">git remote add origin 你的远程库地址</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">5、获取远程库与本地同步合并</span></span><br><span class="line">git pull --rebase origin master</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">6、把本地库的内容推送到远程</span></span><br><span class="line">git push -u origin master	</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/eedc/p/6168430.html">https://www.cnblogs.com/eedc/p/6168430.html</a></p>
-<h1 id="IntelliJ-IDEA-中修改当前项目-Git-仓库地址的方法"><a href="#IntelliJ-IDEA-中修改当前项目-Git-仓库地址的方法" class="headerlink" title="IntelliJ IDEA 中修改当前项目 Git 仓库地址的方法"></a>IntelliJ IDEA 中修改当前项目 Git 仓库地址的方法</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br><span class="line"></span><br><span class="line">git remote add origin http://git.xxxx.com/oct-group/index-service.git</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a target="_blank" rel="noopener" href="https://www.obatis.com/article/1616066405665">https://www.obatis.com/article/1616066405665</a></p>
-<h1 id="git合并两个仓库的代码"><a href="#git合并两个仓库的代码" class="headerlink" title="git合并两个仓库的代码"></a>git合并两个仓库的代码</h1><p>1:将主仓库的地址添加到自己本地的远程仓库中</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//git remote add 仓库名称 地址</span><br><span class="line">git remote add companyMaster git@github.weiwei.com:company/code.git</span><br></pre></td></tr></table></figure>
-
-<p>现在git remote 一下可以看见本地有两个远程仓库：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:git remote</span><br><span class="line">companyMaster</span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
-
-<p>2:抓取仓库数据到本仓库中（接下来可以再idea或git可视化页面操作进行切换代码分支进行合并）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch companyMaster //git fetch 仓库名称</span><br></pre></td></tr></table></figure>
-
-<p>3:合并两个分支（也就是将两个仓库的代码merge）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge master1 //git merge 分支名称</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/" class="post-title-link" itemprop="url">大数据-PySpark</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-PySpark/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-PySpark/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>PySpark 是 Spark 为 Python 开发者提供的 API。</p>
-<p>pyspark.sql 模块</p>
-<p>pyspark.streaming 模块</p>
-<p>pyspark.ml 包</p>
-<p>pyspark.mllib 包</p>
-<h2 id="PySpark-概述"><a href="#PySpark-概述" class="headerlink" title="PySpark - 概述"></a>PySpark - 概述</h2><p>Apache Spark是用 <strong>Scala编程语言</strong> 编写的。为了用Spark支持Python，Apache Spark社区发布了一个工具PySpark。使用PySpark，您也可以使用Python编程语言中的 <strong>RDD</strong> 。正是由于一个名为 <strong>Py4j</strong> 的库，他们才能实现这一目标。</p>
-<p>PySpark提供了 <strong>PySpark Shell</strong> ，它将Python API链接到spark核心并初始化Spark上下文。今天，大多数数据科学家和分析专家都使用Python，因为它具有丰富的库集。将Python与Spark集成对他们来说是一个福音。</p>
-<p><a target="_blank" rel="noopener" href="https://www.codingdict.com/article/8880">https://www.codingdict.com/article/8880</a></p>
-<p><em>一个简单的例子带你进入pyspark的大门，对！我们的入门程序不是wordcount，也不是hello world。我们不一样、不一样。</em></p>
-<p><em>目标：找到股息率大于3%的行业，将结果输出到指定目录。</em></p>
-<p><a target="_blank" rel="noopener" href="https://www.csdn.net/tags/MtTaYg3sNzU1NC1ibG9n.html">https://www.csdn.net/tags/MtTaYg3sNzU1NC1ibG9n.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/" class="post-title-link" itemprop="url">大数据-Spark</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-Spark/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><a target="_blank" rel="noopener" href="https://spark.apache.org/">https://spark.apache.org/</a></p>
-<p>2009年，Spark诞生于伯克利大学AMPLab，最初属于伯克利大学的研究性项目。</p>
-<p>2010年，正式开源。</p>
-<p>2013年，成为了Apache基金项目，同年，基于spark的开源商业公司Databricks成立。</p>
-<p>2014年，成为Apache基金的顶级项目。</p>
-<p>Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。<br>Spark 是使用 scala 实现的基于内存计算的大数据开源集群计算环境.提供了 java,scala, python,R 等语言的调用接口.</p>
-<p>Spark 运算比 Hadoop 的 MapReduce 框架快原因是：<br>Hadoop 在一次 MapReduce 运算之后,会将数据的运算结果从内存写入到磁盘中,第二次 Mapredue 运算时在从磁盘中读取数据,所以其瓶颈在2次运算间的多余 IO 消耗；<br>Spark 则是将数据一直缓存在内存中,直到计算得到最后的结果,再将结果写入到磁盘；</p>
-<p>大神解读：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34436165">https://zhuanlan.zhihu.com/p/34436165</a></p>
-<ul>
-<li>SparkSQL的进化之路</li>
-</ul>
-<p>1.0以前：  Shark</p>
-<p>1.1.x开始：SparkSQL(只是测试性的) SQL</p>
-<p>1.3.x:     SparkSQL(正式版本)+Dataframe</p>
-<p>1.5.x:     SparkSQL 钨丝计划</p>
-<p>1.6.x：    SparkSQL+DataFrame+DataSet(测试版本)</p>
-<p> 2.x:</p>
-<ul>
-<li>   SparkSQL+DataFrame+DataSet(正式版本)</li>
-<li>   SparkSQL:还有其他的优化</li>
-<li>   StructuredStreaming(DataSet)</li>
-</ul>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>分析统计，实时数据处理，图计算及机器学习</p>
-<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><ul>
-<li>Spark Core</li>
-<li>Spark SQL</li>
-<li>Spark Streaming</li>
-<li>MLlib</li>
-<li>GraphX</li>
-</ul>
-<h1 id="Spark之RDD"><a href="#Spark之RDD" class="headerlink" title="Spark之RDD"></a>Spark之RDD</h1><p>RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。<br>RDD具有数据流模型的特点：自动容错、位置感知性调度和可伸缩性。RDD允许用户在执行多个查询时显式地将工作集缓存在内存中，后续的查询能够重用工作集，这极大地提升了查询速度。</p>
-<ul>
-<li>Partition<br>一组分片（Partition），即数据集的基本组成单位。</li>
-</ul>
-<h2 id="RDD编程API"><a href="#RDD编程API" class="headerlink" title="RDD编程API"></a>RDD编程API</h2><p>Spark支持两个类型（算子）操作：Transformation和Action</p>
-<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qingyunzong/p/8899715.html">https://www.cnblogs.com/qingyunzong/p/8899715.html</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Spark会用到HDFS与YARN，因此请先安装Hadoop</p>
-<p>**第一步:**安装Java JDK 1.7及以上版本，并配置好环境变量。本电脑安装的jdk是1.7.0_79版本的。</p>
-<p>**第二步:**安装Hadoop。本电脑安装的Hadoop是2.7.3版本的。</p>
-<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yhl-yh/p/7651470.html">https://www.cnblogs.com/yhl-yh/p/7651470.html</a></p>
-<h1 id="Spark开发"><a href="#Spark开发" class="headerlink" title="Spark开发"></a>Spark开发</h1><ul>
-<li>scala</li>
-<li>java</li>
-</ul>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="Spark的运行模式"><a href="#Spark的运行模式" class="headerlink" title="Spark的运行模式"></a>Spark的运行模式</h2><ul>
-<li>1.<code>local</code>: 本地单进程模式，用于本地开发测试Spark代码。</li>
-<li>2.<code>standalone</code>:分布式集群模式，Master-Worker架构，Master负责调度，Worker负责具体Task的执行。</li>
-<li>3.<code>on yarn/mesos</code>:运行在yarn/mesos等资源管理框架之上，yarn/mesos提供资源管理，spark提供计算调度，并可与其他计算框架(如MapReduce/MPI/Storm)共同运行在同一个集群之上。</li>
-<li>4.<code>on cloud(EC2)</code>: 运行在AWS的EC2之上</li>
-</ul>
-<h1 id="伪分布式"><a href="#伪分布式" class="headerlink" title="伪分布式"></a><strong>伪分布式</strong></h1><h3 id="从微软镜像站下载"><a href="#从微软镜像站下载" class="headerlink" title="从微软镜像站下载"></a>从微软镜像站下载</h3><p> <a target="_blank" rel="noopener" href="http://mirrors.hust.edu.cn/apache/">http://mirrors.hust.edu.cn/apache/</a></p>
-<h3 id="从清华镜像站下载"><a href="#从清华镜像站下载" class="headerlink" title="从清华镜像站下载"></a>从清华镜像站下载</h3><p> <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache/">https://mirrors.tuna.tsinghua.edu.cn/apache/</a></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#解压包到对应规划目录</span></span><br><span class="line">tar -xvf spark-2.2.1-bin-hadoop2.7.tgz -C /opt/hadoop/apps</span><br><span class="line"><span class="comment">#创建软连接</span></span><br><span class="line"><span class="built_in">ln</span> -s spark-2.2.1-bin-hadoop2.7/ spark</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">export SPARK_HOME=/opt/hadoop/apps/spark-2.2.1-bin-hadoop2.7/</span><br><span class="line">export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置spark-site-xml"><a href="#配置spark-site-xml" class="headerlink" title="配置spark-site.xml"></a>配置spark-site.xml</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp spark-env.sh.template spark-env.sh</span><br><span class="line">vim spark-env.sh</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/opt/hadoop/apps/jdk1.8.0_161</span><br><span class="line">export HADOOP_HOME=/opt/hadoop/apps/hadoop-2.7.1/</span><br><span class="line">export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br><span class="line">export SPARK_MASTER_IP=master</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_WORKER_MEMORY=1G</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动及验证"><a href="#启动及验证" class="headerlink" title="启动及验证"></a>启动及验证</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在spark/sbin目录下执行</span><br><span class="line">./start-all.sh</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="web-UI"><a href="#web-UI" class="headerlink" title="web UI"></a>web UI</h1><h4 id="http-localhost-8080"><a href="#http-localhost-8080" class="headerlink" title="http://localhost:8080/"></a><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></h4><h2 id="spark-shell"><a href="#spark-shell" class="headerlink" title="spark-shell"></a>spark-shell</h2><h4 id="到spark的bin目录下-spark-shell命令查看"><a href="#到spark的bin目录下-spark-shell命令查看" class="headerlink" title="到spark的bin目录下./spark-shell命令查看"></a>到spark的bin目录下./spark-shell命令查看</h4><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="使用spark-shell完成单词统计功能"><a href="#使用spark-shell完成单词统计功能" class="headerlink" title="使用spark-shell完成单词统计功能"></a>使用spark-shell完成单词统计功能</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1142,6 +363,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">动态多线程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2018-03-16T19:21:26+08:00">2018-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="cy_cmt_count" data-xid="2018/03/16/java_space/Java动态多线程/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><h1 id="线程互斥"><a href="#线程互斥" class="headerlink" title="线程互斥"></a>线程互斥</h1><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>1.自定义线程池<br>2.配置spring默认的线程池<br>IntelliJ IDEA - Debug 调试多线程程序</p>
+<h2 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h2><p> 随着cpu核数越来越多，不可避免的利用多线程技术以充分利用其计算能力。所以，多线程技术是服务端开发人员必须掌握的技术。</p>
+<p>线程的创建和销毁，都涉及到系统调用，比较消耗系统资源，所以就引入了线程池技术，避免频繁的线程创建和销毁。</p>
+<p>在Java用有一个Executors工具类，可以为我们创建一个线程池，其本质就是new了一个ThreadPoolExecutor对象。线程池几乎也是面试必考问题。本节结合源代码，说说ThreadExecutor的工作原理</p>
+<h1 id="线程数最优设置"><a href="#线程数最优设置" class="headerlink" title="线程数最优设置"></a>线程数最优设置</h1><p>线程数设置和CPU数的关系<br>在Windows中，在cmd命令中输入“wmic”，然后在出现的新窗口中输入“cpu get *”即可查看物理CPU数、CPU核心数、线程数。其中，<br>　　Name:表示物理CPU数<br>　　NumberOfCores：表示CPU核心数<br>　　NumberOfLogicalProcessors：表示CPU线程数<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liubei/p/coreNumAndProcess.html">https://www.cnblogs.com/liubei/p/coreNumAndProcess.html</a></p>
+<ul>
+<li>如何合理地估算线程池大小？</li>
+</ul>
+<p>比如平均每个线程CPU运行时间为0.5s，而线程等待时间（非CPU运行时间，比如IO）为1.5s，CPU核心数为8，那么根据上面这个公式估算得到：((0.5+1.5)/0.5)<em>8=32。这个公式进一步转化为：<br>最佳线程数目 = （线程等待时间与线程CPU时间之比 + 1）</em> CPU数目</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38128980/answer/75041041">https://www.zhihu.com/question/38128980/answer/75041041</a></p>
+<h2 id="连接池场景"><a href="#连接池场景" class="headerlink" title="连接池场景"></a>连接池场景</h2><p>数据库连接池<br>同步数据<br>日志采集保存</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1226,106 +547,6 @@
 <h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><h2 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h2><p>参考(感谢大佬，仅用于个人学习记录)：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunshine052697/p/7269795.html">https://www.cnblogs.com/sunshine052697/p/7269795.html</a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> study.interview;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Map.Entry;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestEmailFromList</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String[] list = &#123;<span class="string">&quot;qq.com&quot;</span>,<span class="string">&quot;126.com&quot;</span>,<span class="string">&quot;168.com&quot;</span>,<span class="string">&quot;sina.com&quot;</span>,<span class="string">&quot;baidu.com&quot;</span>,<span class="string">&quot;soho.com&quot;</span>,<span class="string">&quot;yeah.net&quot;</span>,<span class="string">&quot;139.com&quot;</span>,<span class="string">&quot;hotmail.com&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="comment">//email存放容器</span></span><br><span class="line">        LinkedList&lt;Email&gt; emailList = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Email&gt;();</span><br><span class="line">        <span class="comment">//统计各类邮箱使用人数容器</span></span><br><span class="line">        Map&lt;String, Integer&gt; mapEmail = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">        <span class="comment">//统计各类邮箱使用人数容器</span></span><br><span class="line">        Map&lt;String, Integer&gt; mapEmailPool = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Integer&gt;();</span><br><span class="line">        Random random=<span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line">        <span class="comment">//email原始邮箱初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">9999</span>; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> random.nextInt(<span class="number">9</span>);</span><br><span class="line">            emailList.add(<span class="keyword">new</span> <span class="title class_">Email</span>(String.valueOf(i+<span class="string">&quot;@&quot;</span>+list[num])));</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">// 单线程统计各类邮箱使用人数</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        TestEmailFromList.countingBySingleThread(emailList, mapEmail); </span><br><span class="line">        <span class="type">long</span> <span class="variable">endTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;单线程统计用时：&quot;</span>+(endTime-startTime));</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//多线程统计各类邮箱使用人数</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime2</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">//用多少个线程</span></span><br><span class="line">        TestEmailFromList.countingByMultiThread(emailList, mapEmailPool);</span><br><span class="line">        <span class="type">long</span> <span class="variable">endTime2</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;多线程统计用时：&quot;</span>+(endTime2-startTime2));</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 单线程统计邮箱使用人数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">countingBySingleThread</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmail)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;emailList.size(); i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> emailList.get(i).getUserName().split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(mapEmail.containsKey(key))&#123;</span><br><span class="line">                <span class="type">int</span>  <span class="variable">value</span> <span class="operator">=</span> mapEmail.get(key);</span><br><span class="line">                mapEmail.put(key, ++value);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                mapEmail.put(key, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printMap(mapEmail);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 多线程统计邮箱使用人数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title function_">countingByMultiThread</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmailPool)</span>&#123;</span><br><span class="line">        <span class="type">ExecutorService</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newCachedThreadPool();</span><br><span class="line">        List&lt;Future&lt;Map&lt;String, Integer&gt;&gt;&gt; resultList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Future&lt;Map&lt;String, Integer&gt;&gt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            LinkedList&lt;Email&gt; eList = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">3</span>)&#123;</span><br><span class="line">                eList = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Email&gt;(emailList.subList(i*<span class="number">2500</span>,(i+<span class="number">1</span>)*<span class="number">2500</span>-<span class="number">1</span>));</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                eList = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Email&gt;(emailList.subList(i*<span class="number">2500</span>,(i+<span class="number">1</span>)*<span class="number">2500</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(eList.getFirst().getUserName()+<span class="string">&quot;----&quot;</span>+eList.getLast().getUserName());</span><br><span class="line">            <span class="comment">//使用ExecutorService执行Callable类型的任务，并将结果保存在future变量中</span></span><br><span class="line">            Future&lt;Map&lt;String, Integer&gt;&gt; future = executorService.submit(<span class="keyword">new</span> <span class="title class_">TaskWithResultMap</span>( eList,mapEmailPool));</span><br><span class="line">            <span class="comment">//将任务执行结果存储到List中</span></span><br><span class="line">            resultList.add(future);</span><br><span class="line">             </span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//遍历任务的结果</span></span><br><span class="line">        <span class="keyword">for</span> (Future&lt;Map&lt;String, Integer&gt;&gt; fs : resultList) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(fs.get());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">                executorService.shutdown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        printMap(mapEmailPool);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 输出map</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printMap</span><span class="params">(Map&lt;String, Integer&gt; mapEmail)</span>&#123;</span><br><span class="line">        Set&lt;Entry&lt;String, Integer&gt;&gt; set = mapEmail.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;String, Integer&gt; entry : set) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;使用&quot;</span>+entry.getKey()+<span class="string">&quot;的人共&quot;</span>+entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskWithResultMap</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;Map&lt;String, Integer&gt;&gt;&#123;</span><br><span class="line">    LinkedList&lt;Email&gt; emailList;</span><br><span class="line">    Map&lt;String, Integer&gt; mapEmailPool;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TaskWithResultMap</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmailPool)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.emailList = emailList;</span><br><span class="line">        <span class="built_in">this</span>.mapEmailPool = mapEmailPool;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, Integer&gt; <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (mapEmailPool) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;emailList.size(); i++) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> emailList.get(i).getUserName().split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span>(mapEmailPool.containsKey(key))&#123;</span><br><span class="line">                    <span class="type">int</span>  <span class="variable">value</span> <span class="operator">=</span> mapEmailPool.get(key);</span><br><span class="line">                    mapEmailPool.put(key, ++value);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    mapEmailPool.put(key, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mapEmailPool;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">    LinkedList&lt;Email&gt; emailList;</span><br><span class="line">    Map&lt;String, Integer&gt; mapEmailPool;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyThread</span><span class="params">(LinkedList&lt;Email&gt; emailList,Map&lt;String, Integer&gt; mapEmailPool)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.emailList = emailList;</span><br><span class="line">        <span class="built_in">this</span>.mapEmailPool = mapEmailPool;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (mapEmailPool) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;emailList.size(); i++) &#123;</span><br><span class="line">                        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> emailList.get(i).getUserName().split(<span class="string">&quot;@&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">if</span>(mapEmailPool.containsKey(key))&#123;</span><br><span class="line">                            <span class="type">int</span>  <span class="variable">value</span> <span class="operator">=</span> mapEmailPool.get(key);</span><br><span class="line">                            mapEmailPool.put(key, ++value);</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            mapEmailPool.put(key, <span class="number">1</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                         </span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+<span class="string">&quot;异常&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                 </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Email</span> &#123;</span><br><span class="line">    String username;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Email</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Email</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUserName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">动态多线程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2018-03-16T19:21:26+08:00">2018-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="cy_cmt_count" data-xid="2018/03/16/java_space/Java动态多线程/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><h1 id="线程互斥"><a href="#线程互斥" class="headerlink" title="线程互斥"></a>线程互斥</h1><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>1.自定义线程池<br>2.配置spring默认的线程池<br>IntelliJ IDEA - Debug 调试多线程程序</p>
-<h2 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h2><p> 随着cpu核数越来越多，不可避免的利用多线程技术以充分利用其计算能力。所以，多线程技术是服务端开发人员必须掌握的技术。</p>
-<p>线程的创建和销毁，都涉及到系统调用，比较消耗系统资源，所以就引入了线程池技术，避免频繁的线程创建和销毁。</p>
-<p>在Java用有一个Executors工具类，可以为我们创建一个线程池，其本质就是new了一个ThreadPoolExecutor对象。线程池几乎也是面试必考问题。本节结合源代码，说说ThreadExecutor的工作原理</p>
-<h1 id="线程数最优设置"><a href="#线程数最优设置" class="headerlink" title="线程数最优设置"></a>线程数最优设置</h1><p>线程数设置和CPU数的关系<br>在Windows中，在cmd命令中输入“wmic”，然后在出现的新窗口中输入“cpu get *”即可查看物理CPU数、CPU核心数、线程数。其中，<br>　　Name:表示物理CPU数<br>　　NumberOfCores：表示CPU核心数<br>　　NumberOfLogicalProcessors：表示CPU线程数<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liubei/p/coreNumAndProcess.html">https://www.cnblogs.com/liubei/p/coreNumAndProcess.html</a></p>
-<ul>
-<li>如何合理地估算线程池大小？</li>
-</ul>
-<p>比如平均每个线程CPU运行时间为0.5s，而线程等待时间（非CPU运行时间，比如IO）为1.5s，CPU核心数为8，那么根据上面这个公式估算得到：((0.5+1.5)/0.5)<em>8=32。这个公式进一步转化为：<br>最佳线程数目 = （线程等待时间与线程CPU时间之比 + 1）</em> CPU数目</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38128980/answer/75041041">https://www.zhihu.com/question/38128980/answer/75041041</a></p>
-<h2 id="连接池场景"><a href="#连接池场景" class="headerlink" title="连接池场景"></a>连接池场景</h2><p>数据库连接池<br>同步数据<br>日志采集保存</p>
 
       
     </div>
@@ -1479,10 +700,725 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/" class="post-title-link" itemprop="url">数据仓库-离线数仓</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-01 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-01T00:18:18+08:00">2018-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/" class="cy_cmt_count" data-xid="2018/03/01/大数据/数据仓库-离线数仓/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165963780">https://zhuanlan.zhihu.com/p/165963780</a></p>
+<p><img src="/2018/03/01/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E7%A6%BB%E7%BA%BF%E6%95%B0%E4%BB%93/v2-61df03fbf73fb2d5bf4cace5df248a81_1440w.jpg" alt="《数据仓库篇》——离线数仓数据链路和组件"></p>
+<p>离线数仓</p>
+<p>储存主要是在hadoop的HDFS中，实际仓库管理是HIVE</p>
+<p>维度数据</p>
+<ul>
+<li>日维度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：日维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：1990-01-01 到 2050-12-31</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        date_add(&quot;1990-01-01&quot;, a.pos) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2050-12-31&quot;, &quot;1990-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_day</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> date_id,</span><br><span class="line">    date_code <span class="keyword">as</span> date_code,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> date_name,</span><br><span class="line">    <span class="keyword">year</span>(date_sub(next_day(date_code, <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_code) <span class="keyword">as</span> week_id,</span><br><span class="line">    substr(regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="number">1</span>, <span class="number">6</span>) <span class="keyword">as</span> month_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> season_id,</span><br><span class="line">    <span class="keyword">year</span>(date_code) <span class="keyword">as</span> year_id,</span><br><span class="line">    regexp_replace(date_add(date_code, <span class="number">-1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> pre_date_id,</span><br><span class="line">    regexp_replace(date_add(date_code, <span class="number">1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> after_date_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> is_workday,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> un_workday_name,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时段维度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：时段维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：凌晨 到 下班时间</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> dim_date_hour <span class="keyword">partition</span>(ds <span class="operator">=</span> <span class="string">&#x27;1&#x27;</span>) <span class="keyword">values</span></span><br><span class="line">(<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;深夜到凌晨&#x27;</span>,<span class="string">&#x27;00:00:00&#x27;</span>,<span class="string">&#x27;06:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;6&#x27;</span>,<span class="string">&#x27;清晨&#x27;</span>,<span class="string">&#x27;06:00:00&#x27;</span>,<span class="string">&#x27;09:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;9&#x27;</span>,<span class="string">&#x27;上午&#x27;</span>,<span class="string">&#x27;09:00:00&#x27;</span>,<span class="string">&#x27;12:30:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;12&#x27;</span>,<span class="string">&#x27;午休时间&#x27;</span>,<span class="string">&#x27;12:30:00&#x27;</span>,<span class="string">&#x27;14:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;14&#x27;</span>,<span class="string">&#x27;下午&#x27;</span>,<span class="string">&#x27;14:00:00&#x27;</span>,<span class="string">&#x27;18:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>)),</span><br><span class="line">(<span class="string">&#x27;18&#x27;</span>,<span class="string">&#x27;下班时间&#x27;</span>,<span class="string">&#x27;18:00:00&#x27;</span>,<span class="string">&#x27;24:00:00&#x27;</span>,<span class="string">&#x27;&#x27;</span>,from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>月维度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：月维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年1月 到 2300年1月</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        add_months(&quot;2000-01-01&quot;, a.pos) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2010-01-31&quot;, &quot;2000-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_month</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    substr(regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="number">1</span>, <span class="number">4</span>) <span class="keyword">as</span> year_id,</span><br><span class="line">    substr(regexp_replace(date_code, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>), <span class="number">1</span>, <span class="number">6</span>) <span class="keyword">as</span> month_id,</span><br><span class="line">    substr(date_code, <span class="number">1</span>, <span class="number">7</span>) <span class="keyword">as</span> month_code,</span><br><span class="line">    substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="keyword">as</span> month_short_code,</span><br><span class="line">    concat(<span class="keyword">year</span>(date_code), <span class="string">&#x27;年&#x27;</span>, substr(date_code, <span class="number">6</span>, <span class="number">2</span>), <span class="string">&#x27;月&#x27;</span>) <span class="keyword">as</span> month_name,</span><br><span class="line">    concat(substr(date_code, <span class="number">6</span>, <span class="number">2</span>), <span class="string">&#x27;月&#x27;</span>) <span class="keyword">as</span> month_short_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> month_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(last_day(date_code)),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(last_day(date_code), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(last_day(date_code), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> month_last_date,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">-1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">1</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> after_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">-12</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_year_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">12</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> after_year_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">-3</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_month_id,</span><br><span class="line">    substr(</span><br><span class="line">        regexp_replace(add_months(date_code, <span class="number">3</span>), <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="number">1</span>,</span><br><span class="line">        <span class="number">6</span></span><br><span class="line">    ) <span class="keyword">as</span> after_season_month_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>季维度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：季维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年第1季度 到 2460年第1季度</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        add_months(&quot;2000-01-01&quot;, a.pos <span class="operator">*</span> <span class="number">3</span>) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2005-01-31&quot;, &quot;2000-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_season</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;Q&#x27;</span>,</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> season_code,</span><br><span class="line">    concat(<span class="string">&#x27;Q&#x27;</span>, <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span>) <span class="keyword">as</span> season_short_code,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年第&#x27;</span>,</span><br><span class="line">        <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span>,</span><br><span class="line">        <span class="string">&#x27;季度&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> season_name,</span><br><span class="line">    concat(<span class="string">&#x27;第&#x27;</span>, <span class="built_in">floor</span>(substr(date_code, <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span>, <span class="string">&#x27;季度&#x27;</span>) <span class="keyword">as</span> season_short_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> season_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(last_day(add_months(date_code, <span class="number">2</span>))),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">2</span>)), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">2</span>)), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> season_last_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">-1</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">-1</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">3</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">3</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> after_season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">-12</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">-12</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(add_months(date_code, <span class="number">12</span>)),</span><br><span class="line">        <span class="built_in">floor</span>(substr(add_months(date_code, <span class="number">12</span>), <span class="number">6</span>, <span class="number">2</span>) <span class="operator">/</span> <span class="number">3.1</span>) <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">    ) <span class="keyword">as</span> pre_season_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>周维度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：周维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年第1周 到 2070年第29周</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        date_add(&quot;2000-01-03&quot;, a.pos <span class="operator">*</span> <span class="number">7</span>) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2010-01-31&quot;, &quot;2000-01-03&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_week</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    <span class="keyword">year</span>(date_sub(next_day(date_code, <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_code) <span class="keyword">as</span> week_id,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_sub(next_day(date_code, <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)),</span><br><span class="line">        <span class="string">&#x27;年第&#x27;</span>,</span><br><span class="line">        substr(<span class="number">100</span> <span class="operator">+</span> weekofyear(date_code), <span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;周&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> week_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> week_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_add(date_code, <span class="number">6</span>)),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_add(date_code, <span class="number">6</span>), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_add(date_code, <span class="number">6</span>), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> week_last_date,</span><br><span class="line">    <span class="keyword">year</span>(</span><br><span class="line">        date_sub(next_day(date_add(date_code, <span class="number">-1</span>), <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)</span><br><span class="line">    ) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_add(date_code, <span class="number">-1</span>)) <span class="keyword">as</span> pre_week_id,</span><br><span class="line">    <span class="keyword">year</span>(date_sub(next_day(date_add(date_code, <span class="number">7</span>), <span class="string">&#x27;MO&#x27;</span>), <span class="number">4</span>)) <span class="operator">*</span> <span class="number">100</span> <span class="operator">+</span> weekofyear(date_add(date_code, <span class="number">7</span>)) <span class="keyword">as</span> after_week_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>年维度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* 日期维度表：年维度</span></span><br><span class="line"><span class="comment">* 调度：暂停调度</span></span><br><span class="line"><span class="comment">* 时间：2000年 到 2396年</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">create</span> temporary <span class="keyword">table</span> dates <span class="keyword">as</span> (</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        add_months(&quot;2000-01-01&quot;, a.pos <span class="operator">*</span> <span class="number">12</span>) <span class="keyword">as</span> date_code</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        (</span><br><span class="line">            <span class="keyword">select</span></span><br><span class="line">                posexplode(</span><br><span class="line">                    split(</span><br><span class="line">                        repeat(&quot;o&quot;, datediff(&quot;2001-01-31&quot;, &quot;2000-01-01&quot;)),</span><br><span class="line">                        &quot;o&quot;</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        ) a</span><br><span class="line">);<span class="keyword">insert</span> overwrite <span class="keyword">table</span> dim_date_year</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">    <span class="keyword">year</span>(date_code) <span class="keyword">as</span> year_id,</span><br><span class="line">    concat(<span class="keyword">year</span>(date_code), <span class="string">&#x27;年&#x27;</span>) <span class="keyword">as</span> year_name,</span><br><span class="line">    concat(substr(date_code, <span class="number">3</span>, <span class="number">2</span>), <span class="string">&#x27;年&#x27;</span>) <span class="keyword">as</span> year_short_name,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(date_code),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(date_code, <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> year_first_date,</span><br><span class="line">    concat(</span><br><span class="line">        <span class="keyword">year</span>(last_day(add_months(date_code, <span class="number">11</span>))),</span><br><span class="line">        <span class="string">&#x27;年&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">11</span>)), <span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;月&#x27;</span>,</span><br><span class="line">        substr(last_day(add_months(date_code, <span class="number">11</span>)), <span class="number">9</span>, <span class="number">2</span>),</span><br><span class="line">        <span class="string">&#x27;日&#x27;</span></span><br><span class="line">    ) <span class="keyword">as</span> year_last_date,</span><br><span class="line">    <span class="keyword">year</span>(add_months(date_code, <span class="number">-1</span>)) <span class="keyword">as</span> pre_year_id,</span><br><span class="line">    <span class="keyword">year</span>(add_months(date_code, <span class="number">12</span>)) <span class="keyword">as</span> after_year_id,</span><br><span class="line">    <span class="string">&#x27;&#x27;</span> <span class="keyword">as</span> data_source,</span><br><span class="line">    from_unixtime(unix_timestamp(), <span class="string">&#x27;yyyy-MM-dd HH:dd:ss&#x27;</span>) <span class="keyword">as</span> created_time</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">    dates</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">    date_code;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="数仓术语"><a href="#数仓术语" class="headerlink" title="数仓术语"></a>数仓术语</h1><ol>
+<li>实体</li>
+<li>维度</li>
+<li>度量</li>
+<li>粒度</li>
+<li>口径</li>
+<li>指标</li>
+<li>标签</li>
+<li>自然键（主键）</li>
+<li>持久键（例如身份证）</li>
+<li>代理键</li>
+<li>退化维度</li>
+<li>下钻</li>
+<li>上卷</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Flink-环境搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-28 20:18:18" itemprop="dateCreated datePublished" datetime="2018-02-28T20:18:18+08:00">2018-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/02/28/flink_space/flink-环境搭建/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
+<p>Flink</p>
+<p><img src="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png"></p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>前提条件：需先安装zookeeper与hadoop</p>
+<p>zookeeper安装</p>
+<p>hadoop安装</p>
+<p>机器配置<br>3台 linux centos7（虚拟机即可）<br>修改主机名、固定ip<br>免密<br>安装jdk</p>
+<ul>
+<li>hadoop1: 4g内存 2核 80g硬盘 作为master节点</li>
+<li>hadoop2 1g内存 1核 8g硬盘 作为slave节点</li>
+<li>hadoop3: 1g内存 1核 8g硬盘 作为slave节点</li>
+</ul>
+<h1 id="Flink版本"><a href="#Flink版本" class="headerlink" title="Flink版本"></a>Flink版本</h1><p><a target="_blank" rel="noopener" href="https://flink.apache.org/downloads.html">https://flink.apache.org/downloads.html</a></p>
+<p>首先我需要清楚flink会使用到哪些工具，最好了解相关软件之间的依赖版本。</p>
+<p>下面主要针对flink1.7说明相关工具</p>
+<ul>
+<li>jdk 1.8+</li>
+<li>scala 2.1.1</li>
+<li>maven 3.0.4+</li>
+<li>hadoop 2.4\2.6\2.7\2.8</li>
+<li>flink 1.7</li>
+</ul>
+<h1 id="Flink单机安装"><a href="#Flink单机安装" class="headerlink" title="Flink单机安装"></a>Flink单机安装</h1><p>Flink 有三种部署模式，分别是 Local、Standalone Cluster 和 Yarn Cluster。</p>
+<ul>
+<li>Local模式</li>
+</ul>
+<p>对于 Local 模式来说，JobManager 和 TaskManager 会公用一个 JVM 来完成 Workload。如果要验证一个简单的应用，Local 模式是最方便的。实际应用中大多使用 Standalone 或者 Yarn Cluster，而local模式只是将安装包解压启动（./bin/start-local.sh 或 ./bin/start-cluster.sh）即可，在这里不在演示。</p>
+<ul>
+<li><p>Standalone 模式</p>
+</li>
+<li><p>Flink 的 HA</p>
+</li>
+</ul>
+<p>首先，我们需要知道 Flink 有两种部署的模式，分别是 Standalone 以及 Yarn Cluster 模式。对于 Standalone 来说，Flink 必须依赖于 Zookeeper 来实现 JobManager 的 HA（Zookeeper 已经成为了大部分开源框架 HA 必不可少的模块）。在 Zookeeper 的帮助下，一个 Standalone 的 Flink 集群会同时有多个活着的 JobManager，其中只有一个处于工作状态，其他处于 Standby 状态。当工作中的 JobManager 失去连接后（如宕机或 Crash），Zookeeper 会从 Standby 中选举新的 JobManager 来接管 Flink 集群。</p>
+<p>对于 Yarn Cluaster 模式来说，Flink 就要依靠 Yarn 本身来对 JobManager 做 HA 了。其实这里完全是 Yarn 的机制。对于 Yarn Cluster 模式来说，JobManager 和 TaskManager 都是被 Yarn 启动在 Yarn 的 Container 中。此时的 JobManager，其实应该称之为 Flink Application Master。也就说它的故障恢复，就完全依靠着 Yarn 中的 ResourceManager（和 MapReduce 的 AppMaster 一样）。由于完全依赖了 Yarn，因此不同版本的 Yarn 可能会有细微的差异。这里不再做深究。</p>
+<h2 id="单节点安装-mac环境"><a href="#单节点安装-mac环境" class="headerlink" title="单节点安装(mac环境)"></a>单节点安装(mac环境)</h2><p>Mac上安装flink，推荐通过 homebrew 来安装（一条命令完成）：</p>
+<p><code>brew install apache-flink</code></p>
+<ul>
+<li><p>下载安装，或离线安装（下载压缩包），略</p>
+</li>
+<li><p>启动</p>
+</li>
+</ul>
+<p>查看flink安装信息</p>
+<p><code>brew info apache-flink</code><br>例如：安装目录为：<br>/opt/homebrew/Cellar/apache-flink/1.12.2</p>
+<p>bin  目录</p>
+<p>/opt/homebrew/Cellar/apache-flink/1.12.2/libexec/bin</p>
+<p>启动</p>
+<p>./libexec/bin/start-cluster.sh</p>
+<p>启动flink sql</p>
+<p>sql-client.sh embedded</p>
+<ul>
+<li>访问web页面</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a></p>
+<ul>
+<li>重装</li>
+</ul>
+<h1 id="Flink集群部署"><a href="#Flink集群部署" class="headerlink" title="Flink集群部署"></a>Flink集群部署</h1><p>目前 Flink 支持多种部署模式：本地、集群（Standalone / YARN）、云（GCE / EC2）、kubenetes。</p>
+<p><img src="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.jpg"></p>
+<p>下面主要记录一下flink on yarn模式部署</p>
+<h2 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h2><p>Standalone Cluster 和 Yarn Cluster<br>Flink的Standalone和on Yarn模式都属于集群运行模式，但是有很大的不同，在实际环境中，使用Flink on Yarn模式者居多。</p>
+<pre><code>Local——本地单机模式，学习测试使用
+Standlone——独立集群模式，flink自带集群，学习测试使用
+standloneHA——独立集群的高可用模式，flink自带集群，开发测试使用
+On Yarn——计算机资源同意由Hadoop Yarn管理，生产模式使用
+</code></pre>
+<p>###Standalone Cluster<br>Master-Slave架构，JobManager运行在Master节点，TaskManager运行在Slave节点，与HDFS/Hadoop无关</p>
+<p>Active JobManager挂掉时，通过Zookeeper选举多个Standby JobManager成为Active JobManager来保证高可用</p>
+<p>Standalone Cluster HA<br>由于jobmanager的HA配置依赖于zookeeper，因此，需要先配置zookeeper<br>而且，由于Flink的state backend要依赖hdfs，因此，要部署hdfs</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lmalds/article/details/52981042">https://blog.csdn.net/lmalds/article/details/52981042</a><br>###Yarn Cluster</p>
+<ul>
+<li>Flink yarn session</li>
+<li>Flink run</li>
+</ul>
+<p>yarn-session.sh –help</p>
+<p>在配置HA前，先通过-q看一下我的yarn集群的资源情况：</p>
+<p>yarn-session.sh –q</p>
+<h3 id="Flink-on-Yarn-HA-配置（4步）"><a href="#Flink-on-Yarn-HA-配置（4步）" class="headerlink" title="Flink on Yarn HA 配置（4步）"></a>Flink on Yarn HA 配置（4步）</h3><p>1、配置准备<br>在配置Flink On Yarn之前，必须保证hdfs和yarn都已经开启，可以通过$HADOOP_HOME/sbin/start-all.sh启动hdfs和yarn。<br>2、配置AM在尝试重启的最大次数（yarn-site.xml）<br>3、配置Application Attempts（flink-conf.yaml）<br>4、配置zookeeper信息</p>
+<ul>
+<li>启动</li>
+</ul>
+<p>默认<br>bin/yarn-session.sh</p>
+<p>启动一个yarn-session有2个Taskmanager，jobmanager内存2GB，taskManager2GB内存</p>
+<p>./bin/yarn-session.sh -n 2 -jm 1024 -tm 1024</p>
+<h1 id="Flink本地环境搭建（待整合）"><a href="#Flink本地环境搭建（待整合）" class="headerlink" title="Flink本地环境搭建（待整合）"></a>Flink本地环境搭建（待整合）</h1><p>学习Flink需要对Hadoop和Strom有所了解</p>
+<p>Hadoop实现了MapReduce需要Map和Reduce</p>
+<p>Strom实现了Topology，需要Spout和Bolt</p>
+<p>Hadoop认识与安装</p>
+<p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/hadoop/">https://www.w3cschool.cn/hadoop/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fanxin_i/article/details/80425461">https://blog.csdn.net/fanxin_i/article/details/80425461</a></p>
+<p>我的记录时间：20201218</p>
+<p>Apache Flink® 1.12.0 是我们最新的稳定版本。</p>
+<p>运行部署</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ldsweely/p/12033590.html">https://www.cnblogs.com/ldsweely/p/12033590.html</a></p>
+<h1 id="Apache-Flink-仪表板"><a href="#Apache-Flink-仪表板" class="headerlink" title="Apache Flink 仪表板"></a>Apache Flink 仪表板</h1><p><img src="/2018/02/28/flink_space/flink-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.jpg"></p>
+<h2 id="Overview-概述"><a href="#Overview-概述" class="headerlink" title="Overview(概述)"></a>Overview(概述)</h2><h2 id="Jobs（工作任务）"><a href="#Jobs（工作任务）" class="headerlink" title="Jobs（工作任务）"></a>Jobs（工作任务）</h2><p>这里主要包含运行中和已完成的任务</p>
+<h2 id="Task-Managers（定时任务管理）"><a href="#Task-Managers（定时任务管理）" class="headerlink" title="Task Managers（定时任务管理）"></a>Task Managers（定时任务管理）</h2><h2 id="Job-Manager（任务管理）"><a href="#Job-Manager（任务管理）" class="headerlink" title="Job Manager（任务管理）"></a>Job Manager（任务管理）</h2><h2 id="Submit-New-Job（提交新工作任务）"><a href="#Submit-New-Job（提交新工作任务）" class="headerlink" title="Submit New Job（提交新工作任务）"></a>Submit New Job（提交新工作任务）</h2><h1 id="运维-开发"><a href="#运维-开发" class="headerlink" title="运维+开发"></a>运维+开发</h1><p>#杂<br>最简单的部署<br>直接单包解压（配置环境变量）启动<br>./start-cluster.sh </p>
+<p>FLINK HADOOP_CLASSPATH设置，集成hadoop<br>如果配置flink启动引入hadoop路径，这样可以省去引入hadoop相关包，但是这样容易生产包冲突（flink和hadoop都存在这个包）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33358554/article/details/110918177">https://blog.csdn.net/qq_33358554/article/details/110918177</a></p>
+<p>scp -r <del>/soft/flink/flink-1.10.0  hadoop@hadoop3:</del>/soft/flink/</p>
+<ul>
+<li>flink1.10 在yarn上运行job报内存超出-问题排查</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ASN_forever/article/details/106372923"></a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/flink_space/flink%20ML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/29/flink_space/flink%20ML/" class="post-title-link" itemprop="url">Flink ML</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-29T20:18:18+08:00">2018-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-24 13:15:04" itemprop="dateModified" datetime="2024-05-24T13:15:04+08:00">2024-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/29/flink_space/flink%20ML/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/29/flink_space/flink%20ML/" class="cy_cmt_count" data-xid="2018/01/29/flink_space/flink ML/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Flink<br><img src="/2018/01/29/flink_space/flink%20ML/2.png" style="zoom:80%"> </p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
+<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
+<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
+<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
+<h1 id="Flink-ML"><a href="#Flink-ML" class="headerlink" title="Flink ML"></a>Flink ML</h1><h3 id="机器学习及flinkML算法"><a href="#机器学习及flinkML算法" class="headerlink" title="机器学习及flinkML算法"></a><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0&spm=1001.2101.3001.7020">机器学习</a>及flinkML算法</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/healthsun/article/details/90669798">https://blog.csdn.net/healthsun/article/details/90669798</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/flink_space/flink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/29/flink_space/flink/" class="post-title-link" itemprop="url">Flink</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-29T20:18:18+08:00">2018-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/29/flink_space/flink/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/29/flink_space/flink/" class="cy_cmt_count" data-xid="2018/01/29/flink_space/flink/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
+<p>Flink</p>
+<p><img src="/2018/01/29/flink_space/flink/2.png"></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
+<p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
+<p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
+<p>2019年1月 阿里巴巴开源Flink分支项目Blink</p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/">https://flink.apache.org/</a></p>
+<p><a target="_blank" rel="noopener" href="https://flink.apache.org/zh/">https://flink.apache.org/zh/</a></p>
+<h1 id="Flink计算引擎，到底计算了什么？"><a href="#Flink计算引擎，到底计算了什么？" class="headerlink" title="Flink计算引擎，到底计算了什么？"></a>Flink计算引擎，到底计算了什么？</h1><p>我们一只说Flink是一种计算引擎，那实际在计算什么呢？</p>
+<p>计算框架已经从第一代的雅虎开源的Hadoop体系进化到目前主流的Spark框架，到现在的Flink。<br>前面两套框架的计算主要是从强依赖硬盘存储能力的计算发展到了内存计算，大大增强了计算力。下一代计算引擎，也就是第三代计算引擎Flink</p>
+<p>流计算<br><a target="_blank" rel="noopener" href="https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457">https://gitchat.csdn.net/activity/5ca332d3d021d11a4ec5b457</a></p>
+<h1 id="应用场景（有流数据的地方就可以用flink）"><a href="#应用场景（有流数据的地方就可以用flink）" class="headerlink" title="应用场景（有流数据的地方就可以用flink）"></a>应用场景（有流数据的地方就可以用flink）</h1><p>简单举几个例子，大数据处理可适用在在如下一些场景:</p>
+<pre><code>医疗大数据、看病更高效(病例病理分析、基因数据分析)
+电商大数据、精准营销法宝(杀熟、哈哈哈哈或)
+零售大数据、最懂消费者(用户画像，精准推送)
+金融大数据、理财利器 (大数据选股)
+交通大数据、畅通出行 (城市大脑)
+</code></pre>
+<ul>
+<li>事件驱动型应用</li>
+<li>数据分析应用</li>
+<li>数据管道应用</li>
+</ul>
+<ol>
+<li>事件驱动型应用<br>典型的事件驱动型应用实例</li>
+</ol>
+<ul>
+<li>反欺诈</li>
+<li>异常检测</li>
+<li>基于规则的报警</li>
+<li>业务流程监控</li>
+<li>（社交网络）Web 应用</li>
+</ul>
+<ol start="2">
+<li>数据分析应用<br>典型的数据分析应用实例</li>
+</ol>
+<ul>
+<li>电信网络质量监控</li>
+<li>移动应用中的产品更新及实验评估分析</li>
+<li>消费者技术中的实时数据即席分析</li>
+<li>大规模图分析</li>
+</ul>
+<ol start="3">
+<li>数据管道应用<br>典型的数据管道应用实例</li>
+</ol>
+<ul>
+<li>电子商务中的实时查询索引构建</li>
+<li>电子商务中的持续 ETL</li>
+</ul>
+<h1 id="Apache-Flink-仪表板"><a href="#Apache-Flink-仪表板" class="headerlink" title="Apache Flink 仪表板"></a>Apache Flink 仪表板</h1><p><img src="/2018/01/29/flink_space/flink/2-16470735025064.jpg"></p>
+<h2 id="Overview-概述"><a href="#Overview-概述" class="headerlink" title="Overview(概述)"></a>Overview(概述)</h2><h2 id="Jobs（工作任务）"><a href="#Jobs（工作任务）" class="headerlink" title="Jobs（工作任务）"></a>Jobs（工作任务）</h2><p>这里主要包含运行中和已完成的任务</p>
+<h2 id="Task-Managers（定时任务管理）"><a href="#Task-Managers（定时任务管理）" class="headerlink" title="Task Managers（定时任务管理）"></a>Task Managers（定时任务管理）</h2><h2 id="Job-Manager（任务管理）"><a href="#Job-Manager（任务管理）" class="headerlink" title="Job Manager（任务管理）"></a>Job Manager（任务管理）</h2><h2 id="Submit-New-Job（提交新工作任务）"><a href="#Submit-New-Job（提交新工作任务）" class="headerlink" title="Submit New Job（提交新工作任务）"></a>Submit New Job（提交新工作任务）</h2><h1 id="运维-开发"><a href="#运维-开发" class="headerlink" title="运维+开发"></a>运维+开发</h1><p>#杂<br>最简单的部署<br>直接单包解压（配置环境变量）启动<br>./start-cluster.sh </p>
+<p>FLINK HADOOP_CLASSPATH设置，集成hadoop<br>如果配置flink启动引入hadoop路径，这样可以省去引入hadoop相关包，但是这样容易生产包冲突（flink和hadoop都存在这个包）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33358554/article/details/110918177">https://blog.csdn.net/qq_33358554/article/details/110918177</a></p>
+<p>scp -r <del>/soft/flink/flink-1.10.0  hadoop@hadoop3:</del>/soft/flink/</p>
+<h1 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h1><p>windows&amp;time</p>
+<p>先说需求场景：<br>每天凌晨2点统计前一天的订单量<br>每个整点统计前24小时的总发货量</p>
+<p>实际数据：<br>例如，一条日志进入Flink的时间为2021-01-22 10:00:00.123，到达Window的系统时间为2021-01-22 10:00:01.234，日志的内容如下：<br>2021-01-06 18:37:15.624 INFO Fail over to rm2</p>
+<h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><p>划分窗口就两种方式：</p>
+<p>根据时间进行截取(time-driven-window)，比如每1分钟统计一次或每10分钟统计一次。<br>根据数据进行截取(data-driven-window)，比如每5个数据统计一次或每50个数据统计一次。</p>
+<h3 id="时间窗口"><a href="#时间窗口" class="headerlink" title="时间窗口"></a>时间窗口</h3><p>滚动窗口</p>
+<p>适用场景：适合做BI统计等（做每个时间段的聚合计算）。</p>
+<p>滑动窗口<br>适用场景：对最近一个时间段内的统计（求某接口最近5min的失败率来决定是否要报警）。</p>
+<p>会话窗口<br>计算每个用户在活跃期间总共购买的商品数量，还可以用于判断用户会话是否失效</p>
+<h3 id="计数窗口"><a href="#计数窗口" class="headerlink" title="计数窗口"></a>计数窗口</h3><h2 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h2><p>第一秒数据产生（t1），经过消息队列后在第二秒数据到达处理系统（t2），第三秒数据被处理完毕（t3）。那么这三个时间点就有了三个不同的含义。第一秒代表数据发生时间，第二秒代表数据摄取抑或是到达时间，第三秒代表数据被处理的时间。而这也是Flink的三种时间模式。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yjmyzz/p/flink-3-window.html">https://www.cnblogs.com/yjmyzz/p/flink-3-window.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/346960667">https://zhuanlan.zhihu.com/p/346960667</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/feiyun126/p/15069033.html">https://www.cnblogs.com/feiyun126/p/15069033.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lp284558195/article/details/103802738">https://blog.csdn.net/lp284558195/article/details/103802738</a></p>
+<p>触发器</p>
+<p>trigger触发器接口有五个方法允许trigger对不同的事件做出反应：</p>
+<p>onElement()进入窗口的每个元素都会调用该方法。</p>
+<p>onEventTime()事件时间timer触发的时候被调用。</p>
+<p>onProcessingTime()处理时间timer触发的时候会被调用。</p>
+<p>onMerge()有状态的触发器相关，并在它们相应的窗口合并时合并两个触发器的状态，例如使用会话窗口。</p>
+<p>clear()该方法主要是执行窗口的删除操作。</p>
+<p>内置和自定义触发器<br>Flink带有一些内置触发器。</p>
+<p>EventTimeTrigger基于事件时间和watermark机制来对窗口进行触发计算。</p>
+<p>ProcessingTimeTrigger基于处理时间触发。</p>
+<p>CountTrigger窗口元素数超过预先给定的限制值的话会触发计算。</p>
+<p>PurgingTrigger作为其它trigger的参数，将其转化为一个purging触发器。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Storm环境搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-29 20:18:18" itemprop="dateCreated datePublished" datetime="2018-01-29T20:18:18+08:00">2018-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="cy_cmt_count" data-xid="2018/01/29/大数据/Storm环境搭建/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
+<p>为了学习Flink，首先也了解一下Storm</p>
+<p><img src="/2018/01/29/%E5%A4%A7%E6%95%B0%E6%8D%AE/Storm%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png"></p>
+<h1 id="Storm是什么？"><a href="#Storm是什么？" class="headerlink" title="Storm是什么？"></a>Storm是什么？</h1><p>Storm是一个流式计算框架，数据源源不断的产生，源源不断的收集，源源不断的计算。<br>（数据实时产生、实时传输、实时计算、实时展示）<br>Storm只负责数据的计算，不负责数据的存储。</p>
+<h1 id="实时计算在计算什么？"><a href="#实时计算在计算什么？" class="headerlink" title="实时计算在计算什么？"></a>实时计算在计算什么？</h1><p>所谓”实时计算”，应该叫”实时流计算”，如果不知道实时计算在计算什么，首先要知道流计算是什么？</p>
+<ul>
+<li><p>流计算<br>在传统的数据处理流程中，总是先收集数据，然后将数据放到数据库中。当人们需要的时候通过数据库对数据做查询，得到答案或进行相关的处理。<br>这样看起来虽然非常合理，但是结果却非常的紧凑，尤其是在一些实时搜索应用环境中的某些具体问题，类似于MapReduce方式的离线处理并不能很好地解决问题。<br>这就引出了一种新的数据计算结构—流计算方式。</p>
+</li>
+<li><p>实时流计算<br>其实实时计算主要是基于流数据进行统计分析，例如不间断、按窗口统计分析，对实时的数据流持续的进行查询或计算。<br>可以很好地对大规模流动数据在不断变化的运动过程中实时地进行分析，捕捉到可能有用的信息，并把结果发送到下一计算节点。</p>
+</li>
+</ul>
+<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>实时处理消息以及更新数据库，基于最基础的实时计算语义和API（实时数据处理领域）；<br>基于最基础的实时计算语义和API（实时数据分析领域）；</p>
+<h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><p><a target="_blank" rel="noopener" href="http://storm.apache.org/">http://storm.apache.org/</a></p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>storm是依赖于zookeeper的,搭建storm集群前,必须先把zookeeper集群搭建好</p>
+<ol>
+<li>新建用户</li>
+<li>设置免密登录</li>
+<li>软件包下载</li>
+<li>安装JDK</li>
+<li>安装zookeeper</li>
+<li>安装Storm</li>
+<li>启动<br><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a></li>
+</ol>
+<p>可参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/followees/p/8998551.html">https://www.cnblogs.com/followees/p/8998551.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1550,7 +1486,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">225</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
