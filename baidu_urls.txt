@@ -1,1 +1,1 @@
-https://space.zane56stars.xyz/2023/07/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse%E6%90%AD%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/
+https://space.zane56stars.xyz/2023/08/29/%E4%BD%BF%E7%94%A8Prometheus+Grafana%E7%9B%91%E6%8E%A7Flink%20on%20YARN%E4%BD%9C%E4%B8%9A/

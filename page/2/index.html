@@ -174,6 +174,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2022/01/16/java_space/Java-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8EDrools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/16/java_space/Java-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8EDrools/" class="post-title-link" itemprop="url">Java-规则引擎Drools</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-16 22:21:26" itemprop="dateCreated datePublished" datetime="2022-01-16T22:21:26+08:00">2022-01-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2022/01/16/java_space/Java-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8EDrools/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::https://space.zane56stars.xyz/2022/01/16/java_space/Java-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8EDrools/" class="cy_cmt_count" data-xid="2022/01/16/java_space/Java-规则引擎Drools/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p><a target="_blank" rel="noopener" href="http://www.drools.org.cn/">http://www.drools.org.cn/</a></p>
+<p>java语言开发的开源业务规则引擎。</p>
+<p>DROOLS 是一个基于CHARLES FORGY’S的RETE算法的，易于访问企业策略、易于调整以及易于管理的开源业务规则引擎，符合业内标准，速度快、效率高。 业务分析师人员或审核人员可以利用它轻松查看业务规则，检验已编码的规则执行了所需的业务规则。</p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>风控系统里边存在非常多的规则（比如：age &lt; 16 || age &gt; 50  -&gt; REJECT ）。最便捷的实现就是用 if-else 来写，但是随着规则的增加以及需求的变动，代码将变得越来越难阅读和变动。这时候就要引入Drools等规则引擎了。Drools就是为了解决业务代码和业务规则分离的引擎。</p>
+<p>1、风险控制系统—-风险贷款、风险评估</p>
+<p>2、反欺诈项目—-银行贷款、征信验证</p>
+<p>3、决策平台系统—-财务计算</p>
+<p>4、促销平台系统—-满减、打折、加价购</p>
+<ul>
+<li>在线申请信用卡</li>
+</ul>
+<h1 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h1><h3 id="Drools-Eclipse插件"><a href="#Drools-Eclipse插件" class="headerlink" title="Drools Eclipse插件"></a><a target="_blank" rel="noopener" href="http://www.drools.org.cn/257.html">Drools Eclipse插件</a></h3><h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h3 id="Drools规则编写"><a href="#Drools规则编写" class="headerlink" title="Drools规则编写"></a><a target="_blank" rel="noopener" href="http://www.drools.org.cn/273.html">Drools规则编写</a></h3><h3 id="创建Drools程序-入门"><a href="#创建Drools程序-入门" class="headerlink" title="创建Drools程序(入门)"></a><a target="_blank" rel="noopener" href="http://www.drools.org.cn/267.html">创建Drools程序(入门)</a></h3><h3 id="使用-Drools-规则引擎实现业务逻辑"><a href="#使用-Drools-规则引擎实现业务逻辑" class="headerlink" title="使用 Drools 规则引擎实现业务逻辑"></a><a target="_blank" rel="noopener" href="http://www.drools.org.cn/194.html">使用 Drools 规则引擎实现业务逻辑</a></h3><h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><p>在项目中使用drools时，即可以单独使用也可以整合spring使用。如果单独使用只需要导入如下maven坐标即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.drools&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;drools-compiler&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">7.6</span><span class="number">.0</span>.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们使用IDEA开发drools应用，IDEA中已经集成了drools插件。如果使用eclipse开发drools应用还需要单独安装drools插件。</p>
+<p>drools API开发步骤如下:</p>
+<p>获取KieServices-&gt;获取KieContainer-&gt;开启KieSession-&gt;Insert fact-&gt;触发规则-&gt;关闭KieSession</p>
+<p>第一步：创建maven工程drools_quickstart并导入drools相关maven坐标</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.drools&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;drools-compiler&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;7.10.0.Final&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>第二步：根据drools要求创建resources/META-INF/kmodule.xml配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;kmodule xmlns=&quot;http://www.drools.org/xsd/kmodule&quot;&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">        name:指定kbase的名称，可以任意，但是需要唯一</span><br><span class="line">        packages:指定规则文件的目录，需要根据实际情况填写，否则无法加载到规则文件</span><br><span class="line">        default:指定当前kbase是否为默认</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;kbase name=&quot;myKbase1&quot; packages=&quot;rules&quot; default=&quot;true&quot;&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">            name:指定ksession名称，可以任意，但是需要唯一</span><br><span class="line">            default:指定当前session是否为默认</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;ksession name=&quot;ksession-rule&quot; default=&quot;true&quot;/&gt;</span><br><span class="line">    &lt;/kbase&gt;</span><br><span class="line">&lt;/kmodule&gt;</span><br></pre></td></tr></table></figure>
+
+<p>第三步：创建实体类Order</p>
+<p>第四步：创建规则文件resources/rules/bookDiscount.drl</p>
+<p>第五步：编写单元测试</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dream_ling/article/details/123825818">https://blog.csdn.net/Dream_ling/article/details/123825818</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2021/12/12/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%8B%89%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1339,120 +1455,6 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://www.test.com/login/ -d &#x27;username=yourusername&amp;password=yourpassword&#x27;</span><br></pre></td></tr></table></figure>
 <h3 id="添加额外的请求头"><a href="#添加额外的请求头" class="headerlink" title="添加额外的请求头"></a>添加额外的请求头</h3><p>使用curl也可以在请求中添加请求头，只需加上-H选项然后在引号中加上key和value即可，其中key和value之间用冒号隔开：</p>
 <h3 id="使用-curl-发送-POST-请求的四种方式"><a href="#使用-curl-发送-POST-请求的四种方式" class="headerlink" title="使用 curl 发送 POST 请求的四种方式:"></a>使用 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=curl&spm=1001.2101.3001.7020">curl</a> 发送 POST 请求的四种方式:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#1、application/x-www-form-urlencoded</span><br><span class="line">curl localhost:3000/api/basic -X POST -d &#x27;hello=world&#x27;</span><br><span class="line"></span><br><span class="line">#2、multipart/form-data</span><br><span class="line">curl localhost:3000/api/multipart -F raw=@raw.data -F hello=world</span><br><span class="line"></span><br><span class="line">#3、application/json</span><br><span class="line">curl localhost:3000/api/json -X POST -d &#x27;&#123;&quot;hello&quot;: &quot;world&quot;&#125;&#x27; --header &quot;Content-Type: application/json&quot;</span><br><span class="line">#跟发起 application/x-www-form-urlencoded 类型的 POST 请求类似，-d 参数值是 JSON 字符串，并且多了一个 Content-Type: application/json 指定发送内容的格式。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#4、把文件内容作为要提交的数据</span><br><span class="line">有一个 JSON 文件 data.json 内容如下:</span><br><span class="line">&#123;</span><br><span class="line">    &quot;hello&quot;: &quot;world&quot;,</span><br><span class="line">    &quot;xxx&quot;: &quot;yyy&quot;,</span><br><span class="line">    &quot;a&quot;: [&quot;ooo&quot;, &quot;mmm&quot;]</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">#就可以通过命令来提交数据。</span><br><span class="line">curl localhost:3000/api/json -X POST -d @data.json --header &quot;Content-Type: application/json&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/" class="post-title-link" itemprop="url">Zane之产品之道</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-08 20:18:18" itemprop="dateCreated datePublished" datetime="2021-09-08T20:18:18+08:00">2021-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::https://space.zane56stars.xyz/2021/09/08/zane_space/Zane%E4%B9%8B%E4%BA%A7%E5%93%81%E4%B9%8B%E9%81%93/" class="cy_cmt_count" data-xid="2021/09/08/zane_space/Zane之产品之道/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>我认为每一个程序猿都应该有一个产品的心，（这里会涉及需求分析、原型设计、前端UI）尽管不够专业，起码要知道自己做什么，了解产品基本价值，才能更好地设计及开发系统。</p>
-<h1 id="产品之道"><a href="#产品之道" class="headerlink" title="产品之道"></a>产品之道</h1><p>Balsamiq vs Sketch vs Mockplus：三大原型设计工具对比</p>
-<p><a target="_blank" rel="noopener" href="https://www.mockplus.cn/blog/post/1034">https://www.mockplus.cn/blog/post/1034</a></p>
-<h1 id="电商平台用户行为数据分析（MySQL）"><a href="#电商平台用户行为数据分析（MySQL）" class="headerlink" title="电商平台用户行为数据分析（MySQL）"></a>电商平台用户行为数据分析（MySQL）</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356326256">https://zhuanlan.zhihu.com/p/356326256</a></p>
-<p>CREATE TABLE userbehavior_dwd(<br>    user_id VARCHAR(255)    COMMENT ‘用户id’ ,<br>    item_id VARCHAR(255)    COMMENT ‘商品id’ ,<br>    category_id VARCHAR(255)    COMMENT ‘商品类型id’ ,<br>    behavior_type VARCHAR(255)    COMMENT ‘访问类型：pv,cart,fav,buy（浏览，添加购物车，收藏，购买）’ ,<br>    timestamps DATETIME    COMMENT ‘行为发生时间戳’ ,<br>    behavior_date VARCHAR(255)    COMMENT ‘日期’ ,<br>    behavior_time VARCHAR(255)    COMMENT ‘时间’ ,<br>    weekdays VARCHAR(255)    COMMENT ‘周-天数’<br>)  COMMENT = ‘用户行为表(维度表)’;</p>
-<p>select * from userbehavior_dwd</p>
-<p>select min(behavior_date),max(behavior_date) from userbehavior_dwd</p>
-<p>delete from userbehavior_dwd where behavior_date&gt;’2017-11-25’</p>
-<p>– ▶▶用户行为指标<br>– 一、按实际维度<br>– 1、用户活跃度（这里就涉及每天、每时，不会是全量数据，所以会用到天字段或小时字段分组统计）</p>
-<p>– 首先将用户活跃度划分为每日活跃度与每时活跃度，并对比UV与PV的情况。</p>
-<p>– 日活跃情况<br>–  我的sql(初步sql，没有参考价值)<br>select user_id,count(behavior_type) from userbehavior_dwd  where behavior_type=’pv’ GROUP BY user_id<br>– 日活跃情况-实际sql<br>select behavior_date,count(DISTINCT user_id) as ‘UV’,count(behavior_type) as ‘PV’ from userbehavior_dwd<br>where behavior_type=’pv’ GROUP BY behavior_date </p>
-<p>– 小时活跃情况<br>select HOUR(behavior_time) as ‘hour’,count(DISTINCT user_id) as ‘UV’,count(behavior_type) as ‘PV’ from userbehavior_dwd<br>where behavior_type=’pv’ GROUP BY hour </p>
-<p>– 人均PV（日）<br>select behavior_date,count(DISTINCT user_id) as ‘UV’,count(behavior_type) as ‘PV’,<br>count(behavior_date)/count(DISTINCT user_id) as ‘MeanPVofUV’<br>from userbehavior_dwd<br>where behavior_type=’pv’ GROUP BY behavior_date<br>– 人均PV（小时）同上<br>– 分析价值：晚上20-22点的PV大幅上涨，是由于人均PV的上升产生的，说明晚上休息时间用户的活跃度相较白天有较大提升。</p>
-<p>– 二、用户复购率<br>– （复购率对于平台来讲是非常重要的行为指标，复购率越高，平台的拉新成本，运营成本越低。）<br>– 逻辑分析：统计用户购买【相同商品/非相同商品】次数，用户复购率计算逻辑：复购人数/总购买人数<br>– 2.1、统计复购人数<br>– 2.2 统计总购买人数<br>– 2.3 计算复购率</p>
-<p>select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id<br>– 分析复购人员<br>select t.user_id,if(t.buy_num&gt;1,1,0) as ‘复购人员’<br>from (select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id ) t</p>
-<p>– 统计复购人员数=复购人员总和<br>select sum(if(t.buy_num&gt;1,1,0)) as ‘复购人数’<br>from (select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id ) t</p>
-<p>– 统计总购买人数<br>select count(DISTINCT user_id) as ‘总购买人数’ from userbehavior_dwd  where behavior_type=’buy’</p>
-<p>– 计算复购率=复购人员总和/总购买人数<br>select count(DISTINCT t.user_id) as ‘总购买人数’,sum(if(t.buy_num&gt;1,1,0)) as ‘复购人数’,<br>CONCAT(ROUND(0/20*100,2),’%’) as ‘复购率’<br>from (select user_id,count(behavior_type) as ‘buy_num’ from userbehavior_dwd  where behavior_type=’buy’ GROUP BY user_id ) t</p>
-<p>– ▶▶购物环节转化率（AARRR分析模型）,主要分为浏览数据转化率、用户数据转化率<br>– 加购率=浏览数/加购数；购买率=购买数/加购数<br>– 浏览数据转化率<br>select pv_sum,cf_sum,buy_sum<br>,CONCAT(ROUND(cf_sum/pv_sum<em>100,2),’%’) as cp<br>,CONCAT(ROUND(buy_sum/cf_sum</em>100,2),’%’)as bc<br>from(<br>select<br>sum(IF(behavior_type=’pv’,1,0)) as pv_sum,<br>sum(IF(behavior_type=’cart’ or behavior_type=’fav’,1,0)) as cf_sum,<br>sum(IF(behavior_type=’buy’,1,0)) as buy_sum<br>from userbehavior_dwd<br>)t</p>
-<p>– 用户数据转化率<br>select pv_sum,cf_sum,buy_sum<br>,CONCAT(ROUND(cf_sum/pv_sum<em>100,2),’%’) as cp<br>,CONCAT(ROUND(buy_sum/cf_sum</em>100,2),’%’)as bc<br>from(<br>select<br>COUNT(DISTINCT IF(behavior_type=’pv’,user_id,0)) as pv_sum,<br>COUNT(DISTINCT IF(behavior_type=’cart’ or behavior_type=’fav’,user_id,0)) as cf_sum,<br>COUNT(DISTINCT IF(behavior_type=’buy’,user_id,0)) as buy_sum<br>from userbehavior_dwd<br>)t</p>
-<p>– 方式2（待验证）<br>select<br>COUNT(behavior_type=’pv’) as pv_sum,<br>COUNT(behavior_type=’cart’ or behavior_type=’fav’) as cf_sum,<br>COUNT(behavior_type=’buy’) as buy_sum<br>from userbehavior_dwd</p>
-<p>– 用户价值指标（RFM分析模型），区分出：价值客户、发展客户、保持客户、挽留客户，一般挽留客户占比最高，进而是价值客户，发展客户，保持客户。<br>– 1、Recency-上次消费时间（间隔天数），求平均值<br>– 2、Frequency-消费频率，求平均值<br>– 3、R、F按价值打分规则&amp;用户分组规则</p>
-<p>– r_table、f_table         –（TDM）<br>– r_table<br>CREATE VIEW R_table(user_id,recentbuy)<br>as<br>select u.user_id,<br>case<br>    when recentbuy is not null then recentbuy<br>    else 10<br>end as recentbuy<br>from userbehavior_dwd u left join<br>    (<br>        select user_id<br>        ,count(behavior_type) as recentbuy<br>        from userbehavior_dwd<br>        where behavior_type=’buy’<br>        GROUP BY user_id<br>    ) t<br>    on u.user_id=t.user_id<br>    – GROUP BY u.user_id<br>    ORDER BY u.user_id</p>
-<p>– f_table<br>CREATE VIEW F_table(user_id,frequency)<br>as<br>select u.user_id,<br>case<br>    when frequency is not null then frequency<br>    else 10<br>end as frequency<br>from userbehavior_dwd u left join<br>    (<br>        select user_id<br>        ,MIN(DATEDIFF(‘2017-12-08’,behavior_date)) as frequency<br>        from userbehavior_dwd<br>        where behavior_type=’buy’<br>        GROUP BY user_id<br>    ) t<br>    on u.user_id=t.user_id<br>    – GROUP BY u.user_id<br>    ORDER BY u.user_id</p>
-<p>– （ADM）<br>SELECT a.userID,r_score,f_score,<br>CASE<br>    when r_score&gt;2.35 and f_score&gt;2.04 then ‘价值客户’<br>    when r_score&gt;2.35 and f_score&lt;2.04 then ‘发展客户’<br>    when r_score&lt;2.35 and f_score&gt;2.04 then ‘保持客户’<br>    when r_score&lt;2.35 and f_score&lt;2.04 then ‘挽留客户’<br>END as userclass<br>FROM(<br>    SELECT t.userID,r_score,f_score<br>    FROM<br>    (<br>           SELECT userID,<br>           CASE<br>            when recentbuy=10 then 1<br>            when recentbuy&lt;10 and recentbuy&gt;=5 then 2<br>            when recentbuy&lt;5 and recentbuy&gt;=2 then 3<br>            when recentbuy=1 then 4<br>                    END as r_score<br>                    FROM r_table<br>                ) t<br>    LEFT JOIN<br>    (<br>        SELECT userID,<br>        CASE<br>            when frequency=0 then 1<br>            when frequency&lt;3 and frequency&gt;=1 then 2<br>            when frequency&lt;7 and frequency&gt;=3 then 3<br>            when frequency&gt;=7 then 4<br>            END as f_score<br>            FROM f_table<br>            ) f<br>    ON t.userID=f.userID<br>) a</p>
 
       
     </div>
