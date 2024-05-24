@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="Zane’s Space">
 <meta property="og:description" content="flink on yarn![](flink on yarn_files&#x2F;1.jpg)前提条件：需先安装zookeeper与hadoop zookeeper安装 hadoop安装 准备工作机器配置3台 linux centos7（虚拟机即可）修改主机名、固定ip免密安装jdk  hadoop1: 4g内存 2核 80g硬盘 作为master节点 hadoop2 1g内存 1核 8g硬盘 作为sla">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/flinkOnYarn/flinkOnYarn.jpg">
-<meta property="og:image" content="http://example.com/flinkOnYarn/ha.jpg">
-<meta property="og:image" content="http://example.com/flinkOnYarn/1.jpg">
+<meta property="og:image" content="http://example.com/2021/06/29/flink_space/flink%20on%20yarn/flinkOnYarn.jpg">
+<meta property="og:image" content="http://example.com/2021/06/29/flink_space/flink%20on%20yarn/ha.jpg">
+<meta property="og:image" content="http://example.com/2021/06/29/flink_space/flink%20on%20yarn/1.jpg">
 <meta property="article:published_time" content="2021-06-29T12:18:18.000Z">
 <meta property="article:modified_time" content="2023-06-15T06:53:48.214Z">
 <meta property="article:author" content="Zane">
 <meta property="article:tag" content="Flink">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/flinkOnYarn/flinkOnYarn.jpg">
+<meta name="twitter:image" content="http://example.com/2021/06/29/flink_space/flink%20on%20yarn/flinkOnYarn.jpg">
 
 <link rel="canonical" href="http://example.com/2021/06/29/flink_space/flink%20on%20yarn/">
 
@@ -250,7 +250,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>flink on yarn<br><img src="/flinkOnYarn/flinkOnYarn.jpg"><br>![](flink on yarn_files/1.jpg)<br>前提条件：需先安装zookeeper与hadoop</p>
+        <p>flink on yarn<br><img src="/2021/06/29/flink_space/flink%20on%20yarn/flinkOnYarn.jpg"><br>![](flink on yarn_files/1.jpg)<br>前提条件：需先安装zookeeper与hadoop</p>
 <p>zookeeper安装</p>
 <p>hadoop安装</p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>机器配置<br>3台 linux centos7（虚拟机即可）<br>修改主机名、固定ip<br>免密<br>安装jdk</p>
@@ -291,7 +291,7 @@
 <ul>
 <li>第二种Flink run直接在YARN上提交运行Flink作业(Run a Flink job on YARN)，这种方式的好处是一个任务会对应一个job,即没提交一个作业会根据自身的情况，向yarn申请资源，直到作业执行完成，并不会影响下一个作业的正常运行，除非是yarn上面没有任何资源的情况下。一般生产环境是采用此种方式运行。这种方式就需要确保集群资源足够。</li>
 </ul>
-<p>启动后查看hadoop，yarn的web监控页面<br><img src="/flinkOnYarn/ha.jpg"><br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/asker009/p/11327533.html">https://www.cnblogs.com/asker009/p/11327533.html</a></p>
+<p>启动后查看hadoop，yarn的web监控页面<br><img src="/2021/06/29/flink_space/flink%20on%20yarn/ha.jpg"><br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/asker009/p/11327533.html">https://www.cnblogs.com/asker009/p/11327533.html</a></p>
 <p>#yarn<br>yarn是一个资源管理与调度平台，不仅hadoop跑在上面，flink也可以直接向yarn申请资源并运行上去</p>
 <p>观察任务</p>
 <p>命令行可以确认一下yarn任务创建成功：</p>
@@ -301,7 +301,7 @@
 <p>如果想停止任务，直接向yarn杀死整个任务即可。</p>
 <pre><code>yarn application -kill 进程ID
 </code></pre>
-<p><img src="/flinkOnYarn/1.jpg"><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankdeng/p/9400627.html">https://www.cnblogs.com/frankdeng/p/9400627.html</a></p>
+<p><img src="/2021/06/29/flink_space/flink%20on%20yarn/1.jpg"><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankdeng/p/9400627.html">https://www.cnblogs.com/frankdeng/p/9400627.html</a></p>
 <p>#疑问点？<br>flink启动后，提交job异常，发现是jdk版本问题，flink版本和jdk版本关系？</p>
 <p> Sum of configured JVM Metaspace (96.000mb (100663296 bytes)) and JVM Overhead (192.000mb (201326592 bytes)) exceed configured Total Process Memory (64.000mb (67108864 bytes)).</p>
 <h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>java.lang.NoClassDefFoundError: org/apache/hadoop/yarn/exceptions/YarnException问题可能缺少jar包<br>解决方法<br>cp $HADOOP_HOME/share/hadoop/yarn/hadoop-yarn-api* $FLINK_HOME/lib</p>
@@ -411,7 +411,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

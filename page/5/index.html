@@ -174,6 +174,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/" class="post-title-link" itemprop="url">大数据开发-全量表、增量表、快照表、拉链表、流水表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-03 22:08:08" itemprop="dateCreated datePublished" datetime="2021-01-03T22:08:08+08:00">2021-01-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/" class="cy_cmt_count" data-xid="2021/01/03/大数据/大数据开发-数据表的种类/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="全量表、增量表、快照表、拉链表、流水表"><a href="#全量表、增量表、快照表、拉链表、流水表" class="headerlink" title="全量表、增量表、快照表、拉链表、流水表"></a>全量表、增量表、快照表、拉链表、流水表</h1><p><strong>全量表</strong></p>
+<p>顾名思义是存储了全部数据的表，全量表没有分区的，所有数据都储存在一个分区中。全量表存储的是截至到目前最新状态的全部记录。</p>
+<p><strong>增量表</strong></p>
+<p>增量表是相对于全量表而言的，增量表是每次把新增的数据追加到原表中，增量表中每次新增的数据单独存储在一个分区中。</p>
+<p><strong>快照表</strong></p>
+<p>快照表就是截至过去某个时间点的所有数据，关注更多的是过去某个时间点的状态，即快照表主要存储的是历史状态的表。每次快照的数据单独储存在一个分区中。</p>
+<p><strong>拉链表</strong></p>
+<p>拉链表储存了某个主体的一整套连续动作的信息。与快照表类似，但拉链表储存的是在快照表的基础上去除了重复状态的数据。</p>
+<p><strong>流水表</strong></p>
+<p>流水表是存储了所有修改记录的表。流水表与拉链表也有些类似，不同的是拉链表可以根据拉链粒度存储数据，也就是只存储特定维度的数据变化记录；而流水表存储的是每一个修改记录。</p>
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/218243038">https://zhuanlan.zhihu.com/p/218243038</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/11/AI/AI-%E7%AE%97%E6%B3%95%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1120,109 +1220,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">微服务</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-20 20:21:22" itemprop="dateCreated datePublished" datetime="2020-07-20T20:21:22+08:00">2020-07-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/07/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2020/07/20/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="cy_cmt_count" data-xid="2020/07/20/微服务/微服务/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>微服务</p>
-<p>微服务的核心是服务发现（注册中心）和负载均衡（网0关）</p>
-<p>HSF、dubbo、springcloud</p>
-<p>（阿里EDAS）<br>##微服务管理</p>
-<p>服务调用</p>
-<p>服务链路</p>
-<p>服务查询、报表</p>
-<p>服务拓扑</p>
-<p>服务治理</p>
-<h2 id="应用部署"><a href="#应用部署" class="headerlink" title="应用部署"></a>应用部署</h2><h2 id="应用监控"><a href="#应用监控" class="headerlink" title="应用监控"></a>应用监控</h2><ul>
-<li>基础监控（容器cpu、内存、磁盘）</li>
-<li>服务监控（服务使用情况、统计）</li>
-<li>高级监控（业务监控）</li>
-</ul>
-<h2 id="限流降级"><a href="#限流降级" class="headerlink" title="限流降级"></a>限流降级</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1294,7 +1291,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

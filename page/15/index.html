@@ -174,6 +174,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/" class="post-title-link" itemprop="url">Linux-运维</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-17 20:01:30" itemprop="dateCreated datePublished" datetime="2018-05-17T20:01:30+08:00">2018-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/05/17/linux_space/Linux-%E8%BF%90%E7%BB%B4/" class="cy_cmt_count" data-xid="2018/05/17/linux_space/Linux-运维/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Linux机器启动重启排查</p>
+<p><strong>登录机器，执行last或uptime等命令，查看重启时间</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last | grep reboot</span><br></pre></td></tr></table></figure>
+
+
+
+<p>/var/log/messages：系统日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -Ei &#x27;error|Fail&#x27; /var/log/messages</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li>部署规范</li>
+</ul>
+<p>服务名-版本</p>
+<p>配置文件分离</p>
+<p>jars分离</p>
+<p>lib包分离</p>
+<p>日志文件分离</p>
+<p>日志大小限制、日志保留时长限制</p>
+<p>日志按环境等级分离管理</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/05/17/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Ansible%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -617,7 +729,7 @@
       
           <p>任何语言应以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案去实践及应用。</p>
 <p>Flink</p>
-<p><img src="/flink/2.png"></p>
+<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/2.png"></p>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Apache Flink是由Apache软件基金会开发的开源流处理框架，其核心是用Java和Scala编写的分布式流数据流引擎。Flink以数据并行和流水线方式执行任意流数据程序，Flink的流水线运行时系统可以执行批处理和流处理程序。此外，Flink的运行时本身也支持迭代算法的执行。<br>Flink最早是在2008年，柏林理工大学的一个研究性项目。2014年被Apache孵化器所接受，成为顶级项目之一。</p>
 <p>2010-2014 柏林工业大学、柏林洪堡大学和哈索拉特纳研究所联合发起命名为”Stratosphere”</p>
 <p>2014年4月进入apache 孵化期间改名为Flink<br>2014年12月 成为apache顶级项目。<br>2015年9月 0.9版本</p>
@@ -630,7 +742,7 @@
 <ul>
 <li>内存模型图</li>
 </ul>
-<p><img src="/flink/1.png"></p>
+<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/1.png"></p>
 <h1 id="Flink核心概念"><a href="#Flink核心概念" class="headerlink" title="Flink核心概念"></a>Flink核心概念</h1><p>flink三大核心概念：source、transformations、sink</p>
 <ul>
 <li>并行数据流</li>
@@ -677,7 +789,7 @@
 </ul>
 <h2 id="Flink-CDC"><a href="#Flink-CDC" class="headerlink" title="Flink CDC"></a>Flink CDC</h2><p>CDC 的全称是 Change Data Capture ，在广义的概念上，只要是能捕获数据变更的技术，我们都可以称之为 CDC 。目前通常描述的 CDC 技术主要面向数据库的变更，是一种用于捕获数据库中数据变更的技术。</p>
 <p>CDC工具有很多种；</p>
-<p><img src="/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8.assets/10dfa9ec8a1363279b1fa20879c055e409fac7f0.jpeg" alt="img"></p>
+<p><img src="/2018/03/29/flink_space/flink-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%85%A5%E9%97%A8/10dfa9ec8a1363279b1fa20879c055e409fac7f0.jpeg" alt="img"></p>
 <p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1708018647118048692&amp;wfr=spider&amp;for=pc</a></p>
 <h2 id="待完善的知识点"><a href="#待完善的知识点" class="headerlink" title="待完善的知识点"></a>待完善的知识点</h2><ul>
 <li>Flink时间语义与窗口应用</li>
@@ -995,6 +1107,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="post-title-link" itemprop="url">大数据-SparkSQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-SparkSQL/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>大数据-SparkSQL 操作和普通sql相似</p>
+<p>SparkSQL可以取代HiveSQL（同样是查询hive表数据）</p>
+<p>hive是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%B8%83%E5%BC%8F&spm=1001.2101.3001.7020">分布式</a>又是数据仓库，同时又是查询引擎，Spark SQL只是取代的HIVE的查询引擎这一部分，企业一般使用Hive+<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> SQL进行开发</p>
+<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> sql可以使用hive里面的表，并做操作，并且会很快</p>
+<p>需要做如下配置 </p>
+<p>1.hive-site.xml hive的元数据配置文件要拷贝到spark的conf路径下 </p>
+<p>2.spark的启动要加上–jars mysql连接jar包的路径</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Spark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1148,102 +1356,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="post-title-link" itemprop="url">大数据-SparkSQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-03-19T00:18:18+08:00">2018-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-SparkSQL/" class="cy_cmt_count" data-xid="2018/03/19/大数据/大数据-SparkSQL/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大数据-SparkSQL 操作和普通sql相似</p>
-<p>SparkSQL可以取代HiveSQL（同样是查询hive表数据）</p>
-<p>hive是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%B8%83%E5%BC%8F&spm=1001.2101.3001.7020">分布式</a>又是数据仓库，同时又是查询引擎，Spark SQL只是取代的HIVE的查询引擎这一部分，企业一般使用Hive+<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> SQL进行开发</p>
-<p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=spark&spm=1001.2101.3001.7020">spark</a> sql可以使用hive里面的表，并做操作，并且会很快</p>
-<p>需要做如下配置 </p>
-<p>1.hive-site.xml hive的元数据配置文件要拷贝到spark的conf路径下 </p>
-<p>2.spark的启动要加上–jars mysql连接jar包的路径</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1316,108 +1428,8 @@
       
           <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44033210/article/details/123845219">https://blog.csdn.net/weixin_44033210/article/details/123845219</a></p>
 <p>实时数仓</p>
-<p><img src="/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA44CKQOS5puWxseacieW-hCXjgIs=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"></p>
+<p><img src="/2018/03/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA44CKQOS5puWxseacieW-hCXjgIs=,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"></p>
 <p>储存主要是通过kafka及flink进行实时计算处理，将数据存储到分析性数据库（检索快）和事务性数据库（结果展示）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">动态多线程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-16 19:21:26" itemprop="dateCreated datePublished" datetime="2018-03-16T19:21:26+08:00">2018-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/03/16/java_space/Java%E5%8A%A8%E6%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="cy_cmt_count" data-xid="2018/03/16/java_space/Java动态多线程/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><h1 id="线程互斥"><a href="#线程互斥" class="headerlink" title="线程互斥"></a>线程互斥</h1><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>1.自定义线程池<br>2.配置spring默认的线程池<br>IntelliJ IDEA - Debug 调试多线程程序</p>
-<h2 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h2><p> 随着cpu核数越来越多，不可避免的利用多线程技术以充分利用其计算能力。所以，多线程技术是服务端开发人员必须掌握的技术。</p>
-<p>线程的创建和销毁，都涉及到系统调用，比较消耗系统资源，所以就引入了线程池技术，避免频繁的线程创建和销毁。</p>
-<p>在Java用有一个Executors工具类，可以为我们创建一个线程池，其本质就是new了一个ThreadPoolExecutor对象。线程池几乎也是面试必考问题。本节结合源代码，说说ThreadExecutor的工作原理</p>
-<h1 id="线程数最优设置"><a href="#线程数最优设置" class="headerlink" title="线程数最优设置"></a>线程数最优设置</h1><p>线程数设置和CPU数的关系<br>在Windows中，在cmd命令中输入“wmic”，然后在出现的新窗口中输入“cpu get *”即可查看物理CPU数、CPU核心数、线程数。其中，<br>　　Name:表示物理CPU数<br>　　NumberOfCores：表示CPU核心数<br>　　NumberOfLogicalProcessors：表示CPU线程数<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liubei/p/coreNumAndProcess.html">https://www.cnblogs.com/liubei/p/coreNumAndProcess.html</a></p>
-<ul>
-<li>如何合理地估算线程池大小？</li>
-</ul>
-<p>比如平均每个线程CPU运行时间为0.5s，而线程等待时间（非CPU运行时间，比如IO）为1.5s，CPU核心数为8，那么根据上面这个公式估算得到：((0.5+1.5)/0.5)<em>8=32。这个公式进一步转化为：<br>最佳线程数目 = （线程等待时间与线程CPU时间之比 + 1）</em> CPU数目</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38128980/answer/75041041">https://www.zhihu.com/question/38128980/answer/75041041</a></p>
-<h2 id="连接池场景"><a href="#连接池场景" class="headerlink" title="连接池场景"></a>连接池场景</h2><p>数据库连接池<br>同步数据<br>日志采集保存</p>
 
       
     </div>
@@ -1504,7 +1516,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

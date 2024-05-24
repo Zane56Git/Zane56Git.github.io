@@ -174,6 +174,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/19/flink_space/flink%20on%20k8s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/19/flink_space/flink%20on%20k8s/" class="post-title-link" itemprop="url">Flink on k8s</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-19 22:16:38" itemprop="dateCreated datePublished" datetime="2021-06-19T22:16:38+08:00">2021-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/06/19/flink_space/flink%20on%20k8s/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2021/06/19/flink_space/flink%20on%20k8s/" class="cy_cmt_count" data-xid="2021/06/19/flink_space/flink on k8s/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>flink on k8s   </p>
+<pre><code>1. Mac 安装 Docker
+2. Minikube 搭建 Kubernetes 实验环境
+3. Flink 实时处理 demo
+4. 构建 Docker 容器镜像
+5. 部署 JobManager
+6. 部署 TaskManager
+</code></pre>
+<p>以 flink:1.8.1-scala_2.12 作为基础镜像，编写新的 Dockerfile，将打包好的任务 jar 包放置进去。此外，新版 flink 已将 hadoop 依赖从官方发行版本中剥离，因此在打包镜像的时候也要包含进去。<br>Hadoop jar 下载：flink-shaded-hadoop-2-uber-2.8.3-7.0.jar</p>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/a1240466196/article/details/108881720">https://blog.csdn.net/a1240466196/article/details/108881720</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/flink_space/flink-%E5%9F%BA%E4%BA%8EFlink%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -436,7 +535,7 @@
 <p>3、计算快，一个周期内完成所有指标计算：平均每五分钟或三分钟计算一次</p>
 <p>4、支持实时流，分布式部署，运维简单：支持 Kafka 数据实时流。</p>
 <p>因为数据量大，Hive、MySQL无法满足性能要求，例如统计上一条数据，需秒级完成</p>
-<p><img src="/Users/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse.assets/format,png.png" alt="img"></p>
+<p><img src="/2021/06/06/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/%E6%95%B0%E6%8D%AE%E5%BA%93-ClickHouse.assets/format,png.png" alt="img"></p>
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>部分表引擎，创建后，不可修改表结构。</p>
 <p><code>ALTER</code> 仅支持 <code>*MergeTree</code> ，<code>Merge</code>以及<code>Distributed</code>等引擎表。</p>
 <p>数据库引擎允许您处理数据表。</p>
@@ -1184,7 +1283,7 @@
           <p>作为大数据开发，数据来源很重要！！！数据真实度很重要！！！</p>
 <p>感谢大数据开放平台提供的真实数据，并于大数据学习及开发！</p>
 <p><strong>元数据分类</strong>（以下分类来自深圳市政府数据开放平台）</p>
-<p><img src="/Users/zane/zane_dev/workspaces/my-hexo/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%81%A9%E6%83%A0.assets/image-20220310210826667.png" alt="image-20220310210826667"></p>
+<p><img src="/2021/01/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%81%A9%E6%83%A0/zane/zane_dev/workspaces/my-hexo/source/_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%81%A9%E6%83%A0.assets/image-20220310210826667.png" alt="image-20220310210826667"></p>
 <h1 id="开发建议"><a href="#开发建议" class="headerlink" title="开发建议"></a>开发建议</h1><ol>
 <li><p>统一使用kafka接入数据</p>
 </li>
@@ -1196,106 +1295,6 @@
 <h1 id="开发架构"><a href="#开发架构" class="headerlink" title="开发架构"></a>开发架构</h1><p>采集应用（通过请求获取开放平台数据，并传至kafka）</p>
 <h1 id="基于深圳市政府数据开放平台进行大数据开发"><a href="#基于深圳市政府数据开放平台进行大数据开发" class="headerlink" title="基于深圳市政府数据开放平台进行大数据开发"></a>基于深圳市政府数据开放平台进行大数据开发</h1><p>官网：<a target="_blank" rel="noopener" href="https://opendata.sz.gov.cn/">https://opendata.sz.gov.cn/</a></p>
 <p>步骤：注册账号，创建应用，订阅数据接口</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/" class="post-title-link" itemprop="url">大数据开发-全量表、增量表、快照表、拉链表、流水表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-03 22:08:08" itemprop="dateCreated datePublished" datetime="2021-01-03T22:08:08+08:00">2021-01-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/01/03/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%A7%8D%E7%B1%BB/" class="cy_cmt_count" data-xid="2021/01/03/大数据/大数据开发-数据表的种类/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="全量表、增量表、快照表、拉链表、流水表"><a href="#全量表、增量表、快照表、拉链表、流水表" class="headerlink" title="全量表、增量表、快照表、拉链表、流水表"></a>全量表、增量表、快照表、拉链表、流水表</h1><p><strong>全量表</strong></p>
-<p>顾名思义是存储了全部数据的表，全量表没有分区的，所有数据都储存在一个分区中。全量表存储的是截至到目前最新状态的全部记录。</p>
-<p><strong>增量表</strong></p>
-<p>增量表是相对于全量表而言的，增量表是每次把新增的数据追加到原表中，增量表中每次新增的数据单独存储在一个分区中。</p>
-<p><strong>快照表</strong></p>
-<p>快照表就是截至过去某个时间点的所有数据，关注更多的是过去某个时间点的状态，即快照表主要存储的是历史状态的表。每次快照的数据单独储存在一个分区中。</p>
-<p><strong>拉链表</strong></p>
-<p>拉链表储存了某个主体的一整套连续动作的信息。与快照表类似，但拉链表储存的是在快照表的基础上去除了重复状态的数据。</p>
-<p><strong>流水表</strong></p>
-<p>流水表是存储了所有修改记录的表。流水表与拉链表也有些类似，不同的是拉链表可以根据拉链粒度存储数据，也就是只存储特定维度的数据变化记录；而流水表存储的是每一个修改记录。</p>
-<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/218243038">https://zhuanlan.zhihu.com/p/218243038</a></p>
 
       
     </div>
@@ -1382,7 +1381,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

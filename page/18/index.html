@@ -174,6 +174,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">es实际应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-19 00:18:18" itemprop="dateCreated datePublished" datetime="2018-01-19T00:18:18+08:00">2018-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/es%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8/" class="cy_cmt_count" data-xid="2018/01/19/中间件/es实际应用/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>es<br>面向文档，文档是所有可搜索的数据最小单位<br>可以理解为一个文件、日志、mp3歌曲信息等等</p>
+<p>文档会被序列号成json格式保存在es中</p>
+<p>es和solr都是基于hahhop之父1999年开发的lucene开源项目<br>es：<br>支持分布式、水平扩展<br>降低全文检索学习曲线</p>
+<h2 id="本地安装及水平扩展"><a href="#本地安装及水平扩展" class="headerlink" title="本地安装及水平扩展"></a>本地安装及水平扩展</h2><p>7.0已内置jdk</p>
+<p>阿里云es30免费试用版</p>
+<p>es实际应用</p>
+<p>目前只是记录一下es的简单使用<br>使用es查看日志，首先得有关联的索引</p>
+<p>通过筛选查看数据<br>例如</p>
+<p>(模糊并查询)</p>
+<p>条件 and flag_name and 13800138000</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>文档</p>
+<p>节点（Data Node、Coordinating Node），还有其他节点类型</p>
+<p>分片（主分片、副本）<br>分片的设定（创建索引时会设置主分片，需提前容量规划）<br>多或少都有影响</p>
+<p>查看健康情况</p>
+<h2 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h2><p>##项目实战</p>
+<p>快速定位日志</p>
+<p>索引-&gt;（日志字段筛选，例如：message:”查询关键字1” and message:”查询关键字2”）</p>
+<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><p> java.util.LinkedHashMap cannot be cast to XXXX</p>
+<p> 先转成MAP 在转成JSON  在转成JavaBean </p>
+<p> 后面修改方法：先转成LinkedHashMap 再转成json最后转成json</p>
+<p>LinkedHashMap linkedHashMap = (LinkedHashMap) map.get(“data”);</p>
+<p>String json = new JSONObject().toJSONString(linkedHashMap);</p>
+<p>userEntity = new JSONObject().parseObject(json, UserEntity.class);<br>————————————————<br>版权声明：本文为CSDN博主「BellCalderon」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014373554/article/details/92743743">https://blog.csdn.net/u014373554/article/details/92743743</a></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Get 查看所有索引</span><br><span class="line"></span><br><span class="line">localhost:9200/_all</span><br><span class="line"></span><br><span class="line">PUT 创建索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DEL 删除索引-test</span><br><span class="line"></span><br><span class="line">localhost:9200/test  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 创建索引-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-1</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 25,</span><br><span class="line">  &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PUT 新增数据-person-2</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/2</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;Eric&quot;,</span><br><span class="line">  &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">  &quot;age&quot; : 23,</span><br><span class="line">  &quot;about&quot; : &quot;I love basketball&quot;,</span><br><span class="line">  &quot;interests&quot; : [ &quot;sports&quot;, &quot;reading&quot; ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-id</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/1</span><br><span class="line"></span><br><span class="line">GET 搜索数据-person-name</span><br><span class="line"></span><br><span class="line">localhost:9200/person/_doc/_search?q=first_name:john</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;took&quot;: 56,</span><br><span class="line">  &quot;timed_out&quot;: false,</span><br><span class="line">  &quot;_shards&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: 1,</span><br><span class="line">    &quot;successful&quot;: 1,</span><br><span class="line">    &quot;skipped&quot;: 0,</span><br><span class="line">    &quot;failed&quot;: 0</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hits&quot;: &#123;</span><br><span class="line">    &quot;total&quot;: &#123;</span><br><span class="line">      &quot;value&quot;: 1,</span><br><span class="line">      &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;max_score&quot;: 0.6931472,</span><br><span class="line">    &quot;hits&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;_index&quot;: &quot;person&quot;,</span><br><span class="line">        &quot;_type&quot;: &quot;_doc&quot;,</span><br><span class="line">        &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">        &quot;_score&quot;: 0.6931472,</span><br><span class="line">        &quot;_source&quot;: &#123;</span><br><span class="line">          &quot;first_name&quot;: &quot;John&quot;,</span><br><span class="line">          &quot;last_name&quot;: &quot;Smith&quot;,</span><br><span class="line">          &quot;age&quot;: 25,</span><br><span class="line">          &quot;about&quot;: &quot;I love to go rock climbing&quot;,</span><br><span class="line">          &quot;interests&quot;: [</span><br><span class="line">            &quot;sports&quot;,</span><br><span class="line">            &quot;music&quot;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h1><p>有相关可视化工具</p>
+<p>es本身也是一个数据库，可以通过DBeaver进行连接，默认安装是没有密码的</p>
+<p>通过 dbeaver 配置 jdbc 连接 es时报错 current license is non-compliant for [jdbc]</p>
+<p>在官网 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/subscriptions">https://www.elastic.co/cn/subscriptions</a> 搜索后发现需要白金级别</p>
+<p>查看服务器es的license信息，发现 “type” : “basic”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># curl -XGET http://localhost:9200/_license</span><br></pre></td></tr></table></figure>
+
+<p>修改成30天试用版，<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># curl -X POST &quot;localhost:9200/_license/start_trial?acknowledge=true&amp;pretty&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;acknowledged&quot; : true,</span><br><span class="line">  &quot;trial_was_started&quot; : true,</span><br><span class="line">  &quot;type&quot; : &quot;trial&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>感谢&amp;参考：<a target="_blank" rel="noopener" href="https://www.freesion.com/article/9255676433/">https://www.freesion.com/article/9255676433/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/01/19/%E4%B8%AD%E9%97%B4%E4%BB%B6/zookeeper%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -758,7 +887,7 @@
 </ul>
 <p>学历代表了你所能接触到的层次，因为那与等级挂钩。</p>
 <h1 id="三生万物"><a href="#三生万物" class="headerlink" title="三生万物"></a>三生万物</h1><p>引入美团技术：<a target="_blank" rel="noopener" href="https://tech.meituan.com/2019/02/28/java-dynamic-trace.html">https://tech.meituan.com/2019/02/28/java-dynamic-trace.html</a></p>
-<p><img src="/Users/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/Zane%E4%B9%8B%E6%9D%82%E8%B0%88.assets/image-20220315155042947-7330645.png" alt="image-20220315155042947"></p>
+<p><img src="/2018/01/08/zane_space/Zane%E4%B9%8B%E6%9D%82%E8%B0%88/zane/zane_dev/workspaces/blog/my-hexo/source/_posts/Zane%E4%B9%8B%E6%9D%82%E8%B0%88.assets/image-20220315155042947-7330645.png" alt="image-20220315155042947"></p>
 <h1 id="个人使命宣言（待完善、迁移）"><a href="#个人使命宣言（待完善、迁移）" class="headerlink" title="个人使命宣言（待完善、迁移）"></a>个人使命宣言（待完善、迁移）</h1><p>主要记录人生哲学、基本信念（说明自己想要成为什么样的人，成就什么样的事业（奉献和成就））及为此奠基的价值观和原则、目标规划。</p>
 <p>以改善城市（地球）环境为价值理念，从空气质量、水质、道路环境进行分析潜在的社会价值</p>
 <p>从人类的基础设施进行改造及优化，尽可能规避和及时响应天灾人祸，例如交通事故、火灾、洪灾、旱灾、地震</p>
@@ -1200,119 +1329,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2017/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis/" class="post-title-link" itemprop="url">redis</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-10-29 20:11:22" itemprop="dateCreated datePublished" datetime="2017-10-29T20:11:22+08:00">2017-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2017/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2017/10/29/%E4%B8%AD%E9%97%B4%E4%BB%B6/redis/" class="cy_cmt_count" data-xid="2017/10/29/中间件/redis/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>REmote DIctionary Server(Redis) 是一个由 Salvatore Sanfilippo 写的 key-value 存储系统，是跨平台的非关系型数据库。</p>
-<p>Redis 是一个开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存、分布式、可选持久性的键值对(Key-Value)存储数据库，并提供多种语言的 API。 </p>
-<ul>
-<li>相关资源</li>
-</ul>
-<p>Redis 官网：<a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io/</a></p>
-<p>源码地址：<a target="_blank" rel="noopener" href="https://github.com/redis/redis">https://github.com/redis/redis</a></p>
-<p>Redis 在线测试：<a target="_blank" rel="noopener" href="http://try.redis.io/">http://try.redis.io/</a></p>
-<p>Redis 命令参考：<a target="_blank" rel="noopener" href="http://doc.redisfans.com/">http://doc.redisfans.com/</a></p>
-<h1 id="基础要素"><a href="#基础要素" class="headerlink" title="基础要素"></a>基础要素</h1><p>##基础数据类型<br>5大数据类型：string、list、hash、set、zset</p>
-<p>3个高级数据结构：Bitmaps、Hyperloglogs、GEO。</p>
-<p>Strings：最大512MB<br>Lists： 2^32-1个数据 (4294967295)<br>Sets： 2^32-1个数据 (4294967295)<br>Hashes：2^32-1个键值对 (4294967295)<br>Sorted sets：与Sets类型类似，没有明确说明。应该也是2^32-1个数据</p>
-<p><strong>redis一个实例能存多少个key?</strong></p>
-<p>官方说单例能处理key：2.5亿个，参考链接:<a target="_blank" rel="noopener" href="https://redis.io/topics/faq">https://redis.io/topics/faq</a></p>
-<p>一个key或是value大小最大是512M</p>
-<h1 id="搭建部署"><a href="#搭建部署" class="headerlink" title="搭建部署"></a>搭建部署</h1><h2 id="单机"><a href="#单机" class="headerlink" title="单机"></a>单机</h2><p>建议安装绿色版（windows）、docker安装（linux）</p>
-<h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><p>三主三从</p>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="基础案例"><a href="#基础案例" class="headerlink" title="基础案例"></a>基础案例</h1><h1 id="高阶方案"><a href="#高阶方案" class="headerlink" title="高阶方案"></a>高阶方案</h1><h2 id="管道的使用"><a href="#管道的使用" class="headerlink" title="管道的使用"></a>管道的使用</h2><p>redisTemplate.executePipelined</p>
-<p>redisTemplate.executePipelined(new SessionCallback() {<br>            //执行流水线<br>            @Override<br>            public Object execute(RedisOperations operations) throws DataAccessException {<br>            return null;<br>            }<br>});</p>
-<h2 id="布隆过滤器的使用"><a href="#布隆过滤器的使用" class="headerlink" title="布隆过滤器的使用"></a>布隆过滤器的使用</h2><p>基于bigmap实现布隆过滤器</p>
-<h2 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h2><ul>
-<li>redis持久化<br>快照、AOF<h2 id="key复制"><a href="#key复制" class="headerlink" title="key复制"></a>key复制</h2></li>
-<li>redis中Set集合SortSet有序集合的复制<br>单机redis可用，集群不行。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/chwshuang/article/details/52850093#commentBox">https://blog.csdn.net/chwshuang/article/details/52850093#commentBox</a><br>redis-cluster里做zset的复制有什么方案？<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1>（待完善）</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1384,7 +1400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -174,6 +174,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/flink_space/flink%E5%BC%80%E5%8F%91-%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9%EF%BC%88%E5%AE%9E%E8%B7%B5%E4%B8%AD%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/19/flink_space/flink%E5%BC%80%E5%8F%91-%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9%EF%BC%88%E5%AE%9E%E8%B7%B5%E4%B8%AD%EF%BC%89/" class="post-title-link" itemprop="url">Flink开发-技术要点（实践中）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-19 20:08:08" itemprop="dateCreated datePublished" datetime="2021-10-19T20:08:08+08:00">2021-10-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/10/19/flink_space/flink%E5%BC%80%E5%8F%91-%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9%EF%BC%88%E5%AE%9E%E8%B7%B5%E4%B8%AD%EF%BC%89/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2021/10/19/flink_space/flink%E5%BC%80%E5%8F%91-%E6%8A%80%E6%9C%AF%E8%A6%81%E7%82%B9%EF%BC%88%E5%AE%9E%E8%B7%B5%E4%B8%AD%EF%BC%89/" class="cy_cmt_count" data-xid="2021/10/19/flink_space/flink开发-技术要点（实践中）/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>任何语言以简单快速的方式搭建，由浅到深去学习，循序渐进，最后以高阶方案实践。</p>
+<h1 id="启动flink"><a href="#启动flink" class="headerlink" title="启动flink"></a>启动flink</h1><p>查看flink安装信息</p>
+<p><code>brew info apache-flink</code><br>例如：安装目录为：<br>/opt/homebrew/Cellar/apache-flink/1.12.2</p>
+<p>启动flink</p>
+<p>./libexec/bin/start-cluster.sh</p>
+<p>启动flink sql</p>
+<p>sql-client.sh embedded</p>
+<ul>
+<li>访问web页面</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a></p>
+<p>flink打包部署</p>
+<p>先保障项目能正常编译、运行，</p>
+<p>打包jar，</p>
+<h1 id="flink-api-常用算子"><a href="#flink-api-常用算子" class="headerlink" title="flink api 常用算子"></a>flink api 常用算子</h1><p>算子如果不理解，可以理解为类的函数方法</p>
+<p>1.flink 中<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%AE%97%E5%AD%90&spm=1001.2101.3001.7020">算子</a>是将一个或多个DataStream转换为新的DataStream，可以将多个转换组合成复杂的数据流拓扑<br>2.在flink中有多种不同的DataStream<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%9E%8B&spm=1001.2101.3001.7020">类型</a>，他们之间是通过使用各种算子进行的</p>
+<p>Flink的算子分为两大类：一类是DataSet，一类是DataStream。</p>
+<h1 id="分布式快照Checkpoint"><a href="#分布式快照Checkpoint" class="headerlink" title="分布式快照Checkpoint"></a>分布式快照Checkpoint</h1><h1 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%85%83%E7%BB%84&spm=1001.2101.3001.7020">元组</a></h1><p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Flink&spm=1001.2101.3001.7020">Flink</a> 提供了Tuple 元组的概念，支持使用Tuple1到Tuple25，分别定义1个字段到25个字段。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/curl%E7%9A%84%E5%AE%9E%E9%99%85%E8%BF%90%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -868,7 +975,7 @@
 
       
           <h1 id="OneData"><a href="#OneData" class="headerlink" title="OneData"></a>OneData</h1><p>OneId、OneService、OneModel</p>
-<p><img src="/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E4%B9%8BOneData_files/1.jpg"></p>
+<p><img src="/2021/07/20/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%8F%B0%E4%B9%8BOneData/1.jpg"></p>
 <p><strong>OneModel 统一数据构建和管理</strong><br>将指标定位细化为：原子指标、时间周期、修饰词（统计粒度、业务限定, etc），通过这些定义，设计出各类派生指标; 基于数据分层，设计出维度表、明细事实表、汇总事实表。</p>
 <p><strong>OneService 统一数据服务</strong><br>OneService 指统一数据服务，即由数据中台提供统一的数据接入和数据查询服务。基于复用而不是复制数据的思想，能力包括：</p>
 <ul>
@@ -1198,7 +1305,7 @@ Flink HA部署；
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>flink on yarn<br><img src="/flinkOnYarn/flinkOnYarn.jpg"><br>![](flink on yarn_files/1.jpg)<br>前提条件：需先安装zookeeper与hadoop</p>
+          <p>flink on yarn<br><img src="/2021/06/29/flink_space/flink%20on%20yarn/flinkOnYarn.jpg"><br>![](flink on yarn_files/1.jpg)<br>前提条件：需先安装zookeeper与hadoop</p>
 <p>zookeeper安装</p>
 <p>hadoop安装</p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>机器配置<br>3台 linux centos7（虚拟机即可）<br>修改主机名、固定ip<br>免密<br>安装jdk</p>
@@ -1239,7 +1346,7 @@ Flink HA部署；
 <ul>
 <li>第二种Flink run直接在YARN上提交运行Flink作业(Run a Flink job on YARN)，这种方式的好处是一个任务会对应一个job,即没提交一个作业会根据自身的情况，向yarn申请资源，直到作业执行完成，并不会影响下一个作业的正常运行，除非是yarn上面没有任何资源的情况下。一般生产环境是采用此种方式运行。这种方式就需要确保集群资源足够。</li>
 </ul>
-<p>启动后查看hadoop，yarn的web监控页面<br><img src="/flinkOnYarn/ha.jpg"><br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/asker009/p/11327533.html">https://www.cnblogs.com/asker009/p/11327533.html</a></p>
+<p>启动后查看hadoop，yarn的web监控页面<br><img src="/2021/06/29/flink_space/flink%20on%20yarn/ha.jpg"><br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/asker009/p/11327533.html">https://www.cnblogs.com/asker009/p/11327533.html</a></p>
 <p>#yarn<br>yarn是一个资源管理与调度平台，不仅hadoop跑在上面，flink也可以直接向yarn申请资源并运行上去</p>
 <p>观察任务</p>
 <p>命令行可以确认一下yarn任务创建成功：</p>
@@ -1249,111 +1356,12 @@ Flink HA部署；
 <p>如果想停止任务，直接向yarn杀死整个任务即可。</p>
 <pre><code>yarn application -kill 进程ID
 </code></pre>
-<p><img src="/flinkOnYarn/1.jpg"><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankdeng/p/9400627.html">https://www.cnblogs.com/frankdeng/p/9400627.html</a></p>
+<p><img src="/2021/06/29/flink_space/flink%20on%20yarn/1.jpg"><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankdeng/p/9400627.html">https://www.cnblogs.com/frankdeng/p/9400627.html</a></p>
 <p>#疑问点？<br>flink启动后，提交job异常，发现是jdk版本问题，flink版本和jdk版本关系？</p>
 <p> Sum of configured JVM Metaspace (96.000mb (100663296 bytes)) and JVM Overhead (192.000mb (201326592 bytes)) exceed configured Total Process Memory (64.000mb (67108864 bytes)).</p>
 <h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>java.lang.NoClassDefFoundError: org/apache/hadoop/yarn/exceptions/YarnException问题可能缺少jar包<br>解决方法<br>cp $HADOOP_HOME/share/hadoop/yarn/hadoop-yarn-api* $FLINK_HOME/lib</p>
 <p><a target="_blank" rel="noopener" href="https://yuchi.blog.csdn.net/article/details/106586942">https://yuchi.blog.csdn.net/article/details/106586942</a></p>
 <p>java.lang.NoClassDefFoundError: org/apache/hadoop/fs/Path</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/19/flink_space/flink%20on%20k8s/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/19/flink_space/flink%20on%20k8s/" class="post-title-link" itemprop="url">Flink on k8s</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-19 22:16:38" itemprop="dateCreated datePublished" datetime="2021-06-19T22:16:38+08:00">2021-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2021/06/19/flink_space/flink%20on%20k8s/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2021/06/19/flink_space/flink%20on%20k8s/" class="cy_cmt_count" data-xid="2021/06/19/flink_space/flink on k8s/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>flink on k8s   </p>
-<pre><code>1. Mac 安装 Docker
-2. Minikube 搭建 Kubernetes 实验环境
-3. Flink 实时处理 demo
-4. 构建 Docker 容器镜像
-5. 部署 JobManager
-6. 部署 TaskManager
-</code></pre>
-<p>以 flink:1.8.1-scala_2.12 作为基础镜像，编写新的 Dockerfile，将打包好的任务 jar 包放置进去。此外，新版 flink 已将 hadoop 依赖从官方发行版本中剥离，因此在打包镜像的时候也要包含进去。<br>Hadoop jar 下载：flink-shaded-hadoop-2-uber-2.8.3-7.0.jar</p>
-<p>参考：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/a1240466196/article/details/108881720">https://blog.csdn.net/a1240466196/article/details/108881720</a></p>
 
       
     </div>
@@ -1440,7 +1448,7 @@ Flink HA部署；
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
