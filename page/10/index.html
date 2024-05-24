@@ -174,6 +174,119 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2019/05/29/docker-compose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/29/docker-compose/" class="post-title-link" itemprop="url">docker-compose安装及使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-29 21:21:28" itemprop="dateCreated datePublished" datetime="2019-05-29T21:21:28+08:00">2019-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2019/05/29/docker-compose/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::https://space.zane56stars.xyz/2019/05/29/docker-compose/" class="cy_cmt_count" data-xid="2019/05/29/docker-compose/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>docker-compose、k8s</p>
+<h1 id="安装-Docker-CE"><a href="#安装-Docker-CE" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker-ce</span><br></pre></td></tr></table></figure>
+
+<h1 id="启动Docker"><a href="#启动Docker" class="headerlink" title="启动Docker"></a>启动Docker</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>安装Docker-Compose</p>
+<p>首先确保已经安装docker、安装Docker-Compose之前，(请先安装 python-pip)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">国内镜像</span></span><br><span class="line">sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">上面不可以可试试以下</span></span><br><span class="line">sudo curl -L &quot;https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a></p>
+<h1 id="使用Docker-Compose"><a href="#使用Docker-Compose" class="headerlink" title="使用Docker-Compose"></a>使用Docker-Compose</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2019/05/19/docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1142,135 +1255,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2018/12/02/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-spring/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/02/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-spring/" class="post-title-link" itemprop="url">spring源码分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-02 21:01:24" itemprop="dateCreated datePublished" datetime="2018-12-02T21:01:24+08:00">2018-12-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/12/02/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-spring/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::https://space.zane56stars.xyz/2018/12/02/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-spring/" class="cy_cmt_count" data-xid="2018/12/02/源码分析/源码分析-spring/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h1><p>Spring 最重要的概念是 IOC 和 AOP</p>
-<h2 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h2><p><a target="_blank" rel="noopener" href="https://spring.io/">https://spring.io/</a></p>
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p><a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p>
-<ul>
-<li>Spring 1.x</li>
-</ul>
-<p>大概在2004年3月24日这一天，Spring Framework 1.0 final正式发布</p>
-<p>Spring 1.0当时只包含一个完整的项目，他把所有的功能都集中在一个项目中，其中包含了核心的Ioc、AOP，同时也包含了其他的诸多功能，例如：JDBC、Mail、ORM、事务、定时任务、Spring MVC等。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Spring 2.x</li>
-</ul>
-<p>Spring 2.x增加对注解的支持，支持了基于注解的配置。</p>
-<ul>
-<li>Spring 3.x</li>
-</ul>
-<p>Spring 3.x支持了基于Java类的配置。</p>
-<p>Spring在GitHub托管的代码，最早的版本只能看到Spring v3.1.0.M2</p>
-<ul>
-<li><p>Spring 4.x</p>
-</li>
-<li><p>Spring 5.x</p>
-</li>
-<li><p>使用的版本</p>
-</li>
-</ul>
-<p>特地查看了项目使用的版本 5.2.12.RELEASE</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.boot.SpringBootVersion;</span><br><span class="line">import org.springframework.core.SpringVersion;</span><br><span class="line">import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</span><br><span class="line"></span><br><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">public class UserTest &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void Test1()&#123;</span><br><span class="line">        String version = SpringVersion.getVersion();</span><br><span class="line">        System.out.println(&quot;SpringVersion:&quot;+version);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="Spring-context架构–静态结构"><a href="#Spring-context架构–静态结构" class="headerlink" title="Spring context架构–静态结构"></a>Spring context架构–静态结构</h2><p>Context也就是我们常说的spring容器</p>
-<p>参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/szwandcj/article/details/50762990">https://blog.csdn.net/szwandcj/article/details/50762990</a></p>
-<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><h2 id="spring与java"><a href="#spring与java" class="headerlink" title="spring与java"></a>spring与java</h2><h3 id="没有spring的java是怎样的"><a href="#没有spring的java是怎样的" class="headerlink" title="没有spring的java是怎样的"></a>没有spring的java是怎样的</h3><h3 id="拥有spring的java是怎样的"><a href="#拥有spring的java是怎样的" class="headerlink" title="拥有spring的java是怎样的"></a>拥有spring的java是怎样的</h3><h2 id="启动-Spring-容器"><a href="#启动-Spring-容器" class="headerlink" title="启动 Spring 容器"></a>启动 Spring 容器</h2><ul>
-<li><p>最基本的启动 Spring 容器的例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    ApplicationContext context = new ClassPathXmlApplicationContext(&quot;classpath:applicationfile.xml&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>依赖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;4.3.11.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>spring-context 会自动将 spring-core、spring-beans、spring-aop、spring-expression 这几个基础 jar 包带进来。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bntX2jSQfEHy7/article/details/78918119">https://blog.csdn.net/bntX2jSQfEHy7/article/details/78918119</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1342,7 +1326,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1355,7 +1339,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">109</span>
+        <span class="site-state-item-count">108</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

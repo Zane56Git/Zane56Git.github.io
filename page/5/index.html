@@ -174,6 +174,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="post-title-link" itemprop="url">数学建模-线性回归</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-20 21:18:18" itemprop="dateCreated datePublished" datetime="2020-10-20T21:18:18+08:00">2020-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::https://space.zane56stars.xyz/2020/10/20/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E5%AD%A6%E5%BA%94%E7%94%A8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" class="cy_cmt_count" data-xid="2020/10/20/算法与数据结构/数学应用-线性回归/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在这，建议大家读一下吴军老师的《数学之美》，这本书让我真正感受到IT应用是真的有涉及数学的，只是自己接触的层面太低了！</p>
+<h1 id="数学建模"><a href="#数学建模" class="headerlink" title="数学建模"></a>数学建模</h1><p>试问多少人真正了解数学在IT发展中的实际应用，可能很多都听过说过，学习计算机需要一定的数学功底，这句话貌似是对的，但也不完成对；</p>
+<p>其实大部分人在实际IT开发中很少真正运用到数学模型，因为大部分业务流程只是运用到了开发语言的一些api，再者就是一些逻辑处理，在我看来这些都不涉及数学；</p>
+<p>真正的数学运用，应该是用到数学模型，数学运用，将实际数学知识应用到开发代码中进行运行。</p>
+<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>必修三，第二章，统计，属于回归分析，主要是介绍变量间的相互关系。<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6/6027765?fr=aladdin">https://baike.baidu.com/item/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6/6027765?fr=aladdin</a></p>
+<p>线性回归方程是利用数理统计中的回归分析，来确定两种或两种以上变数间相互依赖的定量关系的一种统计分析方法之一。<br>线性回归也是回归分析中第一种经过严格研究并在实际应用中广泛使用的类型。按自变量个数可分为一元线性回归分析方程和多元线性回归分析方程。</p>
+<h2 id="简单线性回归（一元线性回归）"><a href="#简单线性回归（一元线性回归）" class="headerlink" title="简单线性回归（一元线性回归）"></a>简单线性回归（一元线性回归）</h2><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%96%B9%E7%A8%8B/6953911?fr=aladdin">https://baike.baidu.com/item/%E4%B8%80%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%96%B9%E7%A8%8B/6953911?fr=aladdin</a></p>
+<h2 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h2><h1 id="线性回归应用场景"><a href="#线性回归应用场景" class="headerlink" title="线性回归应用场景"></a>线性回归应用场景</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2020/09/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-BI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1086,115 +1182,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://space.zane56stars.xyz/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/" class="post-title-link" itemprop="url">大数据之难</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-19 00:18:18" itemprop="dateCreated datePublished" datetime="2020-06-19T00:18:18+08:00">2020-06-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::https://space.zane56stars.xyz/2020/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%9A%BE/" class="cy_cmt_count" data-xid="2020/06/19/大数据/大数据之难/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>作为java开发转大数据，个人对大数据之难的感受：</p>
-<ul>
-<li>数据之难</li>
-</ul>
-<p>1、知识体系庞大，解决方案多导致架构多样化；</p>
-<p>2、环境搭建复杂，涉足组件多，版本依赖性严重，占用资源多；</p>
-<p>3、实战少，难以提升；</p>
-<p>4、需结合实际场景，场景应该来源于运营人员的需求，而不是开发人员自行设定；</p>
-<ul>
-<li>大数据组件标准</li>
-</ul>
-<p>虽然大数据有很多框架组件，但其实大部分数据库语句都类似，所以并没有想象得难，大量的技术组件百花齐放，但大浪淘沙，终究会尘埃落定。</p>
-<ul>
-<li>建议</li>
-</ul>
-<p>1、确定需要学习的大数据场景及涉及生态组件，不同场景规划技术框图；</p>
-<p>2、准备好自动管理的linux脚本，方便快速恢复开发环境；</p>
-<p>3、模拟数据，从数据源到数据处理，最后数据输出，形成开发闭环；</p>
-<p>4、熟悉不同架构的组件及API，模拟场景进行运用；</p>
-<p>5、平常心，只是接触晚，实践少，并不代表大数据很难；</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1266,7 +1253,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1279,7 +1266,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">109</span>
+        <span class="site-state-item-count">108</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
