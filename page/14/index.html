@@ -174,121 +174,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/07/20/%E5%89%8D%E7%AB%AF-nvm%EF%BC%88node%E3%80%81npm%E7%AE%A1%E7%90%86%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/20/%E5%89%8D%E7%AB%AF-nvm%EF%BC%88node%E3%80%81npm%E7%AE%A1%E7%90%86%EF%BC%89/" class="post-title-link" itemprop="url">前端-nvm（node.js\npm管理）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-07-20 20:21:22" itemprop="dateCreated datePublished" datetime="2018-07-20T20:21:22+08:00">2018-07-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-16 10:57:11" itemprop="dateModified" datetime="2023-06-16T10:57:11+08:00">2023-06-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/07/20/%E5%89%8D%E7%AB%AF-nvm%EF%BC%88node%E3%80%81npm%E7%AE%A1%E7%90%86%EF%BC%89/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/07/20/%E5%89%8D%E7%AB%AF-nvm%EF%BC%88node%E3%80%81npm%E7%AE%A1%E7%90%86%EF%BC%89/" class="cy_cmt_count" data-xid="2018/07/20/前端-nvm（node、npm管理）/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="前端NPM运用"><a href="#前端NPM运用" class="headerlink" title="前端NPM运用"></a>前端NPM运用</h1><p>首先安装node.js</p>
-<h2 id="NPM设置国内的镜像仓库"><a href="#NPM设置国内的镜像仓库" class="headerlink" title="NPM设置国内的镜像仓库"></a>NPM设置国内的镜像仓库</h2><p>淘宝地址：<a target="_blank" rel="noopener" href="https://npm.taobao.org/">https://npm.taobao.org/</a> 设置淘宝为仓库：npm config set registry <a target="_blank" rel="noopener" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org/</a> 还原默认： npm config set registry <a target="_blank" rel="noopener" href="https://registry.npmjs.org/">https://registry.npmjs.org/</a></p>
-<h1 id="nvm（通过nvm安装node、npm）"><a href="#nvm（通过nvm安装node、npm）" class="headerlink" title="nvm（通过nvm安装node、npm）"></a>nvm（通过nvm安装node、npm）</h1><p>nvm全英文也叫node.js version management，是一个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=nodejs&spm=1001.2101.3001.7020">nodejs</a>的版本管理工具。nvm和npm都是node.js版本管理工具，为了解决node.js各种版本存在不兼容现象可以通过它可以安装和切换不同版本的node.js。</p>
-<h2 id="mac安装"><a href="#mac安装" class="headerlink" title="mac安装"></a>mac安装</h2><p>nvm安装与卸载</p>
-<ul>
-<li><p>nvm 删除 brew uninstall brew 删除 .nvm .npm .node 等相关文件 sudo rm -rf /usr/local/lib/node sudo rm -rf /usr/local/lib/node_modules</p>
-</li>
-<li><p>nvm 安装（也可以通过命令安装） brew install nvm</p>
-</li>
-<li><p>nvm 安装 node nvm install v14.17.0 nvm use v14.17.0 nvm list</p>
-<h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><h3 id="nvm下载"><a href="#nvm下载" class="headerlink" title="nvm下载"></a>nvm下载</h3><p><a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a><br>可在点此在<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">github</a>上下载最新版本,本次下载安装的是windows版本。打开网址我们可以看到有两个版本：</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://nvm.uihtm.com/nvm1.1.7-setup.zip">nvm 1.1.7-setup.zip</a>：安装版，推荐使用</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://nvm.uihtm.com/nvm1.1.7-noinstall.zip">nvm 1.1.7-noinstall.zip</a>: 绿色免安装版，但使用时需进行配置。</p>
-<h2 id="nvm-安装-node"><a href="#nvm-安装-node" class="headerlink" title="nvm 安装 node"></a>nvm 安装 node</h2></li>
-<li><p>nvm install v14.17.0</p>
-</li>
-<li><p>nvm use v14.17.0</p>
-</li>
-<li><p>nvm list</p>
-</li>
-</ul>
-<p>node的安装和版本的使用与切换：<br>nvm install 10.15.0<br>nvm use v10.15.0</p>
-<p>一般在安装node的时候，npm也会自动一起安装的。由于nvm可以管理多个版本的node，如果每次添加一个node版本都要安装一堆npm包；在安装模块时，加上-g（npm i xxx -g ）， 就可以让各个版本的node共用。<br>npm版本切换（略）</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/goddess/p/15487934.html">https://www.cnblogs.com/goddess/p/15487934.html</a><br>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64697285">https://blog.csdn.net/m0_64697285</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/19/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE-Strom/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -738,6 +623,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">机器学习-入门规划</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-07 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T21:18:18+08:00">2018-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/" class="cy_cmt_count" data-xid="2018/06/07/AI/机器学习-入门规划/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="机器学习第一步"><a href="#机器学习第一步" class="headerlink" title="机器学习第一步"></a>机器学习第一步</h1><p>吴恩达(Andrew Ng)老师的课程：</p>
+<p>coursera课程主页<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
+<p>吴恩达老师推荐开发语言使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MATLAB&spm=1001.2101.3001.7020">MATLAB</a>或者octave</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p>Spark MLlib</p>
+<p>Flink ML</p>
+<p>Alink</p>
+<p>Python</p>
+<p>Matlab</p>
+<p>（首先推荐Octave，简单方便，并且开源免费。Matlab也非常的优秀，需付费，如果你能够使用它，那么建议使用matlab。</p>
+<p>Python、numpy、R语言，也有很多人选择，但开发较慢。）</p>
+<h1 id="西瓜书"><a href="#西瓜书" class="headerlink" title="西瓜书"></a>西瓜书</h1><h1 id="南瓜书"><a href="#南瓜书" class="headerlink" title="南瓜书"></a>南瓜书</h1><p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/pumpkin-book/#/">https://datawhalechina.github.io/pumpkin-book/#/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -834,106 +819,6 @@
 <p>##监督学习算法<br>##无监督学习算法</p>
 <h1 id="jupyter-使用"><a href="#jupyter-使用" class="headerlink" title="jupyter 使用"></a>jupyter 使用</h1><h1 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h1><h2 id="octave"><a href="#octave" class="headerlink" title="octave"></a>octave</h2><p>octave是一门科学计算语言，类似于matlab，但其占用内存小，所以广受机器学习爱好者的喜爱</p>
 <h2 id="matlab"><a href="#matlab" class="headerlink" title="matlab"></a>matlab</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Zane">
-      <meta itemprop="description" content="不知生活，何来人生">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zane’s Space">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">机器学习-入门规划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-07 21:18:18" itemprop="dateCreated datePublished" datetime="2018-06-07T21:18:18+08:00">2018-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    
-      <a title="changyan" href="/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/#SOHUCS" itemprop="discussionUrl">
-        <span id="url::http://example.com/2018/06/07/AI/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E8%A7%84%E5%88%92/" class="cy_cmt_count" data-xid="2018/06/07/AI/机器学习-入门规划/" itemprop="commentCount"></span>
-      </a>
-    
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="机器学习第一步"><a href="#机器学习第一步" class="headerlink" title="机器学习第一步"></a>机器学习第一步</h1><p>吴恩达(Andrew Ng)老师的课程：</p>
-<p>coursera课程主页<br><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
-<p>吴恩达老师推荐开发语言使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MATLAB&spm=1001.2101.3001.7020">MATLAB</a>或者octave</p>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p>Spark MLlib</p>
-<p>Flink ML</p>
-<p>Alink</p>
-<p>Python</p>
-<p>Matlab</p>
-<p>（首先推荐Octave，简单方便，并且开源免费。Matlab也非常的优秀，需付费，如果你能够使用它，那么建议使用matlab。</p>
-<p>Python、numpy、R语言，也有很多人选择，但开发较慢。）</p>
-<h1 id="西瓜书"><a href="#西瓜书" class="headerlink" title="西瓜书"></a>西瓜书</h1><h1 id="南瓜书"><a href="#南瓜书" class="headerlink" title="南瓜书"></a>南瓜书</h1><p><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/pumpkin-book/#/">https://datawhalechina.github.io/pumpkin-book/#/</a></p>
-
       
     </div>
 
@@ -1531,10 +1416,122 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="不知生活，何来人生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane’s Space">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">博客目录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-03 13:58:05" itemprop="dateCreated datePublished" datetime="2018-06-03T13:58:05+08:00">2018-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-15 14:53:48" itemprop="dateModified" datetime="2023-06-15T14:53:48+08:00">2023-06-15</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
+        <span id="url::http://example.com/2018/06/03/%E5%8D%9A%E5%AE%A2%E7%9B%AE%E5%BD%95/" class="cy_cmt_count" data-xid="2018/06/03/博客目录/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h1><h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><h2 id="K8s"><a href="#K8s" class="headerlink" title="K8s"></a>K8s</h2><h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="vue、ant-Design"><a href="#vue、ant-Design" class="headerlink" title="vue、ant Design"></a>vue、ant Design</h2><h1 id="微信开发"><a href="#微信开发" class="headerlink" title="微信开发"></a>微信开发</h1><h2 id="公众号、小程序"><a href="#公众号、小程序" class="headerlink" title="公众号、小程序"></a>公众号、小程序</h2><h1 id="移动支付"><a href="#移动支付" class="headerlink" title="移动支付"></a>移动支付</h1><pre><code>微信支付
+支付宝支付
+</code></pre>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h2 id="oracle"><a href="#oracle" class="headerlink" title="oracle"></a>oracle</h2><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><h1 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h1><h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><pre><code>分布式id
+分布式锁
+分布式事务
+分布式事务解决方案
+分布式数据库读写分离
+</code></pre>
+<h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><pre><code>redis
+rabbitmq
+kafka
+</code></pre>
+<h1 id="集成框架"><a href="#集成框架" class="headerlink" title="集成框架"></a>集成框架</h1><h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><h2 id="druid"><a href="#druid" class="headerlink" title="druid"></a>druid</h2><h2 id="shrio"><a href="#shrio" class="headerlink" title="shrio"></a>shrio</h2><h1 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h1><pre><code>hadoop
+flink
+blink
+flume
+hbase
+hive
+kafka
+spark
+storm
+storm-kafka
+zookeeper
+</code></pre>
+<h1 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h1><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><h2 id="item2"><a href="#item2" class="headerlink" title="item2"></a>item2</h2><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><ul>
+<li>idea不显示gradle的视图解决办法</li>
+<li>maven项目转换为gradle项目</li>
+<li>gradle项目转为maven项目</li>
+<li>怎么在IDEA里搜索jar包里的类的方法和配置</li>
+<li>IDEA自带HTTP请求（如同postman）<h2 id="部署神插件-Cloud-ToolkKit"><a href="#部署神插件-Cloud-ToolkKit" class="headerlink" title="部署神插件-Cloud-ToolkKit"></a>部署神插件-Cloud-ToolkKit</h2><h2 id="语雀"><a href="#语雀" class="headerlink" title="语雀"></a>语雀</h2><h2 id="TAPD"><a href="#TAPD" class="headerlink" title="TAPD"></a>TAPD</h2><h2 id="Teambition"><a href="#Teambition" class="headerlink" title="Teambition"></a>Teambition</h2><a target="_blank" rel="noopener" href="https://www.teambition.com/">https://www.teambition.com/</a><h2 id="禅道"><a href="#禅道" class="headerlink" title="禅道"></a>禅道</h2><h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1602,7 +1599,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">231</span>
+          <span class="site-state-item-count">230</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1615,7 +1612,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">109</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
